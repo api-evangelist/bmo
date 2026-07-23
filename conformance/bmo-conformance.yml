@@ -1,0 +1,39 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.json + security schemes + FAPI headers across all BMO commercial APIs
+description: >-
+  Industry / cross-cutting standards conformance for BMO's commercial
+  open-banking APIs, derived from the OpenAPI security schemes, FAPI-aligned
+  interaction headers, and ISO 20022 payment message shapes declared in the specs.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: OAuth 2.0 authorizationCode securitySchemes on all data/payment APIs; /oauth20/authorize + /oauth20/token endpoints.
+  - id: oidc
+    conforms: false
+    evidence: No openIdConnect scheme or /.well-known/openid-configuration published on the sandbox host (404).
+  - id: fapi
+    conforms: true
+    evidence: FAPI-aligned interaction headers (x-fapi-interaction-id, x-fapi-financial-id, x-fapi-customer-ip-address, x-fapi-customer-user-agent) declared across operations.
+  - id: iso20022
+    conforms: true
+    evidence: Payment initiation uses ISO 20022 pain.001 shapes; Push Notification delivers pain.002 payment status.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Error responses use application/json (IBM API Connect fault envelope), not application/problem+json.
+  - id: idempotency
+    conforms: false
+    evidence: No documented Idempotency-Key header; retries handled via x-retry-flag + status polling.
+  - id: pagination
+    conforms: true
+    evidence: offset/limit query pagination on Account Information and Image Retrieval search operations.
+  - id: mutual-tls
+    conforms: false
+    evidence: No mutualTLS securityScheme declared in the published specs.
+compliance:
+  published: false
+  note: >-
+    BMO Bank N.A. is an OCC-supervised national bank subject to GLBA/PCI-style
+    obligations, but no machine-discoverable public trust center or certification
+    page (SOC 2 / ISO 27001) was found for the developer portal. Not asserting a
+    Compliance pointer without a published program.

@@ -1,0 +1,38 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.json info.version + Push Notification non-functional requirements
+description: >-
+  Versioning, SLA and lifecycle posture for BMO's commercial open-banking APIs,
+  derived from the published spec versions and documented non-functional
+  requirements. No public deprecation policy or status page is exposed on the
+  commercial developer portal (access is gated behind onboarding).
+versioning:
+  scheme: per-API semantic version in info.version
+  path: URI base path (/open-banking/commercial-sb; Interac on /open-banking2/commercial-sb)
+  current_versions:
+    account-information: 5.3.0
+    account-validation: '1.0'
+    ach-payments: 1.1.3
+    eft-payments: 2.2.5
+    wire-payments-ca: 1.0.2
+    wire-payments-us: 1.0.2
+    interac-instant-payments: 4.3.0
+    image-retrieval: 4.5.0
+    authorize-token: 2.0.2
+    client-data-encryption-key: 1.0.0
+    push-notifications: 1.0.0
+sla:
+  documented: true
+  source: Push Notification API non-functional requirements
+  uptime_target: '99.95%'
+  latency: 95% of requests < 3s; max acceptable latency 5s
+  throughput: 50 requests/second
+  transport_security: HTTPS TLS 1.2+
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation/Sunset policy located on the gated commercial portal.
+status_page:
+  url: null
+  note: No public status page located.
+deprecated_operations: []

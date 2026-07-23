@@ -1,0 +1,48 @@
+# BMO (Commercial Open Banking APIs)
+
+> BMO Bank N.A. — the U.S. banking subsidiary of Canada's Bank of Montreal — runs a first-party commercial developer portal (developer.bmo.com) publishing downloadable OpenAPI 3.0 / Swagger 2.0 specifications for account validation, account information, payments (ACH, wire US/CA, EFT, Interac e-Transfer), cheque image retrieval, OAuth authorization, client-data encryption, and payment-status push notifications, secured with OAuth 2.0 + a client API key on an IBM API Connect gateway with FAPI-aligned headers.
+
+## APIs
+- [Account Validation (US)](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation): Verify US account ownership and risk level via Early Warning Services.
+- [Account Information](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information): Accounts, balances and transactions for Online Banking for Business.
+- [ACH Payments](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/achpaymentapi): US ACH credit/debit initiation with live status.
+- [Wire Payments (US)](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepaymentapius): US domestic/international wires.
+- [Wire Payments (Canada)](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepayment): Canadian domestic/international wires.
+- [EFT Payments (Canada)](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/eft-payments-ca): Canadian EFT credit/debit, batch up to 50.
+- [Instant Payments (Interac)](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi): Real-time Interac e-Transfer.
+- [Image Retrieval](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/image-retrieval): Cheque / item images.
+- [Authorize & Token](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/authorize): OAuth 2.0 authorization-code and token endpoints.
+- [Client Data Encryption Key](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/client-data-encryption-key-get-open-banking): Fetch key to encrypt sensitive request fields.
+- [Push Notifications](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api): Webhook callback delivering ISO 20022 pain.002 payment status.
+
+## Specs
+- openapi/bmo-account-validation-openapi.json
+- openapi/bmo-account-information-openapi.json
+- openapi/bmo-ach-payments-openapi.json
+- openapi/bmo-wire-payments-us-openapi.json
+- openapi/bmo-wire-payments-ca-openapi.json
+- openapi/bmo-eft-payments-openapi.json
+- openapi/bmo-interac-instant-payments-openapi.json
+- openapi/bmo-image-retrieval-swagger.json
+- openapi/bmo-authorize-token-swagger.json
+- openapi/bmo-client-data-encryption-key-swagger.json
+- openapi/bmo-push-notification-openapi.json
+
+## Artifacts
+- authentication/bmo-authentication.yml — OAuth 2.0 + client API-key profile
+- scopes/bmo-scopes.yml — OAuth scopes across the payment/data APIs
+- conventions/bmo-conventions.yml — FAPI headers, payload encryption, pagination, tracing
+- conformance/bmo-conformance.yml — oauth2, fapi, iso20022 standards
+- errors/bmo-problem-types.yml — HTTP error catalog
+- lifecycle/bmo-lifecycle.yml — versions + SLA
+- asyncapi/bmo-push-notification-webhooks.yml — payment-status webhook
+- data-model/bmo-data-model.yml — entity/relationship graph
+- sandbox/bmo-sandbox.yml — sandbox environment
+- security/bmo-domain-security.yml — TLS/DNS posture
+
+## Docs
+- [Developer Portal](https://developer.bmo.com/api/commercial/)
+- [API Catalogue](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/catalogue)
+- [Registration](https://developer.bmo.com/api/commercial/registration)
+- [FAQ / Support](https://developer.bmo.com/api/commercial/faq)
+- [Terms & Conditions](https://developer.bmo.com/api/commercial/terms-and-conditions)

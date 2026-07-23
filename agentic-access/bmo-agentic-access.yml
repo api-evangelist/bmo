@@ -1,0 +1,551 @@
+generated: '2026-07-23'
+method: generated
+source: openapi/bmo-account-information-openapi.json, openapi/bmo-account-validation-openapi.json,
+  openapi/bmo-ach-payments-openapi.json, openapi/bmo-authorize-token-swagger.json, openapi/bmo-client-data-encryption-key-swagger.json,
+  openapi/bmo-eft-payments-openapi.json, openapi/bmo-image-retrieval-swagger.json, openapi/bmo-interac-instant-payments-openapi.json,
+  openapi/bmo-push-notification-openapi.json, openapi/bmo-wire-payments-ca-openapi.json, openapi/bmo-wire-payments-us-openapi.json
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 30
+  by_action_class:
+    connected: 6
+    acting: 24
+  by_consequence:
+    read: 6
+    write: 6
+    physical: 18
+  human_in_the_loop_required: 0
+operations:
+- path: /accounts
+  method: get
+  operationId: Search for Accounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - FinancialInformation
+- path: /accounts/{accountId}
+  method: get
+  operationId: Get an Account
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - FinancialInformation
+- path: /accounts/{accountId}/transactions
+  method: get
+  operationId: Search for Account Transactions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - FinancialInformation
+- path: /accounts/validate/get
+  method: post
+  operationId: ValidateAccounts
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - AccountValidation
+- path: /tpp/ach/payment-initiation/customer-credit-transfer-initiation
+  method: post
+  operationId: CreditPaymentInitiation
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppach.payment-initiation.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/ach/payment-initiation/customer-direct-debit-initiation
+  method: post
+  operationId: DebitPaymentInitiation
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppach.payment-initiation.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/ach/payment-initiation/get-transaction-status/get
+  method: post
+  operationId: PaymentStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppach.payment-initiation.read
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/ach/customer-access-entitlement/commercial-user-access-arrangement/get
+  method: post
+  operationId: ACHCompanyIDList
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - bmo.tppach.payment-initiation.read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /oauth20/authorize
+  method: get
+  operationId: Retrieve authorization code
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /oauth20/token
+  method: post
+  operationId: Request Access Tokens
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /issued-device-administration/client-data-encryption-key/get
+  method: post
+  operationId: post-retrievecryptoinstruction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/eft/payment-initiation/customer-credit-transfer-initiation
+  method: post
+  operationId: CustomerCreditTransferInitiation
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppeft.payment-initiation.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/eft/payment-initiation/customer-direct-debit-initiation
+  method: post
+  operationId: CustomerDebitTransferInitiation
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppeft.payment-initiation.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/eft/payment-initiation/get-transaction-status/get
+  method: post
+  operationId: GetTransactionStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppeft.payment-initiation.read
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/eft/customer-access-entitlement/commercial-user-access-arrangement/get
+  method: post
+  operationId: GetServiceAgreementList
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - bmo.tppeft.payment-initiation.read
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /accounts/transaction-images-accounts
+  method: get
+  operationId: Search for Accounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - ItemImage
+- path: /accounts/{accountId}/transaction-images/get
+  method: post
+  operationId: Search for Images
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - ItemImage
+- path: /accounts/{accountId}/transaction-images/{imageId}
+  method: get
+  operationId: Retrieve Images
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - ItemImage
+- path: /tpp/interac-etransfer/payment-initiation/get-transaction
+  method: post
+  operationId: TPP-EMTGetTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppinterac.payment-initiation.read
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/interac-etransfer/payment-initiation/get-request-for-payment-transaction
+  method: post
+  operationId: TPP-EMTGetRequestForPaymentTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppinterac.payment-initiation.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/interac-etransfer/payment-initiation/creditor-payment-activation-request
+  method: post
+  operationId: TPP-EMTCreditorPaymentActivationRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppinterac.payment-initiation.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/interac-etransfer/payment-initiation/get-emt-recipient-payment-options/get
+  method: post
+  operationId: TPP-EMTRecipientPaymentOptions
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppinterac.payment-initiation.read
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/interac-etransfer/payment-initiation/customer-credit-transfer-initiation
+  method: post
+  operationId: TPP-EMTCustomerCreditTransferInitiation
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppinterac.payment-initiation.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/interac-etransfer/payment-execution/customer-payment-cancellation-request
+  method: post
+  operationId: TPP-EMTCustomerCancelTransferInitiation
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppinterac.payment-execution.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /paymentStatusUpdate/v1
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/wires/payment-initiation/customer-credit-transfer-initiation
+  method: post
+  operationId: TppCustomerCreditTransferInitiation
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppwiresca.payment-initiation.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/wires/payment-initiation/get-transaction-status/get
+  method: post
+  operationId: TppGetPaymentStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppwiresca.payment-initiation.read
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/wires/payment-initiation/customer-credit-transfer-initiation/us
+  method: post
+  operationId: TppCustomerCreditTransferInitiation
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppwiresus.payment-initiation.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/wires/payment-initiation/get-transaction-status/us/get
+  method: post
+  operationId: TppGetPaymentStatus
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppwiresus.payment-initiation.read
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tpp/wires/payment-initiation/creditor-payment-activation-request
+  method: post
+  operationId: TppCreditorPaymentActivationRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - bmo.tppwiresus.payment-initiation.create
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

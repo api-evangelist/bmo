@@ -1,0 +1,147 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/bmo-account-information-openapi.json, openapi/bmo-account-validation-openapi.json,
+  openapi/bmo-ach-payments-openapi.json, openapi/bmo-eft-payments-openapi.json, openapi/bmo-image-retrieval-swagger.json,
+  openapi/bmo-interac-instant-payments-openapi.json, openapi/bmo-wire-payments-ca-openapi.json,
+  openapi/bmo-wire-payments-us-openapi.json
+schemes:
+- name: OAuth
+  source: openapi/bmo-account-information-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+    tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+- name: OAuth
+  source: openapi/bmo-account-validation-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+    tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+- name: OAuth
+  source: openapi/bmo-ach-payments-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+    tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+- name: OAuth
+  source: openapi/bmo-eft-payments-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+    tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+- name: OAuth
+  source: openapi/bmo-image-retrieval-swagger.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+    tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+- name: OAuth
+  source: openapi/bmo-interac-instant-payments-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api2-sit2.bmogc.net/open-banking2/commercial-sb/oauth20/authorize
+    tokenUrl: https://api2-sit2.bmogc.net/open-banking2/commercial-sb/oauth20/token
+- name: OAuth
+  source: openapi/bmo-wire-payments-ca-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+    tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+- name: OAuth
+  source: openapi/bmo-wire-payments-us-openapi.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+    tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+scopes:
+- scope: AccountValidation
+  description: AccountValidation
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-account-validation-openapi.json
+- scope: FinancialInformation
+  description: FinancialInformation
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-account-information-openapi.json
+- scope: ItemImage
+  description: ItemImage
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-image-retrieval-swagger.json
+- scope: SandboxDataManagement
+  description: SandboxDataManagement
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-ach-payments-openapi.json
+  - openapi/bmo-wire-payments-ca-openapi.json
+- scope: bmo.tppach.payment-initiation.create
+  description: bmo.tppach.payment-initiation.create
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-ach-payments-openapi.json
+- scope: bmo.tppach.payment-initiation.read
+  description: bmo.tppach.payment-initiation.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-ach-payments-openapi.json
+- scope: bmo.tppeft.payment-initiation.create
+  description: bmo.tppeft.payment-initiation.create
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-eft-payments-openapi.json
+- scope: bmo.tppeft.payment-initiation.read
+  description: bmo.tppeft.payment-initiation.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-eft-payments-openapi.json
+- scope: bmo.tppinterac.payment-execution.create
+  description: bmo.tppinterac.payment-execution.create
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-interac-instant-payments-openapi.json
+- scope: bmo.tppinterac.payment-initiation.create
+  description: bmo.tppinterac.payment-initiation.create
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-interac-instant-payments-openapi.json
+- scope: bmo.tppinterac.payment-initiation.read
+  description: bmo.tppinterac.payment-initiation.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-interac-instant-payments-openapi.json
+- scope: bmo.tppwiresca.payment-initiation.create
+  description: bmo.tppwiresca.payment-initiation.create
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-wire-payments-ca-openapi.json
+- scope: bmo.tppwiresca.payment-initiation.read
+  description: bmo.tppwiresca.payment-initiation.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-wire-payments-ca-openapi.json
+- scope: bmo.tppwiresus.payment-initiation.create
+  description: bmo.tppwiresus.payment-initiation.create
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-wire-payments-us-openapi.json
+- scope: bmo.tppwiresus.payment-initiation.read
+  description: bmo.tppwiresus.payment-initiation.read
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bmo-wire-payments-us-openapi.json

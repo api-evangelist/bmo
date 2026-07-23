@@ -1,0 +1,72 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.json (cross-cutting headers, parameters and responses across all BMO commercial APIs)
+description: >-
+  Cross-cutting request/response conventions for BMO's commercial open-banking
+  APIs on the IBM API Connect gateway. Derived from the headers, parameters and
+  security schemes declared across all published specs. FAPI-aligned interaction
+  headers, dual OAuth 2.0 + client API-key auth, and per-field payload encryption
+  are the defining characteristics.
+base_urls:
+  sandbox: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+  interac_sit: https://open-api-sit.bmogc.net/open-banking2/commercial-sb
+  oauth: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20
+api_style: REST over HTTPS (TLS 1.2+), JSON request/response, IBM API Connect gateway
+
+authentication:
+  scheme: OAuth 2.0 authorization-code bearer token PLUS a client API key
+  api_key_header: x-api-key (x-key-type client_id); some Swagger 2.0 defs use X-IBM-Client-Id
+  oauth: authorization_code flow at /oauth20/authorize + /oauth20/token
+  detail: authentication/bmo-authentication.yml
+  scopes: scopes/bmo-scopes.yml
+
+fapi_headers:
+  supported: true
+  note: FAPI-aligned interaction headers are declared on most operations.
+  headers:
+    - x-fapi-interaction-id
+    - x-fapi-financial-id
+    - x-fapi-customer-ip-address
+    - x-fapi-customer-last-logged-time
+    - x-fapi-customer-user-agent
+
+payload_encryption:
+  supported: true
+  mechanism: x-crypto-key header + field-level encryption of sensitive elements (account numbers, tax IDs)
+  key_source: Client Data Encryption Key API (post-retrievecryptoinstruction)
+  note: Callers fetch a client data encryption key, then encrypt designated fields before calling e.g. Account Validation.
+
+idempotency:
+  supported: false
+  note: >-
+    No documented Idempotency-Key contract. Requests carry an x-request-id /
+    x-correlation-id for tracing and an x-retry-flag on payment initiation to
+    signal a retry attempt; use get-transaction-status before resubmitting a
+    payment rather than relying on server-side dedup.
+
+pagination:
+  style: offset
+  request_params:
+    offset: starting record offset
+    limit: maximum records to return
+  applies_to: Account Information (/accounts, /accounts/{accountId}/transactions), Image Retrieval account search.
+
+request_tracing:
+  correlation_id_header: x-correlation-id
+  request_id_header: x-request-id
+  response_id_header: x-response-id
+  timestamps: [x-request-timestamp, x-response-timestamp]
+  note: Supply x-correlation-id to BMO API support when reporting an error.
+
+versioning:
+  scheme: per-API semantic version carried in info.version (e.g. Account Information 5.3.0, ACH 1.1.3)
+  path: URI base path /open-banking/commercial-sb (Interac on /open-banking2/)
+  detail: lifecycle/bmo-lifecycle.yml
+
+error_envelope:
+  media_type: application/json
+  detail: errors/bmo-problem-types.yml
+  note: IBM API Connect gateway fault envelope; not RFC 9457.
+
+rate_limit_signaling:
+  note: Gateway-enforced throttling surfaces as HTTP 429 (Too Many Requests). Push Notification API documents 50 req/s throughput.

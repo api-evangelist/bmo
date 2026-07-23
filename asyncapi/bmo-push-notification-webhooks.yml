@@ -1,0 +1,28 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/bmo-push-notification-openapi.json
+spec_type: Webhooks
+description: >-
+  BMO's commercial Payment Service Push Notification API is a webhook/callback
+  surface: BMO POSTs asynchronous payment-status updates to a customer-registered
+  endpoint. Customers subscribe to a pre-defined list of payment statuses during
+  Payment API onboarding. This is the event surface for the BMO commercial APIs
+  (no AsyncAPI document is published; captured here as a webhook catalog).
+delivery:
+  direction: BMO -> customer endpoint (customer implements the receiver)
+  transport: HTTPS POST, TLS 1.2+
+  auth: client API key (x-api-key) + OAuth 2.0; payload encryption via x-crypto-key
+  subscription: opt-in per payment status during Payment API onboarding
+  retry:
+    policy: Retries delivery for 24 hours at 1-hour intervals based on the HTTP response code returned by the receiver.
+  sla:
+    availability: '99.95%'
+    latency: 95% of requests < 3s; max 5s
+    throughput: 50 requests/second
+webhooks:
+  - name: paymentStatusUpdate
+    path: /paymentStatusUpdate/v1
+    method: POST
+    payload_format: ISO 20022 pain.002 (payment status report), JSON
+    description: Delivers a subscribed payment-status change for a previously submitted ACH/EFT/wire/Interac payment.
+    support_contact: paymentAPIPNSupport@bmo.com

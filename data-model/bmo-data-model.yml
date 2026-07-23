@@ -1,0 +1,49 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.json components.schemas
+description: >-
+  Entity-relationship sketch derived from the components.schemas across BMO's
+  commercial open-banking APIs. The domain splits into an account/transaction
+  information model and a payment-initiation model (ACH/EFT/wire/Interac), with a
+  shared HATEOAS pagination envelope and ISO 20022 payment shapes.
+entities:
+  - name: Account
+    api: openapi/bmo-account-information-openapi.json
+    subtypes: [DepositAccount, InvestmentAccount, LoanAccount, LocAccount]
+    key: accountId
+    description: A business account owned by an Online Banking for Business customer.
+  - name: Transaction
+    api: openapi/bmo-account-information-openapi.json
+    subtypes: [DepositTransaction, InvestmentTransaction, LoanTransaction, LocTransaction]
+    description: A posted movement on an account, paginated under an account.
+  - name: PaymentInitiation
+    api: openapi/bmo-ach-payments-openapi.json
+    description: A credit or debit payment instruction (ISO 20022 pain.001) with a status lifecycle.
+  - name: PaymentStatus
+    api: openapi/bmo-push-notification-openapi.json
+    description: ISO 20022 pain.002 status report for a submitted payment.
+  - name: Company
+    api: openapi/bmo-ach-payments-openapi.json
+    key: companyId
+    description: A commercial user's linked company / access entitlement.
+relationships:
+  - from: Account
+    to: Transaction
+    type: has_many
+    via: accountId
+  - from: Company
+    to: PaymentInitiation
+    type: has_many
+    via: companyId
+  - from: PaymentInitiation
+    to: PaymentStatus
+    type: has_one
+    via: paymentId
+  - from: Account
+    to: TransactionImage
+    type: has_many
+    via: accountId
+    api: openapi/bmo-image-retrieval-swagger.json
+shared:
+  pagination_envelope: [PaginatedArray, PageMetadata, PageMetadataLinks, HateoasLink]
+  error: [Error, Problem]

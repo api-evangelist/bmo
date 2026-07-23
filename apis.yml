@@ -143,6 +143,7 @@ apis:
     Canada with live status, request-for-money, and autodeposit flows. OAuth 2.0
     plus client API key.
   humanURL: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi
+  baseURL: https://open-api-sit.bmogc.net/open-banking2/commercial-sb
   tags:
   - Payments
   - Instant Payments
@@ -220,18 +221,52 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/bmo-push-notification-openapi.json
+  - type: Webhooks
+    url: asyncapi/bmo-push-notification-webhooks.yml
   - type: Documentation
     url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
   - type: DeveloperPortal
     url: https://developer.bmo.com/api/commercial/
 common:
+- type: DomainSecurity
+  url: security/bmo-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/bmo-agentic-access.yml
+- type: OAuthScopes
+  url: scopes/bmo-scopes.yml
+- type: Authentication
+  url: authentication/bmo-authentication.yml
+- type: Conventions
+  url: conventions/bmo-conventions.yml
+- type: Conformance
+  url: conformance/bmo-conformance.yml
+- type: ErrorCatalog
+  url: errors/bmo-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/bmo-lifecycle.yml
+- type: Sandbox
+  url: sandbox/bmo-sandbox.yml
+- type: DataModel
+  url: data-model/bmo-data-model.yml
+- type: Webhooks
+  url: asyncapi/bmo-push-notification-webhooks.yml
+- type: LLMsTxt
+  url: llms/bmo-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/bmo-account-information-overlay.yaml
 - type: Website
   url: https://www.bmo.com/
 - type: DeveloperPortal
   url: https://developer.bmo.com/api/commercial/
 - type: Documentation
   url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/catalogue
+- type: APIReference
+  url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/catalogue
 - type: Registration
+  url: https://developer.bmo.com/api/commercial/registration
+- type: SignUp
   url: https://developer.bmo.com/api/commercial/registration
 - type: Support
   url: https://developer.bmo.com/api/commercial/faq

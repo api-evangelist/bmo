@@ -1,0 +1,52 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/bmo-account-information-openapi.json, openapi/bmo-account-validation-openapi.json,
+  openapi/bmo-ach-payments-openapi.json, openapi/bmo-authorize-token-swagger.json, openapi/bmo-client-data-encryption-key-swagger.json,
+  openapi/bmo-eft-payments-openapi.json, openapi/bmo-image-retrieval-swagger.json, openapi/bmo-interac-instant-payments-openapi.json,
+  openapi/bmo-push-notification-openapi.json, openapi/bmo-wire-payments-ca-openapi.json, openapi/bmo-wire-payments-us-openapi.json
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: api-key-1
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/bmo-account-information-openapi.json
+  - openapi/bmo-account-validation-openapi.json
+  - openapi/bmo-ach-payments-openapi.json
+  - openapi/bmo-client-data-encryption-key-swagger.json
+  - openapi/bmo-eft-payments-openapi.json
+  - openapi/bmo-image-retrieval-swagger.json
+  - openapi/bmo-interac-instant-payments-openapi.json
+  - openapi/bmo-push-notification-openapi.json
+  - openapi/bmo-wire-payments-ca-openapi.json
+  - openapi/bmo-wire-payments-us-openapi.json
+- name: OAuth
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+    tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+    scopes: 1
+  sources:
+  - openapi/bmo-account-information-openapi.json
+  - openapi/bmo-account-validation-openapi.json
+  - openapi/bmo-ach-payments-openapi.json
+  - openapi/bmo-eft-payments-openapi.json
+  - openapi/bmo-image-retrieval-swagger.json
+  - openapi/bmo-interac-instant-payments-openapi.json
+  - openapi/bmo-wire-payments-ca-openapi.json
+  - openapi/bmo-wire-payments-us-openapi.json
+- name: clientIdHeader
+  type: apiKey
+  in: header
+  parameter: X-IBM-Client-Id
+  sources:
+  - openapi/bmo-authorize-token-swagger.json

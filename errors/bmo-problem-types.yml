@@ -1,0 +1,60 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.json (4xx/5xx responses across all BMO commercial APIs)
+format: json
+description: >-
+  Error catalog derived from the HTTP 4xx/5xx responses declared across BMO's
+  commercial open-banking OpenAPI/Swagger definitions. Errors are returned as
+  application/json (not RFC 9457 problem+json); payment-status rejects also
+  carry ISO 20022 pain.002 reason codes on the payment resource itself.
+envelope:
+  media_type: application/json
+  note: >-
+    Fault responses are keyed by BMO's IBM API Connect / API gateway envelope
+    (moduleName, messageId, httpCode, httpMessage, moreInformation) rather than
+    RFC 9457. Downstream/backend timeouts surface as 502/503/504.
+problems:
+  - status: 400
+    title: Bad Request
+    detail: Validation issue or malformed request payload.
+    remediation: Correct the request body/parameters against the operation schema and resubmit.
+  - status: 401
+    title: Unauthorized
+    detail: API key invalid, missing, or no valid subscription for the incoming request.
+    remediation: Present a valid x-api-key (client_id) and a current OAuth 2.0 access token.
+  - status: 403
+    title: Forbidden
+    detail: Caller is authenticated but not entitled to the resource or not registered to the plan.
+    remediation: Confirm the app is subscribed to the product plan and holds the required OAuth scope.
+  - status: 404
+    title: Not Found
+    detail: Resource not found, or the service is unavailable.
+    remediation: Verify the resource id / path; retry later if the service is temporarily unavailable.
+  - status: 415
+    title: Unsupported Media Type
+    detail: Request Content-Type is not application/json.
+    remediation: Set Content-Type to application/json.
+  - status: 422
+    title: Unprocessable Entity
+    detail: Semantically invalid request that passed syntactic validation.
+    remediation: Review business-rule constraints for the operation.
+  - status: 429
+    title: Too Many Requests
+    detail: Rate limit exceeded for the API within the throttle window.
+    remediation: Back off and retry; honor gateway throttle limits (see conventions/rate-limits).
+  - status: 500
+    title: Internal Server Error
+    detail: Server-side error.
+    remediation: Retry with backoff; contact BMO API support with the x-correlation-id if persistent.
+  - status: 502
+    title: Bad Gateway
+    detail: Gateway received an invalid response from an upstream BMO system.
+    remediation: Retry with backoff.
+  - status: 503
+    title: Service Unavailable
+    detail: Service temporarily unavailable.
+    remediation: Retry after the indicated interval with backoff.
+  - status: 504
+    title: Gateway Timeout
+    detail: Downstream/backend system took longer than the gateway timeout.
+    remediation: Retry idempotent reads; for payment initiation, query payment status before resubmitting.

@@ -1,0 +1,27 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.json servers[] + oauth2 scopes (SandboxDataManagement)
+description: >-
+  BMO's commercial open-banking APIs are published against a dedicated sandbox
+  environment. Every specification's servers[] points at the sandbox host, and a
+  SandboxDataManagement OAuth scope exists to seed/manage test data. Specific
+  test account/reference values are provisioned per onboarded client and are not
+  published openly, so none are invented here.
+environments:
+  sandbox:
+    base_url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+    interac_base_url: https://open-api-sit.bmogc.net/open-banking2/commercial-sb
+    oauth:
+      authorize: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+      token: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+    data_management_scope: SandboxDataManagement
+    note: >-
+      SandboxDataManagement scope is declared on ACH and Wire (Canada) payment
+      APIs to provision test data in the sandbox.
+test_values:
+  published: false
+  note: >-
+    Test account numbers, company IDs and credentials are issued to each client
+    during Payment API onboarding; not published on the public portal. No values
+    fabricated.
+access: OAuth 2.0 client credentials issued via developer.bmo.com commercial registration.

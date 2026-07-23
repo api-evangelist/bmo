@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for BMO Instant Payments (Interac)
+  version: 1.0.0
+extends: openapi/bmo-interac-instant-payments-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: bmo
+      x-apievangelist-standards: [oauth2, fapi, iso20022]
+      x-apievangelist-artifacts:
+        authentication: authentication/bmo-authentication.yml
+        scopes: scopes/bmo-scopes.yml
+        conventions: conventions/bmo-conventions.yml
+        errors: errors/bmo-problem-types.yml

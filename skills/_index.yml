@@ -1,0 +1,16 @@
+generated: '2026-07-23'
+method: generated
+source: openapi/*.json (operationIds grounded in the published BMO commercial specs)
+skills:
+  - file: bmo-validate-us-account.md
+    name: Validate a U.S. account before a transfer
+    api: openapi/bmo-account-validation-openapi.json
+    operations: [post-retrievecryptoinstruction, ValidateAccounts]
+  - file: bmo-initiate-ach-payment.md
+    name: Initiate an ACH credit payment and track status
+    api: openapi/bmo-ach-payments-openapi.json
+    operations: [ACHCompanyIDList, CreditPaymentInitiation, PaymentStatus]
+  - file: bmo-retrieve-account-info.md
+    name: Retrieve business account balances and transactions
+    api: openapi/bmo-account-information-openapi.json
+    operations: ["Search for Accounts", "Get an Account", "Search for Account Transactions"]
