@@ -1,0 +1,555 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Push Notifications",
+    "description": "This document summarize the Payment Service - Push Notification API interface specification. The intent of this API is to receive the payment status updates.  The payment status will be sent in JSON format adhering to the ISO pain002 format. Customers must subscribe to the Push Notification as part of the Payment API onboarding process. Customer can subscribe to the pre-defined list of payment status for which the notifications need to be enabled during onboarding process. During payment processing, the payment status changes will be updated by calling this API and the notification wil be send only for the subscribed payment status changes. <br>\nSystem will retry the payment delivery based on the http response code of this API. System will do retry delivering the payments for 24 hours with one hour interval. Refer the \"Response\" section of this swagger for more details. \n## Non-Functional Requirements:\n     Performance:\n      - 95% of request should respond with in 3 seconds\n      - Maximum acceptable Latency: 5 seconds\n     Throughput: \n      - 50 requests/second\n     Availability\n      - 99.95 % uptime SLA\n     Security:\n      - All endpoints must support https and TLS 1.2+\n      - In addition to TLS , payload encryption as per defined in the x-crypto-key header element\n      - Authorization is enabled by OAuth 2.0        ",
+    "contact": {
+      "email": "paymentAPIPNSupport@bmo.com"
+    },
+    "version": "1.0.0",
+    "x-ibm-name": "payment-service-push-notification-api",
+    "x-api-id": "BMO-ENT-f03de36a-fb59-4757-af38-b4afb449a904",
+    "x-bmoservicedomain-name": "Payment Initiation",
+    "x-bmo-api-type": "general-api",
+    "x-bmo-api-provider-id": 87679,
+    "x-audience": "company-internal",
+    "x-template-version": "1.0.0",
+    "x-api-specification-compliant": true,
+    "x-ibm-summary": ""
+  },
+  "externalDocs": {
+    "description": "Documentation about the Payment API Push Notification.",
+    "url": "/payment-systems/<payment-type>"
+  },
+  "servers": [
+    {
+      "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb"
+    }
+  ],
+  "components": {
+    "parameters": {
+      "x-api-key": {
+        "in": "header",
+        "name": "x-api-key",
+        "description": "Unique identifier to identify API and to manage the API usage.",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "x-client-id": {
+        "in": "header",
+        "name": "x-client-id",
+        "description": "Used to identify the entity making the API call.",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "x-request-id": {
+        "in": "header",
+        "name": "x-request-id",
+        "description": "Unique id used to identify the request.",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "x-request-timestamp": {
+        "in": "header",
+        "name": "x-request-timestamp",
+        "description": "Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "authorization": {
+        "in": "header",
+        "name": "authorization",
+        "description": "Authorization Token",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "x-crypto-key": {
+        "in": "header",
+        "name": "x-crypto-key",
+        "description": "x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "x-payment-type": {
+        "in": "header",
+        "name": "x-payment-type",
+        "description": "Used to identify the payment type.",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      },
+      "x-retry-flag": {
+        "in": "header",
+        "name": "x-retry-flag",
+        "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Success responses",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Success"
+            }
+          }
+        },
+        "headers": {
+          "x-correlation-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field."
+          },
+          "x-response-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique id to identify the response."
+          },
+          "x-response-timestamp": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002"
+          }
+        }
+      },
+      "400": {
+        "description": "Bad Request.Unable to process the payment status update message. The payload is malformed,corrupted or failed to decrypt the message. No Automatic retry for this error code. Support team will investigate the issue and resend the notification.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        },
+        "headers": {
+          "x-correlation-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field."
+          },
+          "x-response-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique id to identify the response."
+          },
+          "x-response-timestamp": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002"
+          }
+        }
+      },
+      "401": {
+        "description": "Unauthorized.Request is not having valid authorization credentials. For example, OAuth token may be expired. System will retry this request with a default 3 time retry. If the default re-try limit exceeds, then support team will be updated for further investigation.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        },
+        "headers": {
+          "x-correlation-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field."
+          },
+          "x-response-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique id to identify the response."
+          },
+          "x-response-timestamp": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002"
+          }
+        }
+      },
+      "403": {
+        "description": "Forbidden. Not authorized to call this API. No Retry for this request. Support team will investigate this issue and may resend the notification.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        },
+        "headers": {
+          "x-correlation-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field."
+          },
+          "x-response-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique id to identify the response."
+          },
+          "x-response-timestamp": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002"
+          }
+        }
+      },
+      "422": {
+        "description": "Unprocessable Entity.Request syntax is valid for not able process the request ,i.e invalid transaction id. No automatic retry for this error code. Support team will investigate and resend this request.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        },
+        "headers": {
+          "x-correlation-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field."
+          },
+          "x-response-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique id to identify the response."
+          },
+          "x-response-timestamp": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002"
+          }
+        }
+      },
+      "429": {
+        "description": "Too many requests. System will retry for this request. The request will be retried 3 times on failure and then subsequent retry will happen for 24 hours at one hour interval.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        },
+        "headers": {
+          "x-correlation-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field."
+          },
+          "x-response-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique id to identify the response."
+          },
+          "x-response-timestamp": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002"
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error or Unexpected Error. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        },
+        "headers": {
+          "x-correlation-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field."
+          },
+          "x-response-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique id to identify the response."
+          },
+          "x-response-timestamp": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002"
+          }
+        }
+      },
+      "503": {
+        "description": "Service Unavailable. Service is not available due to maintenance. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval."
+      },
+      "504": {
+        "description": "System processing timeout. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        },
+        "headers": {
+          "x-correlation-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field."
+          },
+          "x-response-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique id to identify the response."
+          },
+          "x-response-timestamp": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002"
+          }
+        }
+      },
+      "default": {
+        "description": "If the http error code is not part of the listed http error codes of the swagger, it will be considered as default error handling. If the http error code falls under 4XX series, system will not do the retry and for other error codes , system will do a default (3 times) retry and also 24 hrs scheduled retry.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        },
+        "headers": {
+          "x-correlation-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field."
+          },
+          "x-response-id": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique id to identify the response."
+          },
+          "x-response-timestamp": {
+            "schema": {
+              "type": "string"
+            },
+            "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api-key": {
+        "type": "apiKey",
+        "x-key-type": "client_id",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    },
+    "schemas": {
+      "PaymentStatusUpdateRequest": {
+        "properties": {
+          "SECURE": {
+            "$ref": "#/components/schemas/SECURE"
+          }
+        }
+      },
+      "SECURE": {
+        "type": "object",
+        "required": [
+          "encrypted",
+          "data"
+        ],
+        "properties": {
+          "encrypted": {
+            "type": "boolean",
+            "default": true,
+            "description": "Send true when dealing with data encryption else false"
+          },
+          "data": {
+            "type": "string",
+            "default": "Payment Status information as encrypted PAIN002 message",
+            "description": "base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field"
+          }
+        }
+      },
+      "Problem": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The HTTP status code generated by the origin server for this occurrence\nof the problem.                 \n"
+          },
+          "title": {
+            "type": "string",
+            "description": "A short, summary of the problem type. Written in english and readable\nfor engineers (usually not suited for non technical stakeholders and\nnot localized); example: Service Unavailable\n"
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human readable explanation specific to this occurrence of the\nproblem. example: Connection to database timed out\n"
+          }
+        }
+      },
+      "Success": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Populated with value 200 for successful processing of the message                \n"
+          },
+          "title": {
+            "type": "string",
+            "description": "Contains value 'success'.\n"
+          },
+          "detail": {
+            "type": "string",
+            "description": "Additional information related to status message processing.\n"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "api-key": []
+    }
+  ],
+  "paths": {
+    "/paymentStatusUpdate/v1": {
+      "post": {
+        "x-dataclassification-code": "Confidential",
+        "summary": "Payment Status Update ",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/x-api-key"
+          },
+          {
+            "$ref": "#/components/parameters/x-client-id"
+          },
+          {
+            "$ref": "#/components/parameters/authorization"
+          },
+          {
+            "$ref": "#/components/parameters/x-request-id"
+          },
+          {
+            "$ref": "#/components/parameters/x-request-timestamp"
+          },
+          {
+            "$ref": "#/components/parameters/x-crypto-key"
+          },
+          {
+            "$ref": "#/components/parameters/x-payment-type"
+          },
+          {
+            "$ref": "#/components/parameters/x-retry-flag"
+          }
+        ],
+        "requestBody": {
+          "description": "Request body contains encrypted payload.Payload will be encrypted as Base64(AES-256-GCM-Encrypted-Message)|Base64(AuthTag)",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentStatusUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/200"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "429": {
+            "$ref": "#/components/responses/429"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          },
+          "503": {
+            "$ref": "#/components/responses/503"
+          },
+          "504": {
+            "$ref": "#/components/responses/504"
+          },
+          "default": {
+            "$ref": "#/components/responses/default"
+          }
+        }
+      }
+    }
+  },
+  "x-ibm-configuration": {
+    "type": "rest",
+    "phase": "realized",
+    "enforced": true,
+    "testable": true,
+    "categories": [
+      "bian--bd--operationalservices"
+    ],
+    "cors": {
+      "enabled": true
+    }
+  },
+  "x-ibm-endpoints": [
+    {
+      "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb",
+      "type": [
+        "production",
+        "development"
+      ]
+    }
+  ]
+}

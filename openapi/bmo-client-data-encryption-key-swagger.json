@@ -1,0 +1,476 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "x-api-id": "042d9789-15fb-44d4-ac60-6a9df5405d38",
+    "x-audience": "company-internal",
+    "x-bmo-api-type": "internal-api",
+    "x-bmo-api-provider-id": 26777,
+    "x-bmoservicedomain-name": "Commercial_sb",
+    "x-api-specification-compliant": true,
+    "version": "1.0.0",
+    "title": "Client Data Encryption Key Get Open Banking",
+    "description": "REST Utility framework to retrieve cryptographic instructions such as public Customer Management key (CMK) details, encryption method and algorithm etc based on a resource uri and key alias. The key can be used to encryt, but not decrypt the data.",
+    "contact": {
+      "name": "Smart Core-CG",
+      "email": "HubCGCustLeadsSupport@bmo.com",
+      "url": "https://confluence.bmogc.net/display/SCCGAPI"
+    },
+    "x-ibm-name": "client-data-encryption-key-get-open-banking",
+    "x-ibm-summary": ""
+  },
+  "host": "sandbox-open-api.bmo.com",
+  "basePath": "/open-banking/commercial-sb",
+  "schemes": [
+    "https"
+  ],
+  "parameters": {
+    "x-fapi-financial-id": {
+      "name": "x-fapi-financial-id",
+      "in": "header",
+      "description": "The unique id of the financial institution to which the request is issued. BMO is 001",
+      "type": "string",
+      "required": true
+    },
+    "x-fapi-customer-last-logged-time": {
+      "name": "x-fapi-customer-last-logged-time",
+      "in": "header",
+      "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+      "type": "string",
+      "required": false
+    },
+    "x-fapi-customer-ip-address": {
+      "name": "x-fapi-customer-ip-address",
+      "in": "header",
+      "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+      "type": "string",
+      "required": false
+    },
+    "x-fapi-customer-user-agent": {
+      "name": "x-fapi-customer-user-agent",
+      "in": "header",
+      "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+      "type": "string",
+      "required": false
+    },
+    "x-fapi-interaction-id": {
+      "name": "x-fapi-interaction-id",
+      "in": "header",
+      "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+      "type": "string",
+      "required": false
+    },
+    "x-client-id": {
+      "name": "x-client-id",
+      "in": "header",
+      "description": "Client Id generated during Third Party Provider application registration",
+      "type": "string",
+      "required": false
+    },
+    "Authorization": {
+      "name": "Authorization",
+      "in": "header",
+      "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+      "type": "string",
+      "required": false
+    },
+    "x-request-id": {
+      "name": "x-request-id",
+      "in": "header",
+      "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+      "type": "string",
+      "required": true
+    },
+    "x-api-key": {
+      "name": "x-api-key",
+      "in": "header",
+      "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+      "type": "string",
+      "required": false
+    },
+    "x-app-cat-id": {
+      "name": "x-app-cat-id",
+      "in": "header",
+      "description": "BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+      "type": "string",
+      "required": true
+    }
+  },
+  "paths": {
+    "/issued-device-administration/client-data-encryption-key/get": {
+      "post": {
+        "x-dataclassification-code": "Confidential",
+        "tags": [
+          "retrieveClientDataEncryptionKey"
+        ],
+        "description": "REST Utility framework to retrieve cryptographic instructions such as public Customer Management key (CMK) details, encryption method and algorithm etc based on a reource uri and key alias",
+        "operationId": "post-retrievecryptoinstruction",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/x-fapi-financial-id"
+          },
+          {
+            "$ref": "#/parameters/x-fapi-customer-last-logged-time"
+          },
+          {
+            "$ref": "#/parameters/x-fapi-customer-ip-address"
+          },
+          {
+            "$ref": "#/parameters/x-fapi-customer-user-agent"
+          },
+          {
+            "$ref": "#/parameters/x-fapi-interaction-id"
+          },
+          {
+            "$ref": "#/parameters/x-client-id"
+          },
+          {
+            "$ref": "#/parameters/Authorization"
+          },
+          {
+            "$ref": "#/parameters/x-request-id"
+          },
+          {
+            "$ref": "#/parameters/x-api-key"
+          },
+          {
+            "$ref": "#/parameters/x-app-cat-id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request Body",
+            "schema": {
+              "$ref": "#/definitions/RetrieveClientKeyRequest"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "x-request-id": {
+                "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/RetrieveClientKeyResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request Exception",
+            "headers": {
+              "x-request-id": {
+                "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/exceptionResult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "x-request-id": {
+                "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/exceptionResult"
+            }
+          },
+          "403": {
+            "description": "Forbidden - the user is not authorized to use this resource",
+            "headers": {
+              "x-request-id": {
+                "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/exceptionResult"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "x-request-id": {
+                "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/exceptionResult"
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "headers": {
+              "x-request-id": {
+                "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/exceptionResult"
+            }
+          },
+          "429": {
+            "description": "Too many requests",
+            "headers": {
+              "x-request-id": {
+                "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/exceptionResult"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "headers": {
+              "x-request-id": {
+                "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/exceptionResult"
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "headers": {
+              "x-request-id": {
+                "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/exceptionResult"
+            }
+          },
+          "504": {
+            "description": "Integration or Backend Timeout",
+            "headers": {
+              "x-request-id": {
+                "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/exceptionResult"
+            }
+          }
+        },
+        "summary": ""
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api-key-1": {
+      "type": "apiKey",
+      "description": "",
+      "in": "header",
+      "name": "x-api-key",
+      "x-key-type": "client_id"
+    }
+  },
+  "definitions": {
+    "RetrieveClientKeyRequest": {
+      "type": "object",
+      "required": [
+        "keyAlias",
+        "originatorData"
+      ],
+      "properties": {
+        "originatorData": {
+          "$ref": "#/definitions/OriginatorData"
+        },
+        "keyAlias": {
+          "type": "string"
+        },
+        "resourceName": {
+          "type": "string"
+        }
+      }
+    },
+    "OriginatorData": {
+      "type": "object",
+      "required": [
+        "applicationCatalogueId",
+        "country"
+      ],
+      "properties": {
+        "applicationCatalogueId": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "locationId": {
+          "type": "string"
+        },
+        "locationType": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "employeeUserId": {
+          "type": "string"
+        }
+      }
+    },
+    "Result": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resultDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResultDetails"
+          }
+        }
+      }
+    },
+    "ResultDetails": {
+      "type": "object",
+      "properties": {
+        "detailCode": {
+          "type": "string"
+        },
+        "detailMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "exceptionResult": {
+      "type": "object",
+      "required": [
+        "result"
+      ],
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/Result"
+        }
+      }
+    },
+    "key": {
+      "type": "object",
+      "required": [
+        "keyid"
+      ],
+      "properties": {
+        "keyid": {
+          "type": "string"
+        },
+        "pemContent": {
+          "type": "string"
+        },
+        "keyType": {
+          "type": "string"
+        },
+        "encryptionAlgorithm": {
+          "type": "string"
+        },
+        "timeToLive": {
+          "type": "string"
+        }
+      }
+    },
+    "RetrieveClientKeyResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/Result"
+        },
+        "key": {
+          "$ref": "#/definitions/key"
+        }
+      }
+    }
+  },
+  "x-ibm-configuration": {
+    "categories": [
+      "bian--bd--operationalservices"
+    ],
+    "type": "rest",
+    "phase": "realized",
+    "enforced": true,
+    "testable": true,
+    "cors": {
+      "enabled": true
+    },
+    "servers": [
+      {
+        "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb",
+        "type": [
+          "production",
+          "development"
+        ]
+      }
+    ]
+  }
+}

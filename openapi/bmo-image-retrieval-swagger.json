@@ -1,0 +1,3702 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Image Retrieval",
+    "x-ibm-name": "image-retrieval",
+    "version": "4.5.0",
+    "description": "The Image Retrieval API lets you retrieve the latest images of paid and deposited cheques as well as other deposit items for the U.S. and Canada. It involves calling a summary of your accounts, which will return account IDs you can then use to search for and retrieve available images.",
+    "x-audience": "company-internal",
+    "x-api-id": "757bb3e9-a7cc-429b-ad5b-97108158c0e6",
+    "x-bmo-api-type": "internal-api",
+    "x-bmo-api-provider-id": 26777,
+    "x-bmoservicedomain-name": "Commercial-sb",
+    "x-api-specification-compliant": true,
+    "x-ibm-summary": ""
+  },
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/open-banking/commercial-sb",
+  "security": [
+    {
+      "OAuth": [
+        "ItemImage"
+      ],
+      "x-api-key": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth": {
+      "type": "oauth2",
+      "flow": "accessCode",
+      "x-ibm-oauth-provider": "apic-oauth-ob-commercial-sb-provider",
+      "authorizationUrl": "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize",
+      "tokenUrl": "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token",
+      "scopes": {
+        "ItemImage": "ItemImage"
+      }
+    },
+    "x-api-key": {
+      "type": "apiKey",
+      "in": "header",
+      "x-key-type": "client_id",
+      "name": "x-api-key"
+    }
+  },
+  "x-ibm-configuration": {
+    "categories": [
+      "bian--bd--operationalservices"
+    ],
+    "enforced": true,
+    "testable": true,
+    "phase": "realized",
+    "cors": {
+      "enabled": true
+    },
+    "type": "rest",
+    "application-authentication": {
+      "certificate": false
+    },
+    "servers": [
+      {
+        "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb",
+        "type": [
+          "production",
+          "development"
+        ]
+      }
+    ],
+    "oauth-servers": {
+      "OAuth": {
+        "tokenUrls": [
+          "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token"
+        ],
+        "authorizationUrls": [
+          "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize"
+        ],
+        "refreshUrls": []
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AccountTransactionImages"
+    }
+  ],
+  "paths": {
+    "/accounts/transaction-images-accounts": {
+      "get": {
+        "x-dataclassification-code": "Confidential",
+        "tags": [
+          "AccountTransactionImages"
+        ],
+        "summary": "Search for Accounts",
+        "description": "Get a list of all your accounts as a starting point for more specific requests. This call will return account IDs that are set up for the \"Cheque Imaging\" (CA) or the \"Check Imaging\" (U.S.) service. ",
+        "operationId": "Search for Accounts",
+        "parameters": [
+          {
+            "name": "x-fapi-customer-last-logged-time",
+            "in": "header",
+            "required": false,
+            "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-customer-ip-address",
+            "in": "header",
+            "required": false,
+            "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "description": "A Unique key to call service. Used as Application Catalogue Id.",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-interaction-id",
+            "in": "header",
+            "required": false,
+            "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+            "type": "string"
+          },
+          {
+            "name": "x-client-id",
+            "in": "header",
+            "required": false,
+            "description": "Client Id generated during Third Party Provider application registration.",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-customer-user-agent",
+            "in": "header",
+            "required": false,
+            "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A valid success response and headers to be returned.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Accounts"
+            },
+            "examples": {
+              "example1": {
+                "statusCode": 200,
+                "body": {
+                  "accounts": [
+                    {
+                      "depositAccount": {
+                        "nickname": "KLAIQTSFMG OLET IQ NSXLTA NDS JOA",
+                        "accountId": "8398198bd29c0c35bd0c1c0c5e65acbd79861e32",
+                        "description": "KLAIQTSFMG OLET IQ NSXLTA NDS JOA",
+                        "currency": "CAD",
+                        "accountNumber": "00011230055",
+                        "accountType": "DDA"
+                      }
+                    }
+                  ],
+                  "page": {
+                    "total": 1
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request fault to be returned in case of validation issues.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "404": {
+            "description": "404 to be returned when service not available or resource not found.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "500": {
+            "description": "500 to be returned for server side errors.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "503": {
+            "description": "Server error to be returned when service is temporarily unavailable.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "504": {
+            "description": "Error to be returned when downstream systems takes longer than specified time to respond.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/transaction-images/get": {
+      "post": {
+        "x-dataclassification-code": "Confidential",
+        "tags": [
+          "AccountTransactionImages"
+        ],
+        "summary": "Search for Images",
+        "description": "Get a list of available images that match your search. You can search by account number, date range, amount and item type. You can get up to 1000 results at once. Then pick the images you want to download in TIFF format.",
+        "operationId": "Search for Images",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "description": "a pseudonymized representation of the account number",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-customer-last-logged-time",
+            "in": "header",
+            "required": false,
+            "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-customer-ip-address",
+            "in": "header",
+            "required": false,
+            "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "description": "A Unique key to call service. Used as Application Catalogue Id.",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-interaction-id",
+            "in": "header",
+            "required": false,
+            "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+            "type": "string"
+          },
+          {
+            "name": "x-client-id",
+            "in": "header",
+            "required": false,
+            "description": "Client Id generated during Third Party Provider application registration.",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-customer-user-agent",
+            "in": "header",
+            "required": false,
+            "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "SearchTransactionImagesRequest",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/searchTransactionImagesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A valid success response and headers to be returned.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/searchTransactionImageSuccessResult"
+            },
+            "examples": {
+              "example1": {
+                "itemIndicator": "deposited",
+                "itemSequenceNumber": "",
+                "itemAmount": "",
+                "routingTransitNumber": "",
+                "depositedItemAccountNumber": "9001016792",
+                "dateRange": {
+                  "startDate": "2020-01-01",
+                  "endDate": "2020-12-31"
+                },
+                "itemAmountRange": {
+                  "lowAmount": "500.00",
+                  "highAmount": "510.00"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request fault to be returned in case of validation issues.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "404": {
+            "description": "404 to be returned when service not available or resource not found.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "500": {
+            "description": "500 to be returned for server side errors.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "503": {
+            "description": "Server error to be returned when service is temporarily unavailable.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "504": {
+            "description": "Error to be returned when downstream systems takes longer than specified time to respond.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          }
+        }
+      }
+    },
+    "/accounts/{accountId}/transaction-images/{imageId}": {
+      "get": {
+        "x-dataclassification-code": "Confidential",
+        "tags": [
+          "AccountTransactionImages"
+        ],
+        "summary": "Retrieve Images",
+        "description": "Send us the index number of the cheque you want to retrieve. As per FDX standard, each API call can retrieve one cheque which includes front and back images in TIFF format. ",
+        "operationId": "Retrieve Images",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "description": "a pseudonymized representation of the account number",
+            "type": "string"
+          },
+          {
+            "name": "imageId",
+            "in": "path",
+            "required": true,
+            "description": "an identifier used to retrieve a specific transaction image",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-customer-last-logged-time",
+            "in": "header",
+            "required": false,
+            "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-customer-ip-address",
+            "in": "header",
+            "required": false,
+            "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+            "type": "string"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": false,
+            "description": "A Unique key to call service. Used as Application Catalogue Id.",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-interaction-id",
+            "in": "header",
+            "required": false,
+            "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+            "type": "string"
+          },
+          {
+            "name": "x-client-id",
+            "in": "header",
+            "required": false,
+            "description": "Client Id generated during Third Party Provider application registration.",
+            "type": "string"
+          },
+          {
+            "name": "x-fapi-customer-user-agent",
+            "in": "header",
+            "required": false,
+            "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "required": false,
+            "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A valid success response and headers to be returned.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/getTransactionImageSuccessResult"
+            },
+            "examples": {
+              "example1": {
+                "result": {
+                  "code": "200",
+                  "status": "SUCCESS"
+                },
+                "transactionImages": {
+                  "images": [
+                    {
+                      "imageFormat": "1",
+                      "imageSegment": "SUkqAAgAAAANAP4ABAABAAAAAAAAAAABBAABAAAAIAMAAAEBBAABAAAAZQEAAAIBAwABAAAAAQAAAAMBAwABAAAABAAAAAYBAwABAAAAAAAAABEBBAABAAAAqgAAABUBAwABAAAAAQAAABYBBAABAAAAZQEAABcBBAABAAAAnQEAABoBBQABAAAARwIAABsBBQABAAAATwIAACgBAwABAAAAAgAAAAAAAAD///////////////////////////////////////////5WGbjcbjjMozjLmYjyM43G43HM7HZ5HkeRuNxuPI3GDMRxlcIZuNxuNxuNswzEbjyMHRUNAjCQRdIEYSKh6KpQIwlQRdIIukEXSCLrRUNVVBF0gi6QRdKggRWUCMJFQ5VlOEXSCLpBF0gRhIEYSK4rgi6QIwllWUaJP9D6T0R114QRHVddddEdJOEER1hBEdV119DXpP9ddY4/1+EER1/EeDHxS4NRx///S8R0ER0P/+giOoNfx///4OD8cf+lBGEl/BGFSX///////8EYVNcf/4SCUECKcECBelx9L0tCx9LLv//0L9L//0v9AgQLlX//bbHH9LlX5xJelnFKvpJY///KvnFxf//F+l+cX//u/+l/ZUUr0mVHsjr0u+++/tlRwa777wav/ZUfvvvLpS6Uusuu9L+1JwHJ2kng+Tyw2Gw2Gk7X7DYbD2HtNSdhsNhxUVBwbDk8yezURERERERERERERERERERERERERER//////////////gAgAkANAwDoAwAAQA0DAOgDAAA="
+                    },
+                    {
+                      "imageFormat": "2",
+                      "imageSegment": "SUkqAAgAAAAOAAABAwABAAAAIAMAAAEBAwABAAAAZQEAAAIBAwABAAAAAQAAAAMBAwABAAAABAAAAAYBAwABAAAAAAAAABEBBAABAAAAtgAAABUBAwABAAAAAQAAABYBAwABAAAAZQEAABcBBAABAAAAyQYAABoBBQABAAAAfwcAABsBBQABAAAAhwcAABwBAwABAAAAAQAAACgBAwABAAAAAgAAADEBAgAaAAAAjwcAAAAAAAD/O1IJBA4IHCDpwg6dOnTp1NFvprkMQQjxrt6aek032ulvppsshln8j5miX9DnYhHadvQrycZhnyIZmkYlc6DPDTJMjB2ZGXa/QtUwrD7aaV23XoxlxSPm8wfDJ4w2gkEw/qnp8i4yq5JjzmdTIHv88L0eP79J/9r9O7HT7X/6v73recif/H+a2sztNFuk3r/x/+tN93//2bM8KRyMzQZstzxHhmZHzMSDSE4RwaDLxyMGbLX/zBfq5Q9fVP8zGeMuzBl42Z8fmYzxlyzB7hAiPRYTdPbTtMLtUnbXqndf+jx+s49f9NP9FjuOL0Z/hFu7vr6bRcFxmdwkaPzQ0XDRrc36zpTQ6+CRob//1/S+v/XvQTbJDtkh26QbtKm2zD2jU9UunbSd9v0um/9pftr/eP/XXxC21/07492trf4r2m9JPrf/+v6/S/69/+uvbYMj7BEf8lAf/3pocnO17W12MnYdf6XFaf++v//t3+F//8RERERHTe2l9f1iuOPdOPXrVYS/78F+wX/v8L/+mC9v//E6A/mYlVwe2fE+N6iv/4r4r/Yf6LH//xXfYr//CLj+w/CLj9jM7l0/1ydfl0/hv7QX//LXD7//r0n/D9pf/1//X1/v7//+/+tvf//w3//Ld7f/rv/9pP////139L//83h+v/v2///S9J/7v9L//XW9f+v9+v/t7dmP9tLYZf1YZhWtpG9fZHD/u12GYXS3216u+000+uvT9vtj/jhxxTFxTHFdtscVbFcdMJJ6baCfTuwv90mErCemt7u/hpw9NUwq22npt8PQhbSYMQrXUNmGqqGKiE2Ya9uIiIiIiIy96mXWBERFihEREREREREa/9rzsDGSjML/Kxitp637Qj2bjaI7OM2zGna3QIx2Ywjw0VD2v6vvT4/a+uv4f2vj/2H8MLWVP+Df2uu/3+1qyoO9K1Lr+GFFNQYYTW3DCEYIREYYXHk3GRAsestwUUrcSAmE6DU3ayn7fr/NmlmqivbPGci7PmZmoQakgZ8j51LetHtcJxaYX8KEwmNP+7TVXtVWV1BkVX+i3onFFvl9YKRILiib5b8EX1/669/X+tL9l0cRxHkcrOILD9D9K79JLSqPxYQaYQaeEGtkeL9df03XLnr/zjpAiOcER9AiPaO4lPggh6pQv1b6/1hYr7WPq/4Ij6Xy6JL2/9flmyxXE475x/x/sev/6//+FwQbxf5r/+Es2k0rSML0/XX/7/f/1FMcUxUV2iFccciGyn7BhKDXdg2KinhdNVvTtP2n3drd64Qapqqa2Z04YURERERERoRm2njX7qdkYJR4r1Ef/////////ySEZo8jwyBmUvysK/ysaPD+yu+5dmGYaTmGYMjxczbLmXzay5m3//RUUCL6BF+hQIvwQTBYIvoqMEECdLgjCQIv/j0h6Gn6eq6cev+uh/K7GF4///C+wX//+VMEC8pH//CBAv6X//+v7BAv/+v4//pf62EFZhNra/2uvv/ZhZKf4YJsGwbFMV/FQwT+jf+wZfiIiIiIiIjKUXEREfpcJDEf//lZRmjyOM2zbPo2zBGGTcpZtm2ZmYMwzNnlVVQIvoEX0CL6oECK6gRfQIwkCL6BF+V5XAi+gRfWqrT09OtDVPQ09Oq09OsPCI6D//wiOsjyVrikKUHB+OH6X//pdl/YbN0LBF+CL/r////6dUEXwww2GxcX9L6X//pf1Th3f/S/F//8X/+XWXWeWXX6XzNdra2p5Wq2pNxddra2trapf9imKYrYrYppimKMbFMUxRjksxERERERERcRERGlH///////////KwzcbjccZlGcZczEeRnG43G45nY7PI8jyNxuNx5G4wZiOMrhDNxuNxuNxtmGYjceRg6KhoEYSCLpAjCRUPRVKBGEqCLpBF0gi6QRdaKhqqoIukEXSCLpUECKygRhIqHKspwi6QRdIIukCMJAjCRXFcEXSBGEsqyjRJ/ofSeiOuvCCI6rrrrojpJwgiOsIIjquuvoa9J/rrrHH+vwgiOv4jwY+KXBqOP//6XiOgiOh//0ER1Br+P///Bwfjj/0oIwkv4IwqS////////gjCprj//CQSggRTggQL0uPpeloWPpZd//+hfpf/+l/oECBcq//7bY4/pcq/OJL0s4pV9JLH//5V84uL//4v0vzi//93/0v7Kilekyo9kdel33339sqODXffeDV/7Kj9995dKXSl1l13pf2pOA5O0k8HyeWGw2Gw0na/YbDYew9pqTsNhsOKioODYcnmT2aiIiIiIiIiIiIiIiIiIiIiIiIiIiP/////////////8AEAEAAAAZAAAgAAAAABkAACAATWV0YXZhbnRlIEltYWdlIFNvbHV0aW9ucwA="
+                    }
+                  ]
+                },
+                "fiAttributes": [
+                  {
+                    "name": "itemType",
+                    "value": "deposit"
+                  },
+                  {
+                    "name": "itemSequenceNumber",
+                    "value": "2700636316"
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request fault to be returned in case of validation issues.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "404": {
+            "description": "404 to be returned when service not available or resource not found.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "500": {
+            "description": "500 to be returned for server side errors.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "503": {
+            "description": "Server error to be returned when service is temporarily unavailable.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          },
+          "504": {
+            "description": "Error to be returned when downstream systems takes longer than specified time to respond.",
+            "headers": {
+              "x-request-id": {
+                "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "type": "string"
+              },
+              "x-fapi-interaction-id": {
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/problem"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "searchTransactionImagesRequest": {
+      "type": "object",
+      "required": [
+        "itemIndicator",
+        "dateRange"
+      ],
+      "properties": {
+        "itemIndicator": {
+          "type": "string",
+          "description": "Indicate the type of item image in scope for search - ‘paid’, ‘deposited’, ‘deposit’"
+        },
+        "itemSequenceNumber": {
+          "type": "string",
+          "description": "Item sequence number/check number"
+        },
+        "itemAmount": {
+          "type": "string",
+          "description": "Item exact amount"
+        },
+        "routingTransitNumber": {
+          "type": "string",
+          "description": "Routing transit number (RTN) associated with account number at owning institution"
+        },
+        "depositedItemAccountNumber": {
+          "type": "string",
+          "description": "Posted Account number for deposited items"
+        },
+        "checkNumber": {
+          "type": "string",
+          "description": "Check Number field for US Checks - Serial number field for CA Cheques"
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Check Number field for US Checks - Serial number field for CA Cheques"
+        },
+        "dateRange": {
+          "$ref": "#/definitions/dateRange"
+        },
+        "itemAmountRange": {
+          "$ref": "#/definitions/itemAmountRange"
+        },
+        "itemSequenceNumberRange": {
+          "$ref": "#/definitions/itemSequenceNumberRange"
+        },
+        "checkNumberRange": {
+          "$ref": "#/definitions/checkNumberRange"
+        },
+        "serialNumberRange": {
+          "$ref": "#/definitions/serialNumberRange"
+        }
+      }
+    },
+    "searchTransactionImageSuccessResult": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/result"
+        },
+        "transactionImages": {
+          "$ref": "#/definitions/transactionImagesSearch"
+        }
+      }
+    },
+    "getTransactionImageSuccessResult": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/result"
+        },
+        "imagesMetadata": {
+          "$ref": "#/definitions/imagesMetadata"
+        },
+        "transactionImages": {
+          "$ref": "#/definitions/transactionImages"
+        }
+      }
+    },
+    "getAccountListSuccessResult": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/result"
+        },
+        "Accounts": {
+          "$ref": "#/definitions/Accounts"
+        }
+      }
+    },
+    "ContentTypes": {
+      "title": "Content Types",
+      "type": "string",
+      "description": "Types of document formats. (Suggested)",
+      "example": "application/json",
+      "enum": [
+        "application/pdf",
+        "image/gif",
+        "image/jpeg",
+        "image/tiff",
+        "image/png",
+        "application/json"
+      ]
+    },
+    "HateoasLink": {
+      "required": [
+        "href"
+      ],
+      "type": "object",
+      "properties": {
+        "href": {
+          "type": "string",
+          "example": "/example/accounts/12345"
+        },
+        "action": {
+          "type": "string",
+          "description": "HTTP Method to use for the request (Suggested)",
+          "enum": [
+            "GET",
+            "POST",
+            "PATCH",
+            "DELETE",
+            "PUT"
+          ]
+        },
+        "types": {
+          "type": "array",
+          "description": "Content-types that can be used in the Accept header.",
+          "items": {
+            "$ref": "#/definitions/ContentTypes"
+          }
+        }
+      }
+    },
+    "PageMetadataLinks": {
+      "type": "object",
+      "properties": {
+        "next": {
+          "$ref": "#/definitions/HateoasLink"
+        },
+        "prev": {
+          "$ref": "#/definitions/HateoasLink"
+        }
+      }
+    },
+    "PageMetadata": {
+      "type": "object",
+      "properties": {
+        "nextOffset": {
+          "type": "string",
+          "description": "Opaque identified. Does not need to be numeric or have any specific pattern. Implementation specific.",
+          "example": "2"
+        },
+        "prevOffset": {
+          "type": "string",
+          "description": "Opaque identified. Does not need to be numeric or have any specific pattern. Implementation specific.",
+          "example": "2"
+        },
+        "totalElements": {
+          "type": "integer",
+          "description": "Total number of elements",
+          "example": 3
+        }
+      }
+    },
+    "PaginatedArray": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "$ref": "#/definitions/PageMetadata"
+        },
+        "links": {
+          "$ref": "#/definitions/PageMetadataLinks"
+        }
+      },
+      "description": "To be used as a mixin using \"allOf\""
+    },
+    "Account": {
+      "title": "Account Entity",
+      "description": "An abstract account entity that concrete account entities extend. Extends and inherits all fields from AccountDescriptor.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AccountDescriptor"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "parentAccountId": {
+              "maxLength": 256,
+              "type": "string",
+              "description": "Long-term persistent identity of the parent account. This is used to group accounts."
+            },
+            "lineOfBusiness": {
+              "type": "string",
+              "description": "The line of business, such as consumer, consumer joint, small business, corporate, etc."
+            },
+            "routingTransitNumber": {
+              "type": "string",
+              "description": "Routing transit number (RTN) associated with account number at owning institution."
+            },
+            "balanceType": {
+              "$ref": "#/definitions/BalanceType"
+            },
+            "interestRate": {
+              "type": "number",
+              "description": "Interest Rate of Account"
+            },
+            "interestRateType": {
+              "$ref": "#/definitions/InterestRateType"
+            },
+            "interestRateAsOf": {
+              "type": "string",
+              "description": "Date of account’s interest rate"
+            },
+            "priorInterestRate": {
+              "type": "number",
+              "description": "Previous Interest Rate of Account"
+            },
+            "transferIn": {
+              "type": "boolean",
+              "description": "Account is eligible for incoming transfers"
+            },
+            "transferOut": {
+              "type": "boolean",
+              "description": "Account is eligible for outgoing transfers"
+            },
+            "micrNumber": {
+              "maxLength": 64,
+              "type": "string",
+              "description": "MICR Number"
+            },
+            "lastActivityDate": {
+              "type": "string",
+              "description": "Date that last transaction occurred on account"
+            },
+            "transactionsIncluded": {
+              "type": "boolean",
+              "description": "Default is false. If present and true, a call to retrieve transactions will not return any further details about this account. This is an optimization that allows an FDX API server to return transactions and account details in a single call."
+            }
+          }
+        }
+      ]
+    },
+    "AccountDescriptor": {
+      "title": "AccountDescriptor Entity",
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "maxLength": 256,
+          "type": "string",
+          "description": "Long-term persistent identity of the account. Not an account number. This identity must be unique to the owning institution."
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "accountType": {
+          "$ref": "#/definitions/AccountType"
+        },
+        "accountNumber": {
+          "type": "string",
+          "description": "Full account number for the end user's handle for account at owning institution."
+        },
+        "accountNumberDisplay": {
+          "type": "string",
+          "description": "Account display number for the end user’s handle at owning institution. This is to be displayed by the Interface Provider."
+        },
+        "productName": {
+          "type": "string",
+          "description": "Marketed product name for this account. Used in UIs to assist in account selection"
+        },
+        "nickname": {
+          "type": "string",
+          "description": "Name given by the user. Used in UIs to assist in account selection"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "CLOSED",
+            "PENDINGOPEN",
+            "PENDINGCLOSE",
+            "DELINQUENT",
+            "PAID",
+            "NEGATIVECURRENTBALANCE"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "currency": {
+          "$ref": "#/definitions/Currency"
+        },
+        "fiAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FiAttribute"
+          }
+        }
+      },
+      "description": "Minimal information about the account for use in lightweight arrays."
+    },
+    "AccountWithDetails": {
+      "description": "An instance of an account with full details.",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "depositAccount": {
+              "$ref": "#/definitions/DepositAccount"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "loanAccount": {
+              "$ref": "#/definitions/LoanAccount"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "locAccount": {
+              "$ref": "#/definitions/LocAccount"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "investmentAccount": {
+              "$ref": "#/definitions/InvestmentAccount"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "insuranceAccount": {
+              "$ref": "#/definitions/InsuranceAccount"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "annuityAccount": {
+              "$ref": "#/definitions/AnnuityAccount"
+            }
+          }
+        }
+      ]
+    },
+    "Accounts": {
+      "title": "Accounts Entity",
+      "description": "An optionally paginated array of accounts.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PaginatedArray"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "accounts": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AccountWithDetails"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Contribution": {
+      "title": "Contribution Entity",
+      "type": "object",
+      "properties": {
+        "securityId": {
+          "type": "string",
+          "description": "Unique identifier of security"
+        },
+        "securityIdType": {
+          "$ref": "#/definitions/SecurityIdType"
+        },
+        "employerMatchPercentage": {
+          "type": "number",
+          "description": "Employer contribution match percentage"
+        },
+        "employerMatchAmount": {
+          "type": "number",
+          "description": "Employer contribution match amount"
+        },
+        "employeePreTaxAmount": {
+          "type": "number",
+          "description": "Employee pre‐tax contribution amount"
+        },
+        "employeePreTaxPercentage": {
+          "type": "number",
+          "description": "Employee pre‐tax contribution percentage"
+        },
+        "employeeAfterTaxAmount": {
+          "type": "number",
+          "description": "Employee after tax contribution amount"
+        },
+        "employeeAfterTaxPercentage": {
+          "type": "number",
+          "description": "Employee after tax contribution percentage"
+        },
+        "employeeDeferPreTaxAmount": {
+          "type": "number",
+          "description": "Employee defer pre‐tax contribution match amount"
+        },
+        "employeeDeferPreTaxPercentage": {
+          "type": "number",
+          "description": "Employee defer pre‐tax contribution match percentage"
+        },
+        "employeeYearToDate": {
+          "type": "number",
+          "description": "Employee total year to date contribution"
+        },
+        "employerYearToDate": {
+          "type": "number",
+          "description": "Employer total year to date contribution"
+        },
+        "rolloverContributionPercentage": {
+          "type": "number",
+          "description": "Rollover contribution percentage"
+        },
+        "rolloverContributionAmount": {
+          "type": "number",
+          "description": "Rollover contribution Amount"
+        }
+      }
+    },
+    "Currency": {
+      "title": "Currency Entity",
+      "type": "object",
+      "properties": {
+        "currencyRate": {
+          "type": "number",
+          "description": "Currency rate between original and converted currency"
+        },
+        "currencyCode": {
+          "$ref": "#/definitions/Iso4217Code"
+        },
+        "originalCurrencyCode": {
+          "$ref": "#/definitions/Iso4217Code"
+        }
+      },
+      "description": "Currency information if it is different from Account entity"
+    },
+    "DebtSecurity": {
+      "title": "DebtSecurity Entity",
+      "type": "object",
+      "properties": {
+        "parValue": {
+          "type": "number",
+          "description": "Par value amount"
+        },
+        "debtType": {
+          "$ref": "#/definitions/DebtType"
+        },
+        "debtClass": {
+          "$ref": "#/definitions/DebtClass"
+        },
+        "couponRate": {
+          "type": "number",
+          "description": "Bond coupon rate for next closest call date"
+        },
+        "couponDate": {
+          "type": "string",
+          "description": "Maturity date for next coupon"
+        },
+        "couponMatureFrequency": {
+          "$ref": "#/definitions/CouponMatureFrequency"
+        },
+        "callPrice": {
+          "type": "number",
+          "description": "Bond call price"
+        },
+        "yieldToCall": {
+          "type": "number",
+          "description": "Yield to next call"
+        },
+        "callDate": {
+          "type": "string",
+          "description": "Next call date"
+        },
+        "callType": {
+          "$ref": "#/definitions/CallType"
+        },
+        "yieldToMaturity": {
+          "type": "number",
+          "description": "Yield to maturity"
+        },
+        "bondMaturityDate": {
+          "type": "string",
+          "description": "Bond Maturity date"
+        }
+      }
+    },
+    "DepositAccount": {
+      "title": "DepositAccount Entity",
+      "description": "Deposit accounts will have following fields in FiAttributes - PreviousBalance, OpenDate, StatementName, 1DayFloat, 2orMoreDaysFloat, AccruedInterestMTD, ProjectedInterested, InterestPaidPreviousMonth",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Account"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "balanceAsOf": {
+              "type": "string",
+              "description": "As-of date of balances"
+            },
+            "currentBalance": {
+              "type": "number",
+              "description": "Balance of funds in account"
+            },
+            "openingDayBalance": {
+              "type": "number",
+              "description": "Day's opening fund balance"
+            },
+            "availableBalance": {
+              "type": "number",
+              "description": "Balance of funds available for use"
+            },
+            "annualPercentageYield": {
+              "type": "number",
+              "description": "Annual Percentage Yield"
+            },
+            "interestYtd": {
+              "type": "number",
+              "description": "YTD Interest"
+            },
+            "term": {
+              "type": "integer",
+              "description": "Term of CD in months"
+            },
+            "maturityDate": {
+              "type": "string",
+              "description": "Maturity date for CDs"
+            },
+            "transactions": {
+              "type": "array",
+              "description": "Array of DepositTransactions",
+              "items": {
+                "$ref": "#/definitions/DepositTransaction"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "DepositTransaction": {
+      "title": "DepositTransaction Entity",
+      "description": "Deposit Transaction will have following fields in FiAttributes - Posted, Pending, ValueDate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Transaction"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "transactionType": {
+              "$ref": "#/definitions/DepositTransactionType"
+            },
+            "payee": {
+              "maxLength": 255,
+              "type": "string",
+              "description": "Payee name"
+            },
+            "checkNumber": {
+              "type": "integer",
+              "description": "Check Number"
+            }
+          }
+        }
+      ]
+    },
+    "Error": {
+      "title": "Error Entity",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Long term persistent identifier which can be used to trace error condition back to log information"
+        },
+        "message": {
+          "type": "string",
+          "description": "End user displayable information which might help the customer diagnose an error"
+        }
+      },
+      "description": "An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account."
+    },
+    "FiAttribute": {
+      "title": "FiAttribute Entity",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of attribute"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of attribute"
+        }
+      },
+      "description": "Financial platform provider-specific attribute"
+    },
+    "FiPortion": {
+      "title": "FiPortion",
+      "type": "object",
+      "properties": {
+        "assetClass": {
+          "type": "string",
+          "description": "FI-specific asset class"
+        },
+        "percent": {
+          "type": "number",
+          "description": "Percentage of asset class that falls under this asset"
+        }
+      }
+    },
+    "Holding": {
+      "title": "Holding Entity",
+      "allOf": [
+        {
+          "type": "object",
+          "properties": {
+            "holdingId": {
+              "maxLength": 256,
+              "type": "string",
+              "description": "Long term persistent identity of the holding"
+            },
+            "securityId": {
+              "type": "string",
+              "description": "Unique identifier of security"
+            },
+            "securityIdType": {
+              "$ref": "#/definitions/SecurityIdType"
+            },
+            "holdingName": {
+              "type": "string",
+              "description": "Holding name or security name"
+            },
+            "holdingType": {
+              "$ref": "#/definitions/HoldingType"
+            },
+            "holdingSubType": {
+              "$ref": "#/definitions/HoldingSubType"
+            },
+            "positionType": {
+              "$ref": "#/definitions/PositionType"
+            },
+            "heldInAccount": {
+              "$ref": "#/definitions/HeldInAccount"
+            },
+            "description": {
+              "type": "string",
+              "description": "The description of the holding"
+            },
+            "symbol": {
+              "type": "string",
+              "description": "Ticker / Market symbol"
+            },
+            "originalPurchaseDate": {
+              "type": "string",
+              "description": "Date of original purchase"
+            },
+            "purchasedPrice": {
+              "type": "number",
+              "description": "Price of holding at the time of purchase"
+            },
+            "currentUnitPrice": {
+              "type": "number",
+              "description": "Current unit price"
+            },
+            "changeInPrice": {
+              "type": "number",
+              "description": "Change in current price compared to previous day's close"
+            },
+            "currentUnitPriceDate": {
+              "type": "string",
+              "description": "Current unit price as of date"
+            },
+            "units": {
+              "type": "number",
+              "description": "Required for stock, mutual funds. Number of shares (with decimals)"
+            },
+            "marketValue": {
+              "type": "number",
+              "description": "Market value at the time of data retrieved"
+            },
+            "faceValue": {
+              "type": "number",
+              "description": "Required for bonds. Face value at the time of data retrieved."
+            },
+            "averageCost": {
+              "type": "boolean",
+              "description": "Cost is average of all purchases for holding"
+            },
+            "cashAccount": {
+              "type": "boolean",
+              "description": "If true, indicates that this holding is used to maintain proceeds from sales, dividends, and other cash postings to the investment account"
+            },
+            "rate": {
+              "type": "number",
+              "description": "For CDs, bonds, and other rate based holdings"
+            },
+            "expirationDate": {
+              "type": "string",
+              "description": "For CDs, bonds, and other time‐based holdings"
+            },
+            "inv401kSurce": {
+              "$ref": "#/definitions/Inv401kSourceType"
+            },
+            "currency": {
+              "$ref": "#/definitions/Currency"
+            },
+            "assetClasses": {
+              "type": "array",
+              "description": "Percent breakdown by asset class",
+              "items": {
+                "$ref": "#/definitions/Portion"
+              }
+            },
+            "fiAssetClasses": {
+              "type": "array",
+              "description": "Percent breakdown by FI-specific asset class percentage breakdown",
+              "items": {
+                "$ref": "#/definitions/FiPortion"
+              }
+            },
+            "fiAttributes": {
+              "type": "array",
+              "description": "Array of FI‐specific attributes",
+              "items": {
+                "$ref": "#/definitions/FiAttribute"
+              }
+            },
+            "taxLots": {
+              "type": "array",
+              "description": "Breakdown by tax lot",
+              "items": {
+                "$ref": "#/definitions/TaxLot"
+              }
+            }
+          }
+        },
+        {
+          "allOf": [
+            {
+              "type": "object",
+              "properties": {
+                "mutualFundSecurity": {
+                  "$ref": "#/definitions/MutualFundSecurity"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "optionSecurity": {
+                  "$ref": "#/definitions/OptionSecurity"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "otherSecurity": {
+                  "$ref": "#/definitions/OtherSecurity"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "stockSecurity": {
+                  "$ref": "#/definitions/StockSecurity"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "sweepSecurity": {
+                  "$ref": "#/definitions/SweepSecurity"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "debtSecurity": {
+                  "$ref": "#/definitions/DebtSecurity"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "InvestmentAccount": {
+      "title": "InvestmentAccount Entity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Account"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "balanceAsOf": {
+              "type": "string",
+              "description": "As-of date of balances"
+            },
+            "allowedCheckWriting": {
+              "type": "boolean",
+              "description": "Check writing privileges"
+            },
+            "allowedOptionTrade": {
+              "type": "boolean",
+              "description": "Allowed to trade options"
+            },
+            "currentValue": {
+              "type": "number",
+              "description": "Total current value of all investments"
+            },
+            "holdings": {
+              "type": "array",
+              "description": "Array of holdings",
+              "items": {
+                "$ref": "#/definitions/Holding"
+              }
+            },
+            "openOrders": {
+              "type": "array",
+              "description": "Array of open orders",
+              "items": {
+                "$ref": "#/definitions/OpenOrder"
+              }
+            },
+            "contribution": {
+              "type": "array",
+              "description": "Describes how new contributions are distributed among the available securities",
+              "items": {
+                "$ref": "#/definitions/Contribution"
+              }
+            },
+            "vesting": {
+              "type": "array",
+              "description": "Provides the past, present, and future vesting schedule and percentages",
+              "items": {
+                "$ref": "#/definitions/Vesting"
+              }
+            },
+            "investmentLoans": {
+              "type": "array",
+              "description": "Array of investment loans",
+              "items": {
+                "$ref": "#/definitions/InvestmentLoan"
+              }
+            },
+            "availableCashBalance": {
+              "type": "number",
+              "description": "Cash balance across all sub-accounts. Should include sweep funds."
+            },
+            "margin": {
+              "type": "boolean",
+              "description": "Margin trading is allowed"
+            },
+            "marginBalance": {
+              "type": "number",
+              "description": "Margin balance"
+            },
+            "shortBalance": {
+              "type": "number",
+              "description": "Short balance"
+            },
+            "rolloverAmount": {
+              "type": "number",
+              "description": "Rollover amount"
+            },
+            "employerName": {
+              "type": "string",
+              "description": "Name of the employer in investment 401k Plan"
+            },
+            "brokerId": {
+              "type": "string",
+              "description": "Unique identifier FI"
+            },
+            "planId": {
+              "type": "string",
+              "description": "Plan number for Investment 401k plan"
+            },
+            "calendaryearFor401K": {
+              "type": "string",
+              "description": "Date for this calendar year for 401K account"
+            },
+            "balanceList": {
+              "type": "array",
+              "description": "Balance List. Name value pair aggregate.",
+              "items": {
+                "$ref": "#/definitions/InvestmentBalance"
+              }
+            },
+            "dailyChange": {
+              "type": "number",
+              "description": "Daily change"
+            },
+            "percentageChange": {
+              "type": "number",
+              "description": "Percentage change"
+            },
+            "transactions": {
+              "type": "array",
+              "description": "Array of Investment Transactions",
+              "items": {
+                "$ref": "#/definitions/InvestmentTransaction"
+              }
+            },
+            "pensionSource": {
+              "type": "array",
+              "description": "Array of Pension Source",
+              "items": {
+                "$ref": "#/definitions/PensionSource"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "InvestmentBalance": {
+      "title": "InvestmentBalance Entity",
+      "type": "object",
+      "properties": {
+        "balanceName": {
+          "type": "string",
+          "description": "Name of the balance"
+        },
+        "balanceDescription": {
+          "type": "string",
+          "description": "Description of balance"
+        },
+        "balanceType": {
+          "$ref": "#/definitions/InvestmentBalanceType"
+        },
+        "balanceValue": {
+          "type": "number",
+          "description": "Value of balance name"
+        },
+        "balanceDate": {
+          "type": "string",
+          "description": "Date as of this balance"
+        },
+        "currency": {
+          "$ref": "#/definitions/Currency"
+        }
+      }
+    },
+    "InvestmentLoan": {
+      "title": "InvestmentLoan Entity",
+      "type": "object",
+      "properties": {
+        "loanId": {
+          "type": "string",
+          "description": "Unique identifier for this loan"
+        },
+        "loanDescription": {
+          "type": "string",
+          "description": "Description"
+        },
+        "initialLoanBalance": {
+          "type": "number",
+          "description": "Initial loan balance amount"
+        },
+        "loanStartDate": {
+          "type": "string",
+          "description": "Start date of the loan"
+        },
+        "currentLoanBalance": {
+          "type": "number",
+          "description": "Current loan principal balance amount"
+        },
+        "dateAsOf": {
+          "type": "string",
+          "description": "Date and time of current loan balance"
+        },
+        "loanRate": {
+          "type": "number",
+          "description": "Loan annual interest rate for the loan"
+        },
+        "loanPaymentAmount": {
+          "type": "number",
+          "description": "Loan payment amount"
+        },
+        "loanPaymentFrequency": {
+          "$ref": "#/definitions/LoanPaymentFrequency"
+        },
+        "loanPaymentInitial": {
+          "type": "number",
+          "description": "Initial number of loan payments"
+        },
+        "loanPaymentsRemaining": {
+          "type": "integer",
+          "description": "Remaining number of loan payments"
+        },
+        "loanMaturityDate": {
+          "type": "string",
+          "description": "Expected loan end date"
+        },
+        "loanInterestToDate": {
+          "type": "number",
+          "description": "Total interest paid to date on this loan"
+        },
+        "loanTotalProjectedInterest": {
+          "type": "number",
+          "description": "Total projected interest to be paid on this loan"
+        },
+        "loanNextPaymentDate": {
+          "type": "string",
+          "description": "The next payment date for the loan"
+        }
+      }
+    },
+    "InvestmentTransaction": {
+      "title": "InvestmentTransaction Entity",
+      "description": "Investment Transaction will have following fields in FiAttributes - Posted, IssueDate, MaturityDate, InterestRate, OriginalAmount, CurrentValue, Disposition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Transaction"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "transactionType": {
+              "$ref": "#/definitions/InvestmentTransactionType"
+            },
+            "shares": {
+              "type": "number",
+              "description": "Required for stock, mutual funds. Number of shares (with decimals). Negative numbers indicate securities are being removed from the account."
+            },
+            "faceValue": {
+              "type": "number",
+              "description": "Cash value for bonds"
+            },
+            "price": {
+              "type": "number",
+              "description": "Unit purchase price"
+            },
+            "securityId": {
+              "type": "string",
+              "description": "Unique identifier of security"
+            },
+            "securityIdType": {
+              "$ref": "#/definitions/SecurityIdType"
+            },
+            "securityType": {
+              "$ref": "#/definitions/SecurityType"
+            },
+            "symbol": {
+              "type": "string",
+              "description": "Ticker symbol"
+            },
+            "markup": {
+              "type": "number",
+              "description": "Portion of unit price that is attributed to the dealer markup"
+            },
+            "commission": {
+              "type": "number",
+              "description": "Transaction commission"
+            },
+            "taxes": {
+              "type": "number",
+              "description": "Taxes on the trade"
+            },
+            "fees": {
+              "type": "number",
+              "description": "Fees applied to the trade"
+            },
+            "load": {
+              "type": "number",
+              "description": "Load on the transaction"
+            },
+            "inv401kSource": {
+              "$ref": "#/definitions/Inv401kSourceType"
+            },
+            "confirmationNumber": {
+              "type": "string",
+              "description": "Confirmation number of the transaction"
+            },
+            "fractionalCash": {
+              "type": "number",
+              "description": "Cash for fractional units (used for stock splits)"
+            },
+            "incomeType": {
+              "$ref": "#/definitions/IncomeType"
+            },
+            "oldUnits": {
+              "type": "number",
+              "description": "Number of shares before split"
+            },
+            "splitRatioNumerator": {
+              "type": "number",
+              "description": "Split ratio numerator"
+            },
+            "splitRatioDenominator": {
+              "type": "number",
+              "description": "Split ratio denominator"
+            },
+            "newUnits": {
+              "type": "number",
+              "description": "Number of shares after split"
+            },
+            "subAccountSec": {
+              "type": "string",
+              "description": "Sub-account security Type - CASH, MARGIN, SHORT and OTHERS",
+              "enum": [
+                "CASH",
+                "MARGIN",
+                "SHORT",
+                "OTHER"
+              ]
+            },
+            "subAccountFund": {
+              "type": "string",
+              "description": "From which account money came in - CASH, MARGIN, SHORT and OTHERS",
+              "enum": [
+                "CASH",
+                "MARGIN",
+                "SHORT",
+                "OTHER"
+              ]
+            },
+            "loanId": {
+              "type": "string",
+              "description": "For 401k accounts only. This indicates the transaction was due to a loan or a loan repayment."
+            },
+            "loanPrincipal": {
+              "type": "number",
+              "description": "How much loan pre‐payment is principal"
+            },
+            "loanInterest": {
+              "type": "number",
+              "description": "How much loan pre‐payment is interest"
+            },
+            "payrollDate": {
+              "type": "string",
+              "description": "The date for the 401k transaction was obtained in payroll"
+            },
+            "priorYearContrib": {
+              "type": "boolean",
+              "description": "Indicates this buy was made using prior year's contribution."
+            },
+            "withholding": {
+              "type": "number",
+              "description": "Federal tax withholding"
+            },
+            "taxExempt": {
+              "type": "boolean",
+              "description": "Tax‐exempt transaction"
+            },
+            "gain": {
+              "type": "number",
+              "description": "For sales"
+            },
+            "stateWithholding": {
+              "type": "number",
+              "description": "State tax withholding"
+            },
+            "penalty": {
+              "type": "number",
+              "description": "Indicates amount withheld due to a penalty"
+            },
+            "runningBalance": {
+              "type": "number",
+              "description": "Running balance of the position"
+            },
+            "unitPrice": {
+              "type": "number",
+              "description": "Price per commonly-quoted unit. Does not include markup/markdown, unitprice. Share price for stocks, mutual funds, and others. Percentage of par for bonds. Per share (not contract) for options."
+            },
+            "units": {
+              "type": "number",
+              "description": "For security‐based actions other than stock splits, quantity. Shares for stocks, mutual funds, and others. Face value for bonds. Contracts for options."
+            },
+            "unitType": {
+              "$ref": "#/definitions/UnitType"
+            },
+            "transactionReason": {
+              "$ref": "#/definitions/TransactionReason"
+            },
+            "accruedInterest": {
+              "type": "number",
+              "description": "Accrued Interest"
+            },
+            "transferAction": {
+              "type": "string",
+              "description": "Transfer direction [IN or OUT]",
+              "enum": [
+                "IN",
+                "OUT"
+              ]
+            },
+            "positionType": {
+              "$ref": "#/definitions/PositionType"
+            }
+          }
+        }
+      ]
+    },
+    "LineItem": {
+      "title": "LineItem Entity",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the line item"
+        },
+        "amount": {
+          "type": "number",
+          "description": "The amount of money attributable to this line item"
+        },
+        "checkNumber": {
+          "type": "integer",
+          "description": "Check number"
+        },
+        "memo": {
+          "maxLength": 255,
+          "type": "string",
+          "description": "Secondary item description"
+        },
+        "reference": {
+          "type": "string",
+          "description": "A reference number"
+        },
+        "imageIds": {
+          "type": "array",
+          "description": "Array of image identifiers (unique to transaction) used to retrieve images of check or transaction receipt",
+          "items": {
+            "type": "string"
+          }
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "array",
+              "description": "Array of Image Identifiers (unique to Transaction) used to retrieve Images of check or transaction receipt",
+              "items": {
+                "$ref": "#/definitions/HateoasLink"
+              }
+            }
+          }
+        }
+      }
+    },
+    "LoanAccount": {
+      "title": "LoanAccount Entity",
+      "description": "Loan accounts will have following fields in FiAttributes - BorrowerName, FacilityName, OutstandingBal, OutstandingBalLoanCurr, MaturityDate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Account"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "balanceAsOf": {
+              "type": "string",
+              "description": "As-of date for balances"
+            },
+            "principalBalance": {
+              "type": "number",
+              "description": "Principal balance of loan"
+            },
+            "escrowBalance": {
+              "type": "number",
+              "description": "Escrow balance of loan"
+            },
+            "originalPrincipal": {
+              "type": "number",
+              "description": "Original principal of loan"
+            },
+            "originatingDate": {
+              "type": "string",
+              "description": "Loan origination date"
+            },
+            "loanTerm": {
+              "type": "integer",
+              "description": "Term of loan in months"
+            },
+            "totalNumberOfPayments": {
+              "type": "integer",
+              "description": "Total number of payments"
+            },
+            "nextPaymentAmount": {
+              "type": "number",
+              "description": "Amount of next payment"
+            },
+            "nextPaymentDate": {
+              "type": "string",
+              "description": "Date of next payment"
+            },
+            "paymentFrequency": {
+              "$ref": "#/definitions/PaymentFrequency"
+            },
+            "compoundingPeriod": {
+              "$ref": "#/definitions/CompoundingPeriod"
+            },
+            "payOffAmount": {
+              "type": "number",
+              "description": "Payoff amount"
+            },
+            "lastPaymentAmount": {
+              "type": "number",
+              "description": "Last payment amount"
+            },
+            "lastPaymentDate": {
+              "type": "string",
+              "description": "Last payment date"
+            },
+            "maturityDate": {
+              "type": "string",
+              "description": "Maturity date"
+            },
+            "interestPaidYearToDate": {
+              "type": "number",
+              "description": "Interest paid year to date"
+            },
+            "transactions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LoanTransaction"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "LoanTransaction": {
+      "title": "LoanTransaction Entity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Transaction"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "transactionType": {
+              "$ref": "#/definitions/LoanTransactionType"
+            },
+            "paymentDetails": {
+              "$ref": "#/definitions/PaymentDetails"
+            }
+          }
+        }
+      ]
+    },
+    "LocAccount": {
+      "title": "LocAccount Entity",
+      "description": "Loc accounts will have following fields in FiAttributes - StatementBalance",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Account"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "balanceAsOf": {
+              "type": "string",
+              "description": "As-of date for balances"
+            },
+            "creditLine": {
+              "type": "number",
+              "description": "Credit limit"
+            },
+            "availableCredit": {
+              "type": "number",
+              "description": "Available credit"
+            },
+            "nextPaymentAmount": {
+              "type": "number",
+              "description": "Amount of next payment"
+            },
+            "nextPaymentDate": {
+              "type": "string",
+              "description": "Due date of next payment"
+            },
+            "principalBalance": {
+              "type": "number",
+              "description": "Principal balance"
+            },
+            "currentBalance": {
+              "type": "number",
+              "description": "Current balance LOC"
+            },
+            "minimumPaymentAmount": {
+              "type": "number",
+              "description": "Minimum payment amount"
+            },
+            "lastPaymentAmount": {
+              "type": "number",
+              "description": "Last payment amount"
+            },
+            "lastPaymentDate": {
+              "type": "string",
+              "description": "Last payment date"
+            },
+            "pastDueAmount": {
+              "type": "number",
+              "description": "Past Due Amount"
+            },
+            "lastStmtBalance": {
+              "type": "number",
+              "description": "Last Statement Balance"
+            },
+            "lastStmtDate": {
+              "type": "string",
+              "description": "Last Statement Date"
+            },
+            "pointsAccrued": {
+              "type": "number",
+              "description": "Points accrued"
+            },
+            "currentRewardsBalance": {
+              "type": "number",
+              "description": "Current rewards balance"
+            },
+            "pointsRedeemed": {
+              "type": "number",
+              "description": "Points redeemed"
+            },
+            "purchasesApr": {
+              "type": "number",
+              "description": "Purchases APR"
+            },
+            "advancesApr": {
+              "type": "number",
+              "description": "Advances APR"
+            },
+            "cashAdvanceLimit": {
+              "type": "number",
+              "description": "Cash advance limit"
+            },
+            "availableCash": {
+              "type": "number",
+              "description": "Available cash"
+            },
+            "financeCharges": {
+              "type": "number",
+              "description": "Finance charges"
+            },
+            "transactions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LocTransaction"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "LocTransaction": {
+      "title": "LocTransaction Entity",
+      "description": "Line of Credit Transaction will have following fields in FiAttributes - Posted, Pending, ValueDate",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Transaction"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "transactionType": {
+              "$ref": "#/definitions/LocTransactionType"
+            },
+            "checkNumber": {
+              "type": "integer",
+              "description": "Check number"
+            },
+            "paymentDetails": {
+              "$ref": "#/definitions/PaymentDetails"
+            }
+          }
+        }
+      ]
+    },
+    "MutualFundSecurity": {
+      "title": "MutualFundSecurity Entity",
+      "type": "object",
+      "properties": {
+        "mutualFundType": {
+          "$ref": "#/definitions/MutualFundType"
+        },
+        "unitsStreet": {
+          "type": "number",
+          "description": "Units in the FI's street name, positive quantity"
+        },
+        "unitsUser": {
+          "type": "number",
+          "description": "Units in user's name directly, positive  quantity"
+        },
+        "reinvestDividends": {
+          "type": "boolean",
+          "description": "Reinvest dividends"
+        },
+        "reinvestCapitalGains": {
+          "type": "boolean",
+          "description": "Reinvest capital gains"
+        },
+        "yield": {
+          "type": "number",
+          "description": "Current yield reported as portion of the fund's assets"
+        },
+        "yieldAsOfDate": {
+          "type": "string",
+          "description": "As-of date for yield value"
+        }
+      }
+    },
+    "OpenOrder": {
+      "title": "OpenOrder Entity",
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "securityId": {
+          "type": "string"
+        },
+        "securityIdType": {
+          "$ref": "#/definitions/SecurityIdType"
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Market symbol"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of order"
+        },
+        "units": {
+          "type": "number",
+          "description": "Number of units (shares or bonds etc)"
+        },
+        "orderType": {
+          "$ref": "#/definitions/OrderType"
+        },
+        "orderDate": {
+          "type": "string",
+          "description": "Order date"
+        },
+        "unitPrice": {
+          "type": "number",
+          "description": "Unit price"
+        },
+        "unitType": {
+          "$ref": "#/definitions/UnitType"
+        },
+        "orderDuration": {
+          "$ref": "#/definitions/OrderDuration"
+        },
+        "subAccount": {
+          "type": "string",
+          "enum": [
+            "CASH",
+            "MARGIN",
+            "SHORT",
+            "OTHER"
+          ]
+        },
+        "limitPrice": {
+          "type": "number",
+          "description": "Limit Price"
+        },
+        "stopPrice": {
+          "type": "number",
+          "description": "Stop price"
+        },
+        "inv401kSource": {
+          "$ref": "#/definitions/Inv401kSourceType"
+        }
+      }
+    },
+    "OptionSecurity": {
+      "title": "OptionSecurity Entity",
+      "type": "object",
+      "properties": {
+        "secured": {
+          "$ref": "#/definitions/Secured"
+        },
+        "optionType": {
+          "$ref": "#/definitions/OptionType"
+        },
+        "strikePrice": {
+          "type": "number",
+          "description": "Strike price / Unit price"
+        },
+        "expireDate": {
+          "type": "string",
+          "description": "Expiration date of option"
+        },
+        "sharesPerContract": {
+          "type": "number",
+          "description": "Shares per contract"
+        }
+      }
+    },
+    "OtherSecurity": {
+      "title": "OtherSecurity Entity",
+      "type": "object",
+      "properties": {
+        "typeDescription": {
+          "type": "string",
+          "description": "Description of Other Security"
+        }
+      }
+    },
+    "PaymentDetails": {
+      "title": "PaymentDetails Entity",
+      "type": "object",
+      "properties": {
+        "principalAmount": {
+          "type": "number",
+          "description": "The amount of payment applied to principal"
+        },
+        "interestAmount": {
+          "type": "number",
+          "description": "The amount of payment applied to interest"
+        },
+        "insuranceAmount": {
+          "type": "number",
+          "description": "The amount of payment applied to life/health/accident insurance on the loan"
+        },
+        "escrowAmount": {
+          "type": "number",
+          "description": "The amount of payment applied to escrow"
+        },
+        "pmiAmount": {
+          "type": "number",
+          "description": "The amount of payment applied to PMI"
+        },
+        "feesAmount": {
+          "type": "number",
+          "description": "The amount of payment applied to fees"
+        }
+      },
+      "description": "Breakdown of payment details"
+    },
+    "Portion": {
+      "title": "Portion Entity",
+      "type": "object",
+      "properties": {
+        "assetClass": {
+          "$ref": "#/definitions/AssetClass"
+        },
+        "percent": {
+          "type": "number"
+        }
+      }
+    },
+    "StockSecurity": {
+      "title": "StockSecurity Entity",
+      "type": "object",
+      "properties": {
+        "unitsStreet": {
+          "type": "number",
+          "description": "Units in the FI's street name, positive quantity"
+        },
+        "unitsUser": {
+          "type": "number",
+          "description": "Units in user's name directly, positive  quantity"
+        },
+        "reinvestDividends": {
+          "type": "boolean",
+          "description": "Reinvest dividends"
+        },
+        "stockType": {
+          "$ref": "#/definitions/StockType"
+        },
+        "yield": {
+          "type": "number",
+          "description": "Current yield"
+        },
+        "yieldAsOfDate": {
+          "type": "string",
+          "description": "Yield as-of date"
+        }
+      }
+    },
+    "SweepSecurity": {
+      "title": "SweepSecurity Entity",
+      "type": "object",
+      "properties": {
+        "currentBalance": {
+          "type": "number",
+          "description": "Balance of funds in account"
+        },
+        "availableBalance": {
+          "type": "number",
+          "description": "Balance of funds available for use"
+        },
+        "balanceAsOf": {
+          "type": "string",
+          "description": "As-of date of balances"
+        },
+        "checks": {
+          "type": "boolean",
+          "description": "Whether or not checks can be written on the account"
+        }
+      }
+    },
+    "TaxLot": {
+      "title": "TaxLot",
+      "type": "object",
+      "properties": {
+        "originalPurchaseDate": {
+          "type": "string",
+          "description": "Lot acquired date"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Lot quantity"
+        },
+        "purchasedPrice": {
+          "type": "number",
+          "description": "Original purchase price"
+        },
+        "costBasis": {
+          "type": "number",
+          "description": "Total amount of money spent acquiring this lot including any fees or commission expenses incurred"
+        },
+        "currentValue": {
+          "type": "number",
+          "description": "Lot market value"
+        },
+        "postionType": {
+          "$ref": "#/definitions/PositionType"
+        }
+      }
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "maxLength": 256,
+          "type": "string",
+          "description": "Corresponds to AccountId in Account"
+        },
+        "transactionId": {
+          "maxLength": 256,
+          "type": "string",
+          "description": "Long term persistent identity of the transaction (unique to account)"
+        },
+        "referenceTransactionId": {
+          "maxLength": 256,
+          "type": "string",
+          "description": "For reverse postings, the identity of the transaction being reversed. For the correction transaction, the identity of the reversing post. For credit card posting transactions, the identity of the authorization transaction."
+        },
+        "postedTimestamp": {
+          "type": "string",
+          "description": "The date and time that the transaction was posted to the account. If not provided then TransactionTimestamp can be used as PostedTimeStamp."
+        },
+        "transactionTimestamp": {
+          "type": "string",
+          "description": "The date and time that the transaction was added to the server backend systems"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the transaction"
+        },
+        "memo": {
+          "maxLength": 255,
+          "type": "string",
+          "description": "Secondary transaction description"
+        },
+        "debitCreditMemo": {
+          "$ref": "#/definitions/DebitCreditMemo"
+        },
+        "category": {
+          "type": "string",
+          "description": "Transaction category, preferably MCC or SIC."
+        },
+        "subCategory": {
+          "type": "string",
+          "description": "Transaction category detail"
+        },
+        "reference": {
+          "type": "string",
+          "description": "A tracking reference identifier"
+        },
+        "status": {
+          "$ref": "#/definitions/TransactionStatus"
+        },
+        "amount": {
+          "type": "number",
+          "description": "The amount of money in the account currency"
+        },
+        "foreignAmount": {
+          "type": "number",
+          "description": "The amount of money in the foreign currency"
+        },
+        "foreignCurrency": {
+          "$ref": "#/definitions/Iso4217Code"
+        },
+        "imageIds": {
+          "type": "array",
+          "description": "Array of Image Identifiers (unique to Transaction) used to retrieve Images of check or transaction receipt",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lineItem": {
+          "type": "array",
+          "description": "Breakdown of the transaction details",
+          "items": {
+            "$ref": "#/definitions/LineItem"
+          }
+        },
+        "fiAttributes": {
+          "type": "array",
+          "description": "Array of FI-specific attributes",
+          "items": {
+            "$ref": "#/definitions/FiAttribute"
+          }
+        },
+        "links": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "array",
+              "description": "Array of Image Identifiers (unique to Transaction) used to retrieve Images of check or transaction receipt",
+              "items": {
+                "$ref": "#/definitions/HateoasLink"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Transactions": {
+      "title": "Transactions Entity",
+      "description": "Optionally paginated array of transactions",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PaginatedArray"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "transactions": {
+              "type": "array",
+              "description": "An array of transactions with entity types dependent on the account type (deposit, investment, loan, or line of credit)",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/DepositTransaction"
+                  },
+                  {
+                    "$ref": "#/definitions/LoanTransaction"
+                  },
+                  {
+                    "$ref": "#/definitions/LocTransaction"
+                  },
+                  {
+                    "$ref": "#/definitions/InvestmentTransaction"
+                  },
+                  {
+                    "$ref": "#/definitions/InsuranceTransaction"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Vesting": {
+      "title": "Vesting Entity",
+      "type": "object",
+      "properties": {
+        "vestingDate": {
+          "type": "string",
+          "description": "Vesting date"
+        },
+        "symbol": {
+          "type": "string",
+          "description": "Security symbol"
+        },
+        "strikePrice": {
+          "type": "number",
+          "description": "Strike price"
+        },
+        "vestingPercentage": {
+          "type": "number",
+          "description": "Vesting percentage"
+        },
+        "otherVestAmount": {
+          "type": "number",
+          "description": "Other vest amount"
+        },
+        "otherVestPercentage": {
+          "type": "number",
+          "description": "Other vest percentage"
+        },
+        "vestedBalance": {
+          "type": "number",
+          "description": "Vested balance"
+        },
+        "unVestedBalance": {
+          "type": "number",
+          "description": "Unvested balance"
+        },
+        "vestedQuantity": {
+          "type": "number",
+          "description": "Vested qualtity"
+        },
+        "unVestedQuantity": {
+          "type": "number",
+          "description": "Unvested quantity"
+        }
+      }
+    },
+    "InsuranceAccount": {
+      "title": "InsuranceAccount Entity",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Account"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "accountCategory": {
+              "type": "string",
+              "enum": [
+                "DEPOSIT_ACCOUNT",
+                "INVESTMENT_ACCOUNT",
+                "LOAN_ACCOUNT",
+                "LOC_ACCOUNT",
+                "INSURANCE_ACCOUNT"
+              ]
+            },
+            "policyPremium": {
+              "type": "number",
+              "description": "The amount of the user's premium"
+            },
+            "policyPremiumTerm": {
+              "type": "string",
+              "enum": [
+                "MONTHLY",
+                "ANNUAL"
+              ]
+            },
+            "policyStartDate": {
+              "type": "string"
+            },
+            "policyEndDate": {
+              "type": "string"
+            },
+            "policyCoverageAmount": {
+              "type": "number",
+              "description": "Total amount of money the user is insured for"
+            },
+            "transactions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InsuranceTransaction"
+              }
+            },
+            "bills": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Bills"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "InsuranceTransaction": {
+      "title": "InsuranceTransaction",
+      "description": "An Insurance Transaction",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Transaction"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "transactionType": {
+              "type": "string",
+              "enum": [
+                "PAYMENT",
+                "FEE",
+                "ADJUSTMENT",
+                "INTEREST"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Bills": {
+      "title": "Bills Entity",
+      "type": "object",
+      "properties": {
+        "totalPaymentDue": {
+          "type": "number",
+          "description": "Total payment due or next payment due.  Monthly payment due for loans."
+        },
+        "minimumPaymentDue": {
+          "type": "number"
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "The date that the payment is due"
+        },
+        "autoPayEnabled": {
+          "type": "boolean",
+          "description": "Whether the user's bill is paid automatically"
+        },
+        "autoPayAmount": {
+          "type": "number",
+          "description": "The amount of money the user has set to autopay this bill"
+        },
+        "autoPayDate": {
+          "type": "string",
+          "description": "The date the autopayment is set to trigger for this bill"
+        },
+        "pastDueAmount": {
+          "type": "number",
+          "description": "The amount that the user should have already paid. Negative value if user owes money."
+        },
+        "lastPaymentAmount": {
+          "type": "number"
+        },
+        "lastPaymentDate": {
+          "type": "string"
+        },
+        "statementBalance": {
+          "type": "number",
+          "description": "The amount of the last statement.  Negative value if user owes money."
+        },
+        "statementDate": {
+          "type": "string",
+          "description": "The date the statement was issued"
+        }
+      }
+    },
+    "PensionSource": {
+      "title": "PensionSource Entity",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Name of the Source"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Benefit Amount"
+        },
+        "paymentOption": {
+          "type": "string",
+          "description": "Form of payment"
+        },
+        "asOfDate": {
+          "type": "string",
+          "description": "Date benefit was calculated"
+        },
+        "frequency": {
+          "$ref": "#/definitions/PaymentFrequency"
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Assumed retirement date ‐ As of date amount is payable"
+        }
+      }
+    },
+    "AnnuityAccount": {
+      "title": "AnnuityAccount Entity",
+      "type": "object",
+      "properties": {
+        "annuityProductType": {
+          "$ref": "#/definitions/AnnuityProductType"
+        },
+        "annuityValueBasis": {
+          "$ref": "#/definitions/AnnuityValueBasis"
+        },
+        "paymentAmount": {
+          "type": "number",
+          "description": "Amount of the recurring payment"
+        },
+        "paymentFrequency": {
+          "$ref": "#/definitions/PaymentFrequency"
+        },
+        "paymentStartDate": {
+          "type": "string",
+          "description": "Date of first payment; could be a future date"
+        },
+        "paymentEndDate": {
+          "type": "string",
+          "description": "Date last payment will be made"
+        },
+        "totalPaymentCount": {
+          "type": "number",
+          "description": "Total number of payments that will be produced by the annuity"
+        },
+        "netPresentValue": {
+          "type": "number",
+          "description": "Surrender or cash balance value"
+        },
+        "annualIncrease": {
+          "type": "number",
+          "description": "Percent or dollar amount of annual payment increase"
+        },
+        "annualIncreaseType": {
+          "$ref": "#/definitions/AnnualIncreaseType"
+        },
+        "periodCertainGuarantee": {
+          "$ref": "#/definitions/PeriodCertainGuarantee"
+        }
+      }
+    },
+    "AccountType": {
+      "title": "AccountType",
+      "type": "string",
+      "enum": [
+        "401A",
+        "401K",
+        "403B",
+        "529",
+        "AUTOLOAN",
+        "CD",
+        "CHARGE",
+        "CHECKING",
+        "COMMERCIALLINEOFCREDIT",
+        "COMMERCIALLOAN",
+        "COVERDELL",
+        "CREDITCARD",
+        "DEPOSIT",
+        "ESCROW",
+        "ESOP",
+        "GUARDIAN",
+        "HOMEEQUITYLOAN",
+        "HOMELINEOFCREDIT",
+        "INSTITUTIONALTRUST",
+        "INSTALLMENT",
+        "IRA",
+        "INVESTMENT",
+        "KEOGH",
+        "LINEOFCREDIT",
+        "LOAN",
+        "MILITARYLOAN",
+        "MONEYMARKET",
+        "MORTGAGE",
+        "PERSONALLOAN",
+        "ROLLOVER",
+        "ROTH",
+        "SARSEP",
+        "SAVINGS",
+        "SMBLOAN",
+        "STUDENTLOAN",
+        "TAXABLE",
+        "TDA",
+        "TRUST",
+        "UGMA",
+        "UTMA",
+        "ANNUITY"
+      ]
+    },
+    "AnnuityProductType": {
+      "title": "AnnuityProductType",
+      "type": "string",
+      "enum": [
+        "CURRENCY",
+        "SHARES"
+      ]
+    },
+    "AnnuityValueBasis": {
+      "title": "AnnuityValueBasis",
+      "type": "string",
+      "enum": [
+        "FIXED",
+        "VARIABLE"
+      ]
+    },
+    "AnnualIncreaseType": {
+      "title": "AnnualIncreaseType",
+      "type": "string",
+      "enum": [
+        "FIXED",
+        "PERCENT",
+        "DOLLAR"
+      ]
+    },
+    "AssetClass": {
+      "title": "AssetClass",
+      "type": "string",
+      "enum": [
+        "DOMESTICBOND",
+        "INTLBOND",
+        "INTLSTOCK",
+        "LARGESTOCK",
+        "MONEYMARKET",
+        "OTHER",
+        "SMALLSTOCK"
+      ]
+    },
+    "BalanceType": {
+      "title": "BalanceType",
+      "type": "string",
+      "description": "ASSET (positive transaction amount increases balance) LIABILITY (positive transaction amount decreases balance)",
+      "enum": [
+        "ASSET",
+        "LIABILITY"
+      ]
+    },
+    "CallType": {
+      "title": "CallType",
+      "type": "string",
+      "description": "Type of next call (CALL, PUT, PREFUND, MATURITY)",
+      "enum": [
+        "CALL",
+        "MATURITY",
+        "PREFUND",
+        "PUT"
+      ]
+    },
+    "CompoundingPeriod": {
+      "title": "CompoundingPeriod",
+      "type": "string",
+      "description": "DAILY, WEEKLY, BIWEEKLY, SEMIMONTHLY, MONTHLY, SEMIANNUALLY, ANNUALLY",
+      "enum": [
+        "ANNUALLY",
+        "BIWEEKLY",
+        "DAILY",
+        "MONTHLY",
+        "SEMIANNUALLY",
+        "SEMIMONTHLY",
+        "WEEKLY"
+      ]
+    },
+    "CouponMatureFrequency": {
+      "title": "CouponMatureFrequency",
+      "type": "string",
+      "description": "When coupons mature (MONTHLY, QUARTERLY,  SEMIANNUAL, ANNUAL, OTHER)",
+      "enum": [
+        "ANNUAL",
+        "MONTHLY",
+        "OTHER",
+        "QUARTERLY",
+        "SEMIANNUAL"
+      ]
+    },
+    "DebitCreditMemo": {
+      "title": "DebitCreditMemo",
+      "type": "string",
+      "enum": [
+        "CREDIT",
+        "DEBIT",
+        "MEMO"
+      ]
+    },
+    "DebtClass": {
+      "title": "DebtClass",
+      "type": "string",
+      "description": "Classification of debt (TREASURY, MUNICIPAL, CORPORATE, OTHER)",
+      "enum": [
+        "CORPORATE",
+        "MUNICIPAL",
+        "OTHER",
+        "TREASURY"
+      ]
+    },
+    "DebtType": {
+      "title": "DebtType",
+      "type": "string",
+      "description": "Debt type (COUPON, ZERO)",
+      "enum": [
+        "COUPON",
+        "ZERO"
+      ]
+    },
+    "DepositTransactionType": {
+      "title": "DepositTransaction Type",
+      "type": "string",
+      "description": "CHECK, WITHDRAWAL, TRANSFER, POSDEBIT, ATMWITHDRAWAL. BILLPAYMENT, FEE, DEPOSIT, ADJUSTMENT, INTEREST, DIVIDEND, DIRECTDEPOSIT, ATMDEPOSIT, POSCREDIT",
+      "enum": [
+        "ADJUSTMENT",
+        "ATMDEPOSIT",
+        "ATMWITHDRAWAL",
+        "BILLPAYMENT",
+        "CHECK",
+        "DEPOSIT",
+        "DIRECTDEPOSIT",
+        "DIVIDEND",
+        "FEE INTEREST",
+        "POSCREDIT",
+        "POSDEBIT",
+        "TRANSFER",
+        "WITHDRAWAL"
+      ]
+    },
+    "HeldInAccount": {
+      "title": "HeldInAccount",
+      "type": "string",
+      "description": "Sub-account CASH, MARGIN, SHORT, OTHER",
+      "enum": [
+        "CASH",
+        "MARGIN",
+        "OTHER",
+        "SHORT"
+      ]
+    },
+    "HoldingSubType": {
+      "title": "HoldingSubType",
+      "type": "string",
+      "description": "MONEYMARKET, CASH",
+      "enum": [
+        "CASH",
+        "MONEYMARKET"
+      ]
+    },
+    "HoldingType": {
+      "title": "HoldingType",
+      "type": "string",
+      "description": "STOCK, BOND, MUTUALFUND, CD, ANNUITY, OPTION, OTHER",
+      "enum": [
+        "ANNUITY",
+        "BOND",
+        "CD",
+        "MUTUALFUND",
+        "OPTION",
+        "OTHER",
+        "STOCK"
+      ]
+    },
+    "IncomeType": {
+      "title": "IncomeType",
+      "type": "string",
+      "description": "Type of investment income - CGLONG (capital gains-long term), CGSHORT (capital gains-short term), MISC",
+      "enum": [
+        "CGLONG",
+        "CGSHORT",
+        "MISC"
+      ]
+    },
+    "InterestRateType": {
+      "title": "InterestRateType",
+      "type": "string",
+      "enum": [
+        "FIXED",
+        "VARIABLE"
+      ]
+    },
+    "Inv401kSourceType": {
+      "title": "Inv401kSourceType",
+      "type": "string",
+      "description": "Source of money. PRETAX, AFTERTAX, MATCH, PROFITSHARING, ROLLOVER OTHERVEST, OTHERNONVEST",
+      "enum": [
+        "AFTERTAX",
+        "MATCH",
+        "OTHERNONVEST",
+        "OTHERVEST",
+        "PRETAX",
+        "PROFITSHARING",
+        "ROLLOVER"
+      ]
+    },
+    "InvestmentBalanceType": {
+      "title": "InvestmentBalanceType",
+      "type": "string",
+      "enum": [
+        "AMOUNT",
+        "PERCENTAGE"
+      ]
+    },
+    "InvestmentTransactionType": {
+      "title": "InvestmentTransactionType",
+      "type": "string",
+      "description": "PURCHASED, SOLD, PURCHASEDTOCOVER, ADJUSTMENT, PURCHASETOOPEN, PURCHASETOCLOSE, SOLDTOOPEN, SOLDTOCLOSE, INTEREST, MARGININTEREST, REINVESTOFINCOME, RETURNOFCAPITAL, TRANSFER, CONTRIBUTION, FEE, OPTIONEXERCISE, OPTIONEXPIRATION, DIVIDEND, DIVIDENDREINVEST, SPLIT, CLOSURE, INCOME, EXPENSE, CLOSUREOPT, INVEXPENSE, JRNLSEC, JRNLFUND, OTHER, DIV, SRVCHG, DEP, DEPOSIT, ATM, POS, XFER, CHECK, PAYMENT, CASH, DIRECTDEP, DIRECTDEBIT, REPEATPMT",
+      "enum": [
+        "ADJUSTMENT",
+        "ATM",
+        "CASH",
+        "CHECK",
+        "CLOSURE",
+        "CLOSUREOPT",
+        "CONTRIBUTION",
+        "DEP",
+        "DEPOSIT",
+        "DIRECTDEBIT",
+        "DIRECTDEP",
+        "DIV",
+        "DIVIDEND",
+        "DIVIDENDREINVEST",
+        "EXPENSE",
+        "FEE",
+        "INCOME",
+        "INTEREST",
+        "INVEXPENSE",
+        "JRNLFUND",
+        "JRNLSEC",
+        "MARGININTEREST",
+        "OPTIONEXERCISE",
+        "OPTIONEXPIRATION",
+        "OTHER",
+        "PAYMENT",
+        "POS",
+        "PURCHASED",
+        "PURCHASEDTOCOVER",
+        "PURCHASETOCLOSE",
+        "PURCHASETOOPEN",
+        "REINVESTOFINCOME",
+        "REPEATPMT",
+        "RETURNOFCAPITAL",
+        "SOLD",
+        "SOLDTOCLOSE",
+        "SOLDTOOPEN",
+        "SPLIT",
+        "SRVCHG",
+        "TRANSFER",
+        "XFER"
+      ]
+    },
+    "Iso4217Code": {
+      "title": "Iso4217Code",
+      "type": "string",
+      "description": "The ISO 4217 code of the foreign currency",
+      "enum": [
+        "AED",
+        "AFN",
+        "ALL",
+        "AMD",
+        "ANG",
+        "AOA",
+        "ARS",
+        "AUD",
+        "AWG",
+        "AZN",
+        "BAM",
+        "BBD",
+        "BDT",
+        "BGN",
+        "BHD",
+        "BIF",
+        "BMD",
+        "BND",
+        "BOB",
+        "BOV",
+        "BRL",
+        "BSD",
+        "BTN",
+        "BWP",
+        "BYR",
+        "BZD",
+        "CAD",
+        "CDF",
+        "CHE",
+        "CHF",
+        "CHW",
+        "CLF",
+        "CLP",
+        "CNY",
+        "COP",
+        "COU",
+        "CRC",
+        "CUC",
+        "CUP",
+        "CVE",
+        "CZK",
+        "DJF",
+        "DKK",
+        "DOP",
+        "DZD",
+        "EGP",
+        "ERN",
+        "ETB",
+        "EUR",
+        "FJD",
+        "FKP",
+        "GBP",
+        "GEL",
+        "GHS",
+        "GIP",
+        "GMD",
+        "GNF",
+        "GTQ",
+        "GYD",
+        "HKD",
+        "HNL",
+        "HRK",
+        "HTG",
+        "HUF",
+        "IDR",
+        "ILS",
+        "INR",
+        "IQD",
+        "IRR",
+        "ISK",
+        "JMD",
+        "JOD",
+        "JPY",
+        "KES",
+        "KGS",
+        "KHR",
+        "KMF",
+        "KPW",
+        "KRW",
+        "KWD",
+        "KYD",
+        "KZT",
+        "LAK",
+        "LBP",
+        "LKR",
+        "LRD",
+        "LSL",
+        "LYD",
+        "MAD",
+        "MDL",
+        "MGA",
+        "MKD",
+        "MMK",
+        "MNT",
+        "MOP",
+        "MRO",
+        "MUR",
+        "MVR",
+        "MWK",
+        "MXN",
+        "MXV",
+        "MYR",
+        "MZN",
+        "NAD",
+        "NGN",
+        "NIO",
+        "NOK",
+        "NPR",
+        "NZD",
+        "OMR",
+        "PAB",
+        "PEN",
+        "PGK",
+        "PHP",
+        "PKR",
+        "PLN",
+        "PYG",
+        "QAR",
+        "RON",
+        "RSD",
+        "RUB",
+        "RWF",
+        "SAR",
+        "SBD",
+        "SCR",
+        "SDG",
+        "SEK",
+        "SGD",
+        "SHP",
+        "SLL",
+        "SOS",
+        "SRD",
+        "SSP",
+        "STD",
+        "SVC",
+        "SYP",
+        "SZL",
+        "THB",
+        "TJS",
+        "TMT",
+        "TND",
+        "TOP",
+        "TRY",
+        "TTD",
+        "TWD",
+        "TZS",
+        "UAH",
+        "UGX",
+        "USD",
+        "USN",
+        "UYI",
+        "UYU",
+        "UZS",
+        "VEF",
+        "VND",
+        "VUV",
+        "WST",
+        "XAF",
+        "XAG",
+        "XAU",
+        "XBA",
+        "XBB",
+        "XBC",
+        "XBD",
+        "XCD",
+        "XDR",
+        "XOF",
+        "XPD",
+        "XPF",
+        "XPT",
+        "XSU",
+        "XTS",
+        "XUA",
+        "XXX",
+        "YER",
+        "ZAR",
+        "ZMW",
+        "ZWL"
+      ]
+    },
+    "LoanPaymentFrequency": {
+      "title": "LoanPaymentFrequency",
+      "type": "string",
+      "description": "WEEKLY, BIWEEKLY, TWICEMONTHLY, MONTHLY, FOURWEEKS, BIMONTHLY, QUARTERLY, SEMIANNUALLY, ANNUALLY, OTHER",
+      "enum": [
+        "ANNUALLY",
+        "BIMONTHLY",
+        "BIWEEKLY",
+        "FOURWEEKS",
+        "MONTHLY",
+        "OTHER",
+        "QUARTERLY",
+        "SEMIANNUALLY",
+        "TWICEMONTHLY",
+        "WEEKLY"
+      ]
+    },
+    "LoanTransactionType": {
+      "title": "LoanTransactionType",
+      "type": "string",
+      "description": "PAYMENT, FEE, ADJUSTMENT, INTEREST",
+      "enum": [
+        "ADJUSTMENT",
+        "FEE",
+        "INTEREST",
+        "PAYMENT"
+      ]
+    },
+    "LocTransactionType": {
+      "title": "LocTransactionType",
+      "type": "string",
+      "description": "CHECK, WITHDRAWAL, PAYMENT, FEE, ADJUSTMENT, INTEREST",
+      "enum": [
+        "ADJUSTMENT",
+        "CHECK",
+        "FEE",
+        "INTEREST",
+        "PAYMENT",
+        "WITHDRAWAL"
+      ]
+    },
+    "MutualFundType": {
+      "title": "MutualFundType",
+      "type": "string",
+      "description": "Mutual fund type",
+      "enum": [
+        "OPENEND",
+        "CLOSEEND",
+        "OTHER"
+      ]
+    },
+    "OptionType": {
+      "title": "OptionType",
+      "type": "string",
+      "enum": [
+        "CALL",
+        "PUT"
+      ]
+    },
+    "OrderDuration": {
+      "title": "OrderDuration",
+      "type": "string",
+      "description": "This order is good for DAY, GOODTILLCANCEL, IMMEDIATE",
+      "enum": [
+        "DAY",
+        "GOODTILLCANCEL",
+        "IMMEDIATE"
+      ]
+    },
+    "OrderType": {
+      "title": "OrderType",
+      "type": "string",
+      "enum": [
+        "BUY",
+        "SELL",
+        "BUYTOCOVER",
+        "BUYTOOPEN",
+        "SELLTOCOVER",
+        "SELLTOOPEN",
+        "SELLSHORT",
+        "SELLCLOSE"
+      ]
+    },
+    "PaymentFrequency": {
+      "title": "PaymentFrequency",
+      "type": "string",
+      "description": "DAILY, WEEKLY, BIWEEKLY, SEMIMONTHLY, MONTHLY, SEMIANNUALLY, ANNUALLY",
+      "enum": [
+        "ANNUALLY",
+        "BIWEEKLY",
+        "DAILY",
+        "MONTHLY",
+        "SEMIANNUALLY",
+        "SEMIMONTHLY",
+        "WEEKLY"
+      ]
+    },
+    "PeriodCertainGuarantee": {
+      "title": "PeriodCertainGuarante",
+      "type": "string",
+      "enum": [
+        "NO PERIOD CERTAIN",
+        "5-YEAR",
+        "10-YEAR",
+        "20-YEAR",
+        "30-YEAR"
+      ]
+    },
+    "PositionType": {
+      "title": "PositionType",
+      "type": "string",
+      "description": "LONG, SHORT",
+      "enum": [
+        "LONG",
+        "SHORT"
+      ]
+    },
+    "Secured": {
+      "title": "Secured",
+      "type": "string",
+      "description": "How the option is secured",
+      "enum": [
+        "COVERED",
+        "NAKED"
+      ]
+    },
+    "SecurityIdType": {
+      "title": "SecurityIdType",
+      "type": "string",
+      "description": "Security identifier type",
+      "enum": [
+        "CUSIP",
+        "ISIN",
+        "SEDOL",
+        "SICC",
+        "VALOR",
+        "WKN"
+      ]
+    },
+    "SecurityType": {
+      "title": "SecurityType",
+      "type": "string",
+      "enum": [
+        "BOND",
+        "DEBT",
+        "MUTUALFUND",
+        "OPTION",
+        "OTHER",
+        "STOCK",
+        "SWEEP"
+      ]
+    },
+    "StockType": {
+      "title": "StockType",
+      "type": "string",
+      "enum": [
+        "COMMON",
+        "CONVERTIBLE",
+        "OTHER",
+        "PREFERRED"
+      ]
+    },
+    "TransactionReason": {
+      "title": "TransactionReason",
+      "type": "string",
+      "description": "Reason for this transaction; CALL (the debt was called), SELL (the debt was sold), MATURITY (the debt reached maturity)",
+      "enum": [
+        "CALL",
+        "MATURITY",
+        "SELL"
+      ]
+    },
+    "TransactionStatus": {
+      "title": "TransactionStatus",
+      "type": "string",
+      "enum": [
+        "AUTHORIZATION",
+        "MEMO",
+        "PENDING",
+        "POSTED"
+      ]
+    },
+    "UnitType": {
+      "title": "UnitType",
+      "type": "string",
+      "enum": [
+        "CURRENCY",
+        "SHARES"
+      ]
+    },
+    "dateRange": {
+      "type": "object",
+      "required": [
+        "startDate",
+        "endDate"
+      ],
+      "properties": {
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }
+      }
+    },
+    "itemAmountRange": {
+      "type": "object",
+      "required": [
+        "lowAmount",
+        "highAmount"
+      ],
+      "properties": {
+        "lowAmount": {
+          "type": "string"
+        },
+        "highAmount": {
+          "type": "string"
+        }
+      }
+    },
+    "itemSequenceNumberRange": {
+      "type": "object",
+      "required": [
+        "lowNumber",
+        "highNumber"
+      ],
+      "properties": {
+        "lowNumber": {
+          "type": "string"
+        },
+        "highNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "checkNumberRange": {
+      "type": "object",
+      "required": [
+        "lowNumber",
+        "highNumber"
+      ],
+      "properties": {
+        "lowNumber": {
+          "type": "string"
+        },
+        "highNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "serialNumberRange": {
+      "type": "object",
+      "required": [
+        "lowNumber",
+        "highNumber"
+      ],
+      "properties": {
+        "lowNumber": {
+          "type": "string"
+        },
+        "highNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "transactionImages": {
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/image"
+          }
+        }
+      }
+    },
+    "transactionImagesSearch": {
+      "type": "object",
+      "properties": {
+        "imagesMetadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/imageSearch"
+          }
+        }
+      }
+    },
+    "account": {
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "type": "string"
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "cid": {
+          "type": "string"
+        },
+        "imageSegment": {
+          "type": "string"
+        },
+        "imageFormat": {
+          "type": "integer"
+        }
+      }
+    },
+    "imageSearch": {
+      "type": "object",
+      "properties": {
+        "itemSequenceNumber": {
+          "type": "string",
+          "description": "Item sequence number"
+        },
+        "checkNumber": {
+          "type": "string",
+          "description": "Item Check number"
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "Item Serial number"
+        },
+        "itemAmount": {
+          "type": "string"
+        },
+        "itemDate": {
+          "type": "string",
+          "description": "Item date or segment date"
+        },
+        "routingTransitNumber": {
+          "type": "string",
+          "description": "Routing transit number (RTN) associated with account number at owning institution"
+        },
+        "itemIndicator": {
+          "type": "string",
+          "description": "Indicate the type of item image - ‘paid’, ‘deposited’, ‘deposit’"
+        },
+        "paidDate": {
+          "type": "string"
+        },
+        "depositedDate": {
+          "type": "string"
+        },
+        "processedDate": {
+          "type": "string"
+        },
+        "imageId": {
+          "type": "string",
+          "description": "Image Id"
+        },
+        "depositedItemAccountNumber": {
+          "type": "string",
+          "description": "deposited Item Account Number"
+        },
+        "imageSiteId": {
+          "type": "string",
+          "description": "Image site spefific document Id"
+        }
+      }
+    },
+    "imagesMetadata": {
+      "type": "object",
+      "properties": {
+        "imageId": {
+          "type": "string",
+          "description": "Image Id"
+        },
+        "imageSiteId": {
+          "type": "string",
+          "description": "Image site spefific document Id"
+        },
+        "itemSequenceNumber": {
+          "type": "string",
+          "description": "Item sequence number/check number"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "code",
+        "status"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Contains the API response code e.g. 200, 500 etc",
+          "example": "200"
+        },
+        "status": {
+          "type": "string",
+          "description": "HTTP Status.",
+          "enum": [
+            "SUCCESS",
+            "PARTIAL",
+            "FAILURE"
+          ],
+          "example": "SUCCESS"
+        }
+      }
+    },
+    "problem": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "format": "uri",
+          "description": "An absolute URI that identifies the problem type.  When dereferenced,\nit SHOULD provide human-readable documentation for the problem type\n(e.g., using HTML).\n",
+          "default": "about:blank"
+        },
+        "title": {
+          "type": "string",
+          "description": "A short, summary of the problem type. Written in english and readable\nfor engineers (usually not suited for non technical stakeholders and\nnot localized); example: Service Unavailable\n"
+        },
+        "detail": {
+          "type": "string",
+          "description": "A human readable explanation specific to this occurrence of the\nproblem.\n"
+        }
+      }
+    }
+  },
+  "host": "sandbox-open-api.bmo.com"
+}

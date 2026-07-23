@@ -1,0 +1,108 @@
+aid: bmo
+name: BMO
+review:
+  question: Does BMO (US) expose a public first-party developer API, and what is its
+    open-finance posture?
+  answer: true
+  date: '2026-07-23'
+  reviewer: API Evangelist
+findings:
+  summary: |
+    BMO Bank N.A. — the U.S. national-bank subsidiary of Bank of Montreal / BMO
+    Financial Group — runs a genuine, publicly reachable first-party COMMERCIAL
+    developer portal at https://developer.bmo.com/api/commercial/ (HTTP 200),
+    aimed at its Online Banking for Business / Treasury & Payment Solutions
+    customers. This is not a retail/consumer open-banking API; it is a
+    business-to-bank integration program first announced in 2020 ("BMO Completes
+    API Portal for Small Business Customers in Move Towards Open Banking").
+
+    The portal's API catalogue (an Angular SPA at
+    https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/catalogue) exposes
+    ELEVEN documented API products, each backed by a publicly downloadable
+    machine-readable specification which was harvested VERBATIM into openapi/:
+    Account Validation (US Only), Account Information, ACH Payments, Wire Payments
+    (U.S.), Wire Payments (Canada), EFT Payments (Canada), Instant Payments
+    (Interac, Canada), Image Retrieval, Authorize & Token (OAuth 2.0), Client Data
+    Encryption Key, and Push Notifications. Eight are OpenAPI 3.0.x; three
+    (Image Retrieval, Authorize & Token, Client Data Encryption Key) are Swagger
+    2.0. The platform is IBM API Connect (x-ibm-* extensions throughout).
+
+    AUTH MODEL: OAuth 2.0 authorization-code flow plus a client API key
+    (client_id sent as x-api-key). Authorization/token endpoints are hosted at
+    https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/{authorize,token}.
+    Requests carry FAPI-aligned headers (x-fapi-interaction-id), and sensitive
+    fields (account numbers, SSN/TIN, DOB) are encrypted client-side using a key
+    obtained from the Client Data Encryption Key API (x-crypto-key header). The
+    Account Validation API is backed by Early Warning Services' national identity
+    and transaction database.
+
+    OPEN-FINANCE / FDX / 1033 POSTURE: No documented FDX (Financial Data Exchange)
+    membership or CFPB Section 1033 consumer-data-rights posture was found for the
+    U.S. entity during this review. BMO brands this program internally as "open
+    banking" and the specs are FAPI-influenced, but this is a permissioned
+    commercial payments/data program, not a consumer-permissioned FDX data-access
+    API. Consumer-side data sharing for BMO in the U.S. is generally intermediated
+    by aggregators rather than a first-party consumer API. fdx_or_1033 = false
+    (not documented).
+
+    NOTE: There is NO official BMO GitHub organization; github.com/bmo belongs to
+    an unrelated individual (Brian Moran) and was deliberately excluded.
+  provenance:
+    specSource: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/assets/mocks/
+    specNote: |
+      Each OpenAPI/Swagger document is served publicly (HTTP 200) as a
+      single-element JSON array under the dev-portal SPA's assets/mocks/ path and
+      was harvested verbatim (unwrapped to the spec object) into openapi/. All
+      documents describe the sandbox base
+      https://sandbox-open-api.bmo.com/open-banking/commercial-sb; the Interac
+      document additionally referenced an internal SIT host
+      (open-api-sit.bmogc.net). Production access is gated behind portal
+      registration and OAuth client credentials.
+    platform: IBM API Connect
+  transports:
+  - protocol: REST
+    scheme: https
+    baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+    documented: true
+  - protocol: OAuth2
+    scheme: https
+    note: Authorization-code flow; token endpoint at
+      https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+    documented: true
+  authModel:
+    oauth2: true
+    apiKey: true
+    mtls: false
+    fapiHeaders: true
+    payloadEncryption: true
+  apisHarvested:
+  - Account Validation (US Only) — OpenAPI 3.0.0
+  - Account Information — OpenAPI 3.0.0
+  - ACH Payments — OpenAPI 3.0.3
+  - Wire Payments (U.S.) — OpenAPI 3.0.3
+  - Wire Payments (Canada) — OpenAPI 3.0.3
+  - Electronic Funds Transfer (EFT) — OpenAPI 3.0.3
+  - Instant Payments (Interac) — OpenAPI 3.0.1
+  - Image Retrieval — Swagger 2.0
+  - Authorize & Token — Swagger 2.0
+  - Client Data Encryption Key — Swagger 2.0
+  - Push Notifications — OpenAPI 3.0.0
+  fdxParticipation: false
+  section1033Posture: not-documented
+  aggregatorOnlyConsumerData: true
+sources:
+- url: https://developer.bmo.com/api/commercial/
+  type: DeveloperPortal
+  note: First-party commercial developer portal (HTTP 200).
+- url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/catalogue
+  type: Documentation
+  note: API catalogue SPA listing all eleven documented API products.
+- url: https://developer.bmo.com/api/commercial/registration
+  type: Registration
+  note: Developer account registration + sandbox credentials (HTTP 200).
+- url: https://developer.bmo.com/api/commercial/terms-and-conditions
+  type: TermsOfService
+  note: BMO Developer Portal terms and conditions (HTTP 200).
+- url: https://newsroom.bmo.com/2020-08-11-BMO-Completes-API-Portal-for-Small-Business-Customers-in-Move-Towards-Open-Banking
+  type: Article
+  note: 2020 announcement of the small-business API portal.

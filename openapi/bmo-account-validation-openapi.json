@@ -1,0 +1,776 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "x-api-id": "042d9789-15fb-44d4-ac60-6a9df5405d38",
+    "x-audience": "company-internal",
+    "x-bmo-api-type": "internal-api",
+    "x-bmo-api-provider-id": 26777,
+    "x-bmoservicedomain-name": "Commercial_sb",
+    "x-api-specification-compliant": true,
+    "version": "1.0",
+    "title": "Account Validation (US Only)",
+    "description": "The Account Validation API lets you verify U.S. account ownership and risk-level before setting up a transfer. You’ll start by requesting an encryption key, which you’ll then use for your account validation request.Currently, this API only supports U.S. savings and deposit accounts.",
+    "contact": {
+      "name": "SmartCore-CG",
+      "email": "HUBCGSRapplicationsupport@bmo.com",
+      "url": "https://confluence.bmogc.net/display/SCCGAPI/Account+Validation"
+    },
+    "x-ibm-name": "account-validation",
+    "x-ibm-summary": ""
+  },
+  "servers": [
+    {
+      "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb"
+    }
+  ],
+  "tags": [
+    {
+      "name": "AccountValidation"
+    }
+  ],
+  "security": [
+    {
+      "OAuth": [
+        "AccountValidation"
+      ],
+      "x-api-key": []
+    }
+  ],
+  "paths": {
+    "/accounts/validate/get": {
+      "post": {
+        "x-dataclassification-code": "Confidential",
+        "operationId": "ValidateAccounts",
+        "tags": [
+          "AccountValidation"
+        ],
+        "summary": "Validate accounts",
+        "description": "Verify details for up to 100 U.S. accounts per call for validation. Each call will return a risk-level score and confirm if the submitted account owner information matches the Early Warning's national transaction and identities database.      \n",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "authentication token"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "client api key"
+          },
+          {
+            "name": "x-crypto-key",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "format": "byte",
+              "description": "base64 encoded crypto key to decrypt sensitive information"
+            },
+            "required": true,
+            "description": "base64 encoded crypto key to decrypt sensitive information"
+          }
+        ],
+        "requestBody": {
+          "description": "Account and other information to be validated",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateAccountsRequest"
+              },
+              "examples": []
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Everything worked as expected, array of results returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateAccountsResponse"
+                }
+              }
+            },
+            "headers": {
+              "x-fapi-interaction-id": {
+                "$ref": "#/components/headers/x-fapi-interaction-id"
+              },
+              "x-crypto-key": {
+                "$ref": "#/components/headers/x-crypto-key"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request received",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "validation-error": {
+                    "value": {
+                      "code": "2b5f0fb2-730b-11e8-adc0-fa7ae01bbebc",
+                      "message": "Invalid request parameters.",
+                      "details": {
+                        "errors": [
+                          {
+                            "accountNumber": "base64 encrypted account numberAAA",
+                            "errors": [
+                              {
+                                "Message": "<Field Name> is missing",
+                                "Path": "<Field Name>",
+                                "Url": "<url to the api reference >"
+                              },
+                              {
+                                "Message": "Invalid enum value",
+                                "Path": "<Field Name>",
+                                "Url": "<url to the api reference >"
+                              }
+                            ]
+                          },
+                          {
+                            "accountNumber": "base64 encrypted account numberBBB",
+                            "errors": [
+                              {
+                                "Message": "<Field Name> is missing",
+                                "Path": "<Field Name>",
+                                "Url": "<url to the api reference >"
+                              },
+                              {
+                                "Message": "Invalid enum value",
+                                "Path": "<Field Name>",
+                                "Url": "<url to the api reference >"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Cannot find valid subscription for the incoming API request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BMOError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Not registered to plan.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BMOError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The requested resource could not be found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported Media Type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests hit the API in too short of a period",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Integration or Backend Timeout",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "headers": {
+      "x-fapi-interaction-id": {
+        "schema": {
+          "type": "string"
+        },
+        "description": "request header to inform server of an interaction tracing identifier."
+      },
+      "x-crypto-key": {
+        "schema": {
+          "type": "string",
+          "format": "byte"
+        },
+        "description": "base64 encoded crypto key to decrypt sensitive information"
+      }
+    },
+    "schemas": {
+      "ValidateAccountsRequest": {
+        "type": "object",
+        "required": [
+          "accounts",
+          "validateOwnership",
+          "validateStatus"
+        ],
+        "properties": {
+          "validateStatus": {
+            "type": "boolean",
+            "description": "validate account status."
+          },
+          "validateOwnership": {
+            "type": "boolean",
+            "description": "validate account ownership. If set to true, accounts.owner parameter is required."
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Account"
+            },
+            "minItems": 1,
+            "maxItems": 100
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "required": [
+          "routingTransitNumber",
+          "accountNumber"
+        ],
+        "properties": {
+          "routingTransitNumber": {
+            "type": "string",
+            "maxLength": 9,
+            "minLength": 9,
+            "pattern": "^\\d+$"
+          },
+          "accountNumber": {
+            "type": "string",
+            "description": "Base64 encoded and encrypted account number in int64 format",
+            "format": "byte"
+          },
+          "amount": {
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "multipleOf": 0.01,
+            "description": "Implied decimal with 2 digits. Format =\n$$$$$$$$$$.¢¢. Field can be zero-filled. Must be\npresent to receive a Participant Model score\nand also to receive the benefit of high focus\nitem, duplication detection and stop payment\nnotification functionality. For inquiries with no\ndollar amount, enrollments for example, it is\nrecommended to inquire applying an average\ndollar amount for the use case.\nRequired if available.\n"
+          },
+          "checkNumber": {
+            "type": "string",
+            "description": "For check transactions SerialNo must be\npresent to get the benefit of high focus item\nduplication detection and stop payment\nnotification functionality.\nSerial Number is not required for ACH\ninquiries.\n"
+          },
+          "processControlTranCode": {
+            "type": "string",
+            "description": "Process Control Transaction Code."
+          },
+          "owner": {
+            "$ref": "#/components/schemas/AccountOwner"
+          }
+        }
+      },
+      "AccountOwner": {
+        "type": "object",
+        "description": "Inquiry must contain First AND Last Name, OR Business Name. if one is populated, the other can be left blank",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/IndividualName"
+          },
+          "businessName": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "homePhone": {
+            "type": "string",
+            "format": "int32"
+          },
+          "workPhone": {
+            "type": "string",
+            "format": "int32"
+          },
+          "taxId": {
+            "type": "string",
+            "description": "Base64 encoded and encrypted SSN or TIN associated with this customer",
+            "format": "byte"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "description": "Base64 encoded and encrypted Date of Birth of customer in YYYYMMDD format",
+            "format": "byte"
+          },
+          "additionalIdentification": {
+            "$ref": "#/components/schemas/AdditionalIdentification"
+          }
+        }
+      },
+      "AdditionalIdentification": {
+        "type": "object",
+        "properties": {
+          "placeOfIssuance": {
+            "type": "string"
+          },
+          "governmentId": {
+            "type": "string",
+            "description": "Base64 encoded and encrypted string idNumber",
+            "format": "byte"
+          },
+          "governmentIdType": {
+            "type": "string",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "A",
+              "B"
+            ]
+          }
+        }
+      },
+      "IndividualName": {
+        "type": "object",
+        "required": [
+          "first",
+          "last"
+        ],
+        "properties": {
+          "first": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "^[a-zA-Z ]*$"
+          },
+          "middle": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "^[a-zA-Z ]*$",
+            "description": "Middle Name or Initial. If middle initial is included, it should be a single letter without a period."
+          },
+          "last": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "^[a-zA-Z ]*$"
+          },
+          "prefix": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "Mr.",
+              "Mrs.",
+              "Ms.",
+              "Mx.",
+              "Sir",
+              "Dr."
+            ]
+          },
+          "suffix": {
+            "type": "string",
+            "maxLength": 4
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "line1": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "^[0-9a-zA-Z _\\-\\+=\\*!\\?/~:;,\\.@#\\$%\\^\\(\\)\\{\\}]+$"
+          },
+          "line2": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "^[0-9a-zA-Z _\\-\\+=\\*!\\?/~:;,\\.@#\\$%\\^\\(\\)\\{\\}]+$"
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 25,
+            "pattern": "^[0-9a-zA-Z _\\-\\+=\\*!\\?/~:;,\\.@#\\$%\\^\\(\\)\\{\\}]+$"
+          },
+          "state": {
+            "description": "State or province",
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string",
+            "description": "zip or postal code"
+          }
+        }
+      },
+      "ValidateAccountsResponse": {
+        "title": "ValidateAccountsResponse",
+        "description": "Validation response",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationResult"
+            },
+            "minItems": 1
+          }
+        }
+      },
+      "ValidationResult": {
+        "type": "object",
+        "properties": {
+          "statusValidationResult": {
+            "$ref": "#/components/schemas/StatusValidationResult"
+          },
+          "ownershipValidationResult": {
+            "$ref": "#/components/schemas/OwnershipValidationResult"
+          },
+          "routingTransitNumber": {
+            "type": "string"
+          },
+          "accountNumber": {
+            "type": "string",
+            "description": "Base64 encoded and encrypted account number in int64 format",
+            "format": "byte"
+          },
+          "accountRisk": {
+            "type": "string",
+            "description": "account risk level",
+            "enum": [
+              "LOW",
+              "MEDIUM",
+              "HIGH"
+            ]
+          }
+        }
+      },
+      "StatusValidationResult": {
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "type": "string",
+            "description": "fieldName that caused validation error. Returned when status is failed."
+          },
+          "status": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the error. Returned when status is failed."
+          }
+        }
+      },
+      "OwnershipValidationResult": {
+        "type": "object",
+        "properties": {
+          "nameMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "C",
+              "U"
+            ]
+          },
+          "firstNameMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "U"
+            ]
+          },
+          "middleNameMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "U"
+            ]
+          },
+          "lastNameMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "U"
+            ]
+          },
+          "businessNameMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "C",
+              "U"
+            ]
+          },
+          "nameSuffixMatch": {
+            "type": "string",
+            "enum": [
+              "U"
+            ]
+          },
+          "namePrfixMatch": {
+            "type": "string",
+            "enum": [
+              "U"
+            ]
+          },
+          "addressMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "C",
+              "U"
+            ]
+          },
+          "cityMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "C",
+              "U"
+            ]
+          },
+          "stateMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "U"
+            ]
+          },
+          "postalCodeMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "C",
+              "U"
+            ]
+          },
+          "homePhoneMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "C",
+              "U"
+            ]
+          },
+          "workPhoneMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "C",
+              "U"
+            ]
+          },
+          "taxIdMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "C",
+              "U"
+            ]
+          },
+          "dateOfBirthMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "C",
+              "U"
+            ]
+          },
+          "governmentIdTypeMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "U"
+            ]
+          },
+          "governmentIdMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "C",
+              "U"
+            ]
+          },
+          "governmentIdStateMatch": {
+            "type": "string",
+            "enum": [
+              "Y",
+              "N",
+              "U"
+            ]
+          },
+          "overallMatchScore": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Measure of how closely the inquiry attributes match\nthe information in the Account Owner Elements\ndatabase. Derived by examining all information sent;\nincorporates name variations (for name fields), edit\ndistance, abbreviations, phonetic encoding and other\nmatching algorithms. Valid values = 0-100.          \n"
+          }
+        }
+      },
+      "Error": {
+        "title": "Error Entity",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Long term persistent identifier which can be used to trace error condition back to log information"
+          },
+          "message": {
+            "type": "string",
+            "description": "End user displayable information which might help the customer diagnose an error"
+          },
+          "details": {
+            "type": "object",
+            "description": "Details of the error"
+          }
+        },
+        "description": "An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account."
+      },
+      "BMOError": {
+        "title": "BMO Error Entity",
+        "type": "object",
+        "properties": {
+          "httpCode": {
+            "type": "string",
+            "description": "HTTP Status Code"
+          },
+          "httpMessage": {
+            "type": "string",
+            "description": "End user displayable information which might help the customer diagnose an error"
+          },
+          "moreInformation": {
+            "type": "object",
+            "description": "Details of the error"
+          }
+        },
+        "description": "An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account."
+      }
+    },
+    "securitySchemes": {
+      "OAuth": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize",
+            "tokenUrl": "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token",
+            "scopes": {
+              "AccountValidation": "AccountValidation"
+            }
+          }
+        },
+        "x-ibm-oauth-provider": "apic-oauth-ob-commercial-sb-provider"
+      },
+      "x-api-key": {
+        "type": "apiKey",
+        "in": "header",
+        "x-key-type": "client_id",
+        "name": "x-api-key"
+      }
+    }
+  },
+  "x-ibm-configuration": {
+    "categories": [
+      "bian--bd--operationalservices"
+    ],
+    "type": "rest",
+    "phase": "realized",
+    "enforced": true,
+    "testable": true,
+    "cors": {
+      "enabled": true
+    },
+    "oauth-servers": {
+      "OAuth": {
+        "authorizationCode": {
+          "tokenUrls": [
+            "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token"
+          ],
+          "authorizationUrls": [
+            "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize"
+          ],
+          "refreshUrls": []
+        }
+      }
+    }
+  },
+  "x-ibm-endpoints": [
+    {
+      "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb",
+      "type": [
+        "production",
+        "development"
+      ]
+    }
+  ]
+}
