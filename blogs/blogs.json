@@ -1,0 +1,14 @@
+{
+  "repo": "bmo",
+  "feeds": [
+    {
+      "source": "https://developer.bmo.com/api/commercial/terms-and-conditions",
+      "feed_url": "https://developer.bmo.com/api/commercial/terms-and-conditions",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-01T15:49:00Z"
+}
