@@ -39,7 +39,7 @@ tags:
 - Account Validation
 created: '2026-07-23'
 modified: '2026-07-23'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: bmo:bmo-account-validation-api
   name: BMO Account Validation API
