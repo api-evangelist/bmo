@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Client Data Encryption Key Get Open Banking",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "retrieveClientDataEncryptionKey",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "post-retrievecryptoinstruction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/issued-device-administration/client-data-encryption-key/get",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "REST Utility framework to retrieve cryptographic instructions such as public Customer Management key (CMK) details, encryption method and algorithm etc based on a reource uri and key alias"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

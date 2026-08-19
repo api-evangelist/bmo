@@ -1,0 +1,1306 @@
+{
+  "item": [
+    {
+      "id": "bc913c06-f245-4962-b9b6-50e04e805f2d",
+      "name": "retrieveClientDataEncryptionKey",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "158deb38-9f33-4927-9d8c-cced2f9f48b1",
+          "name": "post-retrievecryptoinstruction",
+          "request": {
+            "name": "post-retrievecryptoinstruction",
+            "description": {
+              "content": "REST Utility framework to retrieve cryptographic instructions such as public Customer Management key (CMK) details, encryption method and algorithm etc based on a reource uri and key alias",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "issued-device-administration",
+                "client-data-encryption-key",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                "key": "x-fapi-financial-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                "key": "x-fapi-customer-last-logged-time",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                "key": "x-fapi-customer-ip-address",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                "key": "x-fapi-customer-user-agent",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "key": "x-fapi-interaction-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Client Id generated during Third Party Provider application registration",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                "key": "x-app-cat-id",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d0208e63-a1d2-4d72-bb39-b31034f29f22",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued-device-administration",
+                    "client-data-encryption-key",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                    "key": "x-fapi-financial-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                    "key": "x-app-cat-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"string\",\n    \"status\": \"string\",\n    \"messages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"resultDetails\": [\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      },\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      }\n    ]\n  },\n  \"key\": {\n    \"keyid\": \"string\",\n    \"pemContent\": \"string\",\n    \"keyType\": \"string\",\n    \"encryptionAlgorithm\": \"string\",\n    \"timeToLive\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c540cf4-8a19-436d-a1be-21d6b8b43646",
+              "name": "Bad Request Exception",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued-device-administration",
+                    "client-data-encryption-key",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                    "key": "x-fapi-financial-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                    "key": "x-app-cat-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"string\",\n    \"status\": \"string\",\n    \"messages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"resultDetails\": [\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      },\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fb89f05-7609-4dcd-8c97-5ec13a237645",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued-device-administration",
+                    "client-data-encryption-key",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                    "key": "x-fapi-financial-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                    "key": "x-app-cat-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"string\",\n    \"status\": \"string\",\n    \"messages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"resultDetails\": [\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      },\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8341ad8-fdb2-421e-b69f-3e216472e59a",
+              "name": "Forbidden - the user is not authorized to use this resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued-device-administration",
+                    "client-data-encryption-key",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                    "key": "x-fapi-financial-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                    "key": "x-app-cat-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"string\",\n    \"status\": \"string\",\n    \"messages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"resultDetails\": [\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      },\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16c7ef95-e3b1-4164-9356-ea078918b5a6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued-device-administration",
+                    "client-data-encryption-key",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                    "key": "x-fapi-financial-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                    "key": "x-app-cat-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"string\",\n    \"status\": \"string\",\n    \"messages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"resultDetails\": [\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      },\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2980dc1b-4459-4a9b-af79-75fb4271396e",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued-device-administration",
+                    "client-data-encryption-key",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                    "key": "x-fapi-financial-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                    "key": "x-app-cat-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"string\",\n    \"status\": \"string\",\n    \"messages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"resultDetails\": [\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      },\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a38f4f4-5e23-4602-9685-cffb8a4d845b",
+              "name": "Too many requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued-device-administration",
+                    "client-data-encryption-key",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                    "key": "x-fapi-financial-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                    "key": "x-app-cat-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"string\",\n    \"status\": \"string\",\n    \"messages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"resultDetails\": [\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      },\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "777661a9-1b1f-44ed-87ba-a607035b59a1",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued-device-administration",
+                    "client-data-encryption-key",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                    "key": "x-fapi-financial-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                    "key": "x-app-cat-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"string\",\n    \"status\": \"string\",\n    \"messages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"resultDetails\": [\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      },\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "186af52b-25aa-4dc4-9b3e-376406cfd4d7",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued-device-administration",
+                    "client-data-encryption-key",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                    "key": "x-fapi-financial-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                    "key": "x-app-cat-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"string\",\n    \"status\": \"string\",\n    \"messages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"resultDetails\": [\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      },\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e10447d-3900-41db-a55b-326c65dd979c",
+              "name": "Integration or Backend Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "issued-device-administration",
+                    "client-data-encryption-key",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) The unique id of the financial institution to which the request is issued. BMO is 001",
+                    "key": "x-fapi-financial-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                    "key": "x-request-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer",
+                    "key": "x-app-cat-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"keyAlias\": \"<string>\",\n  \"originatorData\": {\n    \"applicationCatalogueId\": \"<string>\",\n    \"country\": \"<string>\",\n    \"locationId\": \"<string>\",\n    \"locationType\": \"<string>\",\n    \"channel\": \"<string>\",\n    \"employeeUserId\": \"<string>\"\n  },\n  \"resourceName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"string\",\n    \"status\": \"string\",\n    \"messages\": [\n      \"string\",\n      \"string\"\n    ],\n    \"resultDetails\": [\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      },\n      {\n        \"detailCode\": \"string\",\n        \"detailMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3c194741-d37f-41c6-a869-1eea20ab706a",
+    "name": "Client Data Encryption Key Get Open Banking",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST Utility framework to retrieve cryptographic instructions such as public Customer Management key (CMK) details, encryption method and algorithm etc based on a resource uri and key alias. The key can be used to encryt, but not decrypt the data.\n\nContact Support:\n Name: Smart Core-CG\n Email: HubCGCustLeadsSupport@bmo.com",
+      "type": "text/plain"
+    }
+  }
+}

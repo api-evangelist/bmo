@@ -1,0 +1,366 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACH Payments",
+    "version": "1.1.3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PaymentInitiation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Payment Credit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/tpp/ach/payment-initiation/customer-credit-transfer-initiation",
+            "headers": [
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-sourcesystem-id",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "x-content-type",
+                "value": ""
+              },
+              {
+                "name": "x-expires",
+                "value": ""
+              },
+              {
+                "name": "x-cache-control",
+                "value": ""
+              },
+              {
+                "name": "x-content-disposition",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Payment Initiation - send Payments. receive PAIN001 (Credit) ISO JSON request as input and return PAIN002 ISO JSON as response after interacting with downstream Payment Rail System."
+        },
+        {
+          "info": {
+            "name": "Send Payment Debit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/tpp/ach/payment-initiation/customer-direct-debit-initiation",
+            "headers": [
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-sourcesystem-id",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "x-content-type",
+                "value": ""
+              },
+              {
+                "name": "x-expires",
+                "value": ""
+              },
+              {
+                "name": "x-cache-control",
+                "value": ""
+              },
+              {
+                "name": "x-content-disposition",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Payment Initiation - send Payments. receive PAIN008 (Debit) ISO JSON request as input and return PAIN002 ISO JSON as response after interacting with downstream Payment Rail System."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "PaymentStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain Payment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/tpp/ach/payment-initiation/get-transaction-status/get",
+            "headers": [
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-sourcesystem-id",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "x-content-type",
+                "value": ""
+              },
+              {
+                "name": "x-expires",
+                "value": ""
+              },
+              {
+                "name": "x-cache-control",
+                "value": ""
+              },
+              {
+                "name": "x-content-disposition",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "PaymentStatus which enquiry sends CAMT005 ISO JSON Request standard messages and enquires and responds back with PAIN002 ISO JSON message structure after querying matching backend"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "TppACHArrangementCompany",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Company ID List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/tpp/ach/customer-access-entitlement/commercial-user-access-arrangement/get",
+            "headers": [
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-sourcesystem-id",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "x-content-type",
+                "value": ""
+              },
+              {
+                "name": "x-expires",
+                "value": ""
+              },
+              {
+                "name": "x-cache-control",
+                "value": ""
+              },
+              {
+                "name": "x-content-disposition",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all the consented company Ids from ACH business services for the third party consumer, request with customerId and respond with the list of Company Ids."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

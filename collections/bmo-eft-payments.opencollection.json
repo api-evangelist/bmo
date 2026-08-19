@@ -1,0 +1,294 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Electronic Funds Transfer (EFT)",
+    "version": "2.2.5"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Send Payment Credit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Payment Credit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/tpp/eft/payment-initiation/customer-credit-transfer-initiation",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "x-bmo-id-token",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Payment credit initiation which receives PAIN.001 ISO request as input and return PAIN.002 ISO as response."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Send Payment Debit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Payment Debit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/tpp/eft/payment-initiation/customer-direct-debit-initiation",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "x-bmo-id-token",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Payment debit initiation which receives PAIN.001 ISO request as input and return PAIN.002 ISO as response."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Obtain Payment Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain Payment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/tpp/eft/payment-initiation/get-transaction-status/get",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "x-bmo-id-token",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search Payment Initiation Status"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Obtain Service Agreement List",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain Service Agreement List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/tpp/eft/customer-access-entitlement/commercial-user-access-arrangement/get",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "x-bmo-id-token",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Service agreement search which receives CustomerEntityId (proprietary) as input and return CustomerAgreementInfoReport (proprietary) as response"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Image Retrieval",
+    "version": "4.5.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AccountTransactionImages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts/transaction-images-accounts",
+            "headers": [
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get a list of all your accounts as a starting point for more specific requests. This call will return account IDs that are set up for the \"Cheque Imaging\" (CA) or the \"Check Imaging\" (U.S.) service. "
+        },
+        {
+          "info": {
+            "name": "Search for Images",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/accounts/:accountId/transaction-images/get",
+            "headers": [
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "a pseudonymized representation of the account number"
+              }
+            ]
+          },
+          "docs": "Get a list of available images that match your search. You can search by account number, date range, amount and item type. You can get up to 1000 results at once. Then pick the images you want to download in TIFF format."
+        },
+        {
+          "info": {
+            "name": "Retrieve Images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/accounts/:accountId/transaction-images/:imageId",
+            "headers": [
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "a pseudonymized representation of the account number"
+              },
+              {
+                "name": "imageId",
+                "value": "",
+                "type": "path",
+                "description": "an identifier used to retrieve a specific transaction image"
+              }
+            ]
+          },
+          "docs": "Send us the index number of the cheque you want to retrieve. As per FDX standard, each API call can retrieve one cheque which includes front and back images in TIFF format. "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

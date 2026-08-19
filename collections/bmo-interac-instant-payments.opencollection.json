@@ -1,0 +1,488 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Instant Payments",
+    "version": "4.3.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TPP-EMTGetTransaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain Payment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open-api-sit.bmogc.net/open-banking2/commercial-sb/tpp/interac-etransfer/payment-initiation/get-transaction",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "true-client-ip",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "GetTransaction - Receives CAMT005 format and respond back with PAIN002 format"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "TPP-EMTGetRequestForPaymentTransaction",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain Request for Payment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open-api-sit.bmogc.net/open-banking2/commercial-sb/tpp/interac-etransfer/payment-initiation/get-request-for-payment-transaction",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "true-client-ip",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "GetRequestForPaymentTransaction - Receives CAMT005 format and respond back with PAIN002 format"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "TPP-EMTCreditorPaymentActivationRequest",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Request for Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open-api-sit.bmogc.net/open-banking2/commercial-sb/tpp/interac-etransfer/payment-initiation/creditor-payment-activation-request",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "true-client-ip",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "CreditorPaymentActivationRequest which receives PAIN.013 ISO format as input and returns PAIN.014 ISO format as response."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "TPP-EMTRecipientPaymentOptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Payment Option",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open-api-sit.bmogc.net/open-banking2/commercial-sb/tpp/interac-etransfer/payment-initiation/get-emt-recipient-payment-options/get",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "true-client-ip",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "RecipientPaymentOptions - receives ACMT.023 format as request and responds back with ACMT.024 format."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "TPP-EMTCustomerCreditTransferInitiation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open-api-sit.bmogc.net/open-banking2/commercial-sb/tpp/interac-etransfer/payment-initiation/customer-credit-transfer-initiation",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "true-client-ip",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "CustomerCreditTransferInitiation - receives pain001 format as request and responds back in PAIN002 format"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "TPP-EMTCustomerCancelTransferInitiation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Cancellation of payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://open-api-sit.bmogc.net/open-banking2/commercial-sb/tpp/interac-etransfer/payment-execution/customer-payment-cancellation-request",
+            "headers": [
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "true-client-ip",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://api2-sit2.bmogc.net/open-banking2/commercial-sb/oauth20/authorize",
+              "accessTokenUrl": "https://api2-sit2.bmogc.net/open-banking2/commercial-sb/oauth20/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "EMTCustomerCancelTransferInitiation Api which receives CAMT.055 ISO format as input and returns CAMT.029 ISO format as response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

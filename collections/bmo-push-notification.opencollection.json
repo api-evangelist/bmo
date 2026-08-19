@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Push Notifications",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Status Update ",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/paymentStatusUpdate/v1",
+        "headers": [
+          {
+            "name": "x-api-key",
+            "value": ""
+          },
+          {
+            "name": "x-client-id",
+            "value": ""
+          },
+          {
+            "name": "authorization",
+            "value": ""
+          },
+          {
+            "name": "x-request-id",
+            "value": ""
+          },
+          {
+            "name": "x-request-timestamp",
+            "value": ""
+          },
+          {
+            "name": "x-crypto-key",
+            "value": ""
+          },
+          {
+            "name": "x-payment-type",
+            "value": ""
+          },
+          {
+            "name": "x-retry-flag",
+            "value": ""
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Payment Status Update "
+    }
+  ],
+  "bundled": true
+}

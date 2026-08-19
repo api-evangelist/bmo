@@ -1,0 +1,64 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Authorize & Token",
+    "version": "2.0.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Retrieve authorization code",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/oauth20/authorize",
+        "params": [
+          {
+            "name": "client_id",
+            "value": "",
+            "type": "query",
+            "description": "Application client ID, can be provided in formData or using HTTP Basic Authentication"
+          },
+          {
+            "name": "redirect_uri",
+            "value": "",
+            "type": "query",
+            "description": "required only if the redirect_uri parameter was included in the authorization request /oauth2/authorize; their values MUST be identical."
+          },
+          {
+            "name": "state",
+            "value": "",
+            "type": "query",
+            "description": "The state value you create and will verify"
+          },
+          {
+            "name": "scope",
+            "value": "",
+            "type": "query",
+            "description": "the scope value you create and will verify"
+          },
+          {
+            "name": "response_type",
+            "value": "",
+            "type": "query",
+            "description": "the response type"
+          }
+        ]
+      },
+      "docs": "Retrieve an authorization code to be used in exchange for an access token. \n"
+    },
+    {
+      "info": {
+        "name": "Request Access Tokens",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/oauth20/token"
+      },
+      "docs": "Exchange the authorization code retrieved in the previous call  for an access token and a refresh token. \n\n1. Authorization Code<br>Get an access token and refresh token by calling our /token endpoint and passing through the authorization code from the previous call. <br>The access token will only be valid for the scope for which the consent has been provided. It will have an expiration of 24 hours in the sandbox environment and 15 minutes in production. You can then call our APIs by passing thi"
+    }
+  ],
+  "bundled": true
+}

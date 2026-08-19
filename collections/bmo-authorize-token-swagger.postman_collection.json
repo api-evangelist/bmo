@@ -1,0 +1,519 @@
+{
+  "item": [
+    {
+      "id": "2e85bcca-4747-47b2-85ea-ce84cf212965",
+      "name": "Retrieve authorization code",
+      "request": {
+        "name": "Retrieve authorization code",
+        "description": {
+          "content": "Retrieve an authorization code to be used in exchange for an access token. \n",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "oauth20",
+            "authorize"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "client_id",
+              "value": "<string>",
+              "description": "(Required) Application client ID, can be provided in formData or using HTTP Basic Authentication"
+            },
+            {
+              "disabled": false,
+              "key": "redirect_uri",
+              "value": "<string>",
+              "description": "(Required) required only if the redirect_uri parameter was included in the authorization request /oauth2/authorize; their values MUST be identical."
+            },
+            {
+              "disabled": false,
+              "key": "state",
+              "value": "<string>",
+              "description": "(Required) The state value you create and will verify"
+            },
+            {
+              "disabled": false,
+              "key": "scope",
+              "value": "<string>",
+              "description": "(Required) the scope value you create and will verify"
+            },
+            {
+              "disabled": false,
+              "key": "response_type",
+              "value": "<string>",
+              "description": "(Required) the response type"
+            }
+          ],
+          "variable": []
+        },
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "555ab239-9224-4515-a04a-73df2ae58aa8",
+          "name": "This operation returns no content",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "oauth20",
+                "authorize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "client_id",
+                  "value": "<string>"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "<string>"
+                },
+                {
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "key": "scope",
+                  "value": "<string>"
+                },
+                {
+                  "key": "response_type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "9c9772c5-eef9-4972-8a88-338eeb039d20",
+          "name": "This operation returns no content",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "oauth20",
+                "authorize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "client_id",
+                  "value": "<string>"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "<string>"
+                },
+                {
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "key": "scope",
+                  "value": "<string>"
+                },
+                {
+                  "key": "response_type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "9244f5e8-3484-43f5-a4ff-509d03f2d5de",
+      "name": "Request Access Tokens",
+      "request": {
+        "name": "Request Access Tokens",
+        "description": {
+          "content": "Exchange the authorization code retrieved in the previous call  for an access token and a refresh token. \n\n1. Authorization Code<br>Get an access token and refresh token by calling our /token endpoint and passing through the authorization code from the previous call. <br>The access token will only be valid for the scope for which the consent has been provided. It will have an expiration of 24 hours in the sandbox environment and 15 minutes in production. You can then call our APIs by passing this token in the Authorization header.<br>The refresh token can be used to get a new access token if the original one expires.\n\n2. Refresh Token<br>If your access token has expired and your refresh token is still valid, you can exchange your refresh token for a new access token and a new refresh token.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "oauth20",
+            "token"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/x-www-form-urlencoded"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "disabled": false,
+              "key": "grant_type",
+              "value": "<string>",
+              "description": "(Required) Type of grant"
+            },
+            {
+              "disabled": false,
+              "key": "client_id",
+              "value": "<string>",
+              "description": "Application client ID, can be provided in formData or using HTTP Basic Authentication"
+            },
+            {
+              "disabled": false,
+              "key": "client_secret",
+              "value": "<string>",
+              "description": "Application client secret, can be provided in formData or using HTTP Basic Authentication"
+            },
+            {
+              "disabled": false,
+              "key": "code",
+              "value": "<string>",
+              "description": "Authorization code provided by the /oauth2/authorize endpoint"
+            },
+            {
+              "disabled": false,
+              "key": "redirect_uri",
+              "value": "<string>",
+              "description": "required only if the redirect_uri parameter was included in the authorization request /oauth2/authorize; their values MUST be identical."
+            },
+            {
+              "disabled": false,
+              "key": "username",
+              "value": "<string>",
+              "description": "Resource owner username"
+            },
+            {
+              "disabled": false,
+              "key": "password",
+              "value": "<string>",
+              "description": "Resource owner password"
+            },
+            {
+              "disabled": false,
+              "key": "scope",
+              "value": "<string>",
+              "description": "Scope being requested"
+            },
+            {
+              "disabled": false,
+              "key": "refresh_token",
+              "value": "<string>",
+              "description": "The refresh token that the client wants to exchange for a new access token (refresh_token grant_type)"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "id": "6f7c121d-02ee-4220-9184-7df9d7899e21",
+          "name": "json document containing token, etc.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "oauth20",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) Type of grant",
+                    "type": "text/plain"
+                  },
+                  "key": "grant_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Application client ID, can be provided in formData or using HTTP Basic Authentication",
+                    "type": "text/plain"
+                  },
+                  "key": "client_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Application client secret, can be provided in formData or using HTTP Basic Authentication",
+                    "type": "text/plain"
+                  },
+                  "key": "client_secret",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Authorization code provided by the /oauth2/authorize endpoint",
+                    "type": "text/plain"
+                  },
+                  "key": "code",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "required only if the redirect_uri parameter was included in the authorization request /oauth2/authorize; their values MUST be identical.",
+                    "type": "text/plain"
+                  },
+                  "key": "redirect_uri",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Resource owner username",
+                    "type": "text/plain"
+                  },
+                  "key": "username",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Resource owner password",
+                    "type": "text/plain"
+                  },
+                  "key": "password",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Scope being requested",
+                    "type": "text/plain"
+                  },
+                  "key": "scope",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "The refresh token that the client wants to exchange for a new access token (refresh_token grant_type)",
+                    "type": "text/plain"
+                  },
+                  "key": "refresh_token",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"token_type\": \"string\",\n  \"access_token\": \"string\",\n  \"expires_in\": 3044,\n  \"scope\": \"string\",\n  \"refresh_token\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "43c8fd1e-b8e4-431a-8fb2-c04bd0552446",
+          "name": "json document that may contain additional details about the failure",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "oauth20",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "(Required) Type of grant",
+                    "type": "text/plain"
+                  },
+                  "key": "grant_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Application client ID, can be provided in formData or using HTTP Basic Authentication",
+                    "type": "text/plain"
+                  },
+                  "key": "client_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Application client secret, can be provided in formData or using HTTP Basic Authentication",
+                    "type": "text/plain"
+                  },
+                  "key": "client_secret",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Authorization code provided by the /oauth2/authorize endpoint",
+                    "type": "text/plain"
+                  },
+                  "key": "code",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "required only if the redirect_uri parameter was included in the authorization request /oauth2/authorize; their values MUST be identical.",
+                    "type": "text/plain"
+                  },
+                  "key": "redirect_uri",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Resource owner username",
+                    "type": "text/plain"
+                  },
+                  "key": "username",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Resource owner password",
+                    "type": "text/plain"
+                  },
+                  "key": "password",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "Scope being requested",
+                    "type": "text/plain"
+                  },
+                  "key": "scope",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "description": {
+                    "content": "The refresh token that the client wants to exchange for a new access token (refresh_token grant_type)",
+                    "type": "text/plain"
+                  },
+                  "key": "refresh_token",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d949eea8-3635-4b6d-9f75-db84f0515baf",
+    "name": "Authorize & Token",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Authorize is our implementation of the OAuth 2.0 framework. It lets you integrate the latest industry-standard secure authorization methods in your app.",
+      "type": "text/plain"
+    }
+  }
+}

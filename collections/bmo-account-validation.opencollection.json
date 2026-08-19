@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Account Validation (US Only)",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize",
+      "accessTokenUrl": "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AccountValidation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/accounts/validate/get",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify details for up to 100 U.S. accounts per call for validation. Each call will return a risk-level score and confirm if the submitted account owner information matches the Early Warning's national transaction and identities database.      \n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

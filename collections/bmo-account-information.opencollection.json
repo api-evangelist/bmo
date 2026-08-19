@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Account Information",
+    "version": "5.3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account Information",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for Authorized Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/accounts",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated list of account ids"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Please ignore Start time"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Please ignore End time"
+              },
+              {
+                "name": "resultType",
+                "value": "",
+                "type": "query",
+                "description": "Flag to indicate if you want a lightweight array of descriptors or full account details. If set to `lightweight`, should only return the fields associated with the `AccountDescriptor` entity. This field is not required, but defaults to lightweight"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor used by the provider to send the next set of records"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of elements that the consumer wishes to receive - Providers should implement reasonable defaults and maximum"
+              }
+            ]
+          },
+          "docs": "Search for Authorized Accounts"
+        },
+        {
+          "info": {
+            "name": "Get an Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/accounts/:accountId",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Account Identifier"
+              }
+            ]
+          },
+          "docs": "Get an Account"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for Account Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/accounts/:accountId/transactions",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "authorization",
+                "value": ""
+              },
+              {
+                "name": "distinct",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Account Identifier"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time for use in retrieval of transactions"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time for use in retrieval of transactions"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor used by the provider to send the next set of records"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of elements that the consumer wishes to receive - Providers should implement reasonable defaults and maximum"
+              }
+            ]
+          },
+          "docs": "Search for Account Transactions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

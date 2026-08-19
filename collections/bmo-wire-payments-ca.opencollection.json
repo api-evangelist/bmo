@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Wire Payments (Canada)",
+    "version": "1.0.2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SendPayment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Wire Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/tpp/wires/payment-initiation/customer-credit-transfer-initiation",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "true-client-ip",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Receive wire payment request from tpp in PAIN.001 ISO request as input and return acknwoledgement in PAIN.002 ISO as response."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GetPaymentStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain Payment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb/tpp/wires/payment-initiation/get-transaction-status/get",
+            "headers": [
+              {
+                "name": "x-request-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-interaction-id",
+                "value": ""
+              },
+              {
+                "name": "x-app-cat-id",
+                "value": ""
+              },
+              {
+                "name": "x-client-id",
+                "value": ""
+              },
+              {
+                "name": "x-api-key",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-financial-id",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-last-logged-time",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-ip-address",
+                "value": ""
+              },
+              {
+                "name": "x-fapi-customer-user-agent",
+                "value": ""
+              },
+              {
+                "name": "x-csrf-token",
+                "value": ""
+              },
+              {
+                "name": "x-crypto-key",
+                "value": ""
+              },
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "true-client-ip",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "x-api-key",
+              "value": "{{x-api-key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Receive payment status inquiry request in CAMT.005 ISO as input and return payment status report in PAIN.002 ISO as response."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

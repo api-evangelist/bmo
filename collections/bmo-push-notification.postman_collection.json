@@ -1,0 +1,1284 @@
+{
+  "item": [
+    {
+      "id": "99f33160-025b-460a-ba52-20f6196b76cb",
+      "name": "Payment Status Update ",
+      "request": {
+        "name": "Payment Status Update ",
+        "description": {},
+        "url": {
+          "path": [
+            "paymentStatusUpdate",
+            "v1"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "disabled": false,
+            "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+            "key": "x-api-key",
+            "value": "<string>"
+          },
+          {
+            "disabled": false,
+            "description": "(Required) Used to identify the entity making the API call.",
+            "key": "x-client-id",
+            "value": "<string>"
+          },
+          {
+            "disabled": false,
+            "description": "(Required) Unique id used to identify the request.",
+            "key": "x-request-id",
+            "value": "<string>"
+          },
+          {
+            "disabled": false,
+            "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+            "key": "x-request-timestamp",
+            "value": "<string>"
+          },
+          {
+            "disabled": false,
+            "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+            "key": "x-crypto-key",
+            "value": "<string>"
+          },
+          {
+            "disabled": false,
+            "description": "Used to identify the payment type.",
+            "key": "x-payment-type",
+            "value": "<string>"
+          },
+          {
+            "disabled": false,
+            "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+            "key": "x-retry-flag",
+            "value": "<string>"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "7abc68e9-8b46-47e2-8eaa-aa49aad14719",
+          "name": "Success responses",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "paymentStatusUpdate",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Used to identify the entity making the API call.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Authorization Token",
+                "key": "authorization",
+                "value": "string"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique id used to identify the request.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+                "key": "x-request-timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+                "key": "x-crypto-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Used to identify the payment type.",
+                "key": "x-payment-type",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+                "key": "x-retry-flag",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "disabled": false,
+              "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field.",
+              "key": "x-correlation-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Unique id to identify the response.",
+              "key": "x-response-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+              "key": "x-response-timestamp",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": 5107,\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "41722c27-6ec9-4e71-9a11-f2eff6837d38",
+          "name": "Bad Request.Unable to process the payment status update message. The payload is malformed,corrupted or failed to decrypt the message. No Automatic retry for this error code. Support team will investigate the issue and resend the notification.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "paymentStatusUpdate",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Used to identify the entity making the API call.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Authorization Token",
+                "key": "authorization",
+                "value": "string"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique id used to identify the request.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+                "key": "x-request-timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+                "key": "x-crypto-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Used to identify the payment type.",
+                "key": "x-payment-type",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+                "key": "x-retry-flag",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "disabled": false,
+              "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field.",
+              "key": "x-correlation-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Unique id to identify the response.",
+              "key": "x-response-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+              "key": "x-response-timestamp",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": 4589,\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "aca13cb1-48ac-486f-9cea-bb67507d64ed",
+          "name": "Unauthorized.Request is not having valid authorization credentials. For example, OAuth token may be expired. System will retry this request with a default 3 time retry. If the default re-try limit exceeds, then support team will be updated for further investigation.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "paymentStatusUpdate",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Used to identify the entity making the API call.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Authorization Token",
+                "key": "authorization",
+                "value": "string"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique id used to identify the request.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+                "key": "x-request-timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+                "key": "x-crypto-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Used to identify the payment type.",
+                "key": "x-payment-type",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+                "key": "x-retry-flag",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "disabled": false,
+              "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field.",
+              "key": "x-correlation-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Unique id to identify the response.",
+              "key": "x-response-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+              "key": "x-response-timestamp",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": 4589,\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "8820a24d-0c15-49a1-b8af-a74e76e30c48",
+          "name": "Forbidden. Not authorized to call this API. No Retry for this request. Support team will investigate this issue and may resend the notification.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "paymentStatusUpdate",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Used to identify the entity making the API call.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Authorization Token",
+                "key": "authorization",
+                "value": "string"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique id used to identify the request.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+                "key": "x-request-timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+                "key": "x-crypto-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Used to identify the payment type.",
+                "key": "x-payment-type",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+                "key": "x-retry-flag",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "disabled": false,
+              "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field.",
+              "key": "x-correlation-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Unique id to identify the response.",
+              "key": "x-response-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+              "key": "x-response-timestamp",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": 4589,\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "bb6ceaec-b90a-4225-a1ba-545cf703989d",
+          "name": "Unprocessable Entity.Request syntax is valid for not able process the request ,i.e invalid transaction id. No automatic retry for this error code. Support team will investigate and resend this request.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "paymentStatusUpdate",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Used to identify the entity making the API call.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Authorization Token",
+                "key": "authorization",
+                "value": "string"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique id used to identify the request.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+                "key": "x-request-timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+                "key": "x-crypto-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Used to identify the payment type.",
+                "key": "x-payment-type",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+                "key": "x-retry-flag",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+          "code": 422,
+          "header": [
+            {
+              "disabled": false,
+              "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field.",
+              "key": "x-correlation-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Unique id to identify the response.",
+              "key": "x-response-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+              "key": "x-response-timestamp",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": 4589,\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "0b004a50-eb0b-4e9b-8ff1-fd1ddeadd626",
+          "name": "Too many requests. System will retry for this request. The request will be retried 3 times on failure and then subsequent retry will happen for 24 hours at one hour interval.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "paymentStatusUpdate",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Used to identify the entity making the API call.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Authorization Token",
+                "key": "authorization",
+                "value": "string"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique id used to identify the request.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+                "key": "x-request-timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+                "key": "x-crypto-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Used to identify the payment type.",
+                "key": "x-payment-type",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+                "key": "x-retry-flag",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Too Many Requests",
+          "code": 429,
+          "header": [
+            {
+              "disabled": false,
+              "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field.",
+              "key": "x-correlation-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Unique id to identify the response.",
+              "key": "x-response-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+              "key": "x-response-timestamp",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": 4589,\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "ede24a1f-a24a-440e-a2d2-c5e689f17e3c",
+          "name": "Internal Server Error or Unexpected Error. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "paymentStatusUpdate",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Used to identify the entity making the API call.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Authorization Token",
+                "key": "authorization",
+                "value": "string"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique id used to identify the request.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+                "key": "x-request-timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+                "key": "x-crypto-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Used to identify the payment type.",
+                "key": "x-payment-type",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+                "key": "x-retry-flag",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "disabled": false,
+              "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field.",
+              "key": "x-correlation-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Unique id to identify the response.",
+              "key": "x-response-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+              "key": "x-response-timestamp",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": 4589,\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "33f43dd5-3b15-4b36-9ffa-89571f228625",
+          "name": "Service Unavailable. Service is not available due to maintenance. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "paymentStatusUpdate",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Used to identify the entity making the API call.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Authorization Token",
+                "key": "authorization",
+                "value": "string"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique id used to identify the request.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+                "key": "x-request-timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+                "key": "x-crypto-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Used to identify the payment type.",
+                "key": "x-payment-type",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+                "key": "x-retry-flag",
+                "value": "<string>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Service Unavailable",
+          "code": 503,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "b93086fb-2db8-486c-8249-4ace90fd2b3d",
+          "name": "System processing timeout. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "paymentStatusUpdate",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Used to identify the entity making the API call.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Authorization Token",
+                "key": "authorization",
+                "value": "string"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique id used to identify the request.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+                "key": "x-request-timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+                "key": "x-crypto-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Used to identify the payment type.",
+                "key": "x-payment-type",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+                "key": "x-retry-flag",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Gateway Timeout",
+          "code": 504,
+          "header": [
+            {
+              "disabled": false,
+              "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field.",
+              "key": "x-correlation-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Unique id to identify the response.",
+              "key": "x-response-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+              "key": "x-response-timestamp",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": 4589,\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "ced534b7-87c5-44fa-9997-c7ff2bc0c13b",
+          "name": "If the http error code is not part of the listed http error codes of the swagger, it will be considered as default error handling. If the http error code falls under 4XX series, system will not do the retry and for other error codes , system will do a default (3 times) retry and also 24 hrs scheduled retry.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "paymentStatusUpdate",
+                "v1"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "x-api-key",
+                "value": "<API Key>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique identifier to identify API and to manage the API usage.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Used to identify the entity making the API call.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Authorization Token",
+                "key": "authorization",
+                "value": "string"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Unique id used to identify the request.",
+                "key": "x-request-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+                "key": "x-request-timestamp",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.",
+                "key": "x-crypto-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Used to identify the payment type.",
+                "key": "x-payment-type",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.",
+                "key": "x-retry-flag",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"SECURE\": {\n    \"encrypted\": true,\n    \"data\": \"Payment Status information as encrypted PAIN002 message\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [
+            {
+              "disabled": false,
+              "description": "Correlates HTTP requests between a client and server. Populate the request id as part of this field.",
+              "key": "x-correlation-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Unique id to identify the response.",
+              "key": "x-response-id",
+              "value": "string"
+            },
+            {
+              "disabled": false,
+              "description": "Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002",
+              "key": "x-response-timestamp",
+              "value": "string"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"status\": 4589,\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aeffdbfa-2204-43aa-b07f-6b8a09f8a05e",
+    "name": "Push Notifications",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "This document summarize the Payment Service - Push Notification API interface specification. The intent of this API is to receive the payment status updates.  The payment status will be sent in JSON format adhering to the ISO pain002 format. Customers must subscribe to the Push Notification as part of the Payment API onboarding process. Customer can subscribe to the pre-defined list of payment status for which the notifications need to be enabled during onboarding process. During payment processing, the payment status changes will be updated by calling this API and the notification wil be send only for the subscribed payment status changes. <br>\nSystem will retry the payment delivery based on the http response code of this API. System will do retry delivering the payments for 24 hours with one hour interval. Refer the \"Response\" section of this swagger for more details. \n## Non-Functional Requirements:\n     Performance:\n      - 95% of request should respond with in 3 seconds\n      - Maximum acceptable Latency: 5 seconds\n     Throughput: \n      - 50 requests/second\n     Availability\n      - 99.95 % uptime SLA\n     Security:\n      - All endpoints must support https and TLS 1.2+\n      - In addition to TLS , payload encryption as per defined in the x-crypto-key header element\n      - Authorization is enabled by OAuth 2.0        \n\nContact Support:\n Email: paymentAPIPNSupport@bmo.com",
+      "type": "text/plain"
+    }
+  }
+}

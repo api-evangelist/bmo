@@ -1,0 +1,2283 @@
+{
+  "item": [
+    {
+      "id": "7a3ab4d9-8a59-4f80-8f38-4c7b655348e1",
+      "name": "AccountTransactionImages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d9464ddd-e872-4b66-8822-ec7bbc7dd982",
+          "name": "Search for Accounts",
+          "request": {
+            "name": "Search for Accounts",
+            "description": {
+              "content": "Get a list of all your accounts as a starting point for more specific requests. This call will return account IDs that are set up for the \"Cheque Imaging\" (CA) or the \"Check Imaging\" (U.S.) service. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "transaction-images-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                "key": "x-fapi-customer-last-logged-time",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                "key": "x-fapi-customer-ip-address",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "key": "x-fapi-interaction-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Client Id generated during Third Party Provider application registration.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                "key": "x-fapi-customer-user-agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e6ebae77-5f5a-4ea1-a0cf-ddf0c17d8365",
+              "name": "A valid success response and headers to be returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transaction-images-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"page\": {\n    \"nextOffset\": \"2\",\n    \"prevOffset\": \"2\",\n    \"totalElements\": 3\n  },\n  \"links\": {\n    \"next\": {\n      \"href\": \"/example/accounts/12345\",\n      \"action\": \"PATCH\",\n      \"types\": [\n        \"application/json\",\n        \"application/json\"\n      ]\n    },\n    \"prev\": {\n      \"href\": \"/example/accounts/12345\",\n      \"action\": \"PATCH\",\n      \"types\": [\n        \"application/json\",\n        \"application/json\"\n      ]\n    }\n  },\n  \"accounts\": [\n    {\n      \"depositAccount\": {\n        \"balanceAsOf\": \"string\",\n        \"currentBalance\": 4219.014134955163,\n        \"openingDayBalance\": 8248.862644375586,\n        \"availableBalance\": 3669.6597416134045,\n        \"annualPercentageYield\": 1291.0540682624771,\n        \"interestYtd\": 4673.495812048574,\n        \"term\": 9389,\n        \"maturityDate\": \"string\",\n        \"transactions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"loanAccount\": {\n        \"balanceAsOf\": \"string\",\n        \"principalBalance\": 8162.848497556951,\n        \"escrowBalance\": 8697.732339491267,\n        \"originalPrincipal\": 2487.7625134680015,\n        \"originatingDate\": \"string\",\n        \"loanTerm\": 9945,\n        \"totalNumberOfPayments\": 9538,\n        \"nextPaymentAmount\": 152.19023833862423,\n        \"nextPaymentDate\": \"string\",\n        \"paymentFrequency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"compoundingPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"payOffAmount\": 8392.019264243454,\n        \"lastPaymentAmount\": 8748.562356372895,\n        \"lastPaymentDate\": \"string\",\n        \"maturityDate\": \"string\",\n        \"interestPaidYearToDate\": 5677.171156791222,\n        \"transactions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"locAccount\": {\n        \"balanceAsOf\": \"string\",\n        \"creditLine\": 8723.297004449581,\n        \"availableCredit\": 2297.2865324460536,\n        \"nextPaymentAmount\": 6144.693482285009,\n        \"nextPaymentDate\": \"string\",\n        \"principalBalance\": 7087.998403181279,\n        \"currentBalance\": 8603.994847351765,\n        \"minimumPaymentAmount\": 1731.3062758112685,\n        \"lastPaymentAmount\": 6447.551734963644,\n        \"lastPaymentDate\": \"string\",\n        \"pastDueAmount\": 4692.331868233772,\n        \"lastStmtBalance\": 9645.147343310857,\n        \"lastStmtDate\": \"string\",\n        \"pointsAccrued\": 4321.301692386384,\n        \"currentRewardsBalance\": 566.2544930501178,\n        \"pointsRedeemed\": 1106.3870357508843,\n        \"purchasesApr\": 5499.221005739946,\n        \"advancesApr\": 202.3220573996465,\n        \"cashAdvanceLimit\": 2660.0050338812785,\n        \"availableCash\": 5168.59770967675,\n        \"financeCharges\": 7782.875359548735,\n        \"transactions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"investmentAccount\": {\n        \"balanceAsOf\": \"string\",\n        \"allowedCheckWriting\": true,\n        \"allowedOptionTrade\": false,\n        \"currentValue\": 9151.982505041451,\n        \"holdings\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"openOrders\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"contribution\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"vesting\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"investmentLoans\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"availableCashBalance\": 1462.3162589142623,\n        \"margin\": true,\n        \"marginBalance\": 1619.5366991343874,\n        \"shortBalance\": 3194.686242692357,\n        \"rolloverAmount\": 6367.927579022234,\n        \"employerName\": \"string\",\n        \"brokerId\": \"string\",\n        \"planId\": \"string\",\n        \"calendaryearFor401K\": \"string\",\n        \"balanceList\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"dailyChange\": 375.03434222820766,\n        \"percentageChange\": 5467.489830873711,\n        \"transactions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"pensionSource\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"insuranceAccount\": {\n        \"accountCategory\": \"LOC_ACCOUNT\",\n        \"policyPremium\": 5044.545436031114,\n        \"policyPremiumTerm\": \"MONTHLY\",\n        \"policyStartDate\": \"string\",\n        \"policyEndDate\": \"string\",\n        \"policyCoverageAmount\": 4491.282421699505,\n        \"transactions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"bills\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"annuityAccount\": {\n        \"annuityProductType\": \"SHARES\",\n        \"annuityValueBasis\": \"FIXED\",\n        \"paymentAmount\": 2917.331832812826,\n        \"paymentFrequency\": \"SEMIANNUALLY\",\n        \"paymentStartDate\": \"string\",\n        \"paymentEndDate\": \"string\",\n        \"totalPaymentCount\": 3638.3228288640867,\n        \"netPresentValue\": 7534.495772844712,\n        \"annualIncrease\": 2860.782437062154,\n        \"annualIncreaseType\": \"DOLLAR\",\n        \"periodCertainGuarantee\": \"30-YEAR\"\n      }\n    },\n    {\n      \"depositAccount\": {\n        \"balanceAsOf\": \"string\",\n        \"currentBalance\": 1276.8397996544322,\n        \"openingDayBalance\": 7775.199638476785,\n        \"availableBalance\": 7048.965420354737,\n        \"annualPercentageYield\": 7842.816597662146,\n        \"interestYtd\": 5674.596665697619,\n        \"term\": 8586,\n        \"maturityDate\": \"string\",\n        \"transactions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"loanAccount\": {\n        \"balanceAsOf\": \"string\",\n        \"principalBalance\": 7672.233928709768,\n        \"escrowBalance\": 2114.6713301748,\n        \"originalPrincipal\": 2576.435563011873,\n        \"originatingDate\": \"string\",\n        \"loanTerm\": 8848,\n        \"totalNumberOfPayments\": 2448,\n        \"nextPaymentAmount\": 2751.374863446635,\n        \"nextPaymentDate\": \"string\",\n        \"paymentFrequency\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"compoundingPeriod\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"payOffAmount\": 7269.948485481863,\n        \"lastPaymentAmount\": 7048.352854241142,\n        \"lastPaymentDate\": \"string\",\n        \"maturityDate\": \"string\",\n        \"interestPaidYearToDate\": 2550.921410137946,\n        \"transactions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"locAccount\": {\n        \"balanceAsOf\": \"string\",\n        \"creditLine\": 2315.688261019574,\n        \"availableCredit\": 688.2732779480194,\n        \"nextPaymentAmount\": 6824.860783135796,\n        \"nextPaymentDate\": \"string\",\n        \"principalBalance\": 9959.26968405861,\n        \"currentBalance\": 621.3866179746475,\n        \"minimumPaymentAmount\": 8822.513369939536,\n        \"lastPaymentAmount\": 5549.352978561123,\n        \"lastPaymentDate\": \"string\",\n        \"pastDueAmount\": 9397.255448932792,\n        \"lastStmtBalance\": 6442.076231100371,\n        \"lastStmtDate\": \"string\",\n        \"pointsAccrued\": 7899.798192836818,\n        \"currentRewardsBalance\": 4363.677433808072,\n        \"pointsRedeemed\": 9713.02807170055,\n        \"purchasesApr\": 2420.395497390915,\n        \"advancesApr\": 7376.523744716975,\n        \"cashAdvanceLimit\": 6797.486414371256,\n        \"availableCash\": 7933.116834695969,\n        \"financeCharges\": 5633.010041587053,\n        \"transactions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"investmentAccount\": {\n        \"balanceAsOf\": \"string\",\n        \"allowedCheckWriting\": true,\n        \"allowedOptionTrade\": false,\n        \"currentValue\": 8139.487379330493,\n        \"holdings\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"openOrders\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"contribution\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"vesting\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"investmentLoans\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"availableCashBalance\": 5350.444182356987,\n        \"margin\": true,\n        \"marginBalance\": 4239.641487116337,\n        \"shortBalance\": 9799.175493882283,\n        \"rolloverAmount\": 3290.834802122754,\n        \"employerName\": \"string\",\n        \"brokerId\": \"string\",\n        \"planId\": \"string\",\n        \"calendaryearFor401K\": \"string\",\n        \"balanceList\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"dailyChange\": 3301.618236271129,\n        \"percentageChange\": 2923.5039834539134,\n        \"transactions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"pensionSource\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"insuranceAccount\": {\n        \"accountCategory\": \"LOAN_ACCOUNT\",\n        \"policyPremium\": 5740.22027741439,\n        \"policyPremiumTerm\": \"MONTHLY\",\n        \"policyStartDate\": \"string\",\n        \"policyEndDate\": \"string\",\n        \"policyCoverageAmount\": 7218.6786342587675,\n        \"transactions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"bills\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"annuityAccount\": {\n        \"annuityProductType\": \"SHARES\",\n        \"annuityValueBasis\": \"FIXED\",\n        \"paymentAmount\": 8038.275530905563,\n        \"paymentFrequency\": \"ANNUALLY\",\n        \"paymentStartDate\": \"string\",\n        \"paymentEndDate\": \"string\",\n        \"totalPaymentCount\": 8673.911639106902,\n        \"netPresentValue\": 8988.633071186485,\n        \"annualIncrease\": 2255.0397621131624,\n        \"annualIncreaseType\": \"PERCENT\",\n        \"periodCertainGuarantee\": \"30-YEAR\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "873b9325-ad50-42dc-aa40-3c1591d6d138",
+              "name": "Bad request fault to be returned in case of validation issues.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transaction-images-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "661cdf19-7c98-4498-9021-aa690037e2c1",
+              "name": "404 to be returned when service not available or resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transaction-images-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa4d54b6-4d08-46c2-9049-c915fce89afa",
+              "name": "500 to be returned for server side errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transaction-images-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8f892c3-3643-43cc-8e9c-a7807bfb3057",
+              "name": "Server error to be returned when service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transaction-images-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50a899ea-aa8a-4b0d-8474-7fcfd9066079",
+              "name": "Error to be returned when downstream systems takes longer than specified time to respond.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "transaction-images-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee0e339c-2286-4d52-9d13-660b398f7be9",
+          "name": "Search for Images",
+          "request": {
+            "name": "Search for Images",
+            "description": {
+              "content": "Get a list of available images that match your search. You can search by account number, date range, amount and item type. You can get up to 1000 results at once. Then pick the images you want to download in TIFF format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":accountId",
+                "transaction-images",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) a pseudonymized representation of the account number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                "key": "x-fapi-customer-last-logged-time",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                "key": "x-fapi-customer-ip-address",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "key": "x-fapi-interaction-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Client Id generated during Third Party Provider application registration.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                "key": "x-fapi-customer-user-agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"itemIndicator\": \"<string>\",\n  \"dateRange\": {\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\"\n  },\n  \"itemSequenceNumber\": \"<string>\",\n  \"itemAmount\": \"<string>\",\n  \"routingTransitNumber\": \"<string>\",\n  \"depositedItemAccountNumber\": \"<string>\",\n  \"checkNumber\": \"<string>\",\n  \"serialNumber\": \"<string>\",\n  \"itemAmountRange\": {\n    \"lowAmount\": \"<string>\",\n    \"highAmount\": \"<string>\"\n  },\n  \"itemSequenceNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"checkNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"serialNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b18163f7-6a7f-4b2b-8f71-d7df13f3c5ed",
+              "name": "A valid success response and headers to be returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"itemIndicator\": \"<string>\",\n  \"dateRange\": {\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\"\n  },\n  \"itemSequenceNumber\": \"<string>\",\n  \"itemAmount\": \"<string>\",\n  \"routingTransitNumber\": \"<string>\",\n  \"depositedItemAccountNumber\": \"<string>\",\n  \"checkNumber\": \"<string>\",\n  \"serialNumber\": \"<string>\",\n  \"itemAmountRange\": {\n    \"lowAmount\": \"<string>\",\n    \"highAmount\": \"<string>\"\n  },\n  \"itemSequenceNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"checkNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"serialNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"200\",\n    \"status\": \"SUCCESS\"\n  },\n  \"transactionImages\": {\n    \"imagesMetadata\": [\n      {\n        \"itemSequenceNumber\": \"string\",\n        \"checkNumber\": \"string\",\n        \"serialNumber\": \"string\",\n        \"itemAmount\": \"string\",\n        \"itemDate\": \"string\",\n        \"routingTransitNumber\": \"string\",\n        \"itemIndicator\": \"string\",\n        \"paidDate\": \"string\",\n        \"depositedDate\": \"string\",\n        \"processedDate\": \"string\",\n        \"imageId\": \"string\",\n        \"depositedItemAccountNumber\": \"string\",\n        \"imageSiteId\": \"string\"\n      },\n      {\n        \"itemSequenceNumber\": \"string\",\n        \"checkNumber\": \"string\",\n        \"serialNumber\": \"string\",\n        \"itemAmount\": \"string\",\n        \"itemDate\": \"string\",\n        \"routingTransitNumber\": \"string\",\n        \"itemIndicator\": \"string\",\n        \"paidDate\": \"string\",\n        \"depositedDate\": \"string\",\n        \"processedDate\": \"string\",\n        \"imageId\": \"string\",\n        \"depositedItemAccountNumber\": \"string\",\n        \"imageSiteId\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8eb06b5-b0f3-4bf8-bf90-508233732edc",
+              "name": "Bad request fault to be returned in case of validation issues.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"itemIndicator\": \"<string>\",\n  \"dateRange\": {\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\"\n  },\n  \"itemSequenceNumber\": \"<string>\",\n  \"itemAmount\": \"<string>\",\n  \"routingTransitNumber\": \"<string>\",\n  \"depositedItemAccountNumber\": \"<string>\",\n  \"checkNumber\": \"<string>\",\n  \"serialNumber\": \"<string>\",\n  \"itemAmountRange\": {\n    \"lowAmount\": \"<string>\",\n    \"highAmount\": \"<string>\"\n  },\n  \"itemSequenceNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"checkNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"serialNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "716942e2-8c77-42e1-a0a0-fc49faf4df7f",
+              "name": "404 to be returned when service not available or resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"itemIndicator\": \"<string>\",\n  \"dateRange\": {\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\"\n  },\n  \"itemSequenceNumber\": \"<string>\",\n  \"itemAmount\": \"<string>\",\n  \"routingTransitNumber\": \"<string>\",\n  \"depositedItemAccountNumber\": \"<string>\",\n  \"checkNumber\": \"<string>\",\n  \"serialNumber\": \"<string>\",\n  \"itemAmountRange\": {\n    \"lowAmount\": \"<string>\",\n    \"highAmount\": \"<string>\"\n  },\n  \"itemSequenceNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"checkNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"serialNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8aa0b0e8-cd5e-45d6-b2cb-0071137bf223",
+              "name": "500 to be returned for server side errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"itemIndicator\": \"<string>\",\n  \"dateRange\": {\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\"\n  },\n  \"itemSequenceNumber\": \"<string>\",\n  \"itemAmount\": \"<string>\",\n  \"routingTransitNumber\": \"<string>\",\n  \"depositedItemAccountNumber\": \"<string>\",\n  \"checkNumber\": \"<string>\",\n  \"serialNumber\": \"<string>\",\n  \"itemAmountRange\": {\n    \"lowAmount\": \"<string>\",\n    \"highAmount\": \"<string>\"\n  },\n  \"itemSequenceNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"checkNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"serialNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "955bbee6-bec9-4425-bdfc-c5f1d91a0906",
+              "name": "Server error to be returned when service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"itemIndicator\": \"<string>\",\n  \"dateRange\": {\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\"\n  },\n  \"itemSequenceNumber\": \"<string>\",\n  \"itemAmount\": \"<string>\",\n  \"routingTransitNumber\": \"<string>\",\n  \"depositedItemAccountNumber\": \"<string>\",\n  \"checkNumber\": \"<string>\",\n  \"serialNumber\": \"<string>\",\n  \"itemAmountRange\": {\n    \"lowAmount\": \"<string>\",\n    \"highAmount\": \"<string>\"\n  },\n  \"itemSequenceNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"checkNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"serialNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b00e764-7c5e-4b98-ae94-3fe68b09c2cc",
+              "name": "Error to be returned when downstream systems takes longer than specified time to respond.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"itemIndicator\": \"<string>\",\n  \"dateRange\": {\n    \"startDate\": \"<string>\",\n    \"endDate\": \"<string>\"\n  },\n  \"itemSequenceNumber\": \"<string>\",\n  \"itemAmount\": \"<string>\",\n  \"routingTransitNumber\": \"<string>\",\n  \"depositedItemAccountNumber\": \"<string>\",\n  \"checkNumber\": \"<string>\",\n  \"serialNumber\": \"<string>\",\n  \"itemAmountRange\": {\n    \"lowAmount\": \"<string>\",\n    \"highAmount\": \"<string>\"\n  },\n  \"itemSequenceNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"checkNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  },\n  \"serialNumberRange\": {\n    \"lowNumber\": \"<string>\",\n    \"highNumber\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eaca326d-bb24-4d9d-8c66-3e9eccc9bc56",
+          "name": "Retrieve Images",
+          "request": {
+            "name": "Retrieve Images",
+            "description": {
+              "content": "Send us the index number of the cheque you want to retrieve. As per FDX standard, each API call can retrieve one cheque which includes front and back images in TIFF format. ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":accountId",
+                "transaction-images",
+                ":imageId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) a pseudonymized representation of the account number"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "imageId",
+                  "description": "(Required) an identifier used to retrieve a specific transaction image"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                "key": "x-fapi-customer-last-logged-time",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                "key": "x-fapi-customer-ip-address",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                "key": "x-fapi-interaction-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Client Id generated during Third Party Provider application registration.",
+                "key": "x-client-id",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                "key": "x-fapi-customer-user-agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a229cce7-cd54-441a-8e51-b97a123f6d55",
+              "name": "A valid success response and headers to be returned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    ":imageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "imageId",
+                      "description": "(Required) an identifier used to retrieve a specific transaction image"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"code\": \"200\",\n    \"status\": \"SUCCESS\"\n  },\n  \"imagesMetadata\": {\n    \"imageId\": \"string\",\n    \"imageSiteId\": \"string\",\n    \"itemSequenceNumber\": \"string\"\n  },\n  \"transactionImages\": {\n    \"images\": [\n      {\n        \"cid\": \"string\",\n        \"imageSegment\": \"string\",\n        \"imageFormat\": 9529\n      },\n      {\n        \"cid\": \"string\",\n        \"imageSegment\": \"string\",\n        \"imageFormat\": 4220\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e5a9c2f-6a3f-4a3d-a241-f79e18fcd212",
+              "name": "Bad request fault to be returned in case of validation issues.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    ":imageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "imageId",
+                      "description": "(Required) an identifier used to retrieve a specific transaction image"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8d8bec7-3a6a-4f56-b4f4-adeef01bf9a0",
+              "name": "404 to be returned when service not available or resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    ":imageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "imageId",
+                      "description": "(Required) an identifier used to retrieve a specific transaction image"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af691816-f612-4c15-b419-1ab1a930995b",
+              "name": "500 to be returned for server side errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    ":imageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "imageId",
+                      "description": "(Required) an identifier used to retrieve a specific transaction image"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c84e8df-0fb3-47a2-9795-a28578ee24b7",
+              "name": "Server error to be returned when service is temporarily unavailable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    ":imageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "imageId",
+                      "description": "(Required) an identifier used to retrieve a specific transaction image"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d02c43b9-03ce-41c8-8482-2c263ab9b8a7",
+              "name": "Error to be returned when downstream systems takes longer than specified time to respond.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":accountId",
+                    "transaction-images",
+                    ":imageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) a pseudonymized representation of the account number"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "imageId",
+                      "description": "(Required) an identifier used to retrieve a specific transaction image"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The time when the Payment Services User last logged in with the Third Party Provider",
+                    "key": "x-fapi-customer-last-logged-time",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The PSU's IP address if the PSU is currently logged in with the TPP.",
+                    "key": "x-fapi-customer-ip-address",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A Unique key to call service. Used as Application Catalogue Id.",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                    "key": "x-fapi-interaction-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Client Id generated during Third Party Provider application registration.",
+                    "key": "x-client-id",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.",
+                    "key": "x-fapi-customer-user-agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "An Authorization Token as per https://tools.ietf.org/html/rfc6750",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.",
+                  "key": "x-request-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "{\n  \"type\": \"about:blank\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "ItemImage"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dd6764ca-bad7-49ad-a2ed-1bbfe74d58da",
+    "name": "Image Retrieval",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Image Retrieval API lets you retrieve the latest images of paid and deposited cheques as well as other deposit items for the U.S. and Canada. It involves calling a summary of your accounts, which will return account IDs you can then use to search for and retrieve available images.",
+      "type": "text/plain"
+    }
+  }
+}

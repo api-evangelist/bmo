@@ -1,0 +1,837 @@
+{
+  "item": [
+    {
+      "id": "25e69421-d8a1-4693-8b15-f70f121e0885",
+      "name": "AccountValidation",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "59c9606e-0688-432a-a597-e9d8ad5637e6",
+          "name": "Validate accounts",
+          "request": {
+            "name": "Validate accounts",
+            "description": {
+              "content": "Verify details for up to 100 U.S. accounts per call for validation. Each call will return a risk-level score and confirm if the submitted account owner information matches the Early Warning's national transaction and identities database.      \n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                "validate",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) client api key",
+                "key": "x-api-key",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                "key": "x-crypto-key",
+                "value": "<byte>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be9330e7-c870-4186-b81a-db47c758ceac",
+              "name": "Everything worked as expected, array of results returned",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) authentication token",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) client api key",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                    "key": "x-crypto-key",
+                    "value": "<byte>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "request header to inform server of an interaction tracing identifier.",
+                  "key": "x-fapi-interaction-id",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "base64 encoded crypto key to decrypt sensitive information",
+                  "key": "x-crypto-key",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"statusValidationResult\": {\n        \"fieldName\": \"string\",\n        \"status\": \"string\",\n        \"description\": \"string\"\n      },\n      \"ownershipValidationResult\": {\n        \"nameMatch\": \"C\",\n        \"firstNameMatch\": \"U\",\n        \"middleNameMatch\": \"U\",\n        \"lastNameMatch\": \"Y\",\n        \"businessNameMatch\": \"U\",\n        \"nameSuffixMatch\": \"U\",\n        \"namePrfixMatch\": \"U\",\n        \"addressMatch\": \"N\",\n        \"cityMatch\": \"U\",\n        \"stateMatch\": \"U\",\n        \"postalCodeMatch\": \"Y\",\n        \"homePhoneMatch\": \"U\",\n        \"workPhoneMatch\": \"N\",\n        \"taxIdMatch\": \"C\",\n        \"dateOfBirthMatch\": \"C\",\n        \"governmentIdTypeMatch\": \"N\",\n        \"governmentIdMatch\": \"N\",\n        \"governmentIdStateMatch\": \"Y\",\n        \"overallMatchScore\": 91.35234567765697\n      },\n      \"routingTransitNumber\": \"string\",\n      \"accountNumber\": \"string\",\n      \"accountRisk\": \"MEDIUM\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36cfbe23-0082-4ee6-a01c-5075205b989a",
+              "name": "Invalid request received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) authentication token",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) client api key",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                    "key": "x-crypto-key",
+                    "value": "<byte>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"2b5f0fb2-730b-11e8-adc0-fa7ae01bbebc\",\n  \"message\": \"Invalid request parameters.\",\n  \"details\": {\n    \"errors\": [\n      {\n        \"accountNumber\": \"base64 encrypted account numberAAA\",\n        \"errors\": [\n          {\n            \"Message\": \"<Field Name> is missing\",\n            \"Path\": \"<Field Name>\",\n            \"Url\": \"<url to the api reference >\"\n          },\n          {\n            \"Message\": \"Invalid enum value\",\n            \"Path\": \"<Field Name>\",\n            \"Url\": \"<url to the api reference >\"\n          }\n        ]\n      },\n      {\n        \"accountNumber\": \"base64 encrypted account numberBBB\",\n        \"errors\": [\n          {\n            \"Message\": \"<Field Name> is missing\",\n            \"Path\": \"<Field Name>\",\n            \"Url\": \"<url to the api reference >\"\n          },\n          {\n            \"Message\": \"Invalid enum value\",\n            \"Path\": \"<Field Name>\",\n            \"Url\": \"<url to the api reference >\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "287225e1-0656-43e2-b84b-3057c7f69343",
+              "name": "Cannot find valid subscription for the incoming API request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) authentication token",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) client api key",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                    "key": "x-crypto-key",
+                    "value": "<byte>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": \"string\",\n  \"httpMessage\": \"string\",\n  \"moreInformation\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ef94495-2e86-44eb-b227-83148812c16e",
+              "name": "Not registered to plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) authentication token",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) client api key",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                    "key": "x-crypto-key",
+                    "value": "<byte>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"httpCode\": \"string\",\n  \"httpMessage\": \"string\",\n  \"moreInformation\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6580632b-15c0-4b19-b9ba-0d8edcce5da9",
+              "name": "The requested resource could not be found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) authentication token",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) client api key",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                    "key": "x-crypto-key",
+                    "value": "<byte>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03456a94-e03d-414d-ba77-7f1628258c38",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) authentication token",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) client api key",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                    "key": "x-crypto-key",
+                    "value": "<byte>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "911372c2-cb27-4f49-9f8f-c3077c8cb309",
+              "name": "Too many requests hit the API in too short of a period",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) authentication token",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) client api key",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                    "key": "x-crypto-key",
+                    "value": "<byte>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe9ab3ce-ee3d-4d5b-8afa-297387f87710",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) authentication token",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) client api key",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                    "key": "x-crypto-key",
+                    "value": "<byte>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6abd5712-8823-451e-a2e1-1470c56bf4ae",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) authentication token",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) client api key",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                    "key": "x-crypto-key",
+                    "value": "<byte>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0278d288-4abe-4a16-b931-7c5234f177e0",
+              "name": "Integration or Backend Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    "validate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) authentication token",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) client api key",
+                    "key": "x-api-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) base64 encoded crypto key to decrypt sensitive information",
+                    "key": "x-crypto-key",
+                    "value": "<byte>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accounts\": [\n    {\n      \"routingTransitNumber\": \"<string>\",\n      \"accountNumber\": \"<byte>\",\n      \"amount\": \"<float>\",\n      \"checkNumber\": \"<string>\",\n      \"processControlTranCode\": \"<string>\",\n      \"owner\": {\n        \"name\": {\n          \"first\": \"<string>\",\n          \"last\": \"<string>\",\n          \"middle\": \"<string>\",\n          \"prefix\": \"<string>\",\n          \"suffix\": \"<string>\"\n        },\n        \"businessName\": \"<string>\",\n        \"address\": {\n          \"line1\": \"<string>\",\n          \"line2\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"postalCode\": \"<string>\"\n        },\n        \"homePhone\": \"<int32>\",\n        \"workPhone\": \"<int32>\",\n        \"taxId\": \"<byte>\",\n        \"dateOfBirth\": \"<byte>\",\n        \"additionalIdentification\": {\n          \"placeOfIssuance\": \"<string>\",\n          \"governmentId\": \"<byte>\",\n          \"governmentIdType\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"validateOwnership\": \"<boolean>\",\n  \"validateStatus\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://sandbox-open-api.bmo.com/open-banking/commercial-sb",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "AccountValidation"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "14757f58-a6df-4c27-8899-45d52c294083",
+    "name": "Account Validation (US Only)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Account Validation API lets you verify U.S. account ownership and risk-level before setting up a transfer. You’ll start by requesting an encryption key, which you’ll then use for your account validation request.Currently, this API only supports U.S. savings and deposit accounts.\n\nContact Support:\n Name: SmartCore-CG\n Email: HUBCGSRapplicationsupport@bmo.com",
+      "type": "text/plain"
+    }
+  }
+}
