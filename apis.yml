@@ -29,6 +29,15 @@ deliveryModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
+- Financial-Services
+- Banking
+- United States
+- Open Finance
+- Payments
+- Commercial Banking
+- Treasury Management
+- Account Validation
+tags_raw:
 - Financial Services
 - Banking
 - United States
@@ -68,6 +77,10 @@ apis:
   humanURL: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information
   baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
   tags:
+  - Account Information
+  - Balances
+  - Transaction
+  tags_raw:
   - Account Information
   - Balances
   - Transactions
@@ -194,6 +207,8 @@ apis:
   baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
   tags:
   - Authentication
+  tags_raw:
+  - Authentication
   - OAuth 2.0
   properties:
   - type: OpenAPI
@@ -227,6 +242,10 @@ apis:
   humanURL: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
   baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
   tags:
+  - Notification
+  - Webhook
+  - Payments
+  tags_raw:
   - Notifications
   - Webhooks
   - Payments
