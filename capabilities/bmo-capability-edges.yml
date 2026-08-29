@@ -1,0 +1,121 @@
+slug: bmo
+provider: BMO
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Send Payment Credit
+  spec_file: bmo-send-payment-credit-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.92
+  evidence: POST /tpp/eft/payment-initiation/customer-credit-transfer-initiation "Send Payment Credit"
+  reason: Initiates customer credit transfers (EFT) — payment instruction capture and initiation.
+- tag: Send Payment Debit
+  spec_file: bmo-send-payment-debit-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.9
+  evidence: POST /tpp/eft/payment-initiation/customer-direct-debit-initiation "Send Payment Debit"
+  reason: Initiates customer direct debit payment instructions — payment initiation capability.
+- tag: SendPayment
+  spec_file: bmo-sendpayment-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.9
+  evidence: POST /tpp/wires/payment-initiation/customer-credit-transfer-initiation "Send Wire Payment"
+  reason: Wire payment initiation via customer credit transfer initiation — payment instruction capture
+    and initiation.
+- tag: PaymentInitiation
+  spec_file: bmo-paymentinitiation-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.88
+  evidence: POST /tpp/ach/payment-initiation/customer-credit-transfer-initiation 'Send Payment Credit';
+    'exposes ... sendPayment - ISO PAIN 001(Credit) and PAIN 008 (Debit)'
+  reason: Bank ACH API capturing and routing customer credit transfer and direct debit initiation instructions
+    (ISO 20022 pain messages) — payment instruction capture and initiation.
+- tag: SendFedwireDrawdownPayment
+  spec_file: bmo-sendfedwiredrawdownpayment-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.85
+  evidence: '"WIRES APIs are used by customers/partners to send wire payment, send fedwire drawdown payment";
+    TppCreditorPaymentActivationRequest'
+  reason: Fedwire drawdown / creditor payment activation request is capture and authorisation of a payment
+    instruction on the wire rail.
+- tag: PaymentStatus
+  spec_file: bmo-paymentstatus-api-openapi.yml
+  capability_id: BC-1340.20
+  capability_id_l1: BC-1340
+  capability_name: Payment Processing Management
+  confidence: 0.8
+  evidence: '"ACHPaymentAPI will act as a API routing the ACH payment requests"; operation "Obtain Payment
+    Status" via /tpp/ach/payment-initiation/get-transaction-status'
+  reason: ACH payment status enquiry (CAMT005) on a bank's payment rail — payment processing/tracking
+    within Payments & Card Management, not a technical status endpoint of an unrelated domain.
+- tag: PaymentStatusUpdate
+  spec_file: bmo-paymentstatusupdate-api-openapi.yml
+  capability_id: BC-1340.20
+  capability_id_l1: BC-1340
+  capability_name: Payment Processing Management
+  confidence: 0.8
+  evidence: '"The intent of this API is to receive the payment status updates ... adhering to the ISO
+    pain002 format"'
+  reason: Push notification of payment status changes in ISO 20022 pain.002 form is payment processing/lifecycle
+    status handling for bank payments.
+- tag: Account Information
+  spec_file: bmo-account-information-api-openapi.yml
+  capability_id: BC-1300
+  capability_id_l1: BC-1300
+  capability_name: Banking Customer Management
+  confidence: 0.7
+  evidence: '''Retrieve real-time account and transaction information for all your authorized BMO accounts''
+    — GET /accounts ''Search for Authorized Accounts'''
+  reason: Bank API exposing customer account information (schemas DepositAccount, LoanAccount, InvestmentAccount,
+    LocAccount) to authorised consumers — banking customer information/servicing and channel access. Spans
+    several account types so no single L2 is clearly named; L1 only.
+- tag: TPP-EMTCreditorPaymentActivationRequest
+  spec_file: bmo-tpp-emtcreditorpaymentactivationrequest-api-openapi.yml
+  capability_id: BC-1340.50
+  capability_id_l1: BC-1340
+  capability_name: Real-Time Payment Management
+  confidence: 0.7
+  evidence: POST /tpp/interac-etransfer/payment-initiation/creditor-payment-activation-request "Send Request
+    for Payment"
+  reason: Request-for-payment on the Interac e-Transfer instant rail; clearly payments, sub-capability
+    read as real-time/instant payment rail management though payment initiation also fits.
+- tag: TPP-EMTCustomerCreditTransferInitiation
+  spec_file: bmo-tpp-emtcustomercredittransferinitiation-api-openapi.yml
+  capability_id: BC-1340.50
+  capability_id_l1: BC-1340
+  capability_name: Real-Time Payment Management
+  confidence: 0.7
+  evidence: POST /tpp/interac-etransfer/payment-initiation/customer-credit-transfer-initiation "Send Payment"
+  reason: Credit transfer initiation on the Interac e-Transfer instant payment rail; payments is certain,
+    real-time rail vs. generic initiation is the only ambiguity.
+- tag: TPP-EMTRecipientPaymentOptions
+  spec_file: bmo-tpp-emtrecipientpaymentoptions-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.7
+  evidence: POST /tpp/interac-etransfer/payment-initiation/get-emt-recipient-payment-options/get "Get
+    Payment Option"; schemas IdentificationVerificationRequestV03, ProxyAccountType1Choice
+  reason: Retrieves recipient payment options / proxy account verification ahead of an e-Transfer payment
+    — clearly within Payments & Card Management, but too thin to pick between initiation and real-time
+    rail sub-capabilities.

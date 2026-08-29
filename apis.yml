@@ -1058,6 +1058,9 @@ apis:
     url: >-
       https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
 common:
+- type: CapabilityMap
+  url: capabilities/bmo-capability-edges.yml
+  name: BMO Business Capability Map
 - type: DomainSecurity
   url: security/bmo-domain-security.yml
 - type: AgenticAccess
