@@ -186,6 +186,8 @@ apis:
     https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
   baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
   tags:
+  - Account Validation
+  tags_raw:
   - AccountValidation
   properties:
   - type: OpenAPI
@@ -274,6 +276,8 @@ apis:
     https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
   baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
   tags:
+  - Authentication
+  tags_raw:
   - Oauth20
   properties:
   - type: OpenAPI
@@ -408,6 +412,8 @@ apis:
     https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
   baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
   tags:
+  - Payment Initiation
+  tags_raw:
   - PaymentInitiation
   properties:
   - type: OpenAPI
@@ -453,6 +459,8 @@ apis:
     https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
   baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
   tags:
+  - Payment Status
+  tags_raw:
   - PaymentStatus
   properties:
   - type: OpenAPI
@@ -539,7 +547,8 @@ apis:
   humanURL: >-
     https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
   baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
-  tags:
+  tags: []
+  tags_raw:
   - retrieveClientDataEncryptionKey
   properties:
   - type: OpenAPI
