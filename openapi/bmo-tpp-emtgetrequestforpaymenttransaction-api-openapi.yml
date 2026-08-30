@@ -1,0 +1,2426 @@
+openapi: 3.2.0
+info:
+  version: 4.3.0
+  title: Instant Payments TPP EMT Get Request For Payment Transaction API
+  description: This swagger is inclusive of 6 operations such as EMTRecipientPaymentOptions, EMTCustomerCreditTransferInitiation, EMTGetTransaction, EMTCreditorPaymentActivationRequest, EMTGetRequestForPaymentTransaction and Cancellation.
+  contact:
+    name: Interac Open API
+    email: AWS-EMTOS-API-Developers@bmo.com
+  x-api-id: BMO-ENT-f03de36a-fb59-4757-af38-b4afb449a904
+  x-bmo-api-type: general-api
+  x-bmoservicedomain-name: Payment Initiation
+  x-bmo-api-provider-id: 87679
+  x-audience: company-external
+  x-template-version: 1.0.0
+  x-api-specification-compliant: true
+  x-ibm-name: interacpaymentapi
+  x-ibm-summary: ''
+servers:
+- url: https://open-api-sit.bmogc.net/open-banking2/commercial-sb
+tags:
+- name: TPP-EMTGetRequestForPaymentTransaction
+  description: Request for Payment Status Enquiry
+paths:
+  /tpp/interac-etransfer/payment-initiation/get-request-for-payment-transaction:
+    post:
+      tags:
+      - TPP-EMTGetRequestForPaymentTransaction
+      summary: Obtain Request for Payment Status
+      description: GetRequestForPaymentTransaction - Receives CAMT005 format and respond back with PAIN002 format
+      x-dataclassification-code: Confidential
+      operationId: TPP-EMTGetRequestForPaymentTransaction
+      parameters:
+      - $ref: '#/components/parameters/x-fapi-financial-id'
+      - $ref: '#/components/parameters/x-fapi-customer-last-logged-time'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/x-fapi-customer-user-agent'
+      - $ref: '#/components/parameters/x-client-id'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-app-cat-id'
+      - $ref: '#/components/parameters/true-client-ip'
+      - $ref: '#/components/parameters/x-crypto-key'
+      - $ref: '#/components/parameters/x-api-key'
+      requestBody:
+        description: GetRequestForPaymentTransaction - Receives CAMT005 format and respond back with PAIN002 format
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GPSRequestBody'
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/GPSResponseBody'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '415':
+          $ref: '#/components/responses/415'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        '504':
+          $ref: '#/components/responses/504'
+      security:
+      - api-key-1: []
+        OAuth:
+        - bmo.tppinterac.payment-initiation.create
+      x-amazon-apigateway-request-validator: params-only
+      x-amazon-apigateway-integration:
+        type: aws_proxy
+        httpMethod: POST
+        uri: EMTRFPS_lambda_arn_invocation
+        responses:
+          default:
+            statusCode: '200'
+        passthroughBehavior: when_no_match
+        contentHandling: CONVERT_TO_TEXT
+      x-codegen-request-body-name: GPSRequestBody
+components:
+  schemas:
+    OriginalTransactionReference28:
+      properties:
+        interbankSettlementAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        amount:
+          $ref: '#/components/schemas/AmountType4Choice'
+        interbankSettlementDate:
+          $ref: '#/components/schemas/ISODate'
+        requestedCollectionDate:
+          $ref: '#/components/schemas/ISODate'
+        requestedExecutionDate:
+          $ref: '#/components/schemas/DateAndDateTime2Choice'
+        paymentTypeInformation:
+          $ref: '#/components/schemas/PaymentTypeInformation27'
+        paymentMethod:
+          $ref: '#/components/schemas/PaymentMethod4Code'
+        remittanceInformation:
+          $ref: '#/components/schemas/RemittanceInformation16'
+        debtor:
+          $ref: '#/components/schemas/Party40Choice'
+        creditor:
+          $ref: '#/components/schemas/Party40Choice'
+        debtorAccount:
+          $ref: '#/components/schemas/debtorAccount'
+        creditorAccount:
+          $ref: '#/components/schemas/creditorAccount'
+        debtorAgent:
+          $ref: '#/components/schemas/debtorAgent'
+        creditorAgent:
+          $ref: '#/components/schemas/creditorAgent'
+        ultimateCreditor:
+          $ref: '#/components/schemas/Party40Choice'
+        ultimateDebtor:
+          $ref: '#/components/schemas/Party40Choice'
+      type: object
+    TransactionCriteria5Choice:
+      oneOf:
+      - required:
+        - queryName
+      - required:
+        - newCriteria
+      properties:
+        queryName:
+          $ref: '#/components/schemas/Max35Text'
+        newCriteria:
+          $ref: '#/components/schemas/TransactionCriteria8'
+      additionalProperties: false
+      type: object
+    AccountSchemeName1Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalAccountIdentification1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    ExternalPaymentControlRequestType1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    GenericFinancialIdentification1:
+      additionalProperties: false
+      properties:
+        identification:
+          $ref: '#/components/schemas/Max35Text'
+        schemeName:
+          $ref: '#/components/schemas/FinancialIdentificationSchemeName1Choice'
+        issuer:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - identification
+      type: object
+    SupplementaryDataGPS:
+      additionalProperties: false
+      properties:
+        envelope:
+          $ref: '#/components/schemas/SupplementaryDataEnvelopeGPS'
+      required:
+      - envelope
+      type: object
+    ISODateTime:
+      type: string
+    SequenceType3Code:
+      enum:
+      - FRST
+      - RCUR
+      - FNAL
+      - OOFF
+      - RPRE
+      type: string
+    AmountRangeBoundary1:
+      properties:
+        boundaryAmount:
+          $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+        included:
+          $ref: '#/components/schemas/YesNoIndicator'
+      required:
+      - boundaryAmount
+      - included
+      type: object
+    GenericPersonIdentification1:
+      additionalProperties: false
+      properties:
+        identification:
+          $ref: '#/components/schemas/Max35Text'
+        schemeName:
+          $ref: '#/components/schemas/PersonIdentificationSchemeName1Choice'
+        issuer:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - identification
+      type: object
+    TaxAmountType1Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalTaxAmountType1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    ExternalStatusReason1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    DateAndDateTimeSearch3Choice:
+      properties:
+        dateTimeSearch:
+          $ref: '#/components/schemas/DateTimePeriod1Choice'
+        dateSearch:
+          $ref: '#/components/schemas/DatePeriodSearch1Choice'
+      oneOf:
+      - required:
+        - dateTimeSearch
+      - required:
+        - dateSearch
+      additionalProperties: false
+      type: object
+    QueueTransactionIdentification1:
+      properties:
+        queueIdentification:
+          $ref: '#/components/schemas/Max16Text'
+        positionInQueue:
+          $ref: '#/components/schemas/Max16Text'
+      required:
+      - queueIdentification
+      - positionInQueue
+      additionalProperties: false
+      type: object
+    SystemSearch4:
+      properties:
+        systemIdentification:
+          items:
+            $ref: '#/components/schemas/ClearingSystemIdentification3Choice'
+          type: array
+        memberIdentification:
+          items:
+            $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6'
+          type: array
+        country:
+          $ref: '#/components/schemas/CountryCode'
+        accountIdentification:
+          $ref: '#/components/schemas/AccountIdentification4Choice'
+      additionalProperties: false
+      type: object
+    ReferredDocumentType3Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/DocumentType6Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    Problem:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The problem type.
+        title:
+          type: string
+          description: A short, summary of the problem type. Written in english and readable for engineers (usually not suited for non technical stakeholders and not localized);
+        status:
+          type: integer
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          format: int32
+        detail:
+          type: string
+          description: A detailed message text human readable explanation specific to this occurrence of the problem.
+        instance:
+          type: string
+          description: An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+    OtherContact1:
+      additionalProperties: false
+      properties:
+        channelType:
+          $ref: '#/components/schemas/Max4Text'
+        identification:
+          $ref: '#/components/schemas/Max128Text'
+      required:
+      - channelType
+      type: object
+    TaxRecord2:
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/Max35Text'
+        category:
+          $ref: '#/components/schemas/Max35Text'
+        categoryDetails:
+          $ref: '#/components/schemas/Max35Text'
+        period:
+          $ref: '#/components/schemas/TaxPeriod2'
+        taxAmount:
+          $ref: '#/components/schemas/TaxAmount2'
+      type: object
+    ExternalServiceLevel1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    Max140Text:
+      description: Specifies a character string with a maximum length of 140 characters.
+      minLength: 1
+      maxLength: 140
+      type: string
+    CreditorReferenceType1Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/DocumentType3Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    impliedCurrencyAndAmountRange1:
+      type: object
+      required:
+      - amount
+      properties:
+        amount:
+          $ref: '#/components/schemas/ImpliedCurrencyAmountRange1Choice'
+        creditDebitIndicator:
+          $ref: '#/components/schemas/CreditDebitCode'
+    FinancialInstitutionIdentification18:
+      additionalProperties: false
+      properties:
+        BICFI:
+          $ref: '#/components/schemas/BICFIDec2014Identifier'
+        clearingSystemMemberIdentification:
+          $ref: '#/components/schemas/ClearingSystemMemberIdentification2'
+        LEI:
+          $ref: '#/components/schemas/LEIIdentifier'
+        name:
+          $ref: '#/components/schemas/Max140Text'
+        postalAddress:
+          $ref: '#/components/schemas/PostalAddress24'
+        other:
+          $ref: '#/components/schemas/GenericFinancialIdentification1'
+      type: object
+    SupplementaryDataEnvelope1:
+      type: object
+      properties:
+        document:
+          type: object
+          properties:
+            transferAuthentication:
+              type: object
+              properties:
+                securityQuestion:
+                  type: string
+                securityAnswer:
+                  type: string
+                expiryDate:
+                  type: string
+    DiscountAmountAndType1:
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/DiscountAmountType1Choice'
+        amount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+      required:
+      - amount
+      type: object
+    NumberOfTransactionsPerStatus5:
+      properties:
+        detailedNumberOfTransactions:
+          $ref: '#/components/schemas/Max15NumericText'
+        detailedStatus:
+          $ref: '#/components/schemas/ExternalPaymentTransactionStatus1Code'
+        detailedControlSum:
+          $ref: '#/components/schemas/DecimalNumber'
+      required:
+      - detailedNumberOfTransactions
+      - detailedStatus
+      type: object
+    Max16Text:
+      description: Specifies a character string with a maximum length of 16 characters.
+      minLength: 1
+      maxLength: 16
+      type: string
+    DateAndDateTime2Choice:
+      oneOf:
+      - required:
+        - date
+      - required:
+        - dateTime
+      properties:
+        date:
+          $ref: '#/components/schemas/ISODate'
+        dateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      additionalProperties: false
+      type: object
+    PaymentOrigin1Choice:
+      additionalProperties: false
+      properties:
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - proprietary
+      type: object
+    ExternalDiscountAmountType1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    Max15NumericText:
+      description: Specifies a numeric string with a maximum length of 15 digits.
+      pattern: ^[0-9]{1,15}$
+      type: string
+    OrganisationIdentificationSchemeName1Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalOrganisationIdentification1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    PreferredContactMethod1Code:
+      enum:
+      - LETT
+      - MAIL
+      - PHON
+      - FAXX
+      - CELL
+      type: string
+    otherAccountIdentification:
+      type: object
+      required:
+      - identification
+      properties:
+        identification:
+          $ref: '#/components/schemas/Max35Text'
+    UUIDv4Identifier:
+      pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$
+      type: string
+    Priority5Code:
+      enum:
+      - HIGH
+      - LOWW
+      - NORM
+      - URGT
+      type: string
+    SupplementaryData1:
+      additionalProperties: false
+      properties:
+        envelope:
+          $ref: '#/components/schemas/SupplementaryDataEnvelope1'
+      required:
+      - envelope
+      type: object
+    RemittanceInformation16:
+      additionalProperties: false
+      properties:
+        unstructured:
+          items:
+            $ref: '#/components/schemas/Max140Text'
+          type: array
+        structured:
+          items:
+            $ref: '#/components/schemas/StructuredRemittanceInformation16'
+          type: array
+      type: object
+    CreditorReferenceType2:
+      additionalProperties: false
+      properties:
+        codeOrProprietary:
+          $ref: '#/components/schemas/CreditorReferenceType1Choice'
+        issuer:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - codeOrProprietary
+      type: object
+    StatusReasonInformation12:
+      properties:
+        originator:
+          $ref: '#/components/schemas/PartyIdentification135'
+        reason:
+          $ref: '#/components/schemas/StatusReason6Choice'
+        additionalInformation:
+          items:
+            $ref: '#/components/schemas/Max105Text'
+          type: array
+      type: object
+    DatePeriodSearch1Choice:
+      oneOf:
+      - required:
+        - fromDateTime
+      - required:
+        - toDateTime
+      - required:
+        - fromToDate
+      - required:
+        - equalDate
+      properties:
+        fromDate:
+          $ref: '#/components/schemas/ISODate'
+        toDate:
+          $ref: '#/components/schemas/ISODate'
+        fromToDate:
+          $ref: '#/components/schemas/DatePeriod2'
+        equalDate:
+          $ref: '#/components/schemas/ISODate'
+      additionalProperties: false
+      type: object
+    PaymentIdentification6Choice:
+      oneOf:
+      - required:
+        - transactionIdentification
+      - required:
+        - queueIdentification
+      - required:
+        - longBusinessIdentification
+      - required:
+        - shortBusinessIdentification
+      - required:
+        - proprietaryIdentification
+      properties:
+        transactionIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        queueIdentification:
+          $ref: '#/components/schemas/QueueTransactionIdentification1'
+        longBusinessIdentification:
+          $ref: '#/components/schemas/LongPaymentIdentification2'
+        shortBusinessIdentification:
+          $ref: '#/components/schemas/ShortPaymentIdentification2'
+        proprietaryIdentification:
+          $ref: '#/components/schemas/Max70Text'
+      additionalProperties: false
+      type: object
+    MessageHeader9:
+      additionalProperties: false
+      properties:
+        messageIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        creationDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        requestType:
+          $ref: '#/components/schemas/RequestType4Choice'
+      required:
+      - messageIdentification
+      type: object
+    ExternalLocalInstrument1Code:
+      minLength: 1
+      maxLength: 35
+      type: string
+    GenericIdentification1:
+      additionalProperties: false
+      properties:
+        identification:
+          $ref: '#/components/schemas/Max35Text'
+        schemeName:
+          $ref: '#/components/schemas/Max35Text'
+        issuer:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - identification
+      type: object
+    CreditorReferenceInformation2:
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/CreditorReferenceType2'
+        reference:
+          $ref: '#/components/schemas/Max35Text'
+      type: object
+    InstructionStatusSearch5:
+      properties:
+        paymentInstructionStatus:
+          $ref: '#/components/schemas/PaymentStatusCodeSearch2Choice'
+        proprietaryStatusReason:
+          $ref: '#/components/schemas/Max4AlphaNumericText'
+      additionalProperties: false
+      type: object
+    DatePeriod2:
+      additionalProperties: false
+      properties:
+        fromDate:
+          $ref: '#/components/schemas/ISODate'
+        toDate:
+          $ref: '#/components/schemas/ISODate'
+      required:
+      - fromDate
+      - toDate
+      type: object
+    TaxRecordPeriod1Code:
+      enum:
+      - MM01
+      - MM02
+      - MM03
+      - MM04
+      - MM05
+      - MM06
+      - MM07
+      - MM08
+      - MM09
+      - MM10
+      - MM11
+      - MM12
+      - QTR1
+      - QTR2
+      - QTR3
+      - QTR4
+      - HLF1
+      - HLF2
+      type: string
+    PersonIdentification13:
+      additionalProperties: false
+      properties:
+        dateAndPlaceOfBirth:
+          $ref: '#/components/schemas/DateAndPlaceOfBirth1'
+        other:
+          items:
+            $ref: '#/components/schemas/GenericPersonIdentification1'
+          type: array
+      type: object
+    PaymentTransactionParty3:
+      properties:
+        ultimateDebtor:
+          $ref: '#/components/schemas/Party40Choice'
+        debtor:
+          $ref: '#/components/schemas/Party40Choice'
+        debtorAgent:
+          $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6'
+        creditorAgent:
+          $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6'
+        creditor:
+          $ref: '#/components/schemas/Party40Choice'
+        ultimateCreditor:
+          $ref: '#/components/schemas/Party40Choice'
+      type: object
+    Party40Choice:
+      oneOf:
+      - required:
+        - party
+      - required:
+        - agent
+      properties:
+        party:
+          $ref: '#/components/schemas/PartyIdentification135'
+        agent:
+          $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6'
+      type: object
+    ExternalCategoryPurpose1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    PaymentMethod4Code:
+      enum:
+      - CHK
+      - TRF
+      - DD
+      - TRA
+      type: string
+    Priority2Code:
+      enum:
+      - HIGH
+      - NORM
+      type: string
+    DocumentAdjustment1:
+      additionalProperties: false
+      properties:
+        amount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        creditDebitIndicator:
+          $ref: '#/components/schemas/CreditDebitCode'
+        reason:
+          $ref: '#/components/schemas/Max4Text'
+        additionalInformation:
+          $ref: '#/components/schemas/Max140Text'
+      required:
+      - amount
+      type: object
+    PostalAddress24:
+      additionalProperties: false
+      properties:
+        addressType:
+          $ref: '#/components/schemas/AddressType3Choice'
+        department:
+          $ref: '#/components/schemas/Max70Text'
+        subDepartment:
+          $ref: '#/components/schemas/Max70Text'
+        streetName:
+          $ref: '#/components/schemas/Max70Text'
+        buildingNumber:
+          $ref: '#/components/schemas/Max16Text'
+        buildingName:
+          $ref: '#/components/schemas/Max35Text'
+        floor:
+          $ref: '#/components/schemas/Max70Text'
+        postBox:
+          $ref: '#/components/schemas/Max16Text'
+        room:
+          $ref: '#/components/schemas/Max70Text'
+        postCode:
+          $ref: '#/components/schemas/Max16Text'
+        townName:
+          $ref: '#/components/schemas/Max35Text'
+        townLocationName:
+          $ref: '#/components/schemas/Max35Text'
+        districtName:
+          $ref: '#/components/schemas/Max35Text'
+        countrySubDivision:
+          $ref: '#/components/schemas/Max35Text'
+        country:
+          $ref: '#/components/schemas/CountryCode'
+        addressLine:
+          maxItems: 7
+          items:
+            $ref: '#/components/schemas/Max70Text'
+          type: array
+      type: object
+    Max4Text:
+      description: Specifies a character string with a maximum length of 4 characters.
+      minLength: 1
+      maxLength: 4
+      type: string
+    ExternalPaymentTransactionStatus1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    TaxAuthorisation1:
+      additionalProperties: false
+      properties:
+        title:
+          $ref: '#/components/schemas/Max35Text'
+        name:
+          $ref: '#/components/schemas/Max140Text'
+      type: object
+    Max70Text:
+      description: Specifies a character string with a maximum length of 70characters.
+      minLength: 1
+      maxLength: 70
+      type: string
+    ExternalPersonIdentification1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    ExternalClearingSystemIdentification1Code:
+      minLength: 1
+      maxLength: 5
+      type: string
+    debtorAccount:
+      type: object
+      required:
+      - identification
+      properties:
+        identification:
+          $ref: '#/components/schemas/accountIdentification'
+    Priority1Choice:
+      required:
+      - code
+      properties:
+        code:
+          $ref: '#/components/schemas/Priority5Code'
+      additionalProperties: false
+      type: object
+    PendingStatus4Code:
+      enum:
+      - ACPD
+      - VALD
+      - MATD
+      - AUTD
+      - INVD
+      - UMAC
+      - STLE
+      - STLM
+      - SSPD
+      - PCAN
+      - PSTL
+      - PFST
+      - SMLR
+      - RMLR
+      - SRBL
+      - AVLB
+      - SRML
+      type: string
+    DocumentLineType1Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalDocumentLineType1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    OriginalPaymentInstruction32:
+      properties:
+        originalPaymentInformationIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        originalNumberOfTransactions:
+          $ref: '#/components/schemas/Max15NumericText'
+        originalControlSum:
+          $ref: '#/components/schemas/DecimalNumber'
+        paymentInformationStatus:
+          $ref: '#/components/schemas/ExternalPaymentGroupStatus1Code'
+        statusReasonInformation:
+          items:
+            $ref: '#/components/schemas/StatusReasonInformation12'
+          type: array
+        numberOfTransactionsPerStatus:
+          items:
+            $ref: '#/components/schemas/NumberOfTransactionsPerStatus5'
+          type: array
+        transactionInformationAndStatus:
+          items:
+            $ref: '#/components/schemas/PaymentTransaction105'
+          type: array
+        supplementaryData:
+          items:
+            $ref: '#/components/schemas/SupplementaryDataGPS'
+          type: array
+      required:
+      - originalPaymentInformationIdentification
+      type: object
+    GenericOrganisationIdentification1:
+      additionalProperties: false
+      properties:
+        identification:
+          $ref: '#/components/schemas/Max35Text'
+        schemeName:
+          $ref: '#/components/schemas/OrganisationIdentificationSchemeName1Choice'
+        issuer:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - identification
+      type: object
+    TransactionQuery5:
+      additionalProperties: false
+      properties:
+        queryType:
+          $ref: '#/components/schemas/QueryType2Code'
+        transactionCriteria:
+          $ref: '#/components/schemas/TransactionCriteria5Choice'
+      type: object
+    BICFIDec2014Identifier:
+      pattern: ^[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}$
+      type: string
+    ExternalGarnishmentType1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    CountryCode:
+      pattern: ^[A-Z]{2,2}$
+      type: string
+    DiscountAmountType1Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalDiscountAmountType1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    ExternalAccountIdentification1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    CashPaymentStatus2Code:
+      enum:
+      - PDNG
+      - FINL
+      type: string
+    TransactionSearchCriteria8:
+      properties:
+        paymentTo:
+          items:
+            $ref: '#/components/schemas/SystemSearch4'
+          type: array
+        paymentFrom:
+          items:
+            $ref: '#/components/schemas/SystemSearch4'
+          type: array
+        paymentSearch:
+          $ref: '#/components/schemas/PaymentSearch8'
+      additionalProperties: false
+      type: object
+    CreditDebitCode:
+      enum:
+      - DBIT
+      - CRDT
+      type: string
+    TaxInformation7:
+      additionalProperties: false
+      properties:
+        creditor:
+          $ref: '#/components/schemas/TaxParty1'
+        debtor:
+          $ref: '#/components/schemas/TaxParty2'
+        ultimateDebtor:
+          $ref: '#/components/schemas/TaxParty2'
+        administrationZone:
+          $ref: '#/components/schemas/Max35Text'
+        referenceNumber:
+          $ref: '#/components/schemas/Max140Text'
+        method:
+          $ref: '#/components/schemas/Max35Text'
+        totalTaxableBaseAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        totalTaxAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        date:
+          $ref: '#/components/schemas/ISODate'
+        sequenceNumber:
+          $ref: '#/components/schemas/Number'
+        record:
+          items:
+            $ref: '#/components/schemas/TaxRecord2'
+          type: array
+      type: object
+    ClearingSystemIdentification2Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalClearingSystemIdentification1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    agentMemberIdentification:
+      type: object
+      properties:
+        memberIdentification:
+          $ref: '#/components/schemas/Max35Text'
+    Party38Choice:
+      oneOf:
+      - required:
+        - organisationIdentification
+      - required:
+        - privateIdentification
+      properties:
+        organisationIdentification:
+          $ref: '#/components/schemas/OrganisationIdentification29'
+        privateIdentification:
+          $ref: '#/components/schemas/PersonIdentification13'
+      additionalProperties: false
+      type: object
+    Max34Text:
+      description: Specifies a character string with a maximum length of 34 characters.
+      minLength: 1
+      maxLength: 34
+      type: string
+    ImpliedCurrencyAmountRange1Choice:
+      oneOf:
+      - required:
+        - fromAmount
+      - required:
+        - toAmount
+      - required:
+        - fromToAmount
+      - required:
+        - equalAmount
+      - required:
+        - notEqualAmount
+      properties:
+        fromAmount:
+          $ref: '#/components/schemas/AmountRangeBoundary1'
+        toAmount:
+          $ref: '#/components/schemas/AmountRangeBoundary1'
+        fromToAmount:
+          $ref: '#/components/schemas/FromToAmountRange1'
+        equalAmount:
+          $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+        notEqualAmount:
+          $ref: '#/components/schemas/ImpliedCurrencyAndAmount'
+      additionalProperties: false
+      type: object
+    GarnishmentType1:
+      additionalProperties: false
+      properties:
+        codeOrProprietary:
+          $ref: '#/components/schemas/GarnishmentType1Choice'
+        issuer:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - codeOrProprietary
+      type: object
+    TrueFalseIndicator:
+      type: boolean
+    AnyBICDec2014Identifier:
+      pattern: ^[A-Z0-9]{4,4}[A-Z]{2,2}[A-Z0-9]{2,2}([A-Z0-9]{3,3}){0,1}$
+      type: string
+    YesNoIndicator:
+      type: boolean
+    GroupHeader86:
+      properties:
+        messageIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        creationDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        initiatingParty:
+          $ref: '#/components/schemas/PartyIdentification135'
+      required:
+      - messageIdentification
+      - creationDateTime
+      type: object
+    ActiveOrHistoricCurrencyAndAmount:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/CurrencyAmountType'
+        currency:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+    ServiceLevel8Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalServiceLevel1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    OriginalGroupHeader17:
+      properties:
+        originalMessageIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        originalMessageNameIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        originalCreationDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        originalNumberOfTransactions:
+          $ref: '#/components/schemas/Max15NumericText'
+        originalControlSum:
+          $ref: '#/components/schemas/DecimalNumber'
+        groupStatus:
+          $ref: '#/components/schemas/ExternalPaymentGroupStatus1Code'
+        statusReasonInformation:
+          items:
+            $ref: '#/components/schemas/StatusReasonInformation12'
+          type: array
+        numberOfTransactionsPerStatus:
+          items:
+            $ref: '#/components/schemas/NumberOfTransactionsPerStatus5'
+          type: array
+      required:
+      - originalMessageIdentification
+      - originalMessageNameIdentification
+      type: object
+    StructuredRemittanceInformation16:
+      additionalProperties: false
+      properties:
+        referredDocumentInformation:
+          items:
+            $ref: '#/components/schemas/ReferredDocumentInformation7'
+          type: array
+        referredDocumentAmount:
+          $ref: '#/components/schemas/RemittanceAmount2'
+        creditorReferenceInformation:
+          $ref: '#/components/schemas/CreditorReferenceInformation2'
+        invoicer:
+          $ref: '#/components/schemas/PartyIdentification135'
+        invoicee:
+          $ref: '#/components/schemas/PartyIdentification135'
+        taxRemittance:
+          $ref: '#/components/schemas/TaxInformation7'
+        garnishmentRemittance:
+          $ref: '#/components/schemas/Garnishment3'
+        additionalRemittanceInformation:
+          maxItems: 3
+          items:
+            $ref: '#/components/schemas/Max140Text'
+          type: array
+      type: object
+    AccountIdentification4Choice:
+      oneOf:
+      - required:
+        - IBAN
+      - required:
+        - other
+      properties:
+        IBAN:
+          $ref: '#/components/schemas/IBAN2007Identifier'
+        other:
+          $ref: '#/components/schemas/GenericAccountIdentification1'
+      additionalProperties: false
+      type: object
+    ImpliedCurrencyAndAmount:
+      type: object
+      properties:
+        amount:
+          type: number
+          minimum: 0
+      required:
+      - amount
+    IBAN2007Identifier:
+      pattern: ^[A-Z]{2,2}[0-9]{2,2}[a-zA-Z0-9]{1,30}$
+      type: string
+    creditorAccount:
+      type: object
+      required:
+      - identification
+      properties:
+        identification:
+          $ref: '#/components/schemas/accountIdentification'
+    PaymentTypeInformation27:
+      properties:
+        instructionPriority:
+          $ref: '#/components/schemas/Priority2Code'
+        clearingChannel:
+          $ref: '#/components/schemas/ClearingChannel2Code'
+        serviceLevel:
+          items:
+            $ref: '#/components/schemas/ServiceLevel8Choice'
+          type: array
+        localInstrument:
+          $ref: '#/components/schemas/LocalInstrument2Choice'
+        sequenceType:
+          $ref: '#/components/schemas/SequenceType3Code'
+        categoryPurpose:
+          $ref: '#/components/schemas/CategoryPurpose1Choice'
+      type: object
+    creditorAgent:
+      required:
+      - financialInstitutionIdentification
+      properties:
+        financialInstitutionIdentification:
+          $ref: '#/components/schemas/agentFinancialInstitution'
+      additionalProperties: false
+      type: object
+    GPSRequestBody:
+      type: object
+      properties:
+        SECURE:
+          type: object
+          properties:
+            encrypted:
+              type: boolean
+            data:
+              type: string
+              $ref: '#/components/schemas/getTransactionV08'
+    AddressType2Code:
+      enum:
+      - HOME
+      - BIZZ
+      - ADDR
+      - PBOX
+      - MLTO
+      - DLVY
+      type: string
+    SupplementaryDataEnvelopeGPS:
+      type: object
+      properties:
+        document:
+          type: object
+          properties:
+            gatewayURL:
+              type: string
+    Max2048Text:
+      description: Specifies a character string with a maximum length of 2048 characters.
+      minLength: 1
+      maxLength: 2048
+      type: string
+    PaymentStatusCodeSearch2Choice:
+      oneOf:
+      - required:
+        - pendingStatus
+      - required:
+        - finalStatus
+      - required:
+        - pendingAndFinalStatus
+      properties:
+        pendingStatus:
+          $ref: '#/components/schemas/PendingStatus4Code'
+        finalStatus:
+          $ref: '#/components/schemas/FinalStatusCode'
+        pendingAndFinalStatus:
+          $ref: '#/components/schemas/CashPaymentStatus2Code'
+      additionalProperties: false
+      type: object
+    ClearingSystemMemberIdentification2:
+      additionalProperties: false
+      properties:
+        clearingSystemIdentification:
+          $ref: '#/components/schemas/ClearingSystemIdentification2Choice'
+        memberIdentification:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - memberIdentification
+      type: object
+    LongPaymentIdentification2:
+      properties:
+        transactionIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        UETR:
+          $ref: '#/components/schemas/UUIDv4Identifier'
+        interBankSettlementAmount:
+          $ref: '#/components/schemas/ImpliedCurrencyAmount'
+        interBankSettlementDate:
+          $ref: '#/components/schemas/ISODate'
+        instructingAgent:
+          $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6'
+        instructedAgent:
+          $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6'
+        endToEndIdentification:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - interBankSettlementAmount
+      - interBankSettlementDate
+      - instructingAgent
+      - instructedAgent
+      additionalProperties: false
+      type: object
+    ISODate:
+      type: string
+    PhoneNumber:
+      description: 'The collection of information which identifies a specific phone or FAX number as defined by telecom services.
+
+        It consists of a ''+'' followed by the country code (from 1 to 3 characters) then a ''-'' and finally, any combination of numbers, ''('', '')'', ''+'' and ''-'' (up to 30 characters).'
+      pattern: ^\+[0-9]{1,3}-[0-9()+\-]{1,30}$
+      type: string
+    GenericIdentification30:
+      additionalProperties: false
+      properties:
+        identification:
+          $ref: '#/components/schemas/Exact4AlphaNumericText'
+        issuer:
+          $ref: '#/components/schemas/Max35Text'
+        schemeName:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - identification
+      - issuer
+      type: object
+    GPSResponseBody:
+      type: object
+      properties:
+        SECURE:
+          type: object
+          properties:
+            encrypted:
+              type: boolean
+            data:
+              type: string
+              $ref: '#/components/schemas/customerPaymentStatusReportV10'
+    CategoryPurpose1Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalCategoryPurpose1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    ReferredDocumentType4:
+      additionalProperties: false
+      properties:
+        codeOrProprietary:
+          $ref: '#/components/schemas/ReferredDocumentType3Choice'
+        issuer:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - codeOrProprietary
+      type: object
+    ExternalOrganisationIdentification1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    PaymentSearch8:
+      additionalProperties: false
+      properties:
+        messageIdentification:
+          items:
+            $ref: '#/components/schemas/Max35Text'
+          type: array
+        requestedExecutionDate:
+          items:
+            $ref: '#/components/schemas/DateAndDateTimeSearch3Choice'
+          type: array
+        paymentIdentification:
+          items:
+            $ref: '#/components/schemas/PaymentIdentification6Choice'
+          type: array
+        status:
+          items:
+            $ref: '#/components/schemas/InstructionStatusSearch5'
+          type: array
+        instructedAmount:
+          items:
+            $ref: '#/components/schemas/ActiveOrHistoricAmountRange2Choice'
+          type: array
+        instructedAmountCurrency:
+          items:
+            $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+          type: array
+        creditDebitIndicator:
+          $ref: '#/components/schemas/CreditDebitCode'
+        paymentMethod:
+          items:
+            $ref: '#/components/schemas/PaymentOrigin1Choice'
+          type: array
+        priority:
+          items:
+            $ref: '#/components/schemas/Priority1Choice'
+          type: array
+        processingValidityTime:
+          items:
+            $ref: '#/components/schemas/DateTimePeriod1Choice'
+          type: array
+        transactionIdentification:
+          items:
+            $ref: '#/components/schemas/Max35Text'
+          type: array
+        endToEndIdentification:
+          items:
+            $ref: '#/components/schemas/Max35Text'
+          type: array
+        parties:
+          items:
+            $ref: '#/components/schemas/PaymentTransactionParty3'
+          type: array
+      type: object
+    FinancialIdentificationSchemeName1Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalFinancialInstitutionIdentification1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    DateTimePeriod1:
+      additionalProperties: false
+      properties:
+        fromDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        toDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      required:
+      - fromDateTime
+      - toDateTime
+      type: object
+    StatusReason6Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalStatusReason1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      type: object
+    BranchAndFinancialInstitutionIdentification6:
+      additionalProperties: false
+      properties:
+        financialInstitutionIdentification:
+          $ref: '#/components/schemas/FinancialInstitutionIdentification18'
+        branchIdentification:
+          $ref: '#/components/schemas/BranchData3'
+      required:
+      - financialInstitutionIdentification
+      type: object
+    ClearingSystemIdentification3Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalCashClearingSystem1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    TaxParty1:
+      additionalProperties: false
+      properties:
+        taxIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        registrationIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        taxType:
+          $ref: '#/components/schemas/Max35Text'
+      type: object
+    ClearingChannel2Code:
+      enum:
+      - RTGS
+      - RTNS
+      - MPNS
+      - BOOK
+      type: string
+    GetTransactionV08:
+      additionalProperties: false
+      properties:
+        messageHeader:
+          $ref: '#/components/schemas/MessageHeader9'
+        transactionQueryDefinition:
+          $ref: '#/components/schemas/TransactionQuery5'
+        supplementaryData:
+          items:
+            $ref: '#/components/schemas/SupplementaryData1'
+          type: array
+      required:
+      - messageHeader
+      type: object
+    TaxAmountAndType1:
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/TaxAmountType1Choice'
+        amount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+      required:
+      - amount
+      type: object
+    TaxAmount2:
+      additionalProperties: false
+      properties:
+        totalAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+      type: object
+    QueryType2Code:
+      enum:
+      - ALLL
+      - CHNG
+      - MODF
+      - DELD
+      type: string
+    agentFinancialInstitution:
+      additionalProperties: false
+      type: object
+      properties:
+        clearingSystemMemberIdentification:
+          $ref: '#/components/schemas/agentMemberIdentification'
+    LocalInstrument2Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalLocalInstrument1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    customerPaymentStatusReportV10:
+      properties:
+        customerPaymentStatusReportV10:
+          $ref: '#/components/schemas/CustomerPaymentStatusReportV10'
+      required:
+      - customerPaymentStatusReportV10
+      type: object
+    DateTimePeriod1Choice:
+      oneOf:
+      - required:
+        - fromDateTime
+      - required:
+        - toDateTime
+      - required:
+        - dateTimeRange
+      properties:
+        fromDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        toDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        dateTimeRange:
+          $ref: '#/components/schemas/DateTimePeriod1'
+      additionalProperties: false
+      type: object
+    CurrencyAmountType:
+      type: number
+      x-precision: 2
+    ExternalEnquiryRequestType1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    DateAndPlaceOfBirth1:
+      additionalProperties: false
+      properties:
+        birthDate:
+          $ref: '#/components/schemas/ISODate'
+        provinceOfBirth:
+          $ref: '#/components/schemas/Max35Text'
+        cityOfBirth:
+          $ref: '#/components/schemas/Max35Text'
+        countryOfBirth:
+          $ref: '#/components/schemas/CountryCode'
+      required:
+      - birthDate
+      - cityOfBirth
+      - countryOfBirth
+      type: object
+    GarnishmentType1Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalGarnishmentType1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    DocumentLineType1:
+      additionalProperties: false
+      properties:
+        codeOrProprietary:
+          $ref: '#/components/schemas/DocumentLineType1Choice'
+        issuer:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - codeOrProprietary
+      type: object
+    Max35Text:
+      description: Specifies a character string with a maximum length of 35 characters.
+      minLength: 1
+      maxLength: 35
+      type: string
+    getTransactionV08:
+      properties:
+        getTransactionV08:
+          $ref: '#/components/schemas/GetTransactionV08'
+      required:
+      - getTransactionV08
+      type: object
+    ExternalFinancialInstitutionIdentification1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    ShortPaymentIdentification2:
+      properties:
+        transactionIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        interBankSettlementDate:
+          $ref: '#/components/schemas/ISODate'
+        instructingAgent:
+          $ref: '#/components/schemas/BranchAndFinancialInstitutionIdentification6'
+      required:
+      - transactionIdentification
+      - interBankSettlementDate
+      - instructingAgent
+      additionalProperties: false
+      type: object
+    Max105Text:
+      description: Specifies a character string with a maximum length of 105 characters.
+      minLength: 1
+      maxLength: 105
+      type: string
+    DocumentLineIdentification1:
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/DocumentLineType1'
+        number:
+          $ref: '#/components/schemas/Max35Text'
+        relatedDate:
+          $ref: '#/components/schemas/ISODate'
+      type: object
+    DocumentType6Code:
+      enum:
+      - MSIN
+      - CNFA
+      - DNFA
+      - CINV
+      - CREN
+      - DEBN
+      - HIRI
+      - SBIN
+      - CMCN
+      - SOAC
+      - DISP
+      - PUOR
+      - BOLD
+      - VCHR
+      - AROI
+      - TSUT
+      type: string
+    NamePrefix2Code:
+      enum:
+      - DOCT
+      - MIST
+      - MISS
+      - MADM
+      - MIKS
+      type: string
+    AddressType3Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/AddressType2Code'
+        proprietary:
+          $ref: '#/components/schemas/GenericIdentification30'
+      additionalProperties: false
+      type: object
+    ImpliedCurrencyAmount:
+      type: object
+    ReferredDocumentInformation7:
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/ReferredDocumentType4'
+        number:
+          $ref: '#/components/schemas/Max35Text'
+        relatedDate:
+          $ref: '#/components/schemas/ISODate'
+        lineDetails:
+          items:
+            $ref: '#/components/schemas/DocumentLineInformation1'
+          type: array
+      type: object
+    TransactionCriteria8:
+      properties:
+        newQueryName:
+          $ref: '#/components/schemas/Max35Text'
+        searchCriteria:
+          items:
+            $ref: '#/components/schemas/TransactionSearchCriteria8'
+          type: array
+      additionalProperties: false
+      type: object
+    ExternalTaxAmountType1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    OrganisationIdentification29:
+      additionalProperties: false
+      properties:
+        anyBIC:
+          $ref: '#/components/schemas/AnyBICDec2014Identifier'
+        LEI:
+          $ref: '#/components/schemas/LEIIdentifier'
+        other:
+          items:
+            $ref: '#/components/schemas/GenericOrganisationIdentification1'
+          type: array
+      type: object
+    RemittanceAmount3:
+      additionalProperties: false
+      properties:
+        duePayableAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        discountAppliedAmount:
+          items:
+            $ref: '#/components/schemas/DiscountAmountAndType1'
+          type: array
+        creditNoteAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        taxAmount:
+          items:
+            $ref: '#/components/schemas/TaxAmountAndType1'
+          type: array
+        adjustmentAmountAndReason:
+          items:
+            $ref: '#/components/schemas/DocumentAdjustment1'
+          type: array
+        remittedAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+      type: object
+    Number:
+      pattern: '[0-9]{18}'
+      maxLength: 18
+      type: string
+    PartyIdentification135:
+      additionalProperties: false
+      properties:
+        name:
+          $ref: '#/components/schemas/Max140Text'
+        postalAddress:
+          $ref: '#/components/schemas/PostalAddress24'
+        identification:
+          $ref: '#/components/schemas/Party38Choice'
+        countryOfResidence:
+          $ref: '#/components/schemas/CountryCode'
+        contactDetails:
+          $ref: '#/components/schemas/Contact4'
+      type: object
+    FinalStatusCode:
+      enum:
+      - STLD
+      - RJTD
+      - CAND
+      - FNLD
+      type: string
+    AmountType4Choice:
+      oneOf:
+      - required:
+        - instructedAmount
+      - required:
+        - equivalentAmount
+      properties:
+        instructedAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        equivalentAmount:
+          $ref: '#/components/schemas/EquivalentAmount2'
+      additionalProperties: false
+      type: object
+    DecimalNumber:
+      maxLength: 18
+      type: string
+    ExternalDocumentLineType1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    BranchData3:
+      additionalProperties: false
+      properties:
+        identification:
+          $ref: '#/components/schemas/Max35Text'
+        LEI:
+          $ref: '#/components/schemas/LEIIdentifier'
+        name:
+          $ref: '#/components/schemas/Max140Text'
+        postalAddress:
+          $ref: '#/components/schemas/PostalAddress24'
+      type: object
+    TaxPeriod2:
+      additionalProperties: false
+      properties:
+        year:
+          $ref: '#/components/schemas/ISODate'
+        type:
+          $ref: '#/components/schemas/TaxRecordPeriod1Code'
+        fromToDate:
+          $ref: '#/components/schemas/DatePeriod2'
+      type: object
+    Contact4:
+      additionalProperties: false
+      properties:
+        namePrefix:
+          $ref: '#/components/schemas/NamePrefix2Code'
+        name:
+          $ref: '#/components/schemas/Max140Text'
+        phoneNumber:
+          $ref: '#/components/schemas/PhoneNumber'
+        mobileNumber:
+          $ref: '#/components/schemas/PhoneNumber'
+        faxNumber:
+          $ref: '#/components/schemas/PhoneNumber'
+        emailAddress:
+          $ref: '#/components/schemas/Max2048Text'
+        emailPurpose:
+          $ref: '#/components/schemas/Max35Text'
+        jobTitle:
+          $ref: '#/components/schemas/Max35Text'
+        responsibility:
+          $ref: '#/components/schemas/Max35Text'
+        department:
+          $ref: '#/components/schemas/Max70Text'
+        other:
+          items:
+            $ref: '#/components/schemas/OtherContact1'
+          type: array
+        preferredMethod:
+          $ref: '#/components/schemas/PreferredContactMethod1Code'
+      type: object
+    DocumentType3Code:
+      enum:
+      - RADM
+      - RPIN
+      - FXDR
+      - DISP
+      - PUOR
+      - SCOR
+      type: string
+    ExternalPaymentGroupStatus1Code:
+      minLength: 1
+      maxLength: 4
+      type: string
+    GenericAccountIdentification1:
+      additionalProperties: false
+      properties:
+        identification:
+          $ref: '#/components/schemas/Max34Text'
+        schemeName:
+          $ref: '#/components/schemas/AccountSchemeName1Choice'
+        issuer:
+          $ref: '#/components/schemas/Max35Text'
+      required:
+      - identification
+      type: object
+    CustomerPaymentStatusReportV10:
+      properties:
+        groupHeader:
+          $ref: '#/components/schemas/GroupHeader86'
+        originalGroupInformationAndStatus:
+          $ref: '#/components/schemas/OriginalGroupHeader17'
+        originalPaymentInformationAndStatus:
+          items:
+            $ref: '#/components/schemas/OriginalPaymentInstruction32'
+          type: array
+      required:
+      - groupHeader
+      - originalGroupInformationAndStatus
+      type: object
+    Max4AlphaNumericText:
+      description: Specifies an alphanumeric string with a maximum length of 4 characters.
+      minLength: 1
+      maxLength: 4
+      pattern: ^[a-zA-Z0-9]{1,4}$
+      type: string
+    EquivalentAmount2:
+      additionalProperties: false
+      properties:
+        amount:
+          $ref: '#/components/schemas/CurrencyAmountType'
+        currencyOfTransfer:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+      required:
+      - amount
+      - currencyOfTransfer
+      type: object
+    ExternalCashClearingSystem1Code:
+      minLength: 1
+      maxLength: 3
+      type: string
+    debtorAgent:
+      required:
+      - financialInstitutionIdentification
+      properties:
+        financialInstitutionIdentification:
+          $ref: '#/components/schemas/agentFinancialInstitution'
+      additionalProperties: false
+      type: object
+    ActiveOrHistoricCurrencyAndAmountRange2:
+      properties:
+        amount:
+          $ref: '#/components/schemas/ImpliedCurrencyAmountRange1Choice'
+        currency:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+      required:
+      - amount
+      - currency
+      additionalProperties: false
+      type: object
+    Garnishment3:
+      additionalProperties: false
+      properties:
+        type:
+          $ref: '#/components/schemas/GarnishmentType1'
+        garnishee:
+          $ref: '#/components/schemas/PartyIdentification135'
+        garnishmentAdministrator:
+          $ref: '#/components/schemas/PartyIdentification135'
+        referenceNumber:
+          $ref: '#/components/schemas/Max140Text'
+        date:
+          $ref: '#/components/schemas/ISODate'
+        remittedAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        familyMedicalInsuranceIndicator:
+          $ref: '#/components/schemas/TrueFalseIndicator'
+        employeeTerminationIndicator:
+          $ref: '#/components/schemas/TrueFalseIndicator'
+      required:
+      - type
+      type: object
+    ActiveOrHistoricAmountRange2Choice:
+      oneOf:
+      - required:
+        - currencyAndAmountRange
+      - required:
+        - impliedCurrencyAndAmountRange
+      properties:
+        currencyAndAmountRange:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmountRange2'
+        impliedCurrencyAndAmountRange:
+          $ref: '#/components/schemas/impliedCurrencyAndAmountRange1'
+      additionalProperties: false
+      type: object
+    PaymentTransaction105:
+      properties:
+        statusIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        originalInstructionIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        originalEndToEndIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        originalUETR:
+          $ref: '#/components/schemas/UUIDv4Identifier'
+        transactionStatus:
+          $ref: '#/components/schemas/ExternalPaymentTransactionStatus1Code'
+        statusReasonInformation:
+          items:
+            $ref: '#/components/schemas/StatusReasonInformation12'
+          type: array
+        acceptanceDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        accountServicerReference:
+          $ref: '#/components/schemas/Max35Text'
+        clearingSystemReference:
+          $ref: '#/components/schemas/Max35Text'
+        originalTransactionReference:
+          $ref: '#/components/schemas/OriginalTransactionReference28'
+      type: object
+    FromToAmountRange1:
+      required:
+      - fromAmount
+      - toAmount
+      properties:
+        fromAmount:
+          $ref: '#/components/schemas/AmountRangeBoundary1'
+        toAmount:
+          $ref: '#/components/schemas/AmountRangeBoundary1'
+      additionalProperties: false
+      type: object
+    RequestType4Choice:
+      oneOf:
+      - required:
+        - paymentControl
+      - required:
+        - enquiry
+      - required:
+        - proprietary
+      properties:
+        paymentControl:
+          $ref: '#/components/schemas/ExternalPaymentControlRequestType1Code'
+        enquiry:
+          $ref: '#/components/schemas/ExternalEnquiryRequestType1Code'
+        proprietary:
+          $ref: '#/components/schemas/GenericIdentification1'
+      additionalProperties: false
+      type: object
+    TaxParty2:
+      additionalProperties: false
+      properties:
+        taxIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        registrationIdentification:
+          $ref: '#/components/schemas/Max35Text'
+        taxType:
+          $ref: '#/components/schemas/Max35Text'
+        authorisation:
+          $ref: '#/components/schemas/TaxAuthorisation1'
+      type: object
+    LEIIdentifier:
+      pattern: ^[A-Z0-9]{18,18}[0-9]{2,2}$
+      type: string
+    RemittanceAmount2:
+      additionalProperties: false
+      properties:
+        duePayableAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        discountAppliedAmount:
+          items:
+            $ref: '#/components/schemas/DiscountAmountAndType1'
+          type: array
+        creditNoteAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+        taxAmount:
+          items:
+            $ref: '#/components/schemas/TaxAmountAndType1'
+          type: array
+        adjustmentAmountAndReason:
+          items:
+            $ref: '#/components/schemas/DocumentAdjustment1'
+          type: array
+        remittedAmount:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyAndAmount'
+      type: object
+    PersonIdentificationSchemeName1Choice:
+      oneOf:
+      - required:
+        - code
+      - required:
+        - proprietary
+      properties:
+        code:
+          $ref: '#/components/schemas/ExternalPersonIdentification1Code'
+        proprietary:
+          $ref: '#/components/schemas/Max35Text'
+      additionalProperties: false
+      type: object
+    Exact4AlphaNumericText:
+      description: Specifies an alphanumeric string with a length of 4 characters.
+      pattern: ^[a-zA-Z0-9]{4}$
+      type: string
+    ActiveOrHistoricCurrencyCode:
+      pattern: ^[A-Z]{3,3}$
+      type: string
+    DocumentLineInformation1:
+      additionalProperties: false
+      properties:
+        identification:
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/DocumentLineIdentification1'
+          type: array
+        description:
+          $ref: '#/components/schemas/Max2048Text'
+        amount:
+          $ref: '#/components/schemas/RemittanceAmount3'
+      required:
+      - identification
+      type: object
+    accountIdentification:
+      type: object
+      oneOf:
+      - required:
+        - other
+      properties:
+        other:
+          $ref: '#/components/schemas/otherAccountIdentification'
+    Max128Text:
+      description: Specifies a character string with a maximum length of 128 characters.
+      minLength: 1
+      maxLength: 128
+      type: string
+  parameters:
+    x-app-cat-id:
+      in: header
+      name: x-app-cat-id
+      schema:
+        type: string
+      required: false
+      description: BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https:#appcat.bmogc.net/servlet/ApmServer
+    x-fapi-customer-user-agent:
+      name: x-fapi-customer-user-agent
+      in: header
+      description: The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.
+      schema:
+        type: string
+      required: false
+    x-fapi-customer-ip-address:
+      in: header
+      name: x-fapi-customer-ip-address
+      schema:
+        type: string
+      required: false
+      description: The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider
+    x-client-id:
+      in: header
+      name: x-client-id
+      schema:
+        type: string
+      required: true
+      description: Client Id generated during Third Party Provider application registration.
+    x-fapi-customer-last-logged-time:
+      in: header
+      name: x-fapi-customer-last-logged-time
+      schema:
+        type: string
+      required: false
+      description: The time when the Payment Services User last logged in with the Third Party Provider
+    x-api-key:
+      in: header
+      name: x-api-key
+      schema:
+        type: string
+      required: true
+      description: The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)
+    x-fapi-financial-id:
+      in: header
+      name: x-fapi-financial-id
+      schema:
+        type: string
+      required: false
+      description: The unique id of the financial institution to which the request is issued. BMO is 001
+    Authorization:
+      in: header
+      name: Authorization
+      schema:
+        type: string
+      required: true
+      description: An Authorisation Token as per https:#tools.ietf.org/html/rfc6750
+    true-client-ip:
+      in: header
+      name: true-client-ip
+      schema:
+        type: string
+      required: true
+      description: Akamai will populate this field and cascade to APIC and EMTOS
+    x-crypto-key:
+      name: x-crypto-key
+      in: header
+      description: Cryptographic key which can be used to decrypt the data. The format is  BASE64(key-id.JWE Encrypted Key.hashed.CEK)||'.'|| BASE64(Initialization Vector).
+      schema:
+        type: string
+      required: true
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      schema:
+        type: string
+      required: true
+      description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+    x-request-id:
+      in: header
+      name: x-request-id
+      schema:
+        type: string
+      required: true
+      description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+  responses:
+    '415':
+      description: Unsupported Media Type
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          required: true
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          required: true
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    GPSResponseBody:
+      description: OK
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          required: true
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          required: true
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GPSResponseBody'
+    '504':
+      description: Integration or Backend Timeout
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          required: true
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          required: true
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '400':
+      description: Bad Request Exception
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          required: true
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          required: true
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+    '500':
+      description: Internal Server Error
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          required: true
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          required: true
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '404':
+      description: Not Found
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          required: true
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          required: true
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '429':
+      description: Too many requests
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          required: true
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          required: true
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '401':
+      description: Unauthorized
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          required: true
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          required: true
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '403':
+      description: Forbidden - the user is not authorized to use this resource
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          required: true
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          required: true
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  securitySchemes:
+    api-key-1:
+      type: apiKey
+      in: header
+      x-key-type: client_id
+      name: x-api-key
+    OAuth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api2-sit2.bmogc.net/open-banking2/commercial-sb/oauth20/authorize
+          tokenUrl: https://api2-sit2.bmogc.net/open-banking2/commercial-sb/oauth20/token
+          scopes:
+            bmo.tppinterac.payment-initiation.read: bmo.tppinterac.payment-initiation.read
+            bmo.tppinterac.payment-initiation.create: bmo.tppinterac.payment-initiation.create
+            bmo.tppinterac.payment-execution.create: bmo.tppinterac.payment-execution.create
+      x-ibm-oauth-provider: apic-oauth-ob-commercial-sb-provider
+x-amazon-apigateway-gateway-responses:
+  INVALID_SIGNATURE:
+    statusCode: 403
+    responseTemplates:
+      application/json: "{\n \"type\": \"Invalid Signature\",\n \"title\": \"Failure\",\n \"status\": \"403\",\n \"detail\": $context.error.messageString\n}"
+  RESOURCE_NOT_FOUND:
+    statusCode: 404
+    responseTemplates:
+      application/json: "{\n \"type\": \"Resource Not Found\",\n \"title\": \"Failure\",\n \"status\": \"404\",\n \"detail\": $context.error.messageString\n}"
+  UNSUPPORTED_MEDIA_TYPE:
+    statusCode: 415
+    responseTemplates:
+      application/json: "{\n \"type\": \"Unsupported Media Type\",\n \"title\": \"Failure\",\n \"status\": \"415\",\n \"detail\": $context.error.messageString\n}"
+  AUTHORIZER_CONFIGURATION_ERROR:
+    statusCode: 500
+    responseTemplates:
+      application/json: "{\n \"type\": \"Authorizer Configuration Error\",\n  \"title\": \"Failure\",\n \"status\": \"500\",\n \"detail\": $context.error.messageString\n}"
+  BAD_REQUEST_BODY:
+    statusCode: 400
+    responseTemplates:
+      application/json: "{\n \"type\": \"Input Violation Exception\",\n \"title\": \"Failure\",\n \"status\": \"400\",\n \"detail\": $context.error.messageString\n}"
+  THROTTLED:
+    statusCode: 429
+    responseTemplates:
+      application/json: "{\n \"type\": \"Throttled\",\n \"title\": \"Failure\",\n \"status\": \"429\",\n \"detail\": $context.error.messageString\n}"
+  ACCESS_DENIED:
+    statusCode: 403
+    responseTemplates:
+      application/json: "{\n \"type\": \"Access Denied\",\n \"title\": \"Failure\",\n \"status\": \"403\",\n \"detail\": $context.error.messageString\n}"
+  INTEGRATION_TIMEOUT:
+    statusCode: 504
+    responseTemplates:
+      application/json: "{\n \"type\": \"Integration Timeout\",\n \"title\": \"Failure\",\n \"status\": \"504\",\n \"detail\": $context.error.messageString\n}"
+  REQUEST_TOO_LARGE:
+    statusCode: 413
+    responseTemplates:
+      application/json: "{\n \"type\": \"Request Too Large\",\n \"title\": \"Failure\",\n \"status\": \"413\",\n \"detail\": $context.error.messageString\n}"
+  QUOTA_EXCEEDED:
+    statusCode: 429
+    responseTemplates:
+      application/json: "{\n \"type\": \"Quota Exceeded\",\n \"title\": \"Failure\",\n \"status\": \"429\",\n \"detail\": $context.error.messageString\n}"
+  INVALID_API_KEY:
+    statusCode: 403
+    responseTemplates:
+      application/json: "{\n \"type\": \"Invalid API Key\",\n \"title\": \"Failure\",\n \"status\": \"403\",\n \"detail\": $context.error.messageString\n}"
+  EXPIRED_TOKEN:
+    statusCode: 403
+    responseTemplates:
+      application/json: "{\n \"type\": \"Expired Token\",\n \"title\": \"Failure\",\n \"status\": \"403\",\n \"detail\": $context.error.messageString\n}"
+  AUTHORIZER_FAILURE:
+    statusCode: 500
+    responseTemplates:
+      application/json: "{\n \"type\": \"Authorizer Failure\",\n \"title\": \"Failure\",\n \"status\": \"500\",\n \"detail\": $context.error.messageString\n}"
+  API_CONFIGURATION_ERROR:
+    statusCode: 500
+    responseTemplates:
+      application/json: "{\n \"type\": \"API Configuration Error\",\n \"title\": \"Failure\",\n \"status\": \"500\",\n \"detail\": $context.error.messageString\n}"
+  BAD_REQUEST_PARAMETERS:
+    statusCode: 400
+    responseTemplates:
+      application/json: "{\n \"type\": \"Input Violation Exception\",\n \"title\": \"Failure\",\n \"status\": \"400\",\n \"detail\": $context.error.messageString\n}"
+  MISSING_AUTHENTICATION_TOKEN:
+    statusCode: 403
+    responseTemplates:
+      application/json: "{\n \"type\": \"Missing Authentication Token\",\n \"title\": \"Failure\",\n \"status\": \"403\",\n \"detail\": $context.error.messageString\n}"
+  INTEGRATION_FAILURE:
+    statusCode: 504
+    responseTemplates:
+      application/json: "{\n \"type\": \"Integration Failure\",\n \"title\": \"Failure\",\n \"status\": \"504\",\n \"detail\": $context.error.messageString\n}"
+  UNAUTHORIZED:
+    statusCode: 401
+    responseTemplates:
+      application/json: "{\n \"type\": \"Unauthorized\",\n \"title\": \"Failure\",\n \"status\": \"401\",\n \"detail\": $context.error.messageString\n}"
+x-amazon-apigateway-request-validators:
+  Validate body, query string parameters, and headers:
+    validateRequestParameters: false
+x-amazon-apigateway-policy:
+  Version: '2012-10-17'
+  Statement:
+  - Effect: Allow
+    Principal: '*'
+    Action: execute-api:Invoke
+    Resource: executeApiArn
+    Condition:
+      StringEquals:
+        aws:SourceVpc:
+        - VpcId
+x-ibm-configuration:
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  categories:
+  - bian--bd--operationalservices
+  cors:
+    enabled: true
+  oauth-servers:
+    OAuth:
+      authorizationCode:
+        tokenUrls:
+        - https://api2-sit2.bmogc.net/open-banking2/commercial-sb/oauth20/token
+        authorizationUrls:
+        - https://api2-sit2.bmogc.net/open-banking2/commercial-sb/oauth20/authorize
+        refreshUrls: []
+x-ibm-endpoints:
+- url: https://open-api-sit.bmogc.net/open-banking2/commercial-sb
+  type:
+  - production
+  - development

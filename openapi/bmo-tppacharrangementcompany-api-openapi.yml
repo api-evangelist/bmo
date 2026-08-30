@@ -1,0 +1,441 @@
+openapi: 3.2.0
+info:
+  title: ACH Payments Tpp ACH Arrangement Company API
+  description: ACHPaymentAPI will act as a API routing the ACH payment requests Product Systems for execution. The TppPaymentInstruction generic API exposes three functionality of receiving sendPayment - ISO PAIN 001(Credit) and PAIN 008 (Debit) and PaymentStatus Enquiry ( CAMT005 ). The subsequent validation and processing of Payment messages received, would be performed by the downstream APIs
+  contact:
+    name: ACH Payment Service - ACHAPI
+    url: https://bmo.atlassian.net/wiki/spaces/ACHBS/pages/1096549051/External+General+API+Swagger
+    email: ACHPSSupport@bmo.com
+  version: 1.1.3
+  x-api-id: NA
+  x-audience: company-external
+  x-bmoservicedomain-name: Payment Initiation
+  x-bmo-api-type: internal-api
+  x-template-version: 2.0.0
+  x-bmo-api-provider-id: 80613
+  x-api-specification-compliant: true
+  x-ibm-name: achpaymentapi
+  x-ibm-summary: ''
+servers:
+- url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+tags:
+- name: TppACHArrangementCompany
+paths:
+  /tpp/ach/customer-access-entitlement/commercial-user-access-arrangement/get:
+    post:
+      tags:
+      - TppACHArrangementCompany
+      summary: Get Company ID List
+      description: Get all the consented company Ids from ACH business services for the third party consumer, request with customerId and respond with the list of Company Ids.
+      operationId: ACHCompanyIDList
+      x-dataclassification-code: Confidential
+      parameters:
+      - name: x-fapi-interaction-id
+        in: header
+        description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream
+        required: true
+        schema:
+          type: string
+      - name: x-fapi-customer-last-logged-time
+        in: header
+        description: The time when the Payment Services User last logged in with the Third Party Provider
+        required: false
+        schema:
+          type: string
+      - name: x-fapi-customer-ip-address
+        in: header
+        description: The Payment Services User's IP address if the Payment Services User is currently logged in with the Third Party Provider.
+        required: false
+        schema:
+          type: string
+      - name: x-fapi-customer-user-agent
+        in: header
+        description: Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm
+        required: false
+        schema:
+          type: string
+      - name: x-fapi-financial-id
+        in: header
+        description: The unique id of the financial institution to which the request is issued.  BMO is 001
+        required: false
+        schema:
+          type: string
+      - name: x-crypto-key
+        in: header
+        description: Crypto Key for payload decryption
+        required: false
+        schema:
+          type: string
+      - name: x-request-id
+        in: header
+        description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        required: true
+        schema:
+          type: string
+      - name: x-sourcesystem-id
+        in: header
+        description: Source System ID to identify source, use 'OPENGENAPI'
+        required: true
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        description: The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)
+        required: false
+        schema:
+          type: string
+      - name: x-app-cat-id
+        in: header
+        description: BMO Application Catalogue ID of the consumer of the API.  To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer
+        required: false
+        schema:
+          type: string
+      - name: x-csrf-token
+        in: header
+        description: Applicable for cookie session based authentication. Applicable for UI layer to pass session value to support cookie session based authentication
+        required: false
+        schema:
+          type: string
+      - name: x-content-type
+        in: header
+        description: pdf or csv
+        required: false
+        schema:
+          type: string
+      - name: x-expires
+        in: header
+        description: valid value 0
+        required: false
+        schema:
+          type: string
+      - name: x-cache-control
+        in: header
+        description: must-revalidate post-check=0 pre-check=0
+        required: false
+        schema:
+          type: string
+      - name: x-content-disposition
+        in: header
+        description: attachment and fileName
+        required: false
+        schema:
+          type: string
+      requestBody:
+        description: ACHCompanyIDListRequest
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPayload'
+        required: true
+      security:
+      - api-key-1: []
+        OAuth:
+        - bmo.tppach.payment-initiation.read
+      responses:
+        '200':
+          description: OK
+          headers:
+            x-fapi-interaction-id:
+              description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+              schema:
+                type: string
+              required: true
+            x-request-id:
+              description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+              required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsePayload'
+        '400':
+          description: Bad Request Exception
+          headers:
+            x-fapi-interaction-id:
+              description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+              schema:
+                type: string
+              required: true
+            x-request-id:
+              description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+              required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '401':
+          description: Unauthorized
+          headers:
+            x-fapi-interaction-id:
+              description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+              schema:
+                type: string
+              required: true
+            x-request-id:
+              description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+              required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '403':
+          description: Forbidden - the user is not authorized to use this resource
+          headers:
+            x-fapi-interaction-id:
+              description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+              schema:
+                type: string
+              required: true
+            x-request-id:
+              description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+              required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '404':
+          description: Not Found
+          headers:
+            x-fapi-interaction-id:
+              description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+              schema:
+                type: string
+              required: true
+            x-request-id:
+              description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+              required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '415':
+          description: Unsupported Media Type
+          headers:
+            x-fapi-interaction-id:
+              description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+              schema:
+                type: string
+              required: true
+            x-request-id:
+              description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+              required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '429':
+          description: Too many requests
+          headers:
+            x-fapi-interaction-id:
+              description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+              schema:
+                type: string
+              required: true
+            x-request-id:
+              description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+              required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '500':
+          description: Internal Server Error
+          headers:
+            x-fapi-interaction-id:
+              description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+              schema:
+                type: string
+              required: true
+            x-request-id:
+              description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+              required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+        '504':
+          description: Integration or Backend Timeout
+          headers:
+            x-fapi-interaction-id:
+              description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+              schema:
+                type: string
+              required: true
+            x-request-id:
+              description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+              required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+      x-codegen-request-body-name: ACHCompanyIDListRequest
+components:
+  schemas:
+    Problem:
+      required:
+      - detail
+      - status
+      - title
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'An absolute URI that identifies the problem type.  When dereferenced,
+
+            it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML).
+
+            '
+          format: uri
+          example: https://zalando.github.io/problem/input-violation
+          default: about:blank
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and not localized);
+
+            '
+          example: Bad Request
+        status:
+          minimum: 100
+          type: integer
+          description: The HTTP status code generated by the origin server for this occurrence of the problem.
+          format: int32
+          example: 400
+          exclusiveMaximum: 600
+        detail:
+          type: string
+          description: A human readable explanation specific to this occurrence of the problem.
+          example: Connection to database timed out
+        instance:
+          type: string
+          description: An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+          format: uri
+        additional_details:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdditionalDetail'
+    RequestPayload:
+      properties:
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
+    ResponsePayload:
+      required:
+      - result
+      - SECURE
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/Result'
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
+    Result:
+      type: object
+      required:
+      - code
+      - status
+      properties:
+        code:
+          type: string
+        status:
+          type: string
+        messages:
+          type: array
+          items:
+            type: string
+        resultDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResultDetails'
+    AdditionalDetail:
+      type: object
+      description: An object containing detailed Additional information.
+      properties:
+        detailCode:
+          type: string
+          description: Detailed backend response codes.eg. CUSTOMER-ERROR-DOB-MISSING
+        detailMessage:
+          type: string
+          description: Detailed backend messages. e.g. Date of Birth is missing.
+        sourceAppCatId:
+          type: string
+    ResultDetails:
+      type: object
+      properties:
+        detailCode:
+          type: string
+        detailMessage:
+          type: string
+    SECURE:
+      type: object
+      required:
+      - encrypted
+      - data
+      properties:
+        encrypted:
+          type: boolean
+          default: true
+          description: Send true when dealing with data encryption
+        data:
+          type: string
+          default: encrypted PAIN001 or PAIN00 or CAMT005 payload for request and pain002 for response
+          description: 'base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field'
+  securitySchemes:
+    api-key-1:
+      type: apiKey
+      in: header
+      x-key-type: client_id
+      name: x-api-key
+    OAuth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+          tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+          scopes:
+            SandboxDataManagement: SandboxDataManagement
+            bmo.tppach.payment-initiation.read: bmo.tppach.payment-initiation.read
+            bmo.tppach.payment-initiation.create: bmo.tppach.payment-initiation.create
+      x-ibm-oauth-provider: apic-oauth-ob-commercial-sb-provider
+x-ibm-configuration:
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  categories:
+  - bian--bd--operationalservices
+  cors:
+    enabled: true
+  oauth-servers:
+    OAuth:
+      authorizationCode:
+        tokenUrls:
+        - https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+        authorizationUrls:
+        - https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+        refreshUrls: []
+x-ibm-endpoints:
+- url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+  type:
+  - production
+  - development

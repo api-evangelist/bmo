@@ -1,0 +1,456 @@
+openapi: 3.2.0
+info:
+  title: Electronic Funds Transfer (EFT) Obtain Service Agreement List API
+  description: A Service to initiate credit/debit payments, get payment status & service agreement list.
+  contact:
+    name: AWS-EFT-API-Developers
+    url: https://bmo.atlassian.net/wiki/spaces/TPSEFPS/pages/1096019429/Swagger+-+EFT+External+General+API
+    email: AWS-EFT-API-Developers@bmo.com
+  version: 2.2.5
+  x-api-id: BMO-ENT-28739f4a-8bcb-4585-8458-a061ab82651a
+  x-audience: external-partner
+  x-bmo-api-provider-id: '87335'
+  x-ibm-name: eft-payments-ca
+  x-bmo-api-type: general-api
+  x-bmoservicedomain-name: Payment Initiation
+  x-template-version: 1.0.0
+  x-api-specification-compliant: true
+  x-ibm-summary: ''
+servers:
+- url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+tags:
+- name: Obtain Service Agreement List
+  description: Service agreement search which receives CustomerEntityId (proprietary) as input and return CustomerAgreementInfoReport (proprietary) as response
+paths:
+  /tpp/eft/customer-access-entitlement/commercial-user-access-arrangement/get:
+    post:
+      tags:
+      - Obtain Service Agreement List
+      summary: Obtain Service Agreement List
+      description: Service agreement search which receives CustomerEntityId (proprietary) as input and return CustomerAgreementInfoReport (proprietary) as response
+      x-dataclassification-code: Confidential
+      operationId: GetServiceAgreementList
+      parameters:
+      - $ref: '#/components/parameters/x-fapi-financial-id'
+      - $ref: '#/components/parameters/x-fapi-customer-last-logged-time'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/x-fapi-customer-user-agent'
+      - $ref: '#/components/parameters/x-client-id'
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-app-cat-id'
+      - $ref: '#/components/parameters/x-bmo-id-token'
+      requestBody:
+        description: CustomerEntityId
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SECURE'
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/CustomerAgreementInfoReport'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '415':
+          $ref: '#/components/responses/415'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        '504':
+          $ref: '#/components/responses/504'
+      security:
+      - api_key: []
+        OAuth:
+        - bmo.tppeft.payment-initiation.read
+      x-amazon-apigateway-request-validator: params-only
+      x-codegen-request-body-name: GetServiceAgreementList
+components:
+  parameters:
+    x-fapi-financial-id:
+      in: header
+      name: x-fapi-financial-id
+      schema:
+        type: string
+      required: true
+      description: The unique id of the financial institution to which the request is issued. BMO is 001
+    x-bmo-id-token:
+      in: header
+      name: x-bmo-id-token
+      schema:
+        type: string
+      required: false
+      description: BMO ID token containing encoded user id and client id information
+    x-app-cat-id:
+      in: header
+      name: x-app-cat-id
+      schema:
+        type: string
+      required: false
+      description: BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer
+    x-fapi-customer-last-logged-time:
+      in: header
+      name: x-fapi-customer-last-logged-time
+      schema:
+        type: string
+      required: false
+      description: The time when the Payment Services User last logged in with the Third Party Provider
+    Authorization:
+      in: header
+      name: Authorization
+      schema:
+        type: string
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      schema:
+        type: string
+      required: true
+      description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+    x-request-id:
+      in: header
+      name: x-request-id
+      schema:
+        type: string
+      required: true
+      description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+    x-fapi-customer-user-agent:
+      name: x-fapi-customer-user-agent
+      in: header
+      description: The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.
+      schema:
+        type: string
+      required: false
+    x-fapi-customer-ip-address:
+      in: header
+      name: x-fapi-customer-ip-address
+      schema:
+        type: string
+      required: false
+      description: The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider
+    x-client-id:
+      in: header
+      name: x-client-id
+      schema:
+        type: string
+      required: true
+      description: Client Id generated during Third Party Provider application registration.
+  responses:
+    '400':
+      description: Bad Request Exception
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+    '415':
+      description: Unsupported Media Type
+      headers:
+        x-fapi-interaction-id:
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          schema:
+            type: string
+          required: true
+        x-et-response-code:
+          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
+          schema:
+            type: integer
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '429':
+      description: Too many requests
+      headers:
+        x-fapi-interaction-id:
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          schema:
+            type: string
+          required: true
+        x-et-response-code:
+          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
+          schema:
+            type: integer
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '504':
+      description: Integration or Backend Timeout
+      headers:
+        x-fapi-interaction-id:
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interanctioId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          schema:
+            type: string
+          required: true
+        x-et-response-code:
+          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
+          schema:
+            type: integer
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    CustomerAgreementInfoReport:
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SECURE'
+    '500':
+      description: Internal Server Error
+      headers:
+        x-fapi-interaction-id:
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          schema:
+            type: string
+          required: true
+        x-et-response-code:
+          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
+          schema:
+            type: integer
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '401':
+      description: Unauthorized
+      headers:
+        x-fapi-interaction-id:
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          schema:
+            type: string
+          required: true
+        x-et-response-code:
+          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
+          schema:
+            type: integer
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '404':
+      description: Not Found
+      headers:
+        x-fapi-interaction-id:
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          schema:
+            type: string
+          required: true
+        x-et-response-code:
+          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
+          schema:
+            type: integer
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '403':
+      description: Forbidden - the user is not authorized to use this resource
+      headers:
+        x-fapi-interaction-id:
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          schema:
+            type: string
+          required: true
+        x-et-response-code:
+          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
+          schema:
+            type: integer
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  schemas:
+    Problem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: 'An absolute URI that identifies the problem type.  When dereferenced,
+
+            it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML). default: ''about:blank''; example: ''https://zalando.github.io/problem/constraint-violation''
+
+            '
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and
+
+            not localized); example: Service Unavailable
+
+            '
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem. example: 503
+
+            '
+          minimum: 100
+          maximum: 600
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem. example: Connection to database timed out
+
+            '
+        instance:
+          type: string
+          format: uri
+          description: 'An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+
+            '
+    SECURE:
+      type: object
+      properties:
+        SECURE:
+          type: object
+          properties:
+            encrypted:
+              type: boolean
+            data:
+              type: string
+              description: Data to hold strigified plaintext iso json/encrypted iso message string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: x-api-key
+      in: header
+      x-key-type: client_id
+    OAuth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+          tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+          scopes:
+            bmo.tppeft.payment-initiation.read: bmo.tppeft.payment-initiation.read
+            bmo.tppeft.payment-initiation.create: bmo.tppeft.payment-initiation.create
+      x-ibm-oauth-provider: apic-oauth-ob-commercial-sb-provider
+x-amazon-apigateway-gateway-responses:
+  INVALID_SIGNATURE:
+    statusCode: 403
+    responseTemplates:
+      application/json: "{\n \"type\": \"Invalid Signature\",\n \"title\": \"Failure\",\n \"status\": \"403\",\n \"detail\": $context.error.messageString\n}"
+  RESOURCE_NOT_FOUND:
+    statusCode: 404
+    responseTemplates:
+      application/json: "{\n \"type\": \"Resource Not Found\",\n \"title\": \"Failure\",\n \"status\": \"404\",\n \"detail\": $context.error.messageString\n}"
+  UNSUPPORTED_MEDIA_TYPE:
+    statusCode: 415
+    responseTemplates:
+      application/json: "{\n \"type\": \"Unsupported Media Type\",\n \"title\": \"Failure\",\n \"status\": \"415\",\n \"detail\": $context.error.messageString\n}"
+  AUTHORIZER_CONFIGURATION_ERROR:
+    statusCode: 500
+    responseTemplates:
+      application/json: "{\n \"type\": \"Authorizer Configuration Error\",\n  \"title\": \"Failure\",\n \"status\": \"500\",\n \"detail\": $context.error.messageString\n}"
+  BAD_REQUEST_BODY:
+    statusCode: 400
+    responseTemplates:
+      application/json: "{\n \"type\": \"Input Violation Exception\",\n \"title\": \"Failure\",\n \"status\": \"400\",\n \"detail\": $context.error.messageString\n}"
+  THROTTLED:
+    statusCode: 429
+    responseTemplates:
+      application/json: "{\n \"type\": \"Throttled\",\n \"title\": \"Failure\",\n \"status\": \"429\",\n \"detail\": $context.error.messageString\n}"
+  ACCESS_DENIED:
+    statusCode: 403
+    responseTemplates:
+      application/json: "{\n \"type\": \"Access Denied\",\n \"title\": \"Failure\",\n \"status\": \"403\",\n \"detail\": $context.error.messageString\n}"
+  INTEGRATION_TIMEOUT:
+    statusCode: 504
+    responseTemplates:
+      application/json: "{\n \"type\": \"Integration Timeout\",\n \"title\": \"Failure\",\n \"status\": \"504\",\n \"detail\": $context.error.messageString\n}"
+  REQUEST_TOO_LARGE:
+    statusCode: 413
+    responseTemplates:
+      application/json: "{\n \"type\": \"Request Too Large\",\n \"title\": \"Failure\",\n \"status\": \"413\",\n \"detail\": $context.error.messageString\n}"
+  QUOTA_EXCEEDED:
+    statusCode: 429
+    responseTemplates:
+      application/json: "{\n \"type\": \"Quota Exceeded\",\n \"title\": \"Failure\",\n \"status\": \"429\",\n \"detail\": $context.error.messageString\n}"
+  INVALID_API_KEY:
+    statusCode: 403
+    responseTemplates:
+      application/json: "{\n \"type\": \"Invalid API Key\",\n \"title\": \"Failure\",\n \"status\": \"403\",\n \"detail\": $context.error.messageString\n}"
+  EXPIRED_TOKEN:
+    statusCode: 403
+    responseTemplates:
+      application/json: "{\n \"type\": \"Expired Token\",\n \"title\": \"Failure\",\n \"status\": \"403\",\n \"detail\": $context.error.messageString\n}"
+  AUTHORIZER_FAILURE:
+    statusCode: 500
+    responseTemplates:
+      application/json: "{\n \"type\": \"Authorizer Failure\",\n \"title\": \"Failure\",\n \"status\": \"500\",\n \"detail\": $context.error.messageString\n}"
+  API_CONFIGURATION_ERROR:
+    statusCode: 500
+    responseTemplates:
+      application/json: "{\n \"type\": \"API Configuration Error\",\n \"title\": \"Failure\",\n \"status\": \"500\",\n \"detail\": $context.error.messageString\n}"
+  BAD_REQUEST_PARAMETERS:
+    statusCode: 400
+    responseTemplates:
+      application/json: "{\n \"type\": \"Input Violation Exception\",\n \"title\": \"Failure\",\n \"status\": \"400\",\n \"detail\": $context.error.messageString\n}"
+  MISSING_AUTHENTICATION_TOKEN:
+    statusCode: 403
+    responseTemplates:
+      application/json: "{\n \"type\": \"Missing Authentication Token\",\n \"title\": \"Failure\",\n \"status\": \"403\",\n \"detail\": $context.error.messageString\n}"
+  INTEGRATION_FAILURE:
+    statusCode: 504
+    responseTemplates:
+      application/json: "{\n \"type\": \"Integration Failure\",\n \"title\": \"Failure\",\n \"status\": \"504\",\n \"detail\": \"An internal error has occurred. Please try again.\"\n}"
+  UNAUTHORIZED:
+    statusCode: 401
+    responseTemplates:
+      application/json: "{\n \"type\": \"Unauthorized\",\n \"title\": \"Failure\",\n \"status\": \"401\",\n \"detail\": $context.error.messageString\n}"
+x-ibm-configuration:
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  categories:
+  - bian--bd--operationalservices
+  cors:
+    enabled: true
+  oauth-servers:
+    OAuth:
+      authorizationCode:
+        tokenUrls:
+        - https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+        authorizationUrls:
+        - https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+        refreshUrls: []
+x-ibm-endpoints:
+- url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+  type:
+  - production
+  - development

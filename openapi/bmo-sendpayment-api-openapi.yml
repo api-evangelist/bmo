@@ -1,0 +1,498 @@
+openapi: 3.2.0
+info:
+  title: Bmo Send Payment API
+  version: 1.0.2
+  contact:
+    name: WROS Support
+    url: https://confluence.bmogc.net/x/PAGE_TO_BE_CREATED
+    email: EWPCORE_TechSupport@bmo.com
+  x-refined-note:
+  - x-api-id differs across the merged source definitions and was not carried
+  - x-ibm-name differs across the merged source definitions and was not carried
+  x-api-specification-compliant: true
+  x-audience: company-internal
+  x-bmo-api-provider-id: 87679
+  x-bmo-api-type: internal-api
+  x-bmoservicedomain-name: Payment Initiation
+  x-ibm-summary: ''
+  x-template-version: 1.0.0
+  description: 'Operations tagged SendPayment across 2 of this provider''s published API definitions: bmo-wire-payments-ca-openapi.json, bmo-wire-payments-us-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+tags:
+- name: SendPayment
+  description: Receive wire payment request in PAIN.001 ISO from BMO Canada partners/customers to initiate wire payment and send acknowledgement as response in PAIN.002 ISO.
+paths:
+  /tpp/wires/payment-initiation/customer-credit-transfer-initiation:
+    post:
+      x-dataclassification-code: Confidential
+      description: Receive wire payment request from tpp in PAIN.001 ISO request as input and return acknwoledgement in PAIN.002 ISO as response.
+      tags:
+      - SendPayment
+      operationId: TppCustomerCreditTransferInitiation
+      summary: Send Wire Payment
+      parameters:
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/x-app-cat-id'
+      - $ref: '#/components/parameters/x-client-id'
+      - $ref: '#/components/parameters/x-api-key'
+      - $ref: '#/components/parameters/x-fapi-financial-id'
+      - $ref: '#/components/parameters/x-fapi-customer-last-logged-time'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-customer-user-agent'
+      - $ref: '#/components/parameters/x-csrf-token'
+      - $ref: '#/components/parameters/x-crypto-key'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/true-client-ip'
+      requestBody:
+        description: CustomerCreditTransferInitiation - Send PAIN.001 ISO message and respond back with PAIN.002 ISO message
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreditTransferInitiationRequest'
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/pain002'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '415':
+          $ref: '#/components/responses/415'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        '504':
+          $ref: '#/components/responses/504'
+      x-codegen-request-body-name: CustomerCreditTransferInitiation
+      security:
+      - api-key-1: []
+        OAuth:
+        - bmo.tppwiresca.payment-initiation.create
+    servers:
+    - url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+  /tpp/wires/payment-initiation/customer-credit-transfer-initiation/us:
+    post:
+      x-dataclassification-code: Confidential
+      security:
+      - api-key-1: []
+        OAuth:
+        - bmo.tppwiresus.payment-initiation.create
+      description: Receive wire payment request from BMO Bank NA Partners/Customers in PAIN.001 ISO as input and return acknwoledgement in PAIN.002 ISO as response.
+      tags:
+      - SendPayment
+      operationId: TppCustomerCreditTransferInitiation
+      summary: Send Wire Payment
+      parameters:
+      - $ref: '#/components/parameters/x-request-id'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/x-app-cat-id'
+      - $ref: '#/components/parameters/x-client-id'
+      - $ref: '#/components/parameters/x-api-key'
+      - $ref: '#/components/parameters/x-fapi-financial-id'
+      - $ref: '#/components/parameters/x-fapi-customer-last-logged-time'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-customer-user-agent'
+      - $ref: '#/components/parameters/x-csrf-token'
+      - $ref: '#/components/parameters/x-crypto-key'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/true-client-ip'
+      requestBody:
+        description: CustomerCreditTransferInitiation - Send PAIN.001 ISO message.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerCreditTransferInitiationRequest'
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/pain002'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '415':
+          $ref: '#/components/responses/415'
+        '429':
+          $ref: '#/components/responses/429'
+        '500':
+          $ref: '#/components/responses/500'
+        '504':
+          $ref: '#/components/responses/504'
+      x-codegen-request-body-name: CustomerCreditTransferInitiation
+    servers:
+    - url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+components:
+  parameters:
+    x-fapi-financial-id:
+      in: header
+      name: x-fapi-financial-id
+      schema:
+        type: string
+      required: false
+      description: The unique id of the financial institution to which the request is issued. BMO is 001
+    x-app-cat-id:
+      in: header
+      name: x-app-cat-id
+      schema:
+        type: string
+      required: false
+      description: BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer
+    x-fapi-customer-last-logged-time:
+      in: header
+      name: x-fapi-customer-last-logged-time
+      schema:
+        type: string
+      required: false
+      description: The time when the Payment Services User last logged in with the Third Party Provider
+    Authorization:
+      in: header
+      name: Authorization
+      schema:
+        type: string
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+    x-csrf-token:
+      in: header
+      name: x-csrf-token
+      schema:
+        type: string
+      required: false
+      description: This header holds the token to prevent for the cross-site request forgery prevention token.
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      schema:
+        type: string
+      required: true
+      description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+    true-client-ip:
+      name: true-client-ip
+      in: header
+      description: Original initiator ip address. Will be inserted by Akamai when enable add “True-Client-IP”. Payments API require this for AML (or Fraud) analysis.
+      schema:
+        type: string
+      required: false
+    x-api-key:
+      in: header
+      name: x-api-key
+      schema:
+        type: string
+      required: false
+      description: The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)
+    x-fapi-customer-user-agent:
+      in: header
+      name: x-fapi-customer-user-agent
+      schema:
+        type: string
+      required: false
+      description: The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.
+    x-request-id:
+      in: header
+      name: x-request-id
+      schema:
+        type: string
+      required: true
+      description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+    x-crypto-key:
+      name: x-crypto-key
+      in: header
+      description: This header is over API calls to share content encryption key and its meta data to fulfill API application-level encryption. The crypto key is to encrypt symmetric key. It will also have information such as iv, key-id.
+      schema:
+        type: string
+      required: false
+    x-fapi-customer-ip-address:
+      in: header
+      name: x-fapi-customer-ip-address
+      schema:
+        type: string
+      required: false
+      description: The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider
+    x-client-id:
+      in: header
+      name: x-client-id
+      schema:
+        type: string
+      required: true
+      description: Client Id generated during Third Party Provider application registration. The Client Id is leveraged for the internal BMO API calls as calling channel identifier.
+  responses:
+    '400':
+      description: Bad Request Exception
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+          required: true
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+          required: true
+    '415':
+      description: Unsupported Media Type
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+          required: true
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '429':
+      description: Too many requests
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+          required: true
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '504':
+      description: Integration or Backend Timeout
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+          required: true
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    pain002:
+      description: OK
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+          required: true
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CustomerPaymentStatusReportResponse'
+    '500':
+      description: Internal Server Error
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+          required: true
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '401':
+      description: Unauthorized
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+          required: true
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '404':
+      description: Not Found
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+          required: true
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '403':
+      description: Forbidden - the user is not authorized to use this resource
+      headers:
+        x-request-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+          required: true
+        x-fapi-interaction-id:
+          schema:
+            type: string
+          description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  schemas:
+    Problem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: 'An absolute URI that identifies the problem type.  When dereferenced,
+
+            it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML). default: ''about:blank''; example: ''https://zalando.github.io/problem/constraint-violation''
+
+            '
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and
+
+            not localized); example: Service Unavailable
+
+            '
+        status:
+          type: integer
+          format: int32
+          description: 'The HTTP status code generated by the origin server for this occurrence
+
+            of the problem. example: 503
+
+            '
+          minimum: 100
+          maximum: 600
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem. example: Connection to database timed out
+
+            '
+        instance:
+          type: string
+          format: uri
+          description: 'An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
+
+            '
+    CustomerCreditTransferInitiationRequest:
+      properties:
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
+      required:
+      - SECURE
+    CustomerPaymentStatusReportResponse:
+      properties:
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
+      required:
+      - SECURE
+    SECURE:
+      type: object
+      required:
+      - encrypted
+      - data
+      properties:
+        encrypted:
+          type: boolean
+          default: true
+          description: Send true when dealing with data encryption else false
+        data:
+          type: string
+          default: encrypted PAIN001 or PAIN00 or CAMT005 payload for request and pain002 for response
+          description: 'base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field'
+  securitySchemes:
+    api-key-1:
+      type: apiKey
+      in: header
+      x-key-type: client_id
+      name: x-api-key
+    OAuth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+          tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+          scopes:
+            SandboxDataManagement: SandboxDataManagement
+            bmo.tppwiresca.payment-initiation.read: bmo.tppwiresca.payment-initiation.read
+            bmo.tppwiresca.payment-initiation.create: bmo.tppwiresca.payment-initiation.create
+      x-ibm-oauth-provider: apic-oauth-ob-commercial-sb-provider
+x-refined-from:
+- bmo-wire-payments-ca-openapi.json
+- bmo-wire-payments-us-openapi.json
+x-ibm-configuration:
+  categories:
+  - bian--bd--operationalservices
+  enforced: true
+  testable: true
+  phase: realized
+  cors:
+    enabled: true
+  type: rest
+  application-authentication:
+    certificate: false
+  oauth-servers:
+    OAuth:
+      authorizationCode:
+        tokenUrls:
+        - https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+        authorizationUrls:
+        - https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+        refreshUrls: []
+x-ibm-endpoints:
+- url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+  type:
+  - production
+  - development

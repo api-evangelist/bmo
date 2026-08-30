@@ -1,0 +1,1081 @@
+openapi: 3.2.0
+info:
+  version: 5.3.0
+  title: Account Information Account Transactions API
+  description: Retrieve real-time account and transaction information for all your authorized BMO accounts without the need to switch applications.
+  x-api-id: BMO-ENT-7673dc36-7935-44e4-aeff-3c9ddd5d8e85
+  x-bmoservicedomain-name: Commercial-sb
+  x-api-specification-compliant: true
+  x-audience: company-internal
+  x-bmo-api-type: internal-api
+  x-bmo-api-provider-id: 3284
+  x-ibm-name: account-information
+  x-ibm-summary: ''
+servers:
+- url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+security:
+- api-key-1: []
+  OAuth:
+  - FinancialInformation
+tags:
+- name: Account Transactions
+  description: Search for account transactions
+paths:
+  /accounts/{accountId}/transactions:
+    get:
+      x-dataclassification-code: Confidential
+      operationId: Search for Account Transactions
+      tags:
+      - Account Transactions
+      description: Search for Account Transactions
+      summary: Search for Account Transactions
+      parameters:
+      - name: accountId
+        in: path
+        description: Account Identifier
+        required: true
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        description: Start time for use in retrieval of transactions
+        schema:
+          type: string
+          format: date
+      - name: endTime
+        in: query
+        description: End time for use in retrieval of transactions
+        schema:
+          type: string
+          format: date
+      - name: offset
+        in: query
+        description: Opaque cursor used by the provider to send the next set of records
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Number of elements that the consumer wishes to receive - Providers should implement reasonable defaults and maximum
+        schema:
+          type: integer
+      - name: x-api-key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: distinct
+        in: header
+        schema:
+          type: boolean
+        required: false
+      responses:
+        '200':
+          description: Paged collection of transactions, which can be one of DepositTransaction, LoanTransaction, LocTransaction or InvestmentTransaction
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transactions'
+              examples:
+                example1:
+                  value:
+                    page:
+                      nextOffset: '2'
+                      total: 3
+                    links:
+                      next:
+                        href: /accounts/33333/transactions?offSet=2&limit=10
+                    transactions:
+                    - depositTransaction:
+                        accountId: '10001'
+                        transactionId: '20001'
+                        postedTimestamp: '2017-11-05 13:15:30.7'
+                        description: FED REF=000119        LTN=J7B74I1C        TTM=2024/10/22 15:03        RECEIVED AT=2024/10/22 15:03        ORIG BANK ABA=307088754        ORIG BANK=CoBank, ACB        REC BANK ABA=071000288        REC BANK=BMO Bank National        TRANS TYPE=CUSTOMER TRANSF
+                        debitCreditMemo: CREDIT
+                        amount: '1200.42'
+                        transactionTimestamp: '2025-06-19 07:57:00.0'
+                        fiAttributes:
+                        - name: ValueDate
+                          value: '2025-06-19 07:57:00.0'
+                        - name: Posted
+                          value: '2025-06-19 07:57:00.0'
+                        - name: TransactionType
+                          value: CREDIT
+                        BAILevel: Credit Transaction
+                        BAICode: '208'
+                        BAIName: Incoming Money Transfer
+                        bankRefNo: 271900035
+                        custRefNo: '241022105844'
+                        fundType: Distributed Availibility (fixed)
+                        text: 'FED REF=000119        LTN=J7B74I1C        TTM=2024/10/22 15:03        RECEIVED AT=2024/10/22 15:03        ORIG BANK ABA=307088754        ORIG BANK=CoBank, ACB        REC BANK ABA=071000288        REC BANK=BMO Bank National        TRANS TYPE=CUSTOMER TRANSFER        WIRE TYPE=FWI        USD AMOUNT=000000000000000000        VALUE DATE=2024/10/22        SRC=FWIFFT0124102215030400        SBR=2024102200000897        ORG=International Wine & Spirits LLC International Wine & Spirits LLC 14111        Northeast 145th Street Woodinville, WA 98072 /AC-31531001        OGB=CoBank, ACB 2515 University Blvd, Ste 104 Ames IA 50010 US /BC-NBFCUS55        XXX        BNF=OIB OLET HE  ,HBMB MP YX PSTC H/X HBMB SMMPRNTZUD HGRJ 517 J LQEBXB 58J        VS CHICAGO,IL,91053 US /AC-000001095355DD028        RFB=NOTPROVIDED        OBI=<6376177101> AGWEST/INTERNATIONAL WINE & SPIRITS\"}},{\"depositTransaction\":{\"accountId\":\"b99bb688b7cf877ef111afd9c23110059b2912f37b5c24c6b9d2811850d945fa\",\"transactionId\":\"1902805570\",\"description\":\"ORIG BANK ABA=071000288        ORIG BANK=BMO BANK N.A.        REC BANK=BOFM CA M3        SENT AT=2024/10/23 18:52        WIRE TYPE=SWO        CURRENCY DESC=CANADIAN DOLLAR        EXCHANGE AMOUNT=000000000000026800CAD        EXCHANGE RATE=000000746313000   '
+                    - depositTransaction:
+                        accountId: '10001'
+                        transactionId: '20001'
+                        postedTimestamp: '2017-11-05 13:15:31.7'
+                        description: ORIG BANK=BOFM CA M2        REC BANK ABA=071000288        REC BANK=BMO BANK N.A.        RECEIVED AT=2024/10/24 03:44        WIRE TYPE=SWI        CURRENCY DESC=CANADIAN DOLLAR        EXCHANGE AMOUNT=000000000007200000CAD        EXC1HANGE RATE=000000740658000
+                        debitCreditMemo: DEBIT
+                        amount: '1200.42'
+                        transactionTimestamp: '2025-06-19 07:57:00.0'
+                        fiAttributes:
+                        - name: ValueDate
+                          value: '2025-06-19 07:57:00.0'
+                        - name: Posted
+                          value: '2025-06-19 07:57:00.0'
+                        - name: TransactionType
+                          value: DEBIT
+                      BAILevel: Debit Transaction
+                      BAICode: '699'
+                      BAIName: Miscellaneous Debit
+                      bankRefNo: '0000000247'
+                      custRefNo: '241023106132'
+                      fundType: Unknown
+                      text: ORIG BANK=BOFM CA M2        REC BANK ABA=071000288        REC BANK=BMO BANK N.A.        RECEIVED AT=2024/10/24 03:44        WIRE TYPE=SWI        CURRENCY DESC=CANADIAN DOLLAR        EXCHANGE AMOUNT=000000000007200000CAD        EXCHANGE RATE=000000740658000
+        '206':
+          description: Everything worked as expected. Partial content returned based on the range set in the header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accounts'
+        '400':
+          description: The request was not accepted, often caused by a missing required parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: API key provided was invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - the user is not authorized to use this resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The requested resource could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too many requests hit the API in too short of a period
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '502':
+          description: Bad Gateway
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '504':
+          description: Integration or Backend Timeout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    LoanTransactionType:
+      title: LoanTransactionType
+      type: string
+      description: PAYMENT, FEE, ADJUSTMENT, INTEREST
+      enum:
+      - ADJUSTMENT
+      - FEE
+      - INTEREST
+      - PAYMENT
+    DepositTransaction:
+      title: DepositTransaction Entity
+      description: Deposit Transaction will have following fields in FiAttributes - Posted, Pending, ValueDate
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/DepositTransactionType'
+          payee:
+            maxLength: 255
+            type: string
+            description: Payee name
+          checkNumber:
+            type: integer
+            description: Check Number
+    PageMetadataLinks:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/HateoasLink'
+        prev:
+          $ref: '#/components/schemas/HateoasLink'
+    Accounts:
+      description: An instance of the getAccounts types with limited details.
+      allOf:
+      - type: object
+        properties:
+          depositAccount:
+            $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          loanAccount:
+            $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          locAccount:
+            $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          investmentAccount:
+            $ref: '#/components/schemas/Account'
+    Error:
+      title: Error Entity
+      type: object
+      properties:
+        code:
+          type: string
+          description: Long term persistent identifier which can be used to trace error condition back to log information
+        message:
+          type: string
+          description: End user displayable information which might help the customer diagnose an error
+      description: An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account.
+    DepositTransactionType:
+      title: DepositTransaction Type
+      type: string
+      description: CHECK, WITHDRAWAL, TRANSFER, POSDEBIT, ATMWITHDRAWAL. BILLPAYMENT, FEE, DEPOSIT, ADJUSTMENT, INTEREST, DIVIDEND, DIRECTDEPOSIT, ATMDEPOSIT, POSCREDIT
+      enum:
+      - ADJUSTMENT
+      - ATMDEPOSIT
+      - ATMWITHDRAWAL
+      - BILLPAYMENT
+      - CHECK
+      - DEPOSIT
+      - DIRECTDEPOSIT
+      - DIVIDEND
+      - FEE INTEREST
+      - POSCREDIT
+      - POSDEBIT
+      - TRANSFER
+      - WITHDRAWAL
+    LocTransaction:
+      title: LocTransaction Entity
+      description: Line of Credit Transaction will have following fields in FiAttributes - Posted, Pending, ValueDate
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/LocTransactionType'
+          checkNumber:
+            type: integer
+            description: Check number
+          paymentDetails:
+            $ref: '#/components/schemas/PaymentDetails'
+    PositionType:
+      title: PositionType
+      type: string
+      description: LONG, SHORT
+      enum:
+      - LONG
+      - SHORT
+    ContentTypes:
+      title: Content Types
+      type: string
+      description: Types of document formats. (Suggested)
+      example: application/json
+      enum:
+      - application/pdf
+      - image/gif
+      - image/jpeg
+      - image/tiff
+      - image/png
+      - application/json
+    AccountType:
+      title: AccountType
+      type: string
+      enum:
+      - 401A
+      - 401K
+      - 403B
+      - '529'
+      - AUTOLOAN
+      - CD
+      - CHARGE
+      - CHECKING
+      - COMMERCIALLINEOFCREDIT
+      - COMMERCIALLOAN
+      - COVERDELL
+      - CREDITCARD
+      - DEPOSIT
+      - ESCROW
+      - ESOP
+      - GUARDIAN
+      - HOMEEQUITYLOAN
+      - HOMELINEOFCREDIT
+      - INSTITUTIONALTRUST
+      - INSTALLMENT
+      - IRA
+      - INVESTMENT
+      - KEOGH
+      - LINEOFCREDIT
+      - LOAN
+      - MILITARYLOAN
+      - MONEYMARKET
+      - MORTGAGE
+      - PERSONALLOAN
+      - ROLLOVER
+      - ROTH
+      - SARSEP
+      - SAVINGS
+      - SMBLOAN
+      - STUDENTLOAN
+      - TAXABLE
+      - TDA
+      - TRUST
+      - UGMA
+      - UTMA
+      - ANNUITY
+    Account:
+      title: Account Entity
+      description: An account object with limited details returned in the search for accounts operation.
+      allOf:
+      - type: object
+        properties:
+          accountId:
+            maxLength: 256
+            type: string
+            description: Long-term persistent identity of the account. Not an account number. This identity must be unique to the owning institution.
+          accountType:
+            $ref: '#/components/schemas/AccountType'
+          accountNumber:
+            type: string
+            description: Return masked account based on request.
+          hostAccountName:
+            type: string
+            description: Name given by the user. Used in UIs to assist in account selection
+          description:
+            type: string
+          currency:
+            $ref: '#/components/schemas/Currency'
+          fiAttributes:
+            type: array
+            items:
+              $ref: '#/components/schemas/FiAttribute'
+    Currency:
+      title: Currency Entity
+      type: object
+      properties:
+        currencyRate:
+          type: number
+          description: Currency rate between original and converted currency
+        currencyCode:
+          $ref: '#/components/schemas/Iso4217Code'
+        originalCurrencyCode:
+          $ref: '#/components/schemas/Iso4217Code'
+      description: Currency information if it is different from Account entity
+    SecurityIdType:
+      title: SecurityIdType
+      type: string
+      description: Security identifier type
+      enum:
+      - CUSIP
+      - ISIN
+      - SEDOL
+      - SICC
+      - VALOR
+      - WKN
+    InvestmentTransaction:
+      title: InvestmentTransaction Entity
+      description: Investment Transaction will have following fields in FiAttributes - Posted, IssueDate, MaturityDate, InterestRate, OriginalAmount, CurrentValue, Disposition
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/InvestmentTransactionType'
+          shares:
+            type: number
+            description: Required for stock, mutual funds. Number of shares (with decimals). Negative numbers indicate securities are being removed from the account.
+          faceValue:
+            type: number
+            description: Cash value for bonds
+          price:
+            type: number
+            description: Unit purchase price
+          securityId:
+            type: string
+            description: Unique identifier of security
+          securityIdType:
+            $ref: '#/components/schemas/SecurityIdType'
+          securityType:
+            $ref: '#/components/schemas/SecurityType'
+          symbol:
+            type: string
+            description: Ticker symbol
+          markup:
+            type: number
+            description: Portion of unit price that is attributed to the dealer markup
+          commission:
+            type: number
+            description: Transaction commission
+          taxes:
+            type: number
+            description: Taxes on the trade
+          fees:
+            type: number
+            description: Fees applied to the trade
+          load:
+            type: number
+            description: Load on the transaction
+          inv401kSource:
+            $ref: '#/components/schemas/Inv401kSourceType'
+          confirmationNumber:
+            type: string
+            description: Confirmation number of the transaction
+          fractionalCash:
+            type: number
+            description: Cash for fractional units (used for stock splits)
+          incomeType:
+            $ref: '#/components/schemas/IncomeType'
+          oldUnits:
+            type: number
+            description: Number of shares before split
+          splitRatioNumerator:
+            type: number
+            description: Split ratio numerator
+          splitRatioDenominator:
+            type: number
+            description: Split ratio denominator
+          newUnits:
+            type: number
+            description: Number of shares after split
+          subAccountSec:
+            type: string
+            description: Sub-account security Type - CASH, MARGIN, SHORT and OTHERS
+            enum:
+            - CASH
+            - MARGIN
+            - SHORT
+            - OTHER
+          subAccountFund:
+            type: string
+            description: From which account money came in - CASH, MARGIN, SHORT and OTHERS
+            enum:
+            - CASH
+            - MARGIN
+            - SHORT
+            - OTHER
+          loanId:
+            type: string
+            description: For 401k accounts only. This indicates the transaction was due to a loan or a loan repayment.
+          loanPrincipal:
+            type: number
+            description: How much loan pre‐payment is principal
+          loanInterest:
+            type: number
+            description: How much loan pre‐payment is interest
+          payrollDate:
+            type: string
+            description: The date for the 401k transaction was obtained in payroll. YYYY-MM-DD.
+          priorYearContrib:
+            type: boolean
+            description: Indicates this buy was made using prior year's contribution.
+          withholding:
+            type: number
+            description: Federal tax withholding
+          taxExempt:
+            type: boolean
+            description: Tax‐exempt transaction
+          gain:
+            type: number
+            description: For sales
+          stateWithholding:
+            type: number
+            description: State tax withholding
+          penalty:
+            type: number
+            description: Indicates amount withheld due to a penalty
+          runningBalance:
+            type: number
+            description: Running balance of the position
+          unitPrice:
+            type: number
+            description: Price per commonly-quoted unit. Does not include markup/markdown, unitprice. Share price for stocks, mutual funds, and others. Percentage of par for bonds. Per share (not contract) for options.
+          units:
+            type: number
+            description: For security‐based actions other than stock splits, quantity. Shares for stocks, mutual funds, and others. Face value for bonds. Contracts for options.
+          unitType:
+            $ref: '#/components/schemas/UnitType'
+          transactionReason:
+            $ref: '#/components/schemas/TransactionReason'
+          accruedInterest:
+            type: number
+            description: Accrued Interest
+          transferAction:
+            type: string
+            description: Transfer direction [IN or OUT]
+            enum:
+            - IN
+            - OUT
+          positionType:
+            $ref: '#/components/schemas/PositionType'
+    HateoasLink:
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          example: /example/accounts/12345
+        action:
+          type: string
+          description: HTTP Method to use for the request (Suggested)
+          enum:
+          - GET
+          - POST
+          - PATCH
+          - DELETE
+          - PUT
+        types:
+          type: array
+          description: Content-types that can be used in the Accept header.
+          items:
+            $ref: '#/components/schemas/ContentTypes'
+    InvestmentTransactionType:
+      title: InvestmentTransactionType
+      type: string
+      description: PURCHASED, SOLD, PURCHASEDTOCOVER, ADJUSTMENT, PURCHASETOOPEN, PURCHASETOCLOSE, SOLDTOOPEN, SOLDTOCLOSE, INTEREST, MARGININTEREST, REINVESTOFINCOME, RETURNOFCAPITAL, TRANSFER, CONTRIBUTION, FEE, OPTIONEXERCISE, OPTIONEXPIRATION, DIVIDEND, DIVIDENDREINVEST, SPLIT, CLOSURE, INCOME, EXPENSE, CLOSUREOPT, INVEXPENSE, JRNLSEC, JRNLFUND, OTHER, DIV, SRVCHG, DEP, DEPOSIT, ATM, POS, XFER, CHECK, PAYMENT, CASH, DIRECTDEP, DIRECTDEBIT, REPEATPMT
+      enum:
+      - ADJUSTMENT
+      - ATM
+      - CASH
+      - CHECK
+      - CLOSURE
+      - CLOSUREOPT
+      - CONTRIBUTION
+      - DEP
+      - DEPOSIT
+      - DIRECTDEBIT
+      - DIRECTDEP
+      - DIV
+      - DIVIDEND
+      - DIVIDENDREINVEST
+      - EXPENSE
+      - FEE
+      - INCOME
+      - INTEREST
+      - INVEXPENSE
+      - JRNLFUND
+      - JRNLSEC
+      - MARGININTEREST
+      - OPTIONEXERCISE
+      - OPTIONEXPIRATION
+      - OTHER
+      - PAYMENT
+      - POS
+      - PURCHASED
+      - PURCHASEDTOCOVER
+      - PURCHASETOCLOSE
+      - PURCHASETOOPEN
+      - REINVESTOFINCOME
+      - REPEATPMT
+      - RETURNOFCAPITAL
+      - SOLD
+      - SOLDTOCLOSE
+      - SOLDTOOPEN
+      - SPLIT
+      - SRVCHG
+      - TRANSFER
+      - XFER
+    IncomeType:
+      title: IncomeType
+      type: string
+      description: Type of investment income - CGLONG (capital gains-long term), CGSHORT (capital gains-short term), MISC
+      enum:
+      - CGLONG
+      - CGSHORT
+      - MISC
+    PaymentDetails:
+      title: PaymentDetails Entity
+      type: object
+      properties:
+        principalAmount:
+          type: number
+          description: The amount of payment applied to principal
+        interestAmount:
+          type: number
+          description: The amount of payment applied to interest
+        insuranceAmount:
+          type: number
+          description: The amount of payment applied to life/health/accident insurance on the loan
+        escrowAmount:
+          type: number
+          description: The amount of payment applied to escrow
+        pmiAmount:
+          type: number
+          description: The amount of payment applied to PMI
+        feesAmount:
+          type: number
+          description: The amount of payment applied to fees
+      description: Breakdown of payment details
+    Iso4217Code:
+      title: Iso4217Code
+      type: string
+      description: The ISO 4217 code of the foreign currency
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    SecurityType:
+      title: SecurityType
+      type: string
+      enum:
+      - BOND
+      - DEBT
+      - MUTUALFUND
+      - OPTION
+      - OTHER
+      - STOCK
+      - SWEEP
+    LoanTransaction:
+      title: LoanTransaction Entity
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/LoanTransactionType'
+          paymentDetails:
+            $ref: '#/components/schemas/PaymentDetails'
+    PageMetadata:
+      type: object
+      properties:
+        nextOffset:
+          type: string
+          description: Opaque identified. Does not need to be numeric or have any specific pattern. Implementation specific.
+          example: '2'
+        prevOffset:
+          type: string
+          description: Opaque identified. Does not need to be numeric or have any specific pattern. Implementation specific.
+          example: '2'
+        totalElements:
+          type: integer
+          description: Total number of elements
+          example: 3
+    TransactionReason:
+      title: TransactionReason
+      type: string
+      description: Reason for this transaction; CALL (the debt was called), SELL (the debt was sold), MATURITY (the debt reached maturity)
+      enum:
+      - CALL
+      - MATURITY
+      - SELL
+    Transaction:
+      title: Transaction
+      type: object
+      required:
+      - accountId
+      - transactionId
+      - postedTimestamp
+      - description
+      - debitCreditMemo
+      - amount
+      - transactionTimestamp
+      - fiAttributes
+      properties:
+        accountId:
+          maxLength: 256
+          type: string
+          description: Corresponds to AccountId in Account
+        transactionId:
+          maxLength: 256
+          type: string
+          description: Long term persistent identity of the transaction (unique to account)
+        referenceTransactionId:
+          maxLength: 256
+          type: string
+          description: For reverse postings, the identity of the transaction being reversed. For the correction transaction, the identity of the reversing post. For credit card posting transactions, the identity of the authorization transaction.
+        postedTimestamp:
+          type: string
+          description: The date and time that the transaction was posted to the account. If not provided then TransactionTimestamp can be used as PostedTimeStamp. YYYY-MM-DD HH-MM-SS.S
+        transactionTimestamp:
+          type: string
+          description: The date and time that the transaction was added to the server backend systems. YYYY-MM-DD HH-MM-SS.S
+        description:
+          type: string
+          description: The description of the transaction
+          maxLength: 256
+        debitCreditMemo:
+          $ref: '#/components/schemas/DebitCreditMemo'
+        category:
+          type: string
+          description: Transaction category, preferably MCC or SIC.
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+        amount:
+          type: string
+          description: The amount of money in the account currency
+        fiAttributes:
+          type: array
+          description: Array of FI-specific attributes
+          items:
+            $ref: '#/components/schemas/FiAttribute'
+        links:
+          type: object
+          properties:
+            image:
+              type: array
+              description: Array of Image Identifiers (unique to Transaction) used to retrieve Images of check or transaction receipt
+              items:
+                $ref: '#/components/schemas/HateoasLink'
+        BAILevel:
+          maxLength: 256
+          type: string
+          description: BAI level information for the transaction
+        BAICode:
+          maxLength: 256
+          type: string
+          description: BAI code information for the transaction
+        BAIName:
+          maxLength: 256
+          type: string
+          description: BAI name related to the transaction
+        bankRefNo:
+          maxLength: 256
+          type: string
+          description: Bank reference number
+        custRefNo:
+          maxLength: 256
+          type: string
+          description: Customer reference number
+        fundType:
+          maxLength: 256
+          type: string
+          description: Fund type corresponding to the transaction
+        text:
+          type: string
+          description: Complete transaction information description (Un-truncated)
+    Inv401kSourceType:
+      title: Inv401kSourceType
+      type: string
+      description: Source of money. PRETAX, AFTERTAX, MATCH, PROFITSHARING, ROLLOVER OTHERVEST, OTHERNONVEST
+      enum:
+      - AFTERTAX
+      - MATCH
+      - OTHERNONVEST
+      - OTHERVEST
+      - PRETAX
+      - PROFITSHARING
+      - ROLLOVER
+    UnitType:
+      title: UnitType
+      type: string
+      enum:
+      - CURRENCY
+      - SHARES
+    LocTransactionType:
+      title: LocTransactionType
+      type: string
+      description: CHECK, WITHDRAWAL, PAYMENT, FEE, ADJUSTMENT, INTEREST
+      enum:
+      - ADJUSTMENT
+      - CHECK
+      - FEE
+      - INTEREST
+      - PAYMENT
+      - WITHDRAWAL
+    Transactions:
+      title: Transactions Entity
+      description: Optionally paginated array of transactions
+      allOf:
+      - $ref: '#/components/schemas/PaginatedArray'
+      - type: object
+        properties:
+          transactions:
+            description: An array of transactions with entity types dependent on the account type (deposit, investment, loan, or line of credit)
+            type: array
+            items:
+              allOf:
+              - type: object
+                properties:
+                  depositTransaction:
+                    $ref: '#/components/schemas/DepositTransaction'
+              - type: object
+                properties:
+                  loanTransaction:
+                    $ref: '#/components/schemas/LoanTransaction'
+              - type: object
+                properties:
+                  locTransaction:
+                    $ref: '#/components/schemas/LocTransaction'
+              - type: object
+                properties:
+                  investmentTransaction:
+                    $ref: '#/components/schemas/InvestmentTransaction'
+    DebitCreditMemo:
+      title: DebitCreditMemo
+      type: string
+      enum:
+      - CREDIT
+      - DEBIT
+      - MEMO
+    PaginatedArray:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+        links:
+          $ref: '#/components/schemas/PageMetadataLinks'
+      description: To be used as a mixin using "allOf"
+    TransactionStatus:
+      title: TransactionStatus
+      type: string
+      enum:
+      - AUTHORIZATION
+      - MEMO
+      - PENDING
+      - POSTED
+    FiAttribute:
+      title: FiAttribute Entity
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of attribute
+        value:
+          type: string
+          description: Value of attribute. All date fields will be of the string format YYYY-MM-DD.
+      description: Financial platform provider-specific attribute
+  securitySchemes:
+    api-key-1:
+      type: apiKey
+      x-key-type: client_id
+      name: x-api-key
+      in: header
+    OAuth:
+      type: oauth2
+      x-ibm-oauth-provider: apic-oauth-ob-commercial-sb-provider
+      flows:
+        authorizationCode:
+          authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+          tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+          scopes:
+            FinancialInformation: FinancialInformation
+x-ibm-configuration:
+  categories:
+  - bian--bd--operationalservices
+  enforced: true
+  testable: true
+  phase: realized
+  cors:
+    enabled: true
+  type: rest
+  application-authentication:
+    certificate: false
+  oauth-servers:
+    OAuth:
+      authorizationCode:
+        tokenUrls:
+        - https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+        authorizationUrls:
+        - https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+        refreshUrls: []
+x-ibm-endpoints:
+- url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+  type:
+  - production
+  - development

@@ -1,0 +1,2729 @@
+openapi: 3.2.0
+info:
+  title: Image Retrieval Account Transaction Images API
+  x-ibm-name: image-retrieval
+  version: 4.5.0
+  description: The Image Retrieval API lets you retrieve the latest images of paid and deposited cheques as well as other deposit items for the U.S. and Canada. It involves calling a summary of your accounts, which will return account IDs you can then use to search for and retrieve available images.
+  x-audience: company-internal
+  x-api-id: 757bb3e9-a7cc-429b-ad5b-97108158c0e6
+  x-bmo-api-type: internal-api
+  x-bmo-api-provider-id: 26777
+  x-bmoservicedomain-name: Commercial-sb
+  x-api-specification-compliant: true
+  x-ibm-summary: ''
+servers:
+- url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+security:
+- OAuth:
+  - ItemImage
+  x-api-key: []
+tags:
+- name: AccountTransactionImages
+paths:
+  /accounts/transaction-images-accounts:
+    get:
+      x-dataclassification-code: Confidential
+      tags:
+      - AccountTransactionImages
+      summary: Search for Accounts
+      description: 'Get a list of all your accounts as a starting point for more specific requests. This call will return account IDs that are set up for the "Cheque Imaging" (CA) or the "Check Imaging" (U.S.) service. '
+      operationId: Search for Accounts
+      parameters:
+      - name: x-fapi-customer-last-logged-time
+        in: header
+        required: false
+        description: The time when the Payment Services User last logged in with the Third Party Provider
+        schema:
+          type: string
+      - name: x-fapi-customer-ip-address
+        in: header
+        required: false
+        description: The PSU's IP address if the PSU is currently logged in with the TPP.
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: false
+        description: A Unique key to call service. Used as Application Catalogue Id.
+        schema:
+          type: string
+      - name: x-fapi-interaction-id
+        in: header
+        required: false
+        description: An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+        schema:
+          type: string
+      - name: x-client-id
+        in: header
+        required: false
+        description: Client Id generated during Third Party Provider application registration.
+        schema:
+          type: string
+      - name: x-fapi-customer-user-agent
+        in: header
+        required: false
+        description: The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: false
+        description: An Authorization Token as per https://tools.ietf.org/html/rfc6750
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A valid success response and headers to be returned.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accounts'
+        '400':
+          description: Bad request fault to be returned in case of validation issues.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '404':
+          description: 404 to be returned when service not available or resource not found.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '500':
+          description: 500 to be returned for server side errors.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '503':
+          description: Server error to be returned when service is temporarily unavailable.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '504':
+          description: Error to be returned when downstream systems takes longer than specified time to respond.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+  /accounts/{accountId}/transaction-images/get:
+    post:
+      x-dataclassification-code: Confidential
+      tags:
+      - AccountTransactionImages
+      summary: Search for Images
+      description: Get a list of available images that match your search. You can search by account number, date range, amount and item type. You can get up to 1000 results at once. Then pick the images you want to download in TIFF format.
+      operationId: Search for Images
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: a pseudonymized representation of the account number
+        schema:
+          type: string
+      - name: x-fapi-customer-last-logged-time
+        in: header
+        required: false
+        description: The time when the Payment Services User last logged in with the Third Party Provider
+        schema:
+          type: string
+      - name: x-fapi-customer-ip-address
+        in: header
+        required: false
+        description: The PSU's IP address if the PSU is currently logged in with the TPP.
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: false
+        description: A Unique key to call service. Used as Application Catalogue Id.
+        schema:
+          type: string
+      - name: x-fapi-interaction-id
+        in: header
+        required: false
+        description: An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+        schema:
+          type: string
+      - name: x-client-id
+        in: header
+        required: false
+        description: Client Id generated during Third Party Provider application registration.
+        schema:
+          type: string
+      - name: x-fapi-customer-user-agent
+        in: header
+        required: false
+        description: The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: false
+        description: An Authorization Token as per https://tools.ietf.org/html/rfc6750
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A valid success response and headers to be returned.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/searchTransactionImageSuccessResult'
+        '400':
+          description: Bad request fault to be returned in case of validation issues.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '404':
+          description: 404 to be returned when service not available or resource not found.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '500':
+          description: 500 to be returned for server side errors.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '503':
+          description: Server error to be returned when service is temporarily unavailable.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '504':
+          description: Error to be returned when downstream systems takes longer than specified time to respond.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/searchTransactionImagesRequest'
+        required: true
+  /accounts/{accountId}/transaction-images/{imageId}:
+    get:
+      x-dataclassification-code: Confidential
+      tags:
+      - AccountTransactionImages
+      summary: Retrieve Images
+      description: 'Send us the index number of the cheque you want to retrieve. As per FDX standard, each API call can retrieve one cheque which includes front and back images in TIFF format. '
+      operationId: Retrieve Images
+      parameters:
+      - name: accountId
+        in: path
+        required: true
+        description: a pseudonymized representation of the account number
+        schema:
+          type: string
+      - name: imageId
+        in: path
+        required: true
+        description: an identifier used to retrieve a specific transaction image
+        schema:
+          type: string
+      - name: x-fapi-customer-last-logged-time
+        in: header
+        required: false
+        description: The time when the Payment Services User last logged in with the Third Party Provider
+        schema:
+          type: string
+      - name: x-fapi-customer-ip-address
+        in: header
+        required: false
+        description: The PSU's IP address if the PSU is currently logged in with the TPP.
+        schema:
+          type: string
+      - name: x-api-key
+        in: header
+        required: false
+        description: A Unique key to call service. Used as Application Catalogue Id.
+        schema:
+          type: string
+      - name: x-fapi-interaction-id
+        in: header
+        required: false
+        description: An RFC 4122 UID used  to consolidate multiple requests e.g. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+        schema:
+          type: string
+      - name: x-client-id
+        in: header
+        required: false
+        description: Client Id generated during Third Party Provider application registration.
+        schema:
+          type: string
+      - name: x-fapi-customer-user-agent
+        in: header
+        required: false
+        description: The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        required: false
+        description: An Authorization Token as per https://tools.ietf.org/html/rfc6750
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A valid success response and headers to be returned.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getTransactionImageSuccessResult'
+        '400':
+          description: Bad request fault to be returned in case of validation issues.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '404':
+          description: 404 to be returned when service not available or resource not found.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '500':
+          description: 500 to be returned for server side errors.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '503':
+          description: Server error to be returned when service is temporarily unavailable.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+        '504':
+          description: Error to be returned when downstream systems takes longer than specified time to respond.
+          headers:
+            x-request-id:
+              description: An RFC 4122 UID, correlates HTTP requests between a client and server. Uniquely identifies each API call.
+              schema:
+                type: string
+            x-fapi-interaction-id:
+              description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid.If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/problem'
+components:
+  schemas:
+    problem:
+      type: object
+      properties:
+        type:
+          type: string
+          format: uri
+          description: 'An absolute URI that identifies the problem type.  When dereferenced,
+
+            it SHOULD provide human-readable documentation for the problem type
+
+            (e.g., using HTML).
+
+            '
+          default: about:blank
+        title:
+          type: string
+          description: 'A short, summary of the problem type. Written in english and readable
+
+            for engineers (usually not suited for non technical stakeholders and
+
+            not localized); example: Service Unavailable
+
+            '
+        detail:
+          type: string
+          description: 'A human readable explanation specific to this occurrence of the
+
+            problem.
+
+            '
+    DepositTransaction:
+      title: DepositTransaction Entity
+      description: Deposit Transaction will have following fields in FiAttributes - Posted, Pending, ValueDate
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/DepositTransactionType'
+          payee:
+            maxLength: 255
+            type: string
+            description: Payee name
+          checkNumber:
+            type: integer
+            description: Check Number
+    OtherSecurity:
+      title: OtherSecurity Entity
+      type: object
+      properties:
+        typeDescription:
+          type: string
+          description: Description of Other Security
+    DepositTransactionType:
+      title: DepositTransaction Type
+      type: string
+      description: CHECK, WITHDRAWAL, TRANSFER, POSDEBIT, ATMWITHDRAWAL. BILLPAYMENT, FEE, DEPOSIT, ADJUSTMENT, INTEREST, DIVIDEND, DIRECTDEPOSIT, ATMDEPOSIT, POSCREDIT
+      enum:
+      - ADJUSTMENT
+      - ATMDEPOSIT
+      - ATMWITHDRAWAL
+      - BILLPAYMENT
+      - CHECK
+      - DEPOSIT
+      - DIRECTDEPOSIT
+      - DIVIDEND
+      - FEE INTEREST
+      - POSCREDIT
+      - POSDEBIT
+      - TRANSFER
+      - WITHDRAWAL
+    Error:
+      title: Error Entity
+      type: object
+      properties:
+        code:
+          type: string
+          description: Long term persistent identifier which can be used to trace error condition back to log information
+        message:
+          type: string
+          description: End user displayable information which might help the customer diagnose an error
+      description: An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account.
+    LineItem:
+      title: LineItem Entity
+      type: object
+      properties:
+        description:
+          type: string
+          description: The description of the line item
+        amount:
+          type: number
+          description: The amount of money attributable to this line item
+        checkNumber:
+          type: integer
+          description: Check number
+        memo:
+          maxLength: 255
+          type: string
+          description: Secondary item description
+        reference:
+          type: string
+          description: A reference number
+        imageIds:
+          type: array
+          description: Array of image identifiers (unique to transaction) used to retrieve images of check or transaction receipt
+          items:
+            type: string
+        links:
+          type: object
+          properties:
+            image:
+              type: array
+              description: Array of Image Identifiers (unique to Transaction) used to retrieve Images of check or transaction receipt
+              items:
+                $ref: '#/components/schemas/HateoasLink'
+    imageSearch:
+      type: object
+      properties:
+        itemSequenceNumber:
+          type: string
+          description: Item sequence number
+        checkNumber:
+          type: string
+          description: Item Check number
+        serialNumber:
+          type: string
+          description: Item Serial number
+        itemAmount:
+          type: string
+        itemDate:
+          type: string
+          description: Item date or segment date
+        routingTransitNumber:
+          type: string
+          description: Routing transit number (RTN) associated with account number at owning institution
+        itemIndicator:
+          type: string
+          description: Indicate the type of item image - ‘paid’, ‘deposited’, ‘deposit’
+        paidDate:
+          type: string
+        depositedDate:
+          type: string
+        processedDate:
+          type: string
+        imageId:
+          type: string
+          description: Image Id
+        depositedItemAccountNumber:
+          type: string
+          description: deposited Item Account Number
+        imageSiteId:
+          type: string
+          description: Image site spefific document Id
+    InsuranceAccount:
+      title: InsuranceAccount Entity
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          accountCategory:
+            type: string
+            enum:
+            - DEPOSIT_ACCOUNT
+            - INVESTMENT_ACCOUNT
+            - LOAN_ACCOUNT
+            - LOC_ACCOUNT
+            - INSURANCE_ACCOUNT
+          policyPremium:
+            type: number
+            description: The amount of the user's premium
+          policyPremiumTerm:
+            type: string
+            enum:
+            - MONTHLY
+            - ANNUAL
+          policyStartDate:
+            type: string
+          policyEndDate:
+            type: string
+          policyCoverageAmount:
+            type: number
+            description: Total amount of money the user is insured for
+          transactions:
+            type: array
+            items:
+              $ref: '#/components/schemas/InsuranceTransaction'
+          bills:
+            type: array
+            items:
+              $ref: '#/components/schemas/Bills'
+    ContentTypes:
+      title: Content Types
+      type: string
+      description: Types of document formats. (Suggested)
+      example: application/json
+      enum:
+      - application/pdf
+      - image/gif
+      - image/jpeg
+      - image/tiff
+      - image/png
+      - application/json
+    Currency:
+      title: Currency Entity
+      type: object
+      properties:
+        currencyRate:
+          type: number
+          description: Currency rate between original and converted currency
+        currencyCode:
+          $ref: '#/components/schemas/Iso4217Code'
+        originalCurrencyCode:
+          $ref: '#/components/schemas/Iso4217Code'
+      description: Currency information if it is different from Account entity
+    InvestmentTransaction:
+      title: InvestmentTransaction Entity
+      description: Investment Transaction will have following fields in FiAttributes - Posted, IssueDate, MaturityDate, InterestRate, OriginalAmount, CurrentValue, Disposition
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/InvestmentTransactionType'
+          shares:
+            type: number
+            description: Required for stock, mutual funds. Number of shares (with decimals). Negative numbers indicate securities are being removed from the account.
+          faceValue:
+            type: number
+            description: Cash value for bonds
+          price:
+            type: number
+            description: Unit purchase price
+          securityId:
+            type: string
+            description: Unique identifier of security
+          securityIdType:
+            $ref: '#/components/schemas/SecurityIdType'
+          securityType:
+            $ref: '#/components/schemas/SecurityType'
+          symbol:
+            type: string
+            description: Ticker symbol
+          markup:
+            type: number
+            description: Portion of unit price that is attributed to the dealer markup
+          commission:
+            type: number
+            description: Transaction commission
+          taxes:
+            type: number
+            description: Taxes on the trade
+          fees:
+            type: number
+            description: Fees applied to the trade
+          load:
+            type: number
+            description: Load on the transaction
+          inv401kSource:
+            $ref: '#/components/schemas/Inv401kSourceType'
+          confirmationNumber:
+            type: string
+            description: Confirmation number of the transaction
+          fractionalCash:
+            type: number
+            description: Cash for fractional units (used for stock splits)
+          incomeType:
+            $ref: '#/components/schemas/IncomeType'
+          oldUnits:
+            type: number
+            description: Number of shares before split
+          splitRatioNumerator:
+            type: number
+            description: Split ratio numerator
+          splitRatioDenominator:
+            type: number
+            description: Split ratio denominator
+          newUnits:
+            type: number
+            description: Number of shares after split
+          subAccountSec:
+            type: string
+            description: Sub-account security Type - CASH, MARGIN, SHORT and OTHERS
+            enum:
+            - CASH
+            - MARGIN
+            - SHORT
+            - OTHER
+          subAccountFund:
+            type: string
+            description: From which account money came in - CASH, MARGIN, SHORT and OTHERS
+            enum:
+            - CASH
+            - MARGIN
+            - SHORT
+            - OTHER
+          loanId:
+            type: string
+            description: For 401k accounts only. This indicates the transaction was due to a loan or a loan repayment.
+          loanPrincipal:
+            type: number
+            description: How much loan pre‐payment is principal
+          loanInterest:
+            type: number
+            description: How much loan pre‐payment is interest
+          payrollDate:
+            type: string
+            description: The date for the 401k transaction was obtained in payroll
+          priorYearContrib:
+            type: boolean
+            description: Indicates this buy was made using prior year's contribution.
+          withholding:
+            type: number
+            description: Federal tax withholding
+          taxExempt:
+            type: boolean
+            description: Tax‐exempt transaction
+          gain:
+            type: number
+            description: For sales
+          stateWithholding:
+            type: number
+            description: State tax withholding
+          penalty:
+            type: number
+            description: Indicates amount withheld due to a penalty
+          runningBalance:
+            type: number
+            description: Running balance of the position
+          unitPrice:
+            type: number
+            description: Price per commonly-quoted unit. Does not include markup/markdown, unitprice. Share price for stocks, mutual funds, and others. Percentage of par for bonds. Per share (not contract) for options.
+          units:
+            type: number
+            description: For security‐based actions other than stock splits, quantity. Shares for stocks, mutual funds, and others. Face value for bonds. Contracts for options.
+          unitType:
+            $ref: '#/components/schemas/UnitType'
+          transactionReason:
+            $ref: '#/components/schemas/TransactionReason'
+          accruedInterest:
+            type: number
+            description: Accrued Interest
+          transferAction:
+            type: string
+            description: Transfer direction [IN or OUT]
+            enum:
+            - IN
+            - OUT
+          positionType:
+            $ref: '#/components/schemas/PositionType'
+    LocAccount:
+      title: LocAccount Entity
+      description: Loc accounts will have following fields in FiAttributes - StatementBalance
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          balanceAsOf:
+            type: string
+            description: As-of date for balances
+          creditLine:
+            type: number
+            description: Credit limit
+          availableCredit:
+            type: number
+            description: Available credit
+          nextPaymentAmount:
+            type: number
+            description: Amount of next payment
+          nextPaymentDate:
+            type: string
+            description: Due date of next payment
+          principalBalance:
+            type: number
+            description: Principal balance
+          currentBalance:
+            type: number
+            description: Current balance LOC
+          minimumPaymentAmount:
+            type: number
+            description: Minimum payment amount
+          lastPaymentAmount:
+            type: number
+            description: Last payment amount
+          lastPaymentDate:
+            type: string
+            description: Last payment date
+          pastDueAmount:
+            type: number
+            description: Past Due Amount
+          lastStmtBalance:
+            type: number
+            description: Last Statement Balance
+          lastStmtDate:
+            type: string
+            description: Last Statement Date
+          pointsAccrued:
+            type: number
+            description: Points accrued
+          currentRewardsBalance:
+            type: number
+            description: Current rewards balance
+          pointsRedeemed:
+            type: number
+            description: Points redeemed
+          purchasesApr:
+            type: number
+            description: Purchases APR
+          advancesApr:
+            type: number
+            description: Advances APR
+          cashAdvanceLimit:
+            type: number
+            description: Cash advance limit
+          availableCash:
+            type: number
+            description: Available cash
+          financeCharges:
+            type: number
+            description: Finance charges
+          transactions:
+            type: array
+            items:
+              $ref: '#/components/schemas/LocTransaction'
+    transactionImages:
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/image'
+    SweepSecurity:
+      title: SweepSecurity Entity
+      type: object
+      properties:
+        currentBalance:
+          type: number
+          description: Balance of funds in account
+        availableBalance:
+          type: number
+          description: Balance of funds available for use
+        balanceAsOf:
+          type: string
+          description: As-of date of balances
+        checks:
+          type: boolean
+          description: Whether or not checks can be written on the account
+    HoldingType:
+      title: HoldingType
+      type: string
+      description: STOCK, BOND, MUTUALFUND, CD, ANNUITY, OPTION, OTHER
+      enum:
+      - ANNUITY
+      - BOND
+      - CD
+      - MUTUALFUND
+      - OPTION
+      - OTHER
+      - STOCK
+    Holding:
+      title: Holding Entity
+      allOf:
+      - type: object
+        properties:
+          holdingId:
+            maxLength: 256
+            type: string
+            description: Long term persistent identity of the holding
+          securityId:
+            type: string
+            description: Unique identifier of security
+          securityIdType:
+            $ref: '#/components/schemas/SecurityIdType'
+          holdingName:
+            type: string
+            description: Holding name or security name
+          holdingType:
+            $ref: '#/components/schemas/HoldingType'
+          holdingSubType:
+            $ref: '#/components/schemas/HoldingSubType'
+          positionType:
+            $ref: '#/components/schemas/PositionType'
+          heldInAccount:
+            $ref: '#/components/schemas/HeldInAccount'
+          description:
+            type: string
+            description: The description of the holding
+          symbol:
+            type: string
+            description: Ticker / Market symbol
+          originalPurchaseDate:
+            type: string
+            description: Date of original purchase
+          purchasedPrice:
+            type: number
+            description: Price of holding at the time of purchase
+          currentUnitPrice:
+            type: number
+            description: Current unit price
+          changeInPrice:
+            type: number
+            description: Change in current price compared to previous day's close
+          currentUnitPriceDate:
+            type: string
+            description: Current unit price as of date
+          units:
+            type: number
+            description: Required for stock, mutual funds. Number of shares (with decimals)
+          marketValue:
+            type: number
+            description: Market value at the time of data retrieved
+          faceValue:
+            type: number
+            description: Required for bonds. Face value at the time of data retrieved.
+          averageCost:
+            type: boolean
+            description: Cost is average of all purchases for holding
+          cashAccount:
+            type: boolean
+            description: If true, indicates that this holding is used to maintain proceeds from sales, dividends, and other cash postings to the investment account
+          rate:
+            type: number
+            description: For CDs, bonds, and other rate based holdings
+          expirationDate:
+            type: string
+            description: For CDs, bonds, and other time‐based holdings
+          inv401kSurce:
+            $ref: '#/components/schemas/Inv401kSourceType'
+          currency:
+            $ref: '#/components/schemas/Currency'
+          assetClasses:
+            type: array
+            description: Percent breakdown by asset class
+            items:
+              $ref: '#/components/schemas/Portion'
+          fiAssetClasses:
+            type: array
+            description: Percent breakdown by FI-specific asset class percentage breakdown
+            items:
+              $ref: '#/components/schemas/FiPortion'
+          fiAttributes:
+            type: array
+            description: Array of FI‐specific attributes
+            items:
+              $ref: '#/components/schemas/FiAttribute'
+          taxLots:
+            type: array
+            description: Breakdown by tax lot
+            items:
+              $ref: '#/components/schemas/TaxLot'
+      - allOf:
+        - type: object
+          properties:
+            mutualFundSecurity:
+              $ref: '#/components/schemas/MutualFundSecurity'
+        - type: object
+          properties:
+            optionSecurity:
+              $ref: '#/components/schemas/OptionSecurity'
+        - type: object
+          properties:
+            otherSecurity:
+              $ref: '#/components/schemas/OtherSecurity'
+        - type: object
+          properties:
+            stockSecurity:
+              $ref: '#/components/schemas/StockSecurity'
+        - type: object
+          properties:
+            sweepSecurity:
+              $ref: '#/components/schemas/SweepSecurity'
+        - type: object
+          properties:
+            debtSecurity:
+              $ref: '#/components/schemas/DebtSecurity'
+    SecurityType:
+      title: SecurityType
+      type: string
+      enum:
+      - BOND
+      - DEBT
+      - MUTUALFUND
+      - OPTION
+      - OTHER
+      - STOCK
+      - SWEEP
+    AnnualIncreaseType:
+      title: AnnualIncreaseType
+      type: string
+      enum:
+      - FIXED
+      - PERCENT
+      - DOLLAR
+    InsuranceTransaction:
+      title: InsuranceTransaction
+      description: An Insurance Transaction
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            type: string
+            enum:
+            - PAYMENT
+            - FEE
+            - ADJUSTMENT
+            - INTEREST
+    DebtClass:
+      title: DebtClass
+      type: string
+      description: Classification of debt (TREASURY, MUNICIPAL, CORPORATE, OTHER)
+      enum:
+      - CORPORATE
+      - MUNICIPAL
+      - OTHER
+      - TREASURY
+    TransactionReason:
+      title: TransactionReason
+      type: string
+      description: Reason for this transaction; CALL (the debt was called), SELL (the debt was sold), MATURITY (the debt reached maturity)
+      enum:
+      - CALL
+      - MATURITY
+      - SELL
+    Inv401kSourceType:
+      title: Inv401kSourceType
+      type: string
+      description: Source of money. PRETAX, AFTERTAX, MATCH, PROFITSHARING, ROLLOVER OTHERVEST, OTHERNONVEST
+      enum:
+      - AFTERTAX
+      - MATCH
+      - OTHERNONVEST
+      - OTHERVEST
+      - PRETAX
+      - PROFITSHARING
+      - ROLLOVER
+    AssetClass:
+      title: AssetClass
+      type: string
+      enum:
+      - DOMESTICBOND
+      - INTLBOND
+      - INTLSTOCK
+      - LARGESTOCK
+      - MONEYMARKET
+      - OTHER
+      - SMALLSTOCK
+    UnitType:
+      title: UnitType
+      type: string
+      enum:
+      - CURRENCY
+      - SHARES
+    FiAttribute:
+      title: FiAttribute Entity
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of attribute
+        value:
+          type: string
+          description: Value of attribute
+      description: Financial platform provider-specific attribute
+    LoanPaymentFrequency:
+      title: LoanPaymentFrequency
+      type: string
+      description: WEEKLY, BIWEEKLY, TWICEMONTHLY, MONTHLY, FOURWEEKS, BIMONTHLY, QUARTERLY, SEMIANNUALLY, ANNUALLY, OTHER
+      enum:
+      - ANNUALLY
+      - BIMONTHLY
+      - BIWEEKLY
+      - FOURWEEKS
+      - MONTHLY
+      - OTHER
+      - QUARTERLY
+      - SEMIANNUALLY
+      - TWICEMONTHLY
+      - WEEKLY
+    InvestmentBalance:
+      title: InvestmentBalance Entity
+      type: object
+      properties:
+        balanceName:
+          type: string
+          description: Name of the balance
+        balanceDescription:
+          type: string
+          description: Description of balance
+        balanceType:
+          $ref: '#/components/schemas/InvestmentBalanceType'
+        balanceValue:
+          type: number
+          description: Value of balance name
+        balanceDate:
+          type: string
+          description: Date as of this balance
+        currency:
+          $ref: '#/components/schemas/Currency'
+    itemSequenceNumberRange:
+      type: object
+      required:
+      - lowNumber
+      - highNumber
+      properties:
+        lowNumber:
+          type: string
+        highNumber:
+          type: string
+    LoanTransactionType:
+      title: LoanTransactionType
+      type: string
+      description: PAYMENT, FEE, ADJUSTMENT, INTEREST
+      enum:
+      - ADJUSTMENT
+      - FEE
+      - INTEREST
+      - PAYMENT
+    PageMetadataLinks:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/HateoasLink'
+        prev:
+          $ref: '#/components/schemas/HateoasLink'
+    Accounts:
+      title: Accounts Entity
+      description: An optionally paginated array of accounts.
+      allOf:
+      - $ref: '#/components/schemas/PaginatedArray'
+      - type: object
+        properties:
+          accounts:
+            type: array
+            items:
+              $ref: '#/components/schemas/AccountWithDetails'
+    LocTransaction:
+      title: LocTransaction Entity
+      description: Line of Credit Transaction will have following fields in FiAttributes - Posted, Pending, ValueDate
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/LocTransactionType'
+          checkNumber:
+            type: integer
+            description: Check number
+          paymentDetails:
+            $ref: '#/components/schemas/PaymentDetails'
+    InterestRateType:
+      title: InterestRateType
+      type: string
+      enum:
+      - FIXED
+      - VARIABLE
+    OrderDuration:
+      title: OrderDuration
+      type: string
+      description: This order is good for DAY, GOODTILLCANCEL, IMMEDIATE
+      enum:
+      - DAY
+      - GOODTILLCANCEL
+      - IMMEDIATE
+    AccountWithDetails:
+      description: An instance of an account with full details.
+      allOf:
+      - type: object
+        properties:
+          depositAccount:
+            $ref: '#/components/schemas/DepositAccount'
+      - type: object
+        properties:
+          loanAccount:
+            $ref: '#/components/schemas/LoanAccount'
+      - type: object
+        properties:
+          locAccount:
+            $ref: '#/components/schemas/LocAccount'
+      - type: object
+        properties:
+          investmentAccount:
+            $ref: '#/components/schemas/InvestmentAccount'
+      - type: object
+        properties:
+          insuranceAccount:
+            $ref: '#/components/schemas/InsuranceAccount'
+      - type: object
+        properties:
+          annuityAccount:
+            $ref: '#/components/schemas/AnnuityAccount'
+    AnnuityValueBasis:
+      title: AnnuityValueBasis
+      type: string
+      enum:
+      - FIXED
+      - VARIABLE
+    AccountType:
+      title: AccountType
+      type: string
+      enum:
+      - 401A
+      - 401K
+      - 403B
+      - '529'
+      - AUTOLOAN
+      - CD
+      - CHARGE
+      - CHECKING
+      - COMMERCIALLINEOFCREDIT
+      - COMMERCIALLOAN
+      - COVERDELL
+      - CREDITCARD
+      - DEPOSIT
+      - ESCROW
+      - ESOP
+      - GUARDIAN
+      - HOMEEQUITYLOAN
+      - HOMELINEOFCREDIT
+      - INSTITUTIONALTRUST
+      - INSTALLMENT
+      - IRA
+      - INVESTMENT
+      - KEOGH
+      - LINEOFCREDIT
+      - LOAN
+      - MILITARYLOAN
+      - MONEYMARKET
+      - MORTGAGE
+      - PERSONALLOAN
+      - ROLLOVER
+      - ROTH
+      - SARSEP
+      - SAVINGS
+      - SMBLOAN
+      - STUDENTLOAN
+      - TAXABLE
+      - TDA
+      - TRUST
+      - UGMA
+      - UTMA
+      - ANNUITY
+    Account:
+      title: Account Entity
+      description: An abstract account entity that concrete account entities extend. Extends and inherits all fields from AccountDescriptor.
+      allOf:
+      - $ref: '#/components/schemas/AccountDescriptor'
+      - type: object
+        properties:
+          parentAccountId:
+            maxLength: 256
+            type: string
+            description: Long-term persistent identity of the parent account. This is used to group accounts.
+          lineOfBusiness:
+            type: string
+            description: The line of business, such as consumer, consumer joint, small business, corporate, etc.
+          routingTransitNumber:
+            type: string
+            description: Routing transit number (RTN) associated with account number at owning institution.
+          balanceType:
+            $ref: '#/components/schemas/BalanceType'
+          interestRate:
+            type: number
+            description: Interest Rate of Account
+          interestRateType:
+            $ref: '#/components/schemas/InterestRateType'
+          interestRateAsOf:
+            type: string
+            description: Date of account’s interest rate
+          priorInterestRate:
+            type: number
+            description: Previous Interest Rate of Account
+          transferIn:
+            type: boolean
+            description: Account is eligible for incoming transfers
+          transferOut:
+            type: boolean
+            description: Account is eligible for outgoing transfers
+          micrNumber:
+            maxLength: 64
+            type: string
+            description: MICR Number
+          lastActivityDate:
+            type: string
+            description: Date that last transaction occurred on account
+          transactionsIncluded:
+            type: boolean
+            description: Default is false. If present and true, a call to retrieve transactions will not return any further details about this account. This is an optimization that allows an FDX API server to return transactions and account details in a single call.
+    StockSecurity:
+      title: StockSecurity Entity
+      type: object
+      properties:
+        unitsStreet:
+          type: number
+          description: Units in the FI's street name, positive quantity
+        unitsUser:
+          type: number
+          description: Units in user's name directly, positive  quantity
+        reinvestDividends:
+          type: boolean
+          description: Reinvest dividends
+        stockType:
+          $ref: '#/components/schemas/StockType'
+        yield:
+          type: number
+          description: Current yield
+        yieldAsOfDate:
+          type: string
+          description: Yield as-of date
+    getTransactionImageSuccessResult:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/result'
+        imagesMetadata:
+          $ref: '#/components/schemas/imagesMetadata'
+        transactionImages:
+          $ref: '#/components/schemas/transactionImages'
+    DepositAccount:
+      title: DepositAccount Entity
+      description: Deposit accounts will have following fields in FiAttributes - PreviousBalance, OpenDate, StatementName, 1DayFloat, 2orMoreDaysFloat, AccruedInterestMTD, ProjectedInterested, InterestPaidPreviousMonth
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          balanceAsOf:
+            type: string
+            description: As-of date of balances
+          currentBalance:
+            type: number
+            description: Balance of funds in account
+          openingDayBalance:
+            type: number
+            description: Day's opening fund balance
+          availableBalance:
+            type: number
+            description: Balance of funds available for use
+          annualPercentageYield:
+            type: number
+            description: Annual Percentage Yield
+          interestYtd:
+            type: number
+            description: YTD Interest
+          term:
+            type: integer
+            description: Term of CD in months
+          maturityDate:
+            type: string
+            description: Maturity date for CDs
+          transactions:
+            type: array
+            description: Array of DepositTransactions
+            items:
+              $ref: '#/components/schemas/DepositTransaction'
+    HateoasLink:
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          example: /example/accounts/12345
+        action:
+          type: string
+          description: HTTP Method to use for the request (Suggested)
+          enum:
+          - GET
+          - POST
+          - PATCH
+          - DELETE
+          - PUT
+        types:
+          type: array
+          description: Content-types that can be used in the Accept header.
+          items:
+            $ref: '#/components/schemas/ContentTypes'
+    image:
+      type: object
+      properties:
+        cid:
+          type: string
+        imageSegment:
+          type: string
+        imageFormat:
+          type: integer
+    CallType:
+      title: CallType
+      type: string
+      description: Type of next call (CALL, PUT, PREFUND, MATURITY)
+      enum:
+      - CALL
+      - MATURITY
+      - PREFUND
+      - PUT
+    AnnuityAccount:
+      title: AnnuityAccount Entity
+      type: object
+      properties:
+        annuityProductType:
+          $ref: '#/components/schemas/AnnuityProductType'
+        annuityValueBasis:
+          $ref: '#/components/schemas/AnnuityValueBasis'
+        paymentAmount:
+          type: number
+          description: Amount of the recurring payment
+        paymentFrequency:
+          $ref: '#/components/schemas/PaymentFrequency'
+        paymentStartDate:
+          type: string
+          description: Date of first payment; could be a future date
+        paymentEndDate:
+          type: string
+          description: Date last payment will be made
+        totalPaymentCount:
+          type: number
+          description: Total number of payments that will be produced by the annuity
+        netPresentValue:
+          type: number
+          description: Surrender or cash balance value
+        annualIncrease:
+          type: number
+          description: Percent or dollar amount of annual payment increase
+        annualIncreaseType:
+          $ref: '#/components/schemas/AnnualIncreaseType'
+        periodCertainGuarantee:
+          $ref: '#/components/schemas/PeriodCertainGuarantee'
+    IncomeType:
+      title: IncomeType
+      type: string
+      description: Type of investment income - CGLONG (capital gains-long term), CGSHORT (capital gains-short term), MISC
+      enum:
+      - CGLONG
+      - CGSHORT
+      - MISC
+    LoanTransaction:
+      title: LoanTransaction Entity
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/LoanTransactionType'
+          paymentDetails:
+            $ref: '#/components/schemas/PaymentDetails'
+    PageMetadata:
+      type: object
+      properties:
+        nextOffset:
+          type: string
+          description: Opaque identified. Does not need to be numeric or have any specific pattern. Implementation specific.
+          example: '2'
+        prevOffset:
+          type: string
+          description: Opaque identified. Does not need to be numeric or have any specific pattern. Implementation specific.
+          example: '2'
+        totalElements:
+          type: integer
+          description: Total number of elements
+          example: 3
+    Transaction:
+      title: Transaction
+      type: object
+      properties:
+        accountId:
+          maxLength: 256
+          type: string
+          description: Corresponds to AccountId in Account
+        transactionId:
+          maxLength: 256
+          type: string
+          description: Long term persistent identity of the transaction (unique to account)
+        referenceTransactionId:
+          maxLength: 256
+          type: string
+          description: For reverse postings, the identity of the transaction being reversed. For the correction transaction, the identity of the reversing post. For credit card posting transactions, the identity of the authorization transaction.
+        postedTimestamp:
+          type: string
+          description: The date and time that the transaction was posted to the account. If not provided then TransactionTimestamp can be used as PostedTimeStamp.
+        transactionTimestamp:
+          type: string
+          description: The date and time that the transaction was added to the server backend systems
+        description:
+          type: string
+          description: The description of the transaction
+        memo:
+          maxLength: 255
+          type: string
+          description: Secondary transaction description
+        debitCreditMemo:
+          $ref: '#/components/schemas/DebitCreditMemo'
+        category:
+          type: string
+          description: Transaction category, preferably MCC or SIC.
+        subCategory:
+          type: string
+          description: Transaction category detail
+        reference:
+          type: string
+          description: A tracking reference identifier
+        status:
+          $ref: '#/components/schemas/TransactionStatus'
+        amount:
+          type: number
+          description: The amount of money in the account currency
+        foreignAmount:
+          type: number
+          description: The amount of money in the foreign currency
+        foreignCurrency:
+          $ref: '#/components/schemas/Iso4217Code'
+        imageIds:
+          type: array
+          description: Array of Image Identifiers (unique to Transaction) used to retrieve Images of check or transaction receipt
+          items:
+            type: string
+        lineItem:
+          type: array
+          description: Breakdown of the transaction details
+          items:
+            $ref: '#/components/schemas/LineItem'
+        fiAttributes:
+          type: array
+          description: Array of FI-specific attributes
+          items:
+            $ref: '#/components/schemas/FiAttribute'
+        links:
+          type: object
+          properties:
+            image:
+              type: array
+              description: Array of Image Identifiers (unique to Transaction) used to retrieve Images of check or transaction receipt
+              items:
+                $ref: '#/components/schemas/HateoasLink'
+    DebitCreditMemo:
+      title: DebitCreditMemo
+      type: string
+      enum:
+      - CREDIT
+      - DEBIT
+      - MEMO
+    PaginatedArray:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+        links:
+          $ref: '#/components/schemas/PageMetadataLinks'
+      description: To be used as a mixin using "allOf"
+    Vesting:
+      title: Vesting Entity
+      type: object
+      properties:
+        vestingDate:
+          type: string
+          description: Vesting date
+        symbol:
+          type: string
+          description: Security symbol
+        strikePrice:
+          type: number
+          description: Strike price
+        vestingPercentage:
+          type: number
+          description: Vesting percentage
+        otherVestAmount:
+          type: number
+          description: Other vest amount
+        otherVestPercentage:
+          type: number
+          description: Other vest percentage
+        vestedBalance:
+          type: number
+          description: Vested balance
+        unVestedBalance:
+          type: number
+          description: Unvested balance
+        vestedQuantity:
+          type: number
+          description: Vested qualtity
+        unVestedQuantity:
+          type: number
+          description: Unvested quantity
+    LoanAccount:
+      title: LoanAccount Entity
+      description: Loan accounts will have following fields in FiAttributes - BorrowerName, FacilityName, OutstandingBal, OutstandingBalLoanCurr, MaturityDate
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          balanceAsOf:
+            type: string
+            description: As-of date for balances
+          principalBalance:
+            type: number
+            description: Principal balance of loan
+          escrowBalance:
+            type: number
+            description: Escrow balance of loan
+          originalPrincipal:
+            type: number
+            description: Original principal of loan
+          originatingDate:
+            type: string
+            description: Loan origination date
+          loanTerm:
+            type: integer
+            description: Term of loan in months
+          totalNumberOfPayments:
+            type: integer
+            description: Total number of payments
+          nextPaymentAmount:
+            type: number
+            description: Amount of next payment
+          nextPaymentDate:
+            type: string
+            description: Date of next payment
+          paymentFrequency:
+            $ref: '#/components/schemas/PaymentFrequency'
+          compoundingPeriod:
+            $ref: '#/components/schemas/CompoundingPeriod'
+          payOffAmount:
+            type: number
+            description: Payoff amount
+          lastPaymentAmount:
+            type: number
+            description: Last payment amount
+          lastPaymentDate:
+            type: string
+            description: Last payment date
+          maturityDate:
+            type: string
+            description: Maturity date
+          interestPaidYearToDate:
+            type: number
+            description: Interest paid year to date
+          transactions:
+            type: array
+            items:
+              $ref: '#/components/schemas/LoanTransaction'
+    AnnuityProductType:
+      title: AnnuityProductType
+      type: string
+      enum:
+      - CURRENCY
+      - SHARES
+    Bills:
+      title: Bills Entity
+      type: object
+      properties:
+        totalPaymentDue:
+          type: number
+          description: Total payment due or next payment due.  Monthly payment due for loans.
+        minimumPaymentDue:
+          type: number
+        dueDate:
+          type: string
+          description: The date that the payment is due
+        autoPayEnabled:
+          type: boolean
+          description: Whether the user's bill is paid automatically
+        autoPayAmount:
+          type: number
+          description: The amount of money the user has set to autopay this bill
+        autoPayDate:
+          type: string
+          description: The date the autopayment is set to trigger for this bill
+        pastDueAmount:
+          type: number
+          description: The amount that the user should have already paid. Negative value if user owes money.
+        lastPaymentAmount:
+          type: number
+        lastPaymentDate:
+          type: string
+        statementBalance:
+          type: number
+          description: The amount of the last statement.  Negative value if user owes money.
+        statementDate:
+          type: string
+          description: The date the statement was issued
+    AccountDescriptor:
+      title: AccountDescriptor Entity
+      type: object
+      properties:
+        accountId:
+          maxLength: 256
+          type: string
+          description: Long-term persistent identity of the account. Not an account number. This identity must be unique to the owning institution.
+        error:
+          $ref: '#/components/schemas/Error'
+        accountType:
+          $ref: '#/components/schemas/AccountType'
+        accountNumber:
+          type: string
+          description: Full account number for the end user's handle for account at owning institution.
+        accountNumberDisplay:
+          type: string
+          description: Account display number for the end user’s handle at owning institution. This is to be displayed by the Interface Provider.
+        productName:
+          type: string
+          description: Marketed product name for this account. Used in UIs to assist in account selection
+        nickname:
+          type: string
+          description: Name given by the user. Used in UIs to assist in account selection
+        status:
+          type: string
+          enum:
+          - OPEN
+          - CLOSED
+          - PENDINGOPEN
+          - PENDINGCLOSE
+          - DELINQUENT
+          - PAID
+          - NEGATIVECURRENTBALANCE
+        description:
+          type: string
+        currency:
+          $ref: '#/components/schemas/Currency'
+        fiAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/FiAttribute'
+      description: Minimal information about the account for use in lightweight arrays.
+    searchTransactionImageSuccessResult:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/result'
+        transactionImages:
+          $ref: '#/components/schemas/transactionImagesSearch'
+    itemAmountRange:
+      type: object
+      required:
+      - lowAmount
+      - highAmount
+      properties:
+        lowAmount:
+          type: string
+        highAmount:
+          type: string
+    HeldInAccount:
+      title: HeldInAccount
+      type: string
+      description: Sub-account CASH, MARGIN, SHORT, OTHER
+      enum:
+      - CASH
+      - MARGIN
+      - OTHER
+      - SHORT
+    imagesMetadata:
+      type: object
+      properties:
+        imageId:
+          type: string
+          description: Image Id
+        imageSiteId:
+          type: string
+          description: Image site spefific document Id
+        itemSequenceNumber:
+          type: string
+          description: Item sequence number/check number
+    OptionSecurity:
+      title: OptionSecurity Entity
+      type: object
+      properties:
+        secured:
+          $ref: '#/components/schemas/Secured'
+        optionType:
+          $ref: '#/components/schemas/OptionType'
+        strikePrice:
+          type: number
+          description: Strike price / Unit price
+        expireDate:
+          type: string
+          description: Expiration date of option
+        sharesPerContract:
+          type: number
+          description: Shares per contract
+    InvestmentAccount:
+      title: InvestmentAccount Entity
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          balanceAsOf:
+            type: string
+            description: As-of date of balances
+          allowedCheckWriting:
+            type: boolean
+            description: Check writing privileges
+          allowedOptionTrade:
+            type: boolean
+            description: Allowed to trade options
+          currentValue:
+            type: number
+            description: Total current value of all investments
+          holdings:
+            type: array
+            description: Array of holdings
+            items:
+              $ref: '#/components/schemas/Holding'
+          openOrders:
+            type: array
+            description: Array of open orders
+            items:
+              $ref: '#/components/schemas/OpenOrder'
+          contribution:
+            type: array
+            description: Describes how new contributions are distributed among the available securities
+            items:
+              $ref: '#/components/schemas/Contribution'
+          vesting:
+            type: array
+            description: Provides the past, present, and future vesting schedule and percentages
+            items:
+              $ref: '#/components/schemas/Vesting'
+          investmentLoans:
+            type: array
+            description: Array of investment loans
+            items:
+              $ref: '#/components/schemas/InvestmentLoan'
+          availableCashBalance:
+            type: number
+            description: Cash balance across all sub-accounts. Should include sweep funds.
+          margin:
+            type: boolean
+            description: Margin trading is allowed
+          marginBalance:
+            type: number
+            description: Margin balance
+          shortBalance:
+            type: number
+            description: Short balance
+          rolloverAmount:
+            type: number
+            description: Rollover amount
+          employerName:
+            type: string
+            description: Name of the employer in investment 401k Plan
+          brokerId:
+            type: string
+            description: Unique identifier FI
+          planId:
+            type: string
+            description: Plan number for Investment 401k plan
+          calendaryearFor401K:
+            type: string
+            description: Date for this calendar year for 401K account
+          balanceList:
+            type: array
+            description: Balance List. Name value pair aggregate.
+            items:
+              $ref: '#/components/schemas/InvestmentBalance'
+          dailyChange:
+            type: number
+            description: Daily change
+          percentageChange:
+            type: number
+            description: Percentage change
+          transactions:
+            type: array
+            description: Array of Investment Transactions
+            items:
+              $ref: '#/components/schemas/InvestmentTransaction'
+          pensionSource:
+            type: array
+            description: Array of Pension Source
+            items:
+              $ref: '#/components/schemas/PensionSource'
+    HoldingSubType:
+      title: HoldingSubType
+      type: string
+      description: MONEYMARKET, CASH
+      enum:
+      - CASH
+      - MONEYMARKET
+    Iso4217Code:
+      title: Iso4217Code
+      type: string
+      description: The ISO 4217 code of the foreign currency
+      enum:
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AUD
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BOV
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYR
+      - BZD
+      - CAD
+      - CDF
+      - CHE
+      - CHF
+      - CHW
+      - CLF
+      - CLP
+      - CNY
+      - COP
+      - COU
+      - CRC
+      - CUC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - EUR
+      - FJD
+      - FKP
+      - GBP
+      - GEL
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRO
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MXV
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - USD
+      - USN
+      - UYI
+      - UYU
+      - UZS
+      - VEF
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XAG
+      - XAU
+      - XBA
+      - XBB
+      - XBC
+      - XBD
+      - XCD
+      - XDR
+      - XOF
+      - XPD
+      - XPF
+      - XPT
+      - XSU
+      - XTS
+      - XUA
+      - XXX
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+    CouponMatureFrequency:
+      title: CouponMatureFrequency
+      type: string
+      description: When coupons mature (MONTHLY, QUARTERLY,  SEMIANNUAL, ANNUAL, OTHER)
+      enum:
+      - ANNUAL
+      - MONTHLY
+      - OTHER
+      - QUARTERLY
+      - SEMIANNUAL
+    transactionImagesSearch:
+      type: object
+      properties:
+        imagesMetadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/imageSearch'
+    LocTransactionType:
+      title: LocTransactionType
+      type: string
+      description: CHECK, WITHDRAWAL, PAYMENT, FEE, ADJUSTMENT, INTEREST
+      enum:
+      - ADJUSTMENT
+      - CHECK
+      - FEE
+      - INTEREST
+      - PAYMENT
+      - WITHDRAWAL
+    Contribution:
+      title: Contribution Entity
+      type: object
+      properties:
+        securityId:
+          type: string
+          description: Unique identifier of security
+        securityIdType:
+          $ref: '#/components/schemas/SecurityIdType'
+        employerMatchPercentage:
+          type: number
+          description: Employer contribution match percentage
+        employerMatchAmount:
+          type: number
+          description: Employer contribution match amount
+        employeePreTaxAmount:
+          type: number
+          description: Employee pre‐tax contribution amount
+        employeePreTaxPercentage:
+          type: number
+          description: Employee pre‐tax contribution percentage
+        employeeAfterTaxAmount:
+          type: number
+          description: Employee after tax contribution amount
+        employeeAfterTaxPercentage:
+          type: number
+          description: Employee after tax contribution percentage
+        employeeDeferPreTaxAmount:
+          type: number
+          description: Employee defer pre‐tax contribution match amount
+        employeeDeferPreTaxPercentage:
+          type: number
+          description: Employee defer pre‐tax contribution match percentage
+        employeeYearToDate:
+          type: number
+          description: Employee total year to date contribution
+        employerYearToDate:
+          type: number
+          description: Employer total year to date contribution
+        rolloverContributionPercentage:
+          type: number
+          description: Rollover contribution percentage
+        rolloverContributionAmount:
+          type: number
+          description: Rollover contribution Amount
+    dateRange:
+      type: object
+      required:
+      - startDate
+      - endDate
+      properties:
+        startDate:
+          type: string
+        endDate:
+          type: string
+    searchTransactionImagesRequest:
+      type: object
+      required:
+      - itemIndicator
+      - dateRange
+      properties:
+        itemIndicator:
+          type: string
+          description: Indicate the type of item image in scope for search - ‘paid’, ‘deposited’, ‘deposit’
+        itemSequenceNumber:
+          type: string
+          description: Item sequence number/check number
+        itemAmount:
+          type: string
+          description: Item exact amount
+        routingTransitNumber:
+          type: string
+          description: Routing transit number (RTN) associated with account number at owning institution
+        depositedItemAccountNumber:
+          type: string
+          description: Posted Account number for deposited items
+        checkNumber:
+          type: string
+          description: Check Number field for US Checks - Serial number field for CA Cheques
+        serialNumber:
+          type: string
+          description: Check Number field for US Checks - Serial number field for CA Cheques
+        dateRange:
+          $ref: '#/components/schemas/dateRange'
+        itemAmountRange:
+          $ref: '#/components/schemas/itemAmountRange'
+        itemSequenceNumberRange:
+          $ref: '#/components/schemas/itemSequenceNumberRange'
+        checkNumberRange:
+          $ref: '#/components/schemas/checkNumberRange'
+        serialNumberRange:
+          $ref: '#/components/schemas/serialNumberRange'
+    result:
+      type: object
+      required:
+      - code
+      - status
+      properties:
+        code:
+          type: string
+          description: Contains the API response code e.g. 200, 500 etc
+          example: '200'
+        status:
+          type: string
+          description: HTTP Status.
+          enum:
+          - SUCCESS
+          - PARTIAL
+          - FAILURE
+          example: SUCCESS
+    Secured:
+      title: Secured
+      type: string
+      description: How the option is secured
+      enum:
+      - COVERED
+      - NAKED
+    InvestmentBalanceType:
+      title: InvestmentBalanceType
+      type: string
+      enum:
+      - AMOUNT
+      - PERCENTAGE
+    StockType:
+      title: StockType
+      type: string
+      enum:
+      - COMMON
+      - CONVERTIBLE
+      - OTHER
+      - PREFERRED
+    OptionType:
+      title: OptionType
+      type: string
+      enum:
+      - CALL
+      - PUT
+    MutualFundSecurity:
+      title: MutualFundSecurity Entity
+      type: object
+      properties:
+        mutualFundType:
+          $ref: '#/components/schemas/MutualFundType'
+        unitsStreet:
+          type: number
+          description: Units in the FI's street name, positive quantity
+        unitsUser:
+          type: number
+          description: Units in user's name directly, positive  quantity
+        reinvestDividends:
+          type: boolean
+          description: Reinvest dividends
+        reinvestCapitalGains:
+          type: boolean
+          description: Reinvest capital gains
+        yield:
+          type: number
+          description: Current yield reported as portion of the fund's assets
+        yieldAsOfDate:
+          type: string
+          description: As-of date for yield value
+    BalanceType:
+      title: BalanceType
+      type: string
+      description: ASSET (positive transaction amount increases balance) LIABILITY (positive transaction amount decreases balance)
+      enum:
+      - ASSET
+      - LIABILITY
+    CompoundingPeriod:
+      title: CompoundingPeriod
+      type: string
+      description: DAILY, WEEKLY, BIWEEKLY, SEMIMONTHLY, MONTHLY, SEMIANNUALLY, ANNUALLY
+      enum:
+      - ANNUALLY
+      - BIWEEKLY
+      - DAILY
+      - MONTHLY
+      - SEMIANNUALLY
+      - SEMIMONTHLY
+      - WEEKLY
+    serialNumberRange:
+      type: object
+      required:
+      - lowNumber
+      - highNumber
+      properties:
+        lowNumber:
+          type: string
+        highNumber:
+          type: string
+    PositionType:
+      title: PositionType
+      type: string
+      description: LONG, SHORT
+      enum:
+      - LONG
+      - SHORT
+    OrderType:
+      title: OrderType
+      type: string
+      enum:
+      - BUY
+      - SELL
+      - BUYTOCOVER
+      - BUYTOOPEN
+      - SELLTOCOVER
+      - SELLTOOPEN
+      - SELLSHORT
+      - SELLCLOSE
+    SecurityIdType:
+      title: SecurityIdType
+      type: string
+      description: Security identifier type
+      enum:
+      - CUSIP
+      - ISIN
+      - SEDOL
+      - SICC
+      - VALOR
+      - WKN
+    OpenOrder:
+      title: OpenOrder Entity
+      type: object
+      properties:
+        orderId:
+          maxLength: 256
+          type: string
+        securityId:
+          type: string
+        securityIdType:
+          $ref: '#/components/schemas/SecurityIdType'
+        symbol:
+          type: string
+          description: Market symbol
+        description:
+          type: string
+          description: Description of order
+        units:
+          type: number
+          description: Number of units (shares or bonds etc)
+        orderType:
+          $ref: '#/components/schemas/OrderType'
+        orderDate:
+          type: string
+          description: Order date
+        unitPrice:
+          type: number
+          description: Unit price
+        unitType:
+          $ref: '#/components/schemas/UnitType'
+        orderDuration:
+          $ref: '#/components/schemas/OrderDuration'
+        subAccount:
+          type: string
+          enum:
+          - CASH
+          - MARGIN
+          - SHORT
+          - OTHER
+        limitPrice:
+          type: number
+          description: Limit Price
+        stopPrice:
+          type: number
+          description: Stop price
+        inv401kSource:
+          $ref: '#/components/schemas/Inv401kSourceType'
+    PeriodCertainGuarantee:
+      title: PeriodCertainGuarante
+      type: string
+      enum:
+      - NO PERIOD CERTAIN
+      - 5-YEAR
+      - 10-YEAR
+      - 20-YEAR
+      - 30-YEAR
+    checkNumberRange:
+      type: object
+      required:
+      - lowNumber
+      - highNumber
+      properties:
+        lowNumber:
+          type: string
+        highNumber:
+          type: string
+    InvestmentTransactionType:
+      title: InvestmentTransactionType
+      type: string
+      description: PURCHASED, SOLD, PURCHASEDTOCOVER, ADJUSTMENT, PURCHASETOOPEN, PURCHASETOCLOSE, SOLDTOOPEN, SOLDTOCLOSE, INTEREST, MARGININTEREST, REINVESTOFINCOME, RETURNOFCAPITAL, TRANSFER, CONTRIBUTION, FEE, OPTIONEXERCISE, OPTIONEXPIRATION, DIVIDEND, DIVIDENDREINVEST, SPLIT, CLOSURE, INCOME, EXPENSE, CLOSUREOPT, INVEXPENSE, JRNLSEC, JRNLFUND, OTHER, DIV, SRVCHG, DEP, DEPOSIT, ATM, POS, XFER, CHECK, PAYMENT, CASH, DIRECTDEP, DIRECTDEBIT, REPEATPMT
+      enum:
+      - ADJUSTMENT
+      - ATM
+      - CASH
+      - CHECK
+      - CLOSURE
+      - CLOSUREOPT
+      - CONTRIBUTION
+      - DEP
+      - DEPOSIT
+      - DIRECTDEBIT
+      - DIRECTDEP
+      - DIV
+      - DIVIDEND
+      - DIVIDENDREINVEST
+      - EXPENSE
+      - FEE
+      - INCOME
+      - INTEREST
+      - INVEXPENSE
+      - JRNLFUND
+      - JRNLSEC
+      - MARGININTEREST
+      - OPTIONEXERCISE
+      - OPTIONEXPIRATION
+      - OTHER
+      - PAYMENT
+      - POS
+      - PURCHASED
+      - PURCHASEDTOCOVER
+      - PURCHASETOCLOSE
+      - PURCHASETOOPEN
+      - REINVESTOFINCOME
+      - REPEATPMT
+      - RETURNOFCAPITAL
+      - SOLD
+      - SOLDTOCLOSE
+      - SOLDTOOPEN
+      - SPLIT
+      - SRVCHG
+      - TRANSFER
+      - XFER
+    Portion:
+      title: Portion Entity
+      type: object
+      properties:
+        assetClass:
+          $ref: '#/components/schemas/AssetClass'
+        percent:
+          type: number
+    MutualFundType:
+      title: MutualFundType
+      type: string
+      description: Mutual fund type
+      enum:
+      - OPENEND
+      - CLOSEEND
+      - OTHER
+    PaymentDetails:
+      title: PaymentDetails Entity
+      type: object
+      properties:
+        principalAmount:
+          type: number
+          description: The amount of payment applied to principal
+        interestAmount:
+          type: number
+          description: The amount of payment applied to interest
+        insuranceAmount:
+          type: number
+          description: The amount of payment applied to life/health/accident insurance on the loan
+        escrowAmount:
+          type: number
+          description: The amount of payment applied to escrow
+        pmiAmount:
+          type: number
+          description: The amount of payment applied to PMI
+        feesAmount:
+          type: number
+          description: The amount of payment applied to fees
+      description: Breakdown of payment details
+    DebtType:
+      title: DebtType
+      type: string
+      description: Debt type (COUPON, ZERO)
+      enum:
+      - COUPON
+      - ZERO
+    TaxLot:
+      title: TaxLot
+      type: object
+      properties:
+        originalPurchaseDate:
+          type: string
+          description: Lot acquired date
+        quantity:
+          type: number
+          description: Lot quantity
+        purchasedPrice:
+          type: number
+          description: Original purchase price
+        costBasis:
+          type: number
+          description: Total amount of money spent acquiring this lot including any fees or commission expenses incurred
+        currentValue:
+          type: number
+          description: Lot market value
+        postionType:
+          $ref: '#/components/schemas/PositionType'
+    FiPortion:
+      title: FiPortion
+      type: object
+      properties:
+        assetClass:
+          type: string
+          description: FI-specific asset class
+        percent:
+          type: number
+          description: Percentage of asset class that falls under this asset
+    DebtSecurity:
+      title: DebtSecurity Entity
+      type: object
+      properties:
+        parValue:
+          type: number
+          description: Par value amount
+        debtType:
+          $ref: '#/components/schemas/DebtType'
+        debtClass:
+          $ref: '#/components/schemas/DebtClass'
+        couponRate:
+          type: number
+          description: Bond coupon rate for next closest call date
+        couponDate:
+          type: string
+          description: Maturity date for next coupon
+        couponMatureFrequency:
+          $ref: '#/components/schemas/CouponMatureFrequency'
+        callPrice:
+          type: number
+          description: Bond call price
+        yieldToCall:
+          type: number
+          description: Yield to next call
+        callDate:
+          type: string
+          description: Next call date
+        callType:
+          $ref: '#/components/schemas/CallType'
+        yieldToMaturity:
+          type: number
+          description: Yield to maturity
+        bondMaturityDate:
+          type: string
+          description: Bond Maturity date
+    PaymentFrequency:
+      title: PaymentFrequency
+      type: string
+      description: DAILY, WEEKLY, BIWEEKLY, SEMIMONTHLY, MONTHLY, SEMIANNUALLY, ANNUALLY
+      enum:
+      - ANNUALLY
+      - BIWEEKLY
+      - DAILY
+      - MONTHLY
+      - SEMIANNUALLY
+      - SEMIMONTHLY
+      - WEEKLY
+    PensionSource:
+      title: PensionSource Entity
+      type: object
+      properties:
+        displayName:
+          type: string
+          description: Name of the Source
+        amount:
+          type: number
+          description: Benefit Amount
+        paymentOption:
+          type: string
+          description: Form of payment
+        asOfDate:
+          type: string
+          description: Date benefit was calculated
+        frequency:
+          $ref: '#/components/schemas/PaymentFrequency'
+        startDate:
+          type: string
+          description: Assumed retirement date ‐ As of date amount is payable
+    InvestmentLoan:
+      title: InvestmentLoan Entity
+      type: object
+      properties:
+        loanId:
+          type: string
+          description: Unique identifier for this loan
+        loanDescription:
+          type: string
+          description: Description
+        initialLoanBalance:
+          type: number
+          description: Initial loan balance amount
+        loanStartDate:
+          type: string
+          description: Start date of the loan
+        currentLoanBalance:
+          type: number
+          description: Current loan principal balance amount
+        dateAsOf:
+          type: string
+          description: Date and time of current loan balance
+        loanRate:
+          type: number
+          description: Loan annual interest rate for the loan
+        loanPaymentAmount:
+          type: number
+          description: Loan payment amount
+        loanPaymentFrequency:
+          $ref: '#/components/schemas/LoanPaymentFrequency'
+        loanPaymentInitial:
+          type: number
+          description: Initial number of loan payments
+        loanPaymentsRemaining:
+          type: integer
+          description: Remaining number of loan payments
+        loanMaturityDate:
+          type: string
+          description: Expected loan end date
+        loanInterestToDate:
+          type: number
+          description: Total interest paid to date on this loan
+        loanTotalProjectedInterest:
+          type: number
+          description: Total projected interest to be paid on this loan
+        loanNextPaymentDate:
+          type: string
+          description: The next payment date for the loan
+    TransactionStatus:
+      title: TransactionStatus
+      type: string
+      enum:
+      - AUTHORIZATION
+      - MEMO
+      - PENDING
+      - POSTED
+  securitySchemes:
+    OAuth:
+      type: oauth2
+      flows:
+        authorizationCode:
+          scopes:
+            ItemImage: ItemImage
+          authorizationUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+          tokenUrl: https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+    x-api-key:
+      type: apiKey
+      in: header
+      x-key-type: client_id
+      name: x-api-key
+x-ibm-configuration:
+  categories:
+  - bian--bd--operationalservices
+  enforced: true
+  testable: true
+  phase: realized
+  cors:
+    enabled: true
+  type: rest
+  application-authentication:
+    certificate: false
+  servers:
+  - url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+    type:
+    - production
+    - development
+  oauth-servers:
+    OAuth:
+      tokenUrls:
+      - https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/token
+      authorizationUrls:
+      - https://open-api.bmofg.com/open-banking/commercial-sb/oauth20/authorize
+      refreshUrls: []

@@ -1,0 +1,155 @@
+openapi: 3.2.0
+info:
+  title: Authorize & Token Oauth20 API
+  x-ibm-name: authorize-token
+  version: 2.0.2
+  description: Authorize is our implementation of the OAuth 2.0 framework. It lets you integrate the latest industry-standard secure authorization methods in your app.
+  x-api-id: 1606b936-dd24-83e8-7013-fc77d3847278
+  x-bmo-api-type: general-api
+  x-bmo-api-provider-id: 3384
+  x-bmoservicedomain-name: Issued Device Administration
+  x-api-specification-compliant: false
+  x-ibm-summary: ''
+servers:
+- url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+tags:
+- name: Oauth20
+paths:
+  /oauth20/authorize:
+    get:
+      operationId: Retrieve authorization code
+      x-dataclassification-code: Highly Sensitive
+      summary: Retrieve authorization code
+      description: "Retrieve an authorization code to be used in exchange for an access token. \n"
+      parameters:
+      - name: client_id
+        in: query
+        description: Application client ID, can be provided in formData or using HTTP Basic Authentication
+        required: true
+        schema:
+          type: string
+      - name: redirect_uri
+        in: query
+        description: required only if the redirect_uri parameter was included in the authorization request /oauth2/authorize; their values MUST be identical.
+        required: true
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: The state value you create and will verify
+        required: true
+        schema:
+          type: string
+      - name: scope
+        in: query
+        description: the scope value you create and will verify
+        required: true
+        schema:
+          type: string
+      - name: response_type
+        in: query
+        description: the response type
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: This operation returns no content
+        '400':
+          description: This operation returns no content
+      tags:
+      - Oauth20
+  /oauth20/token:
+    post:
+      operationId: Request Access Tokens
+      x-dataclassification-code: Public
+      summary: Request Access Tokens
+      description: "Exchange the authorization code retrieved in the previous call  for an access token and a refresh token. \n\n1. Authorization Code<br>Get an access token and refresh token by calling our /token endpoint and passing through the authorization code from the previous call. <br>The access token will only be valid for the scope for which the consent has been provided. It will have an expiration of 24 hours in the sandbox environment and 15 minutes in production. You can then call our APIs by passing this token in the Authorization header.<br>The refresh token can be used to get a new access token if the original one expires.\n\n2. Refresh Token<br>If your access token has expired and your refresh token is still valid, you can exchange your refresh token for a new access token and a new refresh token."
+      responses:
+        '200':
+          description: json document containing token, etc.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '400':
+          description: json document that may contain additional details about the failure
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  description: Type of grant
+                client_id:
+                  type: string
+                  description: Application client ID, can be provided in formData or using HTTP Basic Authentication
+                client_secret:
+                  type: string
+                  description: Application client secret, can be provided in formData or using HTTP Basic Authentication
+                code:
+                  type: string
+                  description: Authorization code provided by the /oauth2/authorize endpoint
+                redirect_uri:
+                  type: string
+                  description: required only if the redirect_uri parameter was included in the authorization request /oauth2/authorize; their values MUST be identical.
+                username:
+                  type: string
+                  description: Resource owner username
+                password:
+                  type: string
+                  description: Resource owner password
+                scope:
+                  type: string
+                  description: Scope being requested
+                refresh_token:
+                  type: string
+                  description: The refresh token that the client wants to exchange for a new access token (refresh_token grant_type)
+              required:
+              - grant_type
+      tags:
+      - Oauth20
+components:
+  schemas:
+    Token:
+      type: object
+      additionalProperties: false
+      required:
+      - token_type
+      - access_token
+      - expires_in
+      properties:
+        token_type:
+          enum:
+          - bearer
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+        scope:
+          type: string
+        refresh_token:
+          type: string
+  securitySchemes:
+    clientIdHeader:
+      type: apiKey
+      in: header
+      name: X-IBM-Client-Id
+x-ibm-configuration:
+  cors:
+    enabled: true
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  categories:
+  - techunit--obtps--sd--issueddeviceadministration--ent
+  application-authentication:
+    certificate: false
+  servers:
+  - url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+    type:
+    - production
+    - development
