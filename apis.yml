@@ -192,51 +192,6 @@ apis:
   - type: Documentation
     url: >-
       https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
-- aid: bmo:bmo-accountvalidation-api
-  name: BMO Account Validation API
-  description: The AccountValidation API from BMO — 1 operation(s) for accountvalidation.
-  humanURL: >-
-    https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
-  baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
-  tags:
-  - Account Validation
-  tags_raw:
-  - AccountValidation
-  properties:
-  - type: OpenAPI
-    url: openapi/bmo-accountvalidation-api-openapi.yml
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
-  - type: DeveloperPortal
-    url: https://developer.bmo.com/api/commercial/
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/achpaymentapi
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepaymentapius
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepayment
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/eft-payments-ca
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/image-retrieval
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/authorize
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/client-data-encryption-key-get-open-banking
-  - type: Webhooks
-    url: asyncapi/bmo-push-notification-webhooks.yml
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
 - aid: bmo:bmo-getpaymentstatus-api
   name: BMO Get Payment Status API
   description: >-
@@ -250,51 +205,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/bmo-getpaymentstatus-api-openapi.yml
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
-  - type: DeveloperPortal
-    url: https://developer.bmo.com/api/commercial/
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/achpaymentapi
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepaymentapius
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepayment
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/eft-payments-ca
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/image-retrieval
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/authorize
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/client-data-encryption-key-get-open-banking
-  - type: Webhooks
-    url: asyncapi/bmo-push-notification-webhooks.yml
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
-- aid: bmo:bmo-oauth20-api
-  name: BMO Oauth20 API
-  description: The Oauth20 API from BMO — 2 operation(s) for oauth20.
-  humanURL: >-
-    https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
-  baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
-  tags:
-  - Authentication
-  tags_raw:
-  - Oauth20
-  properties:
-  - type: OpenAPI
-    url: openapi/bmo-oauth20-api-openapi.yml
   - type: Documentation
     url: >-
       https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
@@ -384,100 +294,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/bmo-obtain-service-agreement-list-api-openapi.yml
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
-  - type: DeveloperPortal
-    url: https://developer.bmo.com/api/commercial/
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/achpaymentapi
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepaymentapius
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepayment
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/eft-payments-ca
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/image-retrieval
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/authorize
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/client-data-encryption-key-get-open-banking
-  - type: Webhooks
-    url: asyncapi/bmo-push-notification-webhooks.yml
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
-- aid: bmo:bmo-paymentinitiation-api
-  name: BMO Payment Initiation API
-  description: >-
-    This is a tag for Payment Initiation - send Payments. receive PAIN001/PAIN008 (Debit/Credit) ISO request
-    as input and return PAIN002 ISO as response after interacting with downstream Payment Rail System(s).
-  humanURL: >-
-    https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
-  baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
-  tags:
-  - Payment Initiation
-  tags_raw:
-  - PaymentInitiation
-  properties:
-  - type: OpenAPI
-    url: openapi/bmo-paymentinitiation-api-openapi.yml
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
-  - type: DeveloperPortal
-    url: https://developer.bmo.com/api/commercial/
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/achpaymentapi
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepaymentapius
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepayment
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/eft-payments-ca
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/image-retrieval
-  - type: Documentation
-    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/authorize
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/client-data-encryption-key-get-open-banking
-  - type: Webhooks
-    url: asyncapi/bmo-push-notification-webhooks.yml
-  - type: Documentation
-    url: >-
-      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
-- aid: bmo:bmo-paymentstatus-api
-  name: BMO Payment Status API
-  description: >-
-    This is a tag for PaymentStatus which enquiry sends CAMT005 ISO JSON Request standard messages and
-    enquires and responds back with PAIN002 message structure after querying matching backend.
-  humanURL: >-
-    https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
-  baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
-  tags:
-  - Payment Status
-  tags_raw:
-  - PaymentStatus
-  properties:
-  - type: OpenAPI
-    url: openapi/bmo-paymentstatus-api-openapi.yml
   - type: Documentation
     url: >-
       https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
@@ -1047,6 +863,182 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/bmo-tppacharrangementcompany-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
+  - type: DeveloperPortal
+    url: https://developer.bmo.com/api/commercial/
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/achpaymentapi
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepaymentapius
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepayment
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/eft-payments-ca
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/image-retrieval
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/authorize
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/client-data-encryption-key-get-open-banking
+  - type: Webhooks
+    url: asyncapi/bmo-push-notification-webhooks.yml
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
+- aid: bmo:bmo-account-validation-api
+  name: BMO Account Validation API
+  description: The Account Validation API from BMO — 1 operation(s) for account validation.
+  humanURL: >-
+    https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
+  baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+  tags:
+  - Account Validation
+  properties:
+  - type: OpenAPI
+    url: openapi/bmo-account-validation-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
+  - type: DeveloperPortal
+    url: https://developer.bmo.com/api/commercial/
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/achpaymentapi
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepaymentapius
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepayment
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/eft-payments-ca
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/image-retrieval
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/authorize
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/client-data-encryption-key-get-open-banking
+  - type: Webhooks
+    url: asyncapi/bmo-push-notification-webhooks.yml
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
+- aid: bmo:bmo-oauth-2-0-api
+  name: BMO OAuth 2.0 API
+  description: The OAuth 2.0 API from BMO — 2 operation(s) for oauth 2.0.
+  humanURL: >-
+    https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
+  baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+  tags:
+  - OAuth 2.0
+  properties:
+  - type: OpenAPI
+    url: openapi/bmo-oauth-2-0-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
+  - type: DeveloperPortal
+    url: https://developer.bmo.com/api/commercial/
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/achpaymentapi
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepaymentapius
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepayment
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/eft-payments-ca
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/image-retrieval
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/authorize
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/client-data-encryption-key-get-open-banking
+  - type: Webhooks
+    url: asyncapi/bmo-push-notification-webhooks.yml
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
+- aid: bmo:bmo-payment-initiation-api
+  name: BMO Payment Initiation API
+  description: >-
+    This is a tag for Payment Initiation - send Payments. receive PAIN001/PAIN008 (Debit/Credit) ISO request
+    as input and return PAIN002 ISO as response after interacting with downstream Payment Rail System(s).
+  humanURL: >-
+    https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
+  baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+  tags:
+  - Payment Initiation
+  properties:
+  - type: OpenAPI
+    url: openapi/bmo-payment-initiation-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
+  - type: DeveloperPortal
+    url: https://developer.bmo.com/api/commercial/
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/achpaymentapi
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepaymentapius
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepayment
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/eft-payments-ca
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/image-retrieval
+  - type: Documentation
+    url: https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/authorize
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/client-data-encryption-key-get-open-banking
+  - type: Webhooks
+    url: asyncapi/bmo-push-notification-webhooks.yml
+  - type: Documentation
+    url: >-
+      https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api
+- aid: bmo:bmo-payment-status-api
+  name: BMO Payment Status API
+  description: >-
+    This is a tag for PaymentStatus which enquiry sends CAMT005 ISO JSON Request standard messages and
+    enquires and responds back with PAIN002 message structure after querying matching backend.
+  humanURL: >-
+    https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
+  baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
+  tags:
+  - Payment Status
+  properties:
+  - type: OpenAPI
+    url: openapi/bmo-payment-status-api-openapi.yml
   - type: Documentation
     url: >-
       https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
