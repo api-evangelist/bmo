@@ -945,6 +945,8 @@ apis:
     https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
   baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
   tags:
+  - Authentication
+  tags_raw:
   - OAuth 2.0
   properties:
   - type: OpenAPI
