@@ -39,7 +39,8 @@ edges:
   reason: Wire payment initiation via customer credit transfer initiation — payment instruction capture
     and initiation.
 - tag: PaymentInitiation
-  spec_file: bmo-paymentinitiation-api-openapi.yml
+  spec_file: bmo-payment-initiation-api-openapi.yml
+  reanchored_from: bmo-paymentinitiation-api-openapi.yml
   capability_id: BC-1340.10
   capability_id_l1: BC-1340
   capability_name: Payment Initiation Management
@@ -59,7 +60,8 @@ edges:
   reason: Fedwire drawdown / creditor payment activation request is capture and authorisation of a payment
     instruction on the wire rail.
 - tag: PaymentStatus
-  spec_file: bmo-paymentstatus-api-openapi.yml
+  spec_file: bmo-payment-status-api-openapi.yml
+  reanchored_from: bmo-paymentstatus-api-openapi.yml
   capability_id: BC-1340.20
   capability_id_l1: BC-1340
   capability_name: Payment Processing Management
