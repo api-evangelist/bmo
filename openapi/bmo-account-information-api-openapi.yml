@@ -27,7 +27,6 @@ paths:
       operationId: Search for Accounts
       tags:
       - Account Information
-      description: Search for Authorized Accounts
       summary: Search for Authorized Accounts
       parameters:
       - name: accountIds
@@ -182,7 +181,6 @@ paths:
       operationId: Get an Account
       tags:
       - Account Information
-      description: Get an Account
       summary: Get an Account
       parameters:
       - name: accountId
@@ -288,200 +286,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    InvestmentBalance:
-      title: InvestmentBalance Entity
-      type: object
-      properties:
-        balanceName:
-          type: string
-          description: Name of the balance
-        balanceDescription:
-          type: string
-          description: Description of balance
-        balanceType:
-          $ref: '#/components/schemas/InvestmentBalanceType'
-        balanceValue:
-          type: number
-          description: Value of balance name
-        balanceDate:
-          type: string
-          description: Date as of this balance. YYYY-MM-DD.
-        currency:
-          $ref: '#/components/schemas/Currency'
-    LoanAccount:
-      title: LoanAccount Entity
-      description: Loan accounts will have following fields in FiAttributes - BorrowerName, FacilityName, OutstandingBal, OutstandingBalLoanCurr, MaturityDate
-      allOf:
-      - $ref: '#/components/schemas/AccountDetails'
-      - type: object
-        properties:
-          principalBalance:
-            type: number
-            description: Principal balance of loan
-          escrowBalance:
-            type: number
-            description: Escrow balance of loan
-          originalPrincipal:
-            type: number
-            description: Original principal of loan
-          originatingDate:
-            type: string
-            description: Loan origination date. YYYY-MM-DD.
-          loanTerm:
-            type: integer
-            description: Term of loan in months
-          nextPaymentAmount:
-            type: number
-            description: Amount of next payment
-          nextPaymentDate:
-            type: string
-            description: Date of next payment. YYYY-MM-DD.
-          paymentFrequency:
-            $ref: '#/components/schemas/PaymentFrequency'
-          payOffAmount:
-            type: number
-            description: Payoff amount
-          lastPaymentAmount:
-            type: number
-            description: Last payment amount
-          lastPaymentDate:
-            type: string
-            description: Last payment date. YYYY-MM-DD.
-          maturityDate:
-            type: string
-            description: Maturity date. YYYY-MM-DD.
-          interestPaidYearToDate:
-            type: number
-            description: Interest paid year to date
-    AccountDetails:
-      title: Account Entity
-      description: An account object that adds additional detail parameters to the basic Accounts object, this is used in Get an Account operation.
-      allOf:
-      - $ref: '#/components/schemas/Account'
-      - type: object
-        properties:
-          status:
-            type: string
-            enum:
-            - OPEN
-            - CLOSED
-            - PENDINGOPEN
-            - PENDINGCLOSE
-            - DELINQUENT
-            - PAID
-            - NEGATIVECURRENTBALANCE
-          routingTransitNumber:
-            type: string
-            description: Routing transit number (RTN) associated with account number at owning institution.
-          interestRate:
-            type: number
-            description: Interest Rate of Account
-          priorInterestRate:
-            type: number
-            description: Previous Interest Rate of Account
-          balanceAsOf:
-            type: string
-            description: As-of date of balances. YYYY-MM-DD.
-    PageMetadataLinks:
-      type: object
-      properties:
-        next:
-          $ref: '#/components/schemas/HateoasLink'
-        prev:
-          $ref: '#/components/schemas/HateoasLink'
-    InvestmentBalanceType:
-      title: InvestmentBalanceType
-      type: string
-      enum:
-      - AMOUNT
-      - PERCENTAGE
-    Error:
-      title: Error Entity
-      type: object
-      properties:
-        code:
-          type: string
-          description: Long term persistent identifier which can be used to trace error condition back to log information
-        message:
-          type: string
-          description: End user displayable information which might help the customer diagnose an error
-      description: An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account.
-    Accounts:
-      description: An instance of the getAccounts types with limited details.
-      allOf:
-      - type: object
-        properties:
-          depositAccount:
-            $ref: '#/components/schemas/Account'
-      - type: object
-        properties:
-          loanAccount:
-            $ref: '#/components/schemas/Account'
-      - type: object
-        properties:
-          locAccount:
-            $ref: '#/components/schemas/Account'
-      - type: object
-        properties:
-          investmentAccount:
-            $ref: '#/components/schemas/Account'
-    ContentTypes:
-      title: Content Types
-      type: string
-      description: Types of document formats. (Suggested)
-      example: application/json
-      enum:
-      - application/pdf
-      - image/gif
-      - image/jpeg
-      - image/tiff
-      - image/png
-      - application/json
-    AccountType:
-      title: AccountType
-      type: string
-      enum:
-      - 401A
-      - 401K
-      - 403B
-      - '529'
-      - AUTOLOAN
-      - CD
-      - CHARGE
-      - CHECKING
-      - COMMERCIALLINEOFCREDIT
-      - COMMERCIALLOAN
-      - COVERDELL
-      - CREDITCARD
-      - DEPOSIT
-      - ESCROW
-      - ESOP
-      - GUARDIAN
-      - HOMEEQUITYLOAN
-      - HOMELINEOFCREDIT
-      - INSTITUTIONALTRUST
-      - INSTALLMENT
-      - IRA
-      - INVESTMENT
-      - KEOGH
-      - LINEOFCREDIT
-      - LOAN
-      - MILITARYLOAN
-      - MONEYMARKET
-      - MORTGAGE
-      - PERSONALLOAN
-      - ROLLOVER
-      - ROTH
-      - SARSEP
-      - SAVINGS
-      - SMBLOAN
-      - STUDENTLOAN
-      - TAXABLE
-      - TDA
-      - TRUST
-      - UGMA
-      - UTMA
-      - ANNUITY
     Account:
       title: Account Entity
       description: An account object with limited details returned in the search for accounts operation.
@@ -508,146 +312,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/FiAttribute'
-    Currency:
-      title: Currency Entity
-      type: object
-      properties:
-        currencyRate:
-          type: number
-          description: Currency rate between original and converted currency
-        currencyCode:
-          $ref: '#/components/schemas/Iso4217Code'
-        originalCurrencyCode:
-          $ref: '#/components/schemas/Iso4217Code'
-      description: Currency information if it is different from Account entity
-    DepositAccount:
-      title: DepositAccount Entity
-      description: Deposit accounts will have following fields in FiAttributes - PreviousBalance, OpenDate, StatementName, 1DayFloat, 2orMoreDaysFloat, AccruedInterestMTD, ProjectedInterested, InterestPaidPreviousMonth
-      allOf:
-      - $ref: '#/components/schemas/AccountDetails'
-      - type: object
-        properties:
-          currentBalance:
-            type: number
-            description: Balance of funds in account
-          openingDayBalance:
-            type: number
-            description: Day's opening fund balance
-          availableBalance:
-            type: number
-            description: Balance of funds available for use
-          interestYtd:
-            type: number
-            description: YTD Interest
-          term:
-            type: integer
-            description: Term of CD in months
-          maturityDate:
-            type: string
-            description: Maturity date for CDs
-    GetAccount:
-      description: An instance of an account with full details.
-      allOf:
-      - type: object
-        properties:
-          depositAccount:
-            $ref: '#/components/schemas/DepositAccount'
-      - type: object
-        properties:
-          loanAccount:
-            $ref: '#/components/schemas/LoanAccount'
-      - type: object
-        properties:
-          locAccount:
-            $ref: '#/components/schemas/LocAccount'
-      - type: object
-        properties:
-          investmentAccount:
-            $ref: '#/components/schemas/InvestmentAccount'
-    HateoasLink:
-      required:
-      - href
-      type: object
-      properties:
-        href:
-          type: string
-          example: /example/accounts/12345
-        action:
-          type: string
-          description: HTTP Method to use for the request (Suggested)
-          enum:
-          - GET
-          - POST
-          - PATCH
-          - DELETE
-          - PUT
-        types:
-          type: array
-          description: Content-types that can be used in the Accept header.
-          items:
-            $ref: '#/components/schemas/ContentTypes'
-    LocAccount:
-      title: LocAccount Entity
-      description: Loc accounts will have following fields in FiAttributes - StatementBalance
-      allOf:
-      - $ref: '#/components/schemas/AccountDetails'
-      - type: object
-        properties:
-          availableCredit:
-            type: number
-            description: Available credit
-          nextPaymentAmount:
-            type: number
-            description: Amount of next payment
-          nextPaymentDate:
-            type: string
-            description: Due date of next payment. YYYY-MM-DD.
-          principalBalance:
-            type: number
-            description: Principal balance
-          currentBalance:
-            type: number
-            description: Current balance LOC
-          lastPaymentAmount:
-            type: number
-            description: Last payment amount
-          lastPaymentDate:
-            type: string
-            description: Last payment date. YYYY-MM-DD.
-          pastDueAmount:
-            type: number
-            description: Past Due Amount
-          lastStmtBalance:
-            type: number
-            description: Last Statement Balance
-          lastStmtDate:
-            type: string
-            description: Last Statement Date. YYYY-MM-DD.
-    InvestmentAccount:
-      title: InvestmentAccount Entity
-      allOf:
-      - $ref: '#/components/schemas/AccountDetails'
-      - type: object
-        properties:
-          currentValue:
-            type: number
-            description: Total current value of all investments
-          balanceList:
-            type: array
-            description: Balance List. Name value pair aggregate.
-            items:
-              $ref: '#/components/schemas/InvestmentBalance'
-    GetAccounts:
-      title: Accounts Entity
-      description: An optionally paginated array of accounts.
-      allOf:
-      - $ref: '#/components/schemas/PaginatedArray'
-      - type: object
-        properties:
-          accounts:
-            type: array
-            items:
-              $ref: '#/components/schemas/Accounts'
     Iso4217Code:
       title: Iso4217Code
       type: string
@@ -831,6 +495,74 @@ components:
       - ZAR
       - ZMW
       - ZWL
+    Accounts:
+      description: An instance of the getAccounts types with limited details.
+      allOf:
+      - type: object
+        properties:
+          depositAccount:
+            $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          loanAccount:
+            $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          locAccount:
+            $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          investmentAccount:
+            $ref: '#/components/schemas/Account'
+    AccountDetails:
+      title: Account Entity
+      description: An account object that adds additional detail parameters to the basic Accounts object, this is used in Get an Account operation.
+      allOf:
+      - $ref: '#/components/schemas/Account'
+      - type: object
+        properties:
+          status:
+            type: string
+            enum:
+            - OPEN
+            - CLOSED
+            - PENDINGOPEN
+            - PENDINGCLOSE
+            - DELINQUENT
+            - PAID
+            - NEGATIVECURRENTBALANCE
+          routingTransitNumber:
+            type: string
+            description: Routing transit number (RTN) associated with account number at owning institution.
+          interestRate:
+            type: number
+            description: Interest Rate of Account
+          priorInterestRate:
+            type: number
+            description: Previous Interest Rate of Account
+          balanceAsOf:
+            type: string
+            description: As-of date of balances. YYYY-MM-DD.
+    InvestmentBalance:
+      title: InvestmentBalance Entity
+      type: object
+      properties:
+        balanceName:
+          type: string
+          description: Name of the balance
+        balanceDescription:
+          type: string
+          description: Description of balance
+        balanceType:
+          $ref: '#/components/schemas/InvestmentBalanceType'
+        balanceValue:
+          type: number
+          description: Value of balance name
+        balanceDate:
+          type: string
+          description: Date as of this balance. YYYY-MM-DD.
+        currency:
+          $ref: '#/components/schemas/Currency'
     PageMetadata:
       type: object
       properties:
@@ -846,6 +578,280 @@ components:
           type: integer
           description: Total number of elements
           example: 3
+    GetAccount:
+      description: An instance of an account with full details.
+      allOf:
+      - type: object
+        properties:
+          depositAccount:
+            $ref: '#/components/schemas/DepositAccount'
+      - type: object
+        properties:
+          loanAccount:
+            $ref: '#/components/schemas/LoanAccount'
+      - type: object
+        properties:
+          locAccount:
+            $ref: '#/components/schemas/LocAccount'
+      - type: object
+        properties:
+          investmentAccount:
+            $ref: '#/components/schemas/InvestmentAccount'
+    InvestmentBalanceType:
+      title: InvestmentBalanceType
+      type: string
+      enum:
+      - AMOUNT
+      - PERCENTAGE
+    LoanAccount:
+      title: LoanAccount Entity
+      description: Loan accounts will have following fields in FiAttributes - BorrowerName, FacilityName, OutstandingBal, OutstandingBalLoanCurr, MaturityDate
+      allOf:
+      - $ref: '#/components/schemas/AccountDetails'
+      - type: object
+        properties:
+          principalBalance:
+            type: number
+            description: Principal balance of loan
+          escrowBalance:
+            type: number
+            description: Escrow balance of loan
+          originalPrincipal:
+            type: number
+            description: Original principal of loan
+          originatingDate:
+            type: string
+            description: Loan origination date. YYYY-MM-DD.
+          loanTerm:
+            type: integer
+            description: Term of loan in months
+          nextPaymentAmount:
+            type: number
+            description: Amount of next payment
+          nextPaymentDate:
+            type: string
+            description: Date of next payment. YYYY-MM-DD.
+          paymentFrequency:
+            $ref: '#/components/schemas/PaymentFrequency'
+          payOffAmount:
+            type: number
+            description: Payoff amount
+          lastPaymentAmount:
+            type: number
+            description: Last payment amount
+          lastPaymentDate:
+            type: string
+            description: Last payment date. YYYY-MM-DD.
+          maturityDate:
+            type: string
+            description: Maturity date. YYYY-MM-DD.
+          interestPaidYearToDate:
+            type: number
+            description: Interest paid year to date
+    FiAttribute:
+      title: FiAttribute Entity
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of attribute
+        value:
+          type: string
+          description: Value of attribute. All date fields will be of the string format YYYY-MM-DD.
+      description: Financial platform provider-specific attribute
+    DepositAccount:
+      title: DepositAccount Entity
+      description: Deposit accounts will have following fields in FiAttributes - PreviousBalance, OpenDate, StatementName, 1DayFloat, 2orMoreDaysFloat, AccruedInterestMTD, ProjectedInterested, InterestPaidPreviousMonth
+      allOf:
+      - $ref: '#/components/schemas/AccountDetails'
+      - type: object
+        properties:
+          currentBalance:
+            type: number
+            description: Balance of funds in account
+          openingDayBalance:
+            type: number
+            description: Day's opening fund balance
+          availableBalance:
+            type: number
+            description: Balance of funds available for use
+          interestYtd:
+            type: number
+            description: YTD Interest
+          term:
+            type: integer
+            description: Term of CD in months
+          maturityDate:
+            type: string
+            description: Maturity date for CDs
+    AccountType:
+      title: AccountType
+      type: string
+      enum:
+      - 401A
+      - 401K
+      - 403B
+      - '529'
+      - AUTOLOAN
+      - CD
+      - CHARGE
+      - CHECKING
+      - COMMERCIALLINEOFCREDIT
+      - COMMERCIALLOAN
+      - COVERDELL
+      - CREDITCARD
+      - DEPOSIT
+      - ESCROW
+      - ESOP
+      - GUARDIAN
+      - HOMEEQUITYLOAN
+      - HOMELINEOFCREDIT
+      - INSTITUTIONALTRUST
+      - INSTALLMENT
+      - IRA
+      - INVESTMENT
+      - KEOGH
+      - LINEOFCREDIT
+      - LOAN
+      - MILITARYLOAN
+      - MONEYMARKET
+      - MORTGAGE
+      - PERSONALLOAN
+      - ROLLOVER
+      - ROTH
+      - SARSEP
+      - SAVINGS
+      - SMBLOAN
+      - STUDENTLOAN
+      - TAXABLE
+      - TDA
+      - TRUST
+      - UGMA
+      - UTMA
+      - ANNUITY
+    PageMetadataLinks:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/HateoasLink'
+        prev:
+          $ref: '#/components/schemas/HateoasLink'
+    GetAccounts:
+      title: Accounts Entity
+      description: An optionally paginated array of accounts.
+      allOf:
+      - $ref: '#/components/schemas/PaginatedArray'
+      - type: object
+        properties:
+          accounts:
+            type: array
+            items:
+              $ref: '#/components/schemas/Accounts'
+    InvestmentAccount:
+      title: InvestmentAccount Entity
+      allOf:
+      - $ref: '#/components/schemas/AccountDetails'
+      - type: object
+        properties:
+          currentValue:
+            type: number
+            description: Total current value of all investments
+          balanceList:
+            type: array
+            description: Balance List. Name value pair aggregate.
+            items:
+              $ref: '#/components/schemas/InvestmentBalance'
+    PaginatedArray:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+        links:
+          $ref: '#/components/schemas/PageMetadataLinks'
+      description: To be used as a mixin using "allOf"
+    LocAccount:
+      title: LocAccount Entity
+      description: Loc accounts will have following fields in FiAttributes - StatementBalance
+      allOf:
+      - $ref: '#/components/schemas/AccountDetails'
+      - type: object
+        properties:
+          availableCredit:
+            type: number
+            description: Available credit
+          nextPaymentAmount:
+            type: number
+            description: Amount of next payment
+          nextPaymentDate:
+            type: string
+            description: Due date of next payment. YYYY-MM-DD.
+          principalBalance:
+            type: number
+            description: Principal balance
+          currentBalance:
+            type: number
+            description: Current balance LOC
+          lastPaymentAmount:
+            type: number
+            description: Last payment amount
+          lastPaymentDate:
+            type: string
+            description: Last payment date. YYYY-MM-DD.
+          pastDueAmount:
+            type: number
+            description: Past Due Amount
+          lastStmtBalance:
+            type: number
+            description: Last Statement Balance
+          lastStmtDate:
+            type: string
+            description: Last Statement Date. YYYY-MM-DD.
+    Currency:
+      title: Currency Entity
+      type: object
+      properties:
+        currencyRate:
+          type: number
+          description: Currency rate between original and converted currency
+        currencyCode:
+          $ref: '#/components/schemas/Iso4217Code'
+        originalCurrencyCode:
+          $ref: '#/components/schemas/Iso4217Code'
+      description: Currency information if it is different from Account entity
+    HateoasLink:
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          example: /example/accounts/12345
+        action:
+          type: string
+          description: HTTP Method to use for the request (Suggested)
+          enum:
+          - GET
+          - POST
+          - PATCH
+          - DELETE
+          - PUT
+        types:
+          type: array
+          description: Content-types that can be used in the Accept header.
+          items:
+            $ref: '#/components/schemas/ContentTypes'
+    ContentTypes:
+      title: Content Types
+      type: string
+      description: Types of document formats. (Suggested)
+      example: application/json
+      enum:
+      - application/pdf
+      - image/gif
+      - image/jpeg
+      - image/tiff
+      - image/png
+      - application/json
     PaymentFrequency:
       title: PaymentFrequency
       type: string
@@ -858,25 +864,17 @@ components:
       - SEMIANNUALLY
       - SEMIMONTHLY
       - WEEKLY
-    PaginatedArray:
+    Error:
+      title: Error Entity
       type: object
       properties:
-        page:
-          $ref: '#/components/schemas/PageMetadata'
-        links:
-          $ref: '#/components/schemas/PageMetadataLinks'
-      description: To be used as a mixin using "allOf"
-    FiAttribute:
-      title: FiAttribute Entity
-      type: object
-      properties:
-        name:
+        code:
           type: string
-          description: Name of attribute
-        value:
+          description: Long term persistent identifier which can be used to trace error condition back to log information
+        message:
           type: string
-          description: Value of attribute. All date fields will be of the string format YYYY-MM-DD.
-      description: Financial platform provider-specific attribute
+          description: End user displayable information which might help the customer diagnose an error
+      description: An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account.
   securitySchemes:
     api-key-1:
       type: apiKey

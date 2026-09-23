@@ -74,78 +74,24 @@ paths:
       x-amazon-apigateway-request-validator: params-only
       x-codegen-request-body-name: CustomerCreditTransferInitiation
 components:
-  parameters:
-    x-fapi-financial-id:
-      in: header
-      name: x-fapi-financial-id
-      schema:
-        type: string
-      required: true
-      description: The unique id of the financial institution to which the request is issued. BMO is 001
-    x-bmo-id-token:
-      in: header
-      name: x-bmo-id-token
-      schema:
-        type: string
-      required: false
-      description: BMO ID token containing encoded user id and client id information
-    x-app-cat-id:
-      in: header
-      name: x-app-cat-id
-      schema:
-        type: string
-      required: false
-      description: BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer
-    x-fapi-customer-last-logged-time:
-      in: header
-      name: x-fapi-customer-last-logged-time
-      schema:
-        type: string
-      required: false
-      description: The time when the Payment Services User last logged in with the Third Party Provider
-    Authorization:
-      in: header
-      name: Authorization
-      schema:
-        type: string
-      required: true
-      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      schema:
-        type: string
-      required: true
-      description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
-    x-request-id:
-      in: header
-      name: x-request-id
-      schema:
-        type: string
-      required: true
-      description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
-    x-fapi-customer-user-agent:
-      name: x-fapi-customer-user-agent
-      in: header
-      description: The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.
-      schema:
-        type: string
-      required: false
-    x-fapi-customer-ip-address:
-      in: header
-      name: x-fapi-customer-ip-address
-      schema:
-        type: string
-      required: false
-      description: The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider
-    x-client-id:
-      in: header
-      name: x-client-id
-      schema:
-        type: string
-      required: true
-      description: Client Id generated during Third Party Provider application registration.
   responses:
+    '415':
+      description: Unsupported Media Type
+      headers:
+        x-fapi-interaction-id:
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          schema:
+            type: string
+          required: true
+        x-et-response-code:
+          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
+          schema:
+            type: integer
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
     '400':
       description: Bad Request Exception
       content:
@@ -161,8 +107,42 @@ components:
           schema:
             type: string
           description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer /employee. Multiple requests  with unique  x-request-id's might have common  x-fapi-interactionid. If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
-    '415':
-      description: Unsupported Media Type
+    '401':
+      description: Unauthorized
+      headers:
+        x-fapi-interaction-id:
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          schema:
+            type: string
+          required: true
+        x-et-response-code:
+          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
+          schema:
+            type: integer
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '504':
+      description: Integration or Backend Timeout
+      headers:
+        x-fapi-interaction-id:
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interanctioId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          schema:
+            type: string
+          required: true
+        x-et-response-code:
+          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
+          schema:
+            type: integer
+          required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    '403':
+      description: Forbidden - the user is not authorized to use this resource
       headers:
         x-fapi-interaction-id:
           description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
@@ -195,11 +175,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Problem'
-    '504':
-      description: Integration or Backend Timeout
+    '404':
+      description: Not Found
       headers:
         x-fapi-interaction-id:
-          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interanctioId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
+          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
           schema:
             type: string
           required: true
@@ -235,58 +215,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Problem'
-    '401':
-      description: Unauthorized
-      headers:
-        x-fapi-interaction-id:
-          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
-          schema:
-            type: string
-          required: true
-        x-et-response-code:
-          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
-          schema:
-            type: integer
-          required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-    '404':
-      description: Not Found
-      headers:
-        x-fapi-interaction-id:
-          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
-          schema:
-            type: string
-          required: true
-        x-et-response-code:
-          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
-          schema:
-            type: integer
-          required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-    '403':
-      description: Forbidden - the user is not authorized to use this resource
-      headers:
-        x-fapi-interaction-id:
-          description: If the FDX-interactionId is provided by the caller then APIC will populate the x-request-id with FDX-interactionId. If FDX-interactionId is not provided by the caller then APIC will generate the x-request-id to send it to downstream.
-          schema:
-            type: string
-          required: true
-        x-et-response-code:
-          description: A numeric response code specifying the outcome of the message.A successful call will return a response code of 0 and http response code '200', along with any additional response data."
-          schema:
-            type: integer
-          required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
   schemas:
+    SECURE:
+      type: object
+      properties:
+        SECURE:
+          type: object
+          properties:
+            encrypted:
+              type: boolean
+            data:
+              type: string
+              description: Data to hold strigified plaintext iso json/encrypted iso message string
     Problem:
       type: object
       properties:
@@ -332,17 +272,77 @@ components:
           description: 'An absolute URI that identifies the specific occurrence of the problem. It may or may not yield further information if dereferenced.
 
             '
-    SECURE:
-      type: object
-      properties:
-        SECURE:
-          type: object
-          properties:
-            encrypted:
-              type: boolean
-            data:
-              type: string
-              description: Data to hold strigified plaintext iso json/encrypted iso message string
+  parameters:
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      schema:
+        type: string
+      required: true
+      description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interactionid. If the is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+    Authorization:
+      in: header
+      name: Authorization
+      schema:
+        type: string
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+    x-client-id:
+      in: header
+      name: x-client-id
+      schema:
+        type: string
+      required: true
+      description: Client Id generated during Third Party Provider application registration.
+    x-fapi-customer-user-agent:
+      name: x-fapi-customer-user-agent
+      in: header
+      description: The header indicates the user-agent that the PSU is using. The API client may populate this field with the User-Agent header string if browser is being used. If the mobile app is being used then the x-fapi-customer-user-agent content must be different from browser based user-agent strings.
+      schema:
+        type: string
+      required: false
+    x-request-id:
+      in: header
+      name: x-request-id
+      schema:
+        type: string
+      required: true
+      description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+    x-app-cat-id:
+      in: header
+      name: x-app-cat-id
+      schema:
+        type: string
+      required: false
+      description: BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer
+    x-bmo-id-token:
+      in: header
+      name: x-bmo-id-token
+      schema:
+        type: string
+      required: false
+      description: BMO ID token containing encoded user id and client id information
+    x-fapi-customer-ip-address:
+      in: header
+      name: x-fapi-customer-ip-address
+      schema:
+        type: string
+      required: false
+      description: The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider
+    x-fapi-customer-last-logged-time:
+      in: header
+      name: x-fapi-customer-last-logged-time
+      schema:
+        type: string
+      required: false
+      description: The time when the Payment Services User last logged in with the Third Party Provider
+    x-fapi-financial-id:
+      in: header
+      name: x-fapi-financial-id
+      schema:
+        type: string
+      required: true
+      description: The unique id of the financial institution to which the request is issued. BMO is 001
   securitySchemes:
     api_key:
       type: apiKey

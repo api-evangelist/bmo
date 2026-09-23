@@ -13,14 +13,14 @@ info:
 servers:
 - url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
 tags:
-- name: Oauth20
+- name: OAuth 2.0
 paths:
   /oauth20/authorize:
     get:
       operationId: Retrieve authorization code
       x-dataclassification-code: Highly Sensitive
       summary: Retrieve authorization code
-      description: "Retrieve an authorization code to be used in exchange for an access token. \n"
+      description: Retrieve an authorization code to be used in exchange for an access token.
       parameters:
       - name: client_id
         in: query
@@ -58,13 +58,27 @@ paths:
         '400':
           description: This operation returns no content
       tags:
-      - Oauth20
+      - OAuth 2.0
   /oauth20/token:
     post:
       operationId: Request Access Tokens
       x-dataclassification-code: Public
       summary: Request Access Tokens
-      description: "Exchange the authorization code retrieved in the previous call  for an access token and a refresh token. \n\n1. Authorization Code<br>Get an access token and refresh token by calling our /token endpoint and passing through the authorization code from the previous call. <br>The access token will only be valid for the scope for which the consent has been provided. It will have an expiration of 24 hours in the sandbox environment and 15 minutes in production. You can then call our APIs by passing this token in the Authorization header.<br>The refresh token can be used to get a new access token if the original one expires.\n\n2. Refresh Token<br>If your access token has expired and your refresh token is still valid, you can exchange your refresh token for a new access token and a new refresh token."
+      description: 'Exchange the authorization code retrieved in the previous call for an access token and a refresh token.
+
+
+        1. Authorization Code
+
+        Get an access token and refresh token by calling our /token endpoint and passing through the authorization code from the previous call.
+
+        The access token will only be valid for the scope for which the consent has been provided. It will have an expiration of 24 hours in the sandbox environment and 15 minutes in production. You can then call our APIs by passing this token in the Authorization header.
+
+        The refresh token can be used to get a new access token if the original one expires.
+
+
+        2. Refresh Token
+
+        If your access token has expired and your refresh token is still valid, you can exchange your refresh token for a new access token and a new refresh token.'
       responses:
         '200':
           description: json document containing token, etc.
@@ -110,7 +124,7 @@ paths:
               required:
               - grant_type
       tags:
-      - Oauth20
+      - OAuth 2.0
 components:
   schemas:
     Token:

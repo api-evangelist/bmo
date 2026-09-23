@@ -22,16 +22,16 @@ security:
   - AccountValidation
   x-api-key: []
 tags:
-- name: AccountValidation
+- name: Account Validation
 paths:
   /accounts/validate/get:
     post:
       x-dataclassification-code: Confidential
       operationId: ValidateAccounts
       tags:
-      - AccountValidation
+      - Account Validation
       summary: Validate accounts
-      description: "Verify details for up to 100 U.S. accounts per call for validation. Each call will return a risk-level score and confirm if the submitted account owner information matches the Early Warning's national transaction and identities database.      \n"
+      description: Verify details for up to 100 U.S. accounts per call for validation. Each call will return a risk-level score and confirm if the submitted account owner information matches the Early Warning's national transaction and identities database.
       parameters:
       - name: authorization
         in: header
@@ -152,126 +152,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ValidateAccountsResponse:
-      title: ValidateAccountsResponse
-      description: Validation response
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationResult'
-          minItems: 1
-    AccountOwner:
-      type: object
-      description: Inquiry must contain First AND Last Name, OR Business Name. if one is populated, the other can be left blank
-      properties:
-        name:
-          $ref: '#/components/schemas/IndividualName'
-        businessName:
-          type: string
-        address:
-          $ref: '#/components/schemas/Address'
-        homePhone:
-          type: string
-          format: int32
-        workPhone:
-          type: string
-          format: int32
-        taxId:
-          type: string
-          description: Base64 encoded and encrypted SSN or TIN associated with this customer
-          format: byte
-        dateOfBirth:
-          type: string
-          description: Base64 encoded and encrypted Date of Birth of customer in YYYYMMDD format
-          format: byte
-        additionalIdentification:
-          $ref: '#/components/schemas/AdditionalIdentification'
-    ValidateAccountsRequest:
-      type: object
-      required:
-      - accounts
-      - validateOwnership
-      - validateStatus
-      properties:
-        validateStatus:
-          type: boolean
-          description: validate account status.
-        validateOwnership:
-          type: boolean
-          description: validate account ownership. If set to true, accounts.owner parameter is required.
-        accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-          minItems: 1
-          maxItems: 100
-    ValidationResult:
-      type: object
-      properties:
-        statusValidationResult:
-          $ref: '#/components/schemas/StatusValidationResult'
-        ownershipValidationResult:
-          $ref: '#/components/schemas/OwnershipValidationResult'
-        routingTransitNumber:
-          type: string
-        accountNumber:
-          type: string
-          description: Base64 encoded and encrypted account number in int64 format
-          format: byte
-        accountRisk:
-          type: string
-          description: account risk level
-          enum:
-          - LOW
-          - MEDIUM
-          - HIGH
-    StatusValidationResult:
-      type: object
-      properties:
-        fieldName:
-          type: string
-          description: fieldName that caused validation error. Returned when status is failed.
-        status:
-          type: string
-        description:
-          type: string
-          description: Description of the error. Returned when status is failed.
-    Address:
-      type: object
-      properties:
-        line1:
-          type: string
-          maxLength: 40
-          pattern: ^[0-9a-zA-Z _\-\+=\*!\?/~:;,\.@#\$%\^\(\)\{\}]+$
-        line2:
-          type: string
-          maxLength: 40
-          pattern: ^[0-9a-zA-Z _\-\+=\*!\?/~:;,\.@#\$%\^\(\)\{\}]+$
-        city:
-          type: string
-          maxLength: 25
-          pattern: ^[0-9a-zA-Z _\-\+=\*!\?/~:;,\.@#\$%\^\(\)\{\}]+$
-        state:
-          description: State or province
-          type: string
-        postalCode:
-          type: string
-          description: zip or postal code
-    Error:
-      title: Error Entity
-      type: object
-      properties:
-        code:
-          type: string
-          description: Long term persistent identifier which can be used to trace error condition back to log information
-        message:
-          type: string
-          description: End user displayable information which might help the customer diagnose an error
-        details:
-          type: object
-          description: Details of the error
-      description: An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account.
     Account:
       type: object
       required:
@@ -333,30 +213,87 @@ components:
           description: Process Control Transaction Code.
         owner:
           $ref: '#/components/schemas/AccountOwner'
-    AdditionalIdentification:
+    AccountOwner:
+      type: object
+      description: Inquiry must contain First AND Last Name, OR Business Name. if one is populated, the other can be left blank
+      properties:
+        name:
+          $ref: '#/components/schemas/IndividualName'
+        businessName:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        homePhone:
+          type: string
+          format: int32
+        workPhone:
+          type: string
+          format: int32
+        taxId:
+          type: string
+          description: Base64 encoded and encrypted SSN or TIN associated with this customer
+          format: byte
+        dateOfBirth:
+          type: string
+          description: Base64 encoded and encrypted Date of Birth of customer in YYYYMMDD format
+          format: byte
+        additionalIdentification:
+          $ref: '#/components/schemas/AdditionalIdentification'
+    ValidationResult:
       type: object
       properties:
-        placeOfIssuance:
+        statusValidationResult:
+          $ref: '#/components/schemas/StatusValidationResult'
+        ownershipValidationResult:
+          $ref: '#/components/schemas/OwnershipValidationResult'
+        routingTransitNumber:
           type: string
-        governmentId:
+        accountNumber:
           type: string
-          description: Base64 encoded and encrypted string idNumber
+          description: Base64 encoded and encrypted account number in int64 format
           format: byte
-        governmentIdType:
+        accountRisk:
           type: string
+          description: account risk level
           enum:
-          - '0'
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
-          - '6'
-          - '7'
-          - '8'
-          - '9'
-          - A
-          - B
+          - LOW
+          - MEDIUM
+          - HIGH
+    Address:
+      type: object
+      properties:
+        line1:
+          type: string
+          maxLength: 40
+          pattern: ^[0-9a-zA-Z _\-\+=\*!\?/~:;,\.@#\$%\^\(\)\{\}]+$
+        line2:
+          type: string
+          maxLength: 40
+          pattern: ^[0-9a-zA-Z _\-\+=\*!\?/~:;,\.@#\$%\^\(\)\{\}]+$
+        city:
+          type: string
+          maxLength: 25
+          pattern: ^[0-9a-zA-Z _\-\+=\*!\?/~:;,\.@#\$%\^\(\)\{\}]+$
+        state:
+          description: State or province
+          type: string
+        postalCode:
+          type: string
+          description: zip or postal code
+    BMOError:
+      title: BMO Error Entity
+      type: object
+      properties:
+        httpCode:
+          type: string
+          description: HTTP Status Code
+        httpMessage:
+          type: string
+          description: End user displayable information which might help the customer diagnose an error
+        moreInformation:
+          type: object
+          description: Details of the error
+      description: An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account.
     OwnershipValidationResult:
       type: object
       properties:
@@ -479,20 +416,72 @@ components:
           minimum: 0
           maximum: 100
           description: "Measure of how closely the inquiry attributes match\nthe information in the Account Owner Elements\ndatabase. Derived by examining all information sent;\nincorporates name variations (for name fields), edit\ndistance, abbreviations, phonetic encoding and other\nmatching algorithms. Valid values = 0-100.          \n"
-    BMOError:
-      title: BMO Error Entity
+    ValidateAccountsRequest:
+      type: object
+      required:
+      - accounts
+      - validateOwnership
+      - validateStatus
+      properties:
+        validateStatus:
+          type: boolean
+          description: validate account status.
+        validateOwnership:
+          type: boolean
+          description: validate account ownership. If set to true, accounts.owner parameter is required.
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+          minItems: 1
+          maxItems: 100
+    Error:
+      title: Error Entity
       type: object
       properties:
-        httpCode:
+        code:
           type: string
-          description: HTTP Status Code
-        httpMessage:
+          description: Long term persistent identifier which can be used to trace error condition back to log information
+        message:
           type: string
           description: End user displayable information which might help the customer diagnose an error
-        moreInformation:
+        details:
           type: object
           description: Details of the error
       description: An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account.
+    ValidateAccountsResponse:
+      title: ValidateAccountsResponse
+      description: Validation response
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationResult'
+          minItems: 1
+    AdditionalIdentification:
+      type: object
+      properties:
+        placeOfIssuance:
+          type: string
+        governmentId:
+          type: string
+          description: Base64 encoded and encrypted string idNumber
+          format: byte
+        governmentIdType:
+          type: string
+          enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+          - '5'
+          - '6'
+          - '7'
+          - '8'
+          - '9'
+          - A
+          - B
     IndividualName:
       type: object
       required:
@@ -526,16 +515,27 @@ components:
         suffix:
           type: string
           maxLength: 4
+    StatusValidationResult:
+      type: object
+      properties:
+        fieldName:
+          type: string
+          description: fieldName that caused validation error. Returned when status is failed.
+        status:
+          type: string
+        description:
+          type: string
+          description: Description of the error. Returned when status is failed.
   headers:
+    x-fapi-interaction-id:
+      schema:
+        type: string
+      description: request header to inform server of an interaction tracing identifier.
     x-crypto-key:
       schema:
         type: string
         format: byte
       description: base64 encoded crypto key to decrypt sensitive information
-    x-fapi-interaction-id:
-      schema:
-        type: string
-      description: request header to inform server of an interaction tracing identifier.
   securitySchemes:
     OAuth:
       type: oauth2

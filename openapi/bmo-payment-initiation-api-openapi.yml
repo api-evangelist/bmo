@@ -19,7 +19,7 @@ info:
 servers:
 - url: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
 tags:
-- name: PaymentInitiation
+- name: Payment Initiation
   description: This is a tag for Payment Initiation - send Payments. receive PAIN001/PAIN008 (Debit/Credit) ISO request as input and return PAIN002 ISO as response after interacting with downstream Payment Rail System(s).
 paths:
   /tpp/ach/payment-initiation/customer-credit-transfer-initiation:
@@ -29,7 +29,7 @@ paths:
         OAuth:
         - bmo.tppach.payment-initiation.create
       tags:
-      - PaymentInitiation
+      - Payment Initiation
       summary: Send Payment Credit
       description: Payment Initiation - send Payments. receive PAIN001 (Credit) ISO JSON request as input and return PAIN002 ISO JSON as response after interacting with downstream Payment Rail System.
       operationId: CreditPaymentInitiation
@@ -290,7 +290,7 @@ paths:
   /tpp/ach/payment-initiation/customer-direct-debit-initiation:
     post:
       tags:
-      - PaymentInitiation
+      - Payment Initiation
       summary: Send Payment Debit
       description: Payment Initiation - send Payments. receive PAIN008 (Debit) ISO JSON request as input and return PAIN002 ISO JSON as response after interacting with downstream Payment Rail System.
       operationId: DebitPaymentInitiation
@@ -553,6 +553,27 @@ paths:
       x-codegen-request-body-name: sendPaymentInitiationRequest
 components:
   schemas:
+    SECURE:
+      type: object
+      required:
+      - encrypted
+      - data
+      properties:
+        encrypted:
+          type: boolean
+          default: true
+          description: Send true when dealing with data encryption
+        data:
+          type: string
+          default: encrypted PAIN001 or PAIN00 or CAMT005 payload for request and pain002 for response
+          description: 'base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field'
+    ResultDetails:
+      type: object
+      properties:
+        detailCode:
+          type: string
+        detailMessage:
+          type: string
     Problem:
       required:
       - detail
@@ -600,20 +621,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AdditionalDetail'
-    RequestPayload:
-      properties:
-        SECURE:
-          $ref: '#/components/schemas/SECURE'
-    ResponsePayload:
-      required:
-      - result
-      - SECURE
+    AdditionalDetail:
       type: object
+      description: An object containing detailed Additional information.
       properties:
-        result:
-          $ref: '#/components/schemas/Result'
-        SECURE:
-          $ref: '#/components/schemas/SECURE'
+        detailCode:
+          type: string
+          description: Detailed backend response codes.eg. CUSTOMER-ERROR-DOB-MISSING
+        detailMessage:
+          type: string
+          description: Detailed backend messages. e.g. Date of Birth is missing.
+        sourceAppCatId:
+          type: string
     Result:
       type: object
       required:
@@ -632,39 +651,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ResultDetails'
-    AdditionalDetail:
-      type: object
-      description: An object containing detailed Additional information.
-      properties:
-        detailCode:
-          type: string
-          description: Detailed backend response codes.eg. CUSTOMER-ERROR-DOB-MISSING
-        detailMessage:
-          type: string
-          description: Detailed backend messages. e.g. Date of Birth is missing.
-        sourceAppCatId:
-          type: string
-    ResultDetails:
-      type: object
-      properties:
-        detailCode:
-          type: string
-        detailMessage:
-          type: string
-    SECURE:
-      type: object
+    ResponsePayload:
       required:
-      - encrypted
-      - data
+      - result
+      - SECURE
+      type: object
       properties:
-        encrypted:
-          type: boolean
-          default: true
-          description: Send true when dealing with data encryption
-        data:
-          type: string
-          default: encrypted PAIN001 or PAIN00 or CAMT005 payload for request and pain002 for response
-          description: 'base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field'
+        result:
+          $ref: '#/components/schemas/Result'
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
+    RequestPayload:
+      properties:
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
   securitySchemes:
     api-key-1:
       type: apiKey

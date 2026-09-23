@@ -288,6 +288,27 @@ paths:
       x-codegen-request-body-name: ACHCompanyIDListRequest
 components:
   schemas:
+    SECURE:
+      type: object
+      required:
+      - encrypted
+      - data
+      properties:
+        encrypted:
+          type: boolean
+          default: true
+          description: Send true when dealing with data encryption
+        data:
+          type: string
+          default: encrypted PAIN001 or PAIN00 or CAMT005 payload for request and pain002 for response
+          description: 'base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field'
+    ResultDetails:
+      type: object
+      properties:
+        detailCode:
+          type: string
+        detailMessage:
+          type: string
     Problem:
       required:
       - detail
@@ -335,20 +356,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AdditionalDetail'
-    RequestPayload:
-      properties:
-        SECURE:
-          $ref: '#/components/schemas/SECURE'
-    ResponsePayload:
-      required:
-      - result
-      - SECURE
+    AdditionalDetail:
       type: object
+      description: An object containing detailed Additional information.
       properties:
-        result:
-          $ref: '#/components/schemas/Result'
-        SECURE:
-          $ref: '#/components/schemas/SECURE'
+        detailCode:
+          type: string
+          description: Detailed backend response codes.eg. CUSTOMER-ERROR-DOB-MISSING
+        detailMessage:
+          type: string
+          description: Detailed backend messages. e.g. Date of Birth is missing.
+        sourceAppCatId:
+          type: string
     Result:
       type: object
       required:
@@ -367,39 +386,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ResultDetails'
-    AdditionalDetail:
-      type: object
-      description: An object containing detailed Additional information.
-      properties:
-        detailCode:
-          type: string
-          description: Detailed backend response codes.eg. CUSTOMER-ERROR-DOB-MISSING
-        detailMessage:
-          type: string
-          description: Detailed backend messages. e.g. Date of Birth is missing.
-        sourceAppCatId:
-          type: string
-    ResultDetails:
-      type: object
-      properties:
-        detailCode:
-          type: string
-        detailMessage:
-          type: string
-    SECURE:
-      type: object
+    ResponsePayload:
       required:
-      - encrypted
-      - data
+      - result
+      - SECURE
+      type: object
       properties:
-        encrypted:
-          type: boolean
-          default: true
-          description: Send true when dealing with data encryption
-        data:
-          type: string
-          default: encrypted PAIN001 or PAIN00 or CAMT005 payload for request and pain002 for response
-          description: 'base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field'
+        result:
+          $ref: '#/components/schemas/Result'
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
+    RequestPayload:
+      properties:
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
   securitySchemes:
     api-key-1:
       type: apiKey

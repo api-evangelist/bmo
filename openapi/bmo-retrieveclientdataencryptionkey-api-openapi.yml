@@ -7,7 +7,7 @@ info:
   x-bmoservicedomain-name: Commercial_sb
   x-api-specification-compliant: true
   version: 1.0.0
-  title: Client Data Encryption Key Get Open Banking Retrieve Client Data Encryption Key API
+  title: Client Data Encryption Key Get Open Banking Retrieve Client…
   description: REST Utility framework to retrieve cryptographic instructions such as public Customer Management key (CMK) details, encryption method and algorithm etc based on a resource uri and key alias. The key can be used to encryt, but not decrypt the data.
   contact:
     name: Smart Core-CG
@@ -189,7 +189,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/exceptionResult'
-      summary: ''
+      summary: Post retrievecryptoinstruction
       requestBody:
         content:
           application/json:
@@ -197,79 +197,23 @@ paths:
               $ref: '#/components/schemas/RetrieveClientKeyRequest'
         description: Request Body
         required: true
+      x-summary-source: derived
 components:
-  parameters:
-    Authorization:
-      name: Authorization
-      in: header
-      description: An Authorization Token as per https://tools.ietf.org/html/rfc6750
-      required: false
-      schema:
-        type: string
-    x-fapi-financial-id:
-      name: x-fapi-financial-id
-      in: header
-      description: The unique id of the financial institution to which the request is issued. BMO is 001
-      required: true
-      schema:
-        type: string
-    x-request-id:
-      name: x-request-id
-      in: header
-      description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
-      required: true
-      schema:
-        type: string
-    x-client-id:
-      name: x-client-id
-      in: header
-      description: Client Id generated during Third Party Provider application registration
-      required: false
-      schema:
-        type: string
-    x-fapi-customer-user-agent:
-      name: x-fapi-customer-user-agent
-      in: header
-      description: Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm
-      required: false
-      schema:
-        type: string
-    x-app-cat-id:
-      name: x-app-cat-id
-      in: header
-      description: BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer
-      required: true
-      schema:
-        type: string
-    x-api-key:
-      name: x-api-key
-      in: header
-      description: The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)
-      required: false
-      schema:
-        type: string
-    x-fapi-interaction-id:
-      name: x-fapi-interaction-id
-      in: header
-      description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
-      required: false
-      schema:
-        type: string
-    x-fapi-customer-ip-address:
-      name: x-fapi-customer-ip-address
-      in: header
-      description: The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.
-      required: false
-      schema:
-        type: string
-    x-fapi-customer-last-logged-time:
-      name: x-fapi-customer-last-logged-time
-      in: header
-      description: The time when the Payment Services User last logged in with the Third Party Provider
-      required: false
-      schema:
-        type: string
   schemas:
+    RetrieveClientKeyResponse:
+      type: object
+      properties:
+        result:
+          $ref: '#/components/schemas/Result'
+        key:
+          $ref: '#/components/schemas/key'
+    ResultDetails:
+      type: object
+      properties:
+        detailCode:
+          type: string
+        detailMessage:
+          type: string
     exceptionResult:
       type: object
       required:
@@ -277,6 +221,21 @@ components:
       properties:
         result:
           $ref: '#/components/schemas/Result'
+    key:
+      type: object
+      required:
+      - keyid
+      properties:
+        keyid:
+          type: string
+        pemContent:
+          type: string
+        keyType:
+          type: string
+        encryptionAlgorithm:
+          type: string
+        timeToLive:
+          type: string
     RetrieveClientKeyRequest:
       type: object
       required:
@@ -304,13 +263,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ResultDetails'
-    RetrieveClientKeyResponse:
-      type: object
-      properties:
-        result:
-          $ref: '#/components/schemas/Result'
-        key:
-          $ref: '#/components/schemas/key'
     OriginatorData:
       type: object
       required:
@@ -329,28 +281,77 @@ components:
           type: string
         employeeUserId:
           type: string
-    ResultDetails:
-      type: object
-      properties:
-        detailCode:
-          type: string
-        detailMessage:
-          type: string
-    key:
-      type: object
-      required:
-      - keyid
-      properties:
-        keyid:
-          type: string
-        pemContent:
-          type: string
-        keyType:
-          type: string
-        encryptionAlgorithm:
-          type: string
-        timeToLive:
-          type: string
+  parameters:
+    x-fapi-interaction-id:
+      name: x-fapi-interaction-id
+      in: header
+      description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+      required: false
+      schema:
+        type: string
+    x-app-cat-id:
+      name: x-app-cat-id
+      in: header
+      description: BMO Application Catalogue ID of the consumer of the API. To be provided if API call is initiated by a BMO Application. BMO Application Catalogue https://appcat.bmogc.net/servlet/ApmServer
+      required: true
+      schema:
+        type: string
+    x-client-id:
+      name: x-client-id
+      in: header
+      description: Client Id generated during Third Party Provider application registration
+      required: false
+      schema:
+        type: string
+    x-fapi-customer-user-agent:
+      name: x-fapi-customer-user-agent
+      in: header
+      description: Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm
+      required: false
+      schema:
+        type: string
+    x-request-id:
+      name: x-request-id
+      in: header
+      description: Correlates HTTP requests between a client and server. Uniquely identifies each API call.
+      required: true
+      schema:
+        type: string
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The unique id used to identify caller of the API. (For legacy, AppCatId value could be used)
+      required: false
+      schema:
+        type: string
+    x-fapi-customer-ip-address:
+      name: x-fapi-customer-ip-address
+      in: header
+      description: The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.
+      required: false
+      schema:
+        type: string
+    x-fapi-customer-last-logged-time:
+      name: x-fapi-customer-last-logged-time
+      in: header
+      description: The time when the Payment Services User last logged in with the Third Party Provider
+      required: false
+      schema:
+        type: string
+    x-fapi-financial-id:
+      name: x-fapi-financial-id
+      in: header
+      description: The unique id of the financial institution to which the request is issued. BMO is 001
+      required: true
+      schema:
+        type: string
+    Authorization:
+      name: Authorization
+      in: header
+      description: An Authorization Token as per https://tools.ietf.org/html/rfc6750
+      required: false
+      schema:
+        type: string
   securitySchemes:
     api-key-1:
       type: apiKey
