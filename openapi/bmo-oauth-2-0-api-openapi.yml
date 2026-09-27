@@ -17,7 +17,7 @@ tags:
 paths:
   /oauth20/authorize:
     get:
-      operationId: Retrieve authorization code
+      operationId: RetrieveAuthorizationCode
       x-dataclassification-code: Highly Sensitive
       summary: Retrieve authorization code
       description: Retrieve an authorization code to be used in exchange for an access token.
@@ -59,9 +59,11 @@ paths:
           description: This operation returns no content
       tags:
       - OAuth 2.0
+      x-operation-id-source: normalized
+      x-operation-id-original: Retrieve authorization code
   /oauth20/token:
     post:
-      operationId: Request Access Tokens
+      operationId: RequestAccessTokens
       x-dataclassification-code: Public
       summary: Request Access Tokens
       description: 'Exchange the authorization code retrieved in the previous call for an access token and a refresh token.
@@ -125,6 +127,8 @@ paths:
               - grant_type
       tags:
       - OAuth 2.0
+      x-operation-id-source: normalized
+      x-operation-id-original: Request Access Tokens
 components:
   schemas:
     Token:

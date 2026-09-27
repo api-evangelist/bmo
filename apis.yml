@@ -42,7 +42,7 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
-- Financial-Services
+- Financial Services
 - Banking
 - United States
 - Open Finance
@@ -59,6 +59,7 @@ tags_raw:
 - Commercial Banking
 - Treasury Management
 - Account Validation
+- Financial-Services
 created: '2026-07-23'
 modified: '2026-07-23'
 specificationVersion: '0.23'
@@ -945,8 +946,6 @@ apis:
     https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation
   baseURL: https://sandbox-open-api.bmo.com/open-banking/commercial-sb
   tags:
-  - Authentication
-  tags_raw:
   - OAuth 2.0
   properties:
   - type: OpenAPI
