@@ -288,36 +288,6 @@ paths:
       x-codegen-request-body-name: ACHCompanyIDListRequest
 components:
   schemas:
-    Result:
-      type: object
-      required:
-      - code
-      - status
-      properties:
-        code:
-          type: string
-        status:
-          type: string
-        messages:
-          type: array
-          items:
-            type: string
-        resultDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResultDetails'
-    AdditionalDetail:
-      type: object
-      description: An object containing detailed Additional information.
-      properties:
-        detailCode:
-          type: string
-          description: Detailed backend response codes.eg. CUSTOMER-ERROR-DOB-MISSING
-        detailMessage:
-          type: string
-          description: Detailed backend messages. e.g. Date of Birth is missing.
-        sourceAppCatId:
-          type: string
     Problem:
       required:
       - detail
@@ -365,17 +335,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AdditionalDetail'
-    RequestPayload:
-      properties:
-        SECURE:
-          $ref: '#/components/schemas/SECURE'
-    ResultDetails:
+    AdditionalDetail:
       type: object
+      description: An object containing detailed Additional information.
       properties:
         detailCode:
           type: string
+          description: Detailed backend response codes.eg. CUSTOMER-ERROR-DOB-MISSING
         detailMessage:
           type: string
+          description: Detailed backend messages. e.g. Date of Birth is missing.
+        sourceAppCatId:
+          type: string
+    Result:
+      type: object
+      required:
+      - code
+      - status
+      properties:
+        code:
+          type: string
+        status:
+          type: string
+        messages:
+          type: array
+          items:
+            type: string
+        resultDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResultDetails'
     SECURE:
       type: object
       required:
@@ -390,6 +379,17 @@ components:
           type: string
           default: encrypted PAIN001 or PAIN00 or CAMT005 payload for request and pain002 for response
           description: 'base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field'
+    RequestPayload:
+      properties:
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
+    ResultDetails:
+      type: object
+      properties:
+        detailCode:
+          type: string
+        detailMessage:
+          type: string
     ResponsePayload:
       required:
       - result
