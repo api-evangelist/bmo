@@ -68,103 +68,8 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    '504':
-      description: System processing timeout. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-      headers:
-        x-correlation-id:
-          schema:
-            type: string
-          description: Correlates HTTP requests between a client and server. Populate the request id as part of this field.
-        x-response-id:
-          schema:
-            type: string
-          description: Unique id to identify the response.
-        x-response-timestamp:
-          schema:
-            type: string
-          description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
-    '403':
-      description: Forbidden. Not authorized to call this API. No Retry for this request. Support team will investigate this issue and may resend the notification.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-      headers:
-        x-correlation-id:
-          schema:
-            type: string
-          description: Correlates HTTP requests between a client and server. Populate the request id as part of this field.
-        x-response-id:
-          schema:
-            type: string
-          description: Unique id to identify the response.
-        x-response-timestamp:
-          schema:
-            type: string
-          description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
-    '500':
-      description: Internal Server Error or Unexpected Error. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-      headers:
-        x-correlation-id:
-          schema:
-            type: string
-          description: Correlates HTTP requests between a client and server. Populate the request id as part of this field.
-        x-response-id:
-          schema:
-            type: string
-          description: Unique id to identify the response.
-        x-response-timestamp:
-          schema:
-            type: string
-          description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
-    default:
-      description: If the http error code is not part of the listed http error codes of the swagger, it will be considered as default error handling. If the http error code falls under 4XX series, system will not do the retry and for other error codes , system will do a default (3 times) retry and also 24 hrs scheduled retry.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-      headers:
-        x-correlation-id:
-          schema:
-            type: string
-          description: Correlates HTTP requests between a client and server. Populate the request id as part of this field.
-        x-response-id:
-          schema:
-            type: string
-          description: Unique id to identify the response.
-        x-response-timestamp:
-          schema:
-            type: string
-          description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
-    '400':
-      description: Bad Request.Unable to process the payment status update message. The payload is malformed,corrupted or failed to decrypt the message. No Automatic retry for this error code. Support team will investigate the issue and resend the notification.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-      headers:
-        x-correlation-id:
-          schema:
-            type: string
-          description: Correlates HTTP requests between a client and server. Populate the request id as part of this field.
-        x-response-id:
-          schema:
-            type: string
-          description: Unique id to identify the response.
-        x-response-timestamp:
-          schema:
-            type: string
-          description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
-    '401':
-      description: Unauthorized.Request is not having valid authorization credentials. For example, OAuth token may be expired. System will retry this request with a default 3 time retry. If the default re-try limit exceeds, then support team will be updated for further investigation.
+    '429':
+      description: Too many requests. System will retry for this request. The request will be retried 3 times on failure and then subsequent retry will happen for 24 hours at one hour interval.
       content:
         application/json:
           schema:
@@ -201,12 +106,12 @@ components:
           schema:
             type: string
           description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
-    '200':
-      description: Success responses
+    '401':
+      description: Unauthorized.Request is not having valid authorization credentials. For example, OAuth token may be expired. System will retry this request with a default 3 time retry. If the default re-try limit exceeds, then support team will be updated for further investigation.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Success'
+            $ref: '#/components/schemas/Problem'
       headers:
         x-correlation-id:
           schema:
@@ -220,8 +125,46 @@ components:
           schema:
             type: string
           description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
-    '429':
-      description: Too many requests. System will retry for this request. The request will be retried 3 times on failure and then subsequent retry will happen for 24 hours at one hour interval.
+    '400':
+      description: Bad Request.Unable to process the payment status update message. The payload is malformed,corrupted or failed to decrypt the message. No Automatic retry for this error code. Support team will investigate the issue and resend the notification.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+      headers:
+        x-correlation-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Populate the request id as part of this field.
+        x-response-id:
+          schema:
+            type: string
+          description: Unique id to identify the response.
+        x-response-timestamp:
+          schema:
+            type: string
+          description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
+    default:
+      description: If the http error code is not part of the listed http error codes of the swagger, it will be considered as default error handling. If the http error code falls under 4XX series, system will not do the retry and for other error codes , system will do a default (3 times) retry and also 24 hrs scheduled retry.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+      headers:
+        x-correlation-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Populate the request id as part of this field.
+        x-response-id:
+          schema:
+            type: string
+          description: Unique id to identify the response.
+        x-response-timestamp:
+          schema:
+            type: string
+          description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
+    '504':
+      description: System processing timeout. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval.
       content:
         application/json:
           schema:
@@ -241,39 +184,82 @@ components:
           description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
     '503':
       description: Service Unavailable. Service is not available due to maintenance. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval.
+    '403':
+      description: Forbidden. Not authorized to call this API. No Retry for this request. Support team will investigate this issue and may resend the notification.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+      headers:
+        x-correlation-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Populate the request id as part of this field.
+        x-response-id:
+          schema:
+            type: string
+          description: Unique id to identify the response.
+        x-response-timestamp:
+          schema:
+            type: string
+          description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
+    '200':
+      description: Success responses
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Success'
+      headers:
+        x-correlation-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Populate the request id as part of this field.
+        x-response-id:
+          schema:
+            type: string
+          description: Unique id to identify the response.
+        x-response-timestamp:
+          schema:
+            type: string
+          description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
+    '500':
+      description: Internal Server Error or Unexpected Error. System will do default (3-times) retry first followed by 24 hrs retry with one hour interval.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+      headers:
+        x-correlation-id:
+          schema:
+            type: string
+          description: Correlates HTTP requests between a client and server. Populate the request id as part of this field.
+        x-response-id:
+          schema:
+            type: string
+          description: Unique id to identify the response.
+        x-response-timestamp:
+          schema:
+            type: string
+          description: Response Timestamp in UTC format. For example 2025-01-22T12:00:00.002
   parameters:
-    x-payment-type:
+    x-retry-flag:
       in: header
-      name: x-payment-type
-      description: Used to identify the payment type.
+      name: x-retry-flag
+      description: Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.
       schema:
         type: string
       required: false
-    x-crypto-key:
-      in: header
-      name: x-crypto-key
-      description: x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.
-      schema:
-        type: string
-      required: true
-    x-api-key:
-      in: header
-      name: x-api-key
-      description: Unique identifier to identify API and to manage the API usage.
-      schema:
-        type: string
-      required: true
-    x-request-id:
-      in: header
-      name: x-request-id
-      description: Unique id used to identify the request.
-      schema:
-        type: string
-      required: true
     x-client-id:
       in: header
       name: x-client-id
       description: Used to identify the entity making the API call.
+      schema:
+        type: string
+      required: true
+    x-request-timestamp:
+      in: header
+      name: x-request-timestamp
+      description: Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002
       schema:
         type: string
       required: true
@@ -284,39 +270,35 @@ components:
       schema:
         type: string
       required: true
-    x-retry-flag:
+    x-request-id:
       in: header
-      name: x-retry-flag
-      description: Payment Status update is send during retry. Contains 'Y' if the status update is send during retry.
-      schema:
-        type: string
-      required: false
-    x-request-timestamp:
-      in: header
-      name: x-request-timestamp
-      description: Request Timestamp in UTC format. For example 2025-01-22T12:00:00.002
+      name: x-request-id
+      description: Unique id used to identify the request.
       schema:
         type: string
       required: true
+    x-api-key:
+      in: header
+      name: x-api-key
+      description: Unique identifier to identify API and to manage the API usage.
+      schema:
+        type: string
+      required: true
+    x-crypto-key:
+      in: header
+      name: x-crypto-key
+      description: x-crypto-key will be send in the format Base64(keyid).Base64 +(encrypted CEK).base64(hashed CEK).base64(IV).GCM<br> It has 5 parts.<br> <b>Base64(keyid)</b> - First part of the header is the base64 encoded keyid of | the  public key <br> <b>Base64(encrypted CEK)</b>-Second part of the header is the base64 encoded encrypted CEK|Encrypt CEK using the public key, ensure padding is set to  RSA_PKCS1_OAEP_PADDING and base64 encoded. <br> <b>Base64(hashed CEK)</b> -Hash CEK using SHA-256 algorithm.Apply base64 encoding on the hashed CEK to generate the third parts. <br> <b>Base64(IV)</b>-Apply base64 encoding on the IV to generate the fourth part (AES-256-GCM)<br> <b>GCM-256</b>-AES-256-GCM algorithm used in encryption of the payload.
+      schema:
+        type: string
+      required: true
+    x-payment-type:
+      in: header
+      name: x-payment-type
+      description: Used to identify the payment type.
+      schema:
+        type: string
+      required: false
   schemas:
-    SECURE:
-      type: object
-      required:
-      - encrypted
-      - data
-      properties:
-        encrypted:
-          type: boolean
-          default: true
-          description: Send true when dealing with data encryption else false
-        data:
-          type: string
-          default: Payment Status information as encrypted PAIN002 message
-          description: 'base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field'
-    PaymentStatusUpdateRequest:
-      properties:
-        SECURE:
-          $ref: '#/components/schemas/SECURE'
     Problem:
       type: object
       properties:
@@ -357,6 +339,24 @@ components:
           description: 'Additional information related to status message processing.
 
             '
+    SECURE:
+      type: object
+      required:
+      - encrypted
+      - data
+      properties:
+        encrypted:
+          type: boolean
+          default: true
+          description: Send true when dealing with data encryption else false
+        data:
+          type: string
+          default: Payment Status information as encrypted PAIN002 message
+          description: 'base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field'
+    PaymentStatusUpdateRequest:
+      properties:
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
   securitySchemes:
     api-key:
       type: apiKey

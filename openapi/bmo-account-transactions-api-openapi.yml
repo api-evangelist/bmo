@@ -197,20 +197,68 @@ paths:
       x-operation-id-original: Search for Account Transactions
 components:
   schemas:
-    UnitType:
-      title: UnitType
+    LoanTransactionType:
+      title: LoanTransactionType
       type: string
+      description: PAYMENT, FEE, ADJUSTMENT, INTEREST
       enum:
-      - CURRENCY
-      - SHARES
-    IncomeType:
-      title: IncomeType
-      type: string
-      description: Type of investment income - CGLONG (capital gains-long term), CGSHORT (capital gains-short term), MISC
-      enum:
-      - CGLONG
-      - CGSHORT
-      - MISC
+      - ADJUSTMENT
+      - FEE
+      - INTEREST
+      - PAYMENT
+    PageMetadata:
+      type: object
+      properties:
+        nextOffset:
+          type: string
+          description: Opaque identified. Does not need to be numeric or have any specific pattern. Implementation specific.
+          example: '2'
+        prevOffset:
+          type: string
+          description: Opaque identified. Does not need to be numeric or have any specific pattern. Implementation specific.
+          example: '2'
+        totalElements:
+          type: integer
+          description: Total number of elements
+          example: 3
+    DepositTransaction:
+      title: DepositTransaction Entity
+      description: Deposit Transaction will have following fields in FiAttributes - Posted, Pending, ValueDate
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/DepositTransactionType'
+          payee:
+            maxLength: 255
+            type: string
+            description: Payee name
+          checkNumber:
+            type: integer
+            description: Check Number
+    Currency:
+      title: Currency Entity
+      type: object
+      properties:
+        currencyRate:
+          type: number
+          description: Currency rate between original and converted currency
+        currencyCode:
+          $ref: '#/components/schemas/Iso4217Code'
+        originalCurrencyCode:
+          $ref: '#/components/schemas/Iso4217Code'
+      description: Currency information if it is different from Account entity
+    LoanTransaction:
+      title: LoanTransaction Entity
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/LoanTransactionType'
+          paymentDetails:
+            $ref: '#/components/schemas/PaymentDetails'
     DepositTransactionType:
       title: DepositTransaction Type
       type: string
@@ -229,182 +277,52 @@ components:
       - POSDEBIT
       - TRANSFER
       - WITHDRAWAL
-    DebitCreditMemo:
-      title: DebitCreditMemo
+    InvestmentTransactionType:
+      title: InvestmentTransactionType
       type: string
-      enum:
-      - CREDIT
-      - DEBIT
-      - MEMO
-    LoanTransactionType:
-      title: LoanTransactionType
-      type: string
-      description: PAYMENT, FEE, ADJUSTMENT, INTEREST
+      description: PURCHASED, SOLD, PURCHASEDTOCOVER, ADJUSTMENT, PURCHASETOOPEN, PURCHASETOCLOSE, SOLDTOOPEN, SOLDTOCLOSE, INTEREST, MARGININTEREST, REINVESTOFINCOME, RETURNOFCAPITAL, TRANSFER, CONTRIBUTION, FEE, OPTIONEXERCISE, OPTIONEXPIRATION, DIVIDEND, DIVIDENDREINVEST, SPLIT, CLOSURE, INCOME, EXPENSE, CLOSUREOPT, INVEXPENSE, JRNLSEC, JRNLFUND, OTHER, DIV, SRVCHG, DEP, DEPOSIT, ATM, POS, XFER, CHECK, PAYMENT, CASH, DIRECTDEP, DIRECTDEBIT, REPEATPMT
       enum:
       - ADJUSTMENT
-      - FEE
-      - INTEREST
-      - PAYMENT
-    PaginatedArray:
-      type: object
-      properties:
-        page:
-          $ref: '#/components/schemas/PageMetadata'
-        links:
-          $ref: '#/components/schemas/PageMetadataLinks'
-      description: To be used as a mixin using "allOf"
-    Inv401kSourceType:
-      title: Inv401kSourceType
-      type: string
-      description: Source of money. PRETAX, AFTERTAX, MATCH, PROFITSHARING, ROLLOVER OTHERVEST, OTHERNONVEST
-      enum:
-      - AFTERTAX
-      - MATCH
-      - OTHERNONVEST
-      - OTHERVEST
-      - PRETAX
-      - PROFITSHARING
-      - ROLLOVER
-    SecurityIdType:
-      title: SecurityIdType
-      type: string
-      description: Security identifier type
-      enum:
-      - CUSIP
-      - ISIN
-      - SEDOL
-      - SICC
-      - VALOR
-      - WKN
-    LocTransactionType:
-      title: LocTransactionType
-      type: string
-      description: CHECK, WITHDRAWAL, PAYMENT, FEE, ADJUSTMENT, INTEREST
-      enum:
-      - ADJUSTMENT
+      - ATM
+      - CASH
       - CHECK
-      - FEE
-      - INTEREST
-      - PAYMENT
-      - WITHDRAWAL
-    Error:
-      title: Error Entity
-      type: object
-      properties:
-        code:
-          type: string
-          description: Long term persistent identifier which can be used to trace error condition back to log information
-        message:
-          type: string
-          description: End user displayable information which might help the customer diagnose an error
-      description: An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account.
-    Transactions:
-      title: Transactions Entity
-      description: Optionally paginated array of transactions
-      allOf:
-      - $ref: '#/components/schemas/PaginatedArray'
-      - type: object
-        properties:
-          transactions:
-            description: An array of transactions with entity types dependent on the account type (deposit, investment, loan, or line of credit)
-            type: array
-            items:
-              allOf:
-              - type: object
-                properties:
-                  depositTransaction:
-                    $ref: '#/components/schemas/DepositTransaction'
-              - type: object
-                properties:
-                  loanTransaction:
-                    $ref: '#/components/schemas/LoanTransaction'
-              - type: object
-                properties:
-                  locTransaction:
-                    $ref: '#/components/schemas/LocTransaction'
-              - type: object
-                properties:
-                  investmentTransaction:
-                    $ref: '#/components/schemas/InvestmentTransaction'
-    AccountType:
-      title: AccountType
-      type: string
-      enum:
-      - 401A
-      - 401K
-      - 403B
-      - '529'
-      - AUTOLOAN
-      - CD
-      - CHARGE
-      - CHECKING
-      - COMMERCIALLINEOFCREDIT
-      - COMMERCIALLOAN
-      - COVERDELL
-      - CREDITCARD
+      - CLOSURE
+      - CLOSUREOPT
+      - CONTRIBUTION
+      - DEP
       - DEPOSIT
-      - ESCROW
-      - ESOP
-      - GUARDIAN
-      - HOMEEQUITYLOAN
-      - HOMELINEOFCREDIT
-      - INSTITUTIONALTRUST
-      - INSTALLMENT
-      - IRA
-      - INVESTMENT
-      - KEOGH
-      - LINEOFCREDIT
-      - LOAN
-      - MILITARYLOAN
-      - MONEYMARKET
-      - MORTGAGE
-      - PERSONALLOAN
-      - ROLLOVER
-      - ROTH
-      - SARSEP
-      - SAVINGS
-      - SMBLOAN
-      - STUDENTLOAN
-      - TAXABLE
-      - TDA
-      - TRUST
-      - UGMA
-      - UTMA
-      - ANNUITY
-    LoanTransaction:
-      title: LoanTransaction Entity
-      allOf:
-      - $ref: '#/components/schemas/Transaction'
-      - type: object
-        properties:
-          transactionType:
-            $ref: '#/components/schemas/LoanTransactionType'
-          paymentDetails:
-            $ref: '#/components/schemas/PaymentDetails'
-    DepositTransaction:
-      title: DepositTransaction Entity
-      description: Deposit Transaction will have following fields in FiAttributes - Posted, Pending, ValueDate
-      allOf:
-      - $ref: '#/components/schemas/Transaction'
-      - type: object
-        properties:
-          transactionType:
-            $ref: '#/components/schemas/DepositTransactionType'
-          payee:
-            maxLength: 255
-            type: string
-            description: Payee name
-          checkNumber:
-            type: integer
-            description: Check Number
-    TransactionStatus:
-      title: TransactionStatus
-      type: string
-      enum:
-      - AUTHORIZATION
-      - MEMO
-      - PENDING
-      - POSTED
+      - DIRECTDEBIT
+      - DIRECTDEP
+      - DIV
+      - DIVIDEND
+      - DIVIDENDREINVEST
+      - EXPENSE
+      - FEE
+      - INCOME
+      - INTEREST
+      - INVEXPENSE
+      - JRNLFUND
+      - JRNLSEC
+      - MARGININTEREST
+      - OPTIONEXERCISE
+      - OPTIONEXPIRATION
+      - OTHER
+      - PAYMENT
+      - POS
+      - PURCHASED
+      - PURCHASEDTOCOVER
+      - PURCHASETOCLOSE
+      - PURCHASETOOPEN
+      - REINVESTOFINCOME
+      - REPEATPMT
+      - RETURNOFCAPITAL
+      - SOLD
+      - SOLDTOCLOSE
+      - SOLDTOOPEN
+      - SPLIT
+      - SRVCHG
+      - TRANSFER
+      - XFER
     Transaction:
       title: Transaction
       type: object
@@ -490,52 +408,216 @@ components:
         text:
           type: string
           description: Complete transaction information description (Un-truncated)
-    InvestmentTransactionType:
-      title: InvestmentTransactionType
+    SecurityIdType:
+      title: SecurityIdType
       type: string
-      description: PURCHASED, SOLD, PURCHASEDTOCOVER, ADJUSTMENT, PURCHASETOOPEN, PURCHASETOCLOSE, SOLDTOOPEN, SOLDTOCLOSE, INTEREST, MARGININTEREST, REINVESTOFINCOME, RETURNOFCAPITAL, TRANSFER, CONTRIBUTION, FEE, OPTIONEXERCISE, OPTIONEXPIRATION, DIVIDEND, DIVIDENDREINVEST, SPLIT, CLOSURE, INCOME, EXPENSE, CLOSUREOPT, INVEXPENSE, JRNLSEC, JRNLFUND, OTHER, DIV, SRVCHG, DEP, DEPOSIT, ATM, POS, XFER, CHECK, PAYMENT, CASH, DIRECTDEP, DIRECTDEBIT, REPEATPMT
+      description: Security identifier type
       enum:
-      - ADJUSTMENT
-      - ATM
-      - CASH
-      - CHECK
-      - CLOSURE
-      - CLOSUREOPT
-      - CONTRIBUTION
-      - DEP
+      - CUSIP
+      - ISIN
+      - SEDOL
+      - SICC
+      - VALOR
+      - WKN
+    AccountType:
+      title: AccountType
+      type: string
+      enum:
+      - 401A
+      - 401K
+      - 403B
+      - '529'
+      - AUTOLOAN
+      - CD
+      - CHARGE
+      - CHECKING
+      - COMMERCIALLINEOFCREDIT
+      - COMMERCIALLOAN
+      - COVERDELL
+      - CREDITCARD
       - DEPOSIT
-      - DIRECTDEBIT
-      - DIRECTDEP
-      - DIV
-      - DIVIDEND
-      - DIVIDENDREINVEST
-      - EXPENSE
-      - FEE
-      - INCOME
-      - INTEREST
-      - INVEXPENSE
-      - JRNLFUND
-      - JRNLSEC
-      - MARGININTEREST
-      - OPTIONEXERCISE
-      - OPTIONEXPIRATION
+      - ESCROW
+      - ESOP
+      - GUARDIAN
+      - HOMEEQUITYLOAN
+      - HOMELINEOFCREDIT
+      - INSTITUTIONALTRUST
+      - INSTALLMENT
+      - IRA
+      - INVESTMENT
+      - KEOGH
+      - LINEOFCREDIT
+      - LOAN
+      - MILITARYLOAN
+      - MONEYMARKET
+      - MORTGAGE
+      - PERSONALLOAN
+      - ROLLOVER
+      - ROTH
+      - SARSEP
+      - SAVINGS
+      - SMBLOAN
+      - STUDENTLOAN
+      - TAXABLE
+      - TDA
+      - TRUST
+      - UGMA
+      - UTMA
+      - ANNUITY
+    DebitCreditMemo:
+      title: DebitCreditMemo
+      type: string
+      enum:
+      - CREDIT
+      - DEBIT
+      - MEMO
+    SecurityType:
+      title: SecurityType
+      type: string
+      enum:
+      - BOND
+      - DEBT
+      - MUTUALFUND
+      - OPTION
       - OTHER
-      - PAYMENT
-      - POS
-      - PURCHASED
-      - PURCHASEDTOCOVER
-      - PURCHASETOCLOSE
-      - PURCHASETOOPEN
-      - REINVESTOFINCOME
-      - REPEATPMT
-      - RETURNOFCAPITAL
-      - SOLD
-      - SOLDTOCLOSE
-      - SOLDTOOPEN
-      - SPLIT
-      - SRVCHG
-      - TRANSFER
-      - XFER
+      - STOCK
+      - SWEEP
+    IncomeType:
+      title: IncomeType
+      type: string
+      description: Type of investment income - CGLONG (capital gains-long term), CGSHORT (capital gains-short term), MISC
+      enum:
+      - CGLONG
+      - CGSHORT
+      - MISC
+    FiAttribute:
+      title: FiAttribute Entity
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of attribute
+        value:
+          type: string
+          description: Value of attribute. All date fields will be of the string format YYYY-MM-DD.
+      description: Financial platform provider-specific attribute
+    Transactions:
+      title: Transactions Entity
+      description: Optionally paginated array of transactions
+      allOf:
+      - $ref: '#/components/schemas/PaginatedArray'
+      - type: object
+        properties:
+          transactions:
+            description: An array of transactions with entity types dependent on the account type (deposit, investment, loan, or line of credit)
+            type: array
+            items:
+              allOf:
+              - type: object
+                properties:
+                  depositTransaction:
+                    $ref: '#/components/schemas/DepositTransaction'
+              - type: object
+                properties:
+                  loanTransaction:
+                    $ref: '#/components/schemas/LoanTransaction'
+              - type: object
+                properties:
+                  locTransaction:
+                    $ref: '#/components/schemas/LocTransaction'
+              - type: object
+                properties:
+                  investmentTransaction:
+                    $ref: '#/components/schemas/InvestmentTransaction'
+    PaginatedArray:
+      type: object
+      properties:
+        page:
+          $ref: '#/components/schemas/PageMetadata'
+        links:
+          $ref: '#/components/schemas/PageMetadataLinks'
+      description: To be used as a mixin using "allOf"
+    Error:
+      title: Error Entity
+      type: object
+      properties:
+        code:
+          type: string
+          description: Long term persistent identifier which can be used to trace error condition back to log information
+        message:
+          type: string
+          description: End user displayable information which might help the customer diagnose an error
+      description: An error entity which can be used at the API level for error responses or at the account level to indicate a problem specific to a particular account.
+    LocTransaction:
+      title: LocTransaction Entity
+      description: Line of Credit Transaction will have following fields in FiAttributes - Posted, Pending, ValueDate
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/LocTransactionType'
+          checkNumber:
+            type: integer
+            description: Check number
+          paymentDetails:
+            $ref: '#/components/schemas/PaymentDetails'
+    HateoasLink:
+      required:
+      - href
+      type: object
+      properties:
+        href:
+          type: string
+          example: /example/accounts/12345
+        action:
+          type: string
+          description: HTTP Method to use for the request (Suggested)
+          enum:
+          - GET
+          - POST
+          - PATCH
+          - DELETE
+          - PUT
+        types:
+          type: array
+          description: Content-types that can be used in the Accept header.
+          items:
+            $ref: '#/components/schemas/ContentTypes'
+    PositionType:
+      title: PositionType
+      type: string
+      description: LONG, SHORT
+      enum:
+      - LONG
+      - SHORT
+    PageMetadataLinks:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/HateoasLink'
+        prev:
+          $ref: '#/components/schemas/HateoasLink'
+    ContentTypes:
+      title: Content Types
+      type: string
+      description: Types of document formats. (Suggested)
+      example: application/json
+      enum:
+      - application/pdf
+      - image/gif
+      - image/jpeg
+      - image/tiff
+      - image/png
+      - application/json
+    TransactionReason:
+      title: TransactionReason
+      type: string
+      description: Reason for this transaction; CALL (the debt was called), SELL (the debt was sold), MATURITY (the debt reached maturity)
+      enum:
+      - CALL
+      - MATURITY
+      - SELL
     Account:
       title: Account Entity
       description: An account object with limited details returned in the search for accounts operation.
@@ -562,283 +644,12 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/FiAttribute'
-    PositionType:
-      title: PositionType
-      type: string
-      description: LONG, SHORT
-      enum:
-      - LONG
-      - SHORT
-    InvestmentTransaction:
-      title: InvestmentTransaction Entity
-      description: Investment Transaction will have following fields in FiAttributes - Posted, IssueDate, MaturityDate, InterestRate, OriginalAmount, CurrentValue, Disposition
-      allOf:
-      - $ref: '#/components/schemas/Transaction'
-      - type: object
-        properties:
-          transactionType:
-            $ref: '#/components/schemas/InvestmentTransactionType'
-          shares:
-            type: number
-            description: Required for stock, mutual funds. Number of shares (with decimals). Negative numbers indicate securities are being removed from the account.
-          faceValue:
-            type: number
-            description: Cash value for bonds
-          price:
-            type: number
-            description: Unit purchase price
-          securityId:
-            type: string
-            description: Unique identifier of security
-          securityIdType:
-            $ref: '#/components/schemas/SecurityIdType'
-          securityType:
-            $ref: '#/components/schemas/SecurityType'
-          symbol:
-            type: string
-            description: Ticker symbol
-          markup:
-            type: number
-            description: Portion of unit price that is attributed to the dealer markup
-          commission:
-            type: number
-            description: Transaction commission
-          taxes:
-            type: number
-            description: Taxes on the trade
-          fees:
-            type: number
-            description: Fees applied to the trade
-          load:
-            type: number
-            description: Load on the transaction
-          inv401kSource:
-            $ref: '#/components/schemas/Inv401kSourceType'
-          confirmationNumber:
-            type: string
-            description: Confirmation number of the transaction
-          fractionalCash:
-            type: number
-            description: Cash for fractional units (used for stock splits)
-          incomeType:
-            $ref: '#/components/schemas/IncomeType'
-          oldUnits:
-            type: number
-            description: Number of shares before split
-          splitRatioNumerator:
-            type: number
-            description: Split ratio numerator
-          splitRatioDenominator:
-            type: number
-            description: Split ratio denominator
-          newUnits:
-            type: number
-            description: Number of shares after split
-          subAccountSec:
-            type: string
-            description: Sub-account security Type - CASH, MARGIN, SHORT and OTHERS
-            enum:
-            - CASH
-            - MARGIN
-            - SHORT
-            - OTHER
-          subAccountFund:
-            type: string
-            description: From which account money came in - CASH, MARGIN, SHORT and OTHERS
-            enum:
-            - CASH
-            - MARGIN
-            - SHORT
-            - OTHER
-          loanId:
-            type: string
-            description: For 401k accounts only. This indicates the transaction was due to a loan or a loan repayment.
-          loanPrincipal:
-            type: number
-            description: How much loan pre‐payment is principal
-          loanInterest:
-            type: number
-            description: How much loan pre‐payment is interest
-          payrollDate:
-            type: string
-            description: The date for the 401k transaction was obtained in payroll. YYYY-MM-DD.
-          priorYearContrib:
-            type: boolean
-            description: Indicates this buy was made using prior year's contribution.
-          withholding:
-            type: number
-            description: Federal tax withholding
-          taxExempt:
-            type: boolean
-            description: Tax‐exempt transaction
-          gain:
-            type: number
-            description: For sales
-          stateWithholding:
-            type: number
-            description: State tax withholding
-          penalty:
-            type: number
-            description: Indicates amount withheld due to a penalty
-          runningBalance:
-            type: number
-            description: Running balance of the position
-          unitPrice:
-            type: number
-            description: Price per commonly-quoted unit. Does not include markup/markdown, unitprice. Share price for stocks, mutual funds, and others. Percentage of par for bonds. Per share (not contract) for options.
-          units:
-            type: number
-            description: For security‐based actions other than stock splits, quantity. Shares for stocks, mutual funds, and others. Face value for bonds. Contracts for options.
-          unitType:
-            $ref: '#/components/schemas/UnitType'
-          transactionReason:
-            $ref: '#/components/schemas/TransactionReason'
-          accruedInterest:
-            type: number
-            description: Accrued Interest
-          transferAction:
-            type: string
-            description: Transfer direction [IN or OUT]
-            enum:
-            - IN
-            - OUT
-          positionType:
-            $ref: '#/components/schemas/PositionType'
-    HateoasLink:
-      required:
-      - href
-      type: object
-      properties:
-        href:
-          type: string
-          example: /example/accounts/12345
-        action:
-          type: string
-          description: HTTP Method to use for the request (Suggested)
-          enum:
-          - GET
-          - POST
-          - PATCH
-          - DELETE
-          - PUT
-        types:
-          type: array
-          description: Content-types that can be used in the Accept header.
-          items:
-            $ref: '#/components/schemas/ContentTypes'
-    TransactionReason:
-      title: TransactionReason
-      type: string
-      description: Reason for this transaction; CALL (the debt was called), SELL (the debt was sold), MATURITY (the debt reached maturity)
-      enum:
-      - CALL
-      - MATURITY
-      - SELL
-    ContentTypes:
-      title: Content Types
-      type: string
-      description: Types of document formats. (Suggested)
-      example: application/json
-      enum:
-      - application/pdf
-      - image/gif
-      - image/jpeg
-      - image/tiff
-      - image/png
-      - application/json
-    PageMetadataLinks:
-      type: object
-      properties:
-        next:
-          $ref: '#/components/schemas/HateoasLink'
-        prev:
-          $ref: '#/components/schemas/HateoasLink'
-    LocTransaction:
-      title: LocTransaction Entity
-      description: Line of Credit Transaction will have following fields in FiAttributes - Posted, Pending, ValueDate
-      allOf:
-      - $ref: '#/components/schemas/Transaction'
-      - type: object
-        properties:
-          transactionType:
-            $ref: '#/components/schemas/LocTransactionType'
-          checkNumber:
-            type: integer
-            description: Check number
-          paymentDetails:
-            $ref: '#/components/schemas/PaymentDetails'
-    PageMetadata:
-      type: object
-      properties:
-        nextOffset:
-          type: string
-          description: Opaque identified. Does not need to be numeric or have any specific pattern. Implementation specific.
-          example: '2'
-        prevOffset:
-          type: string
-          description: Opaque identified. Does not need to be numeric or have any specific pattern. Implementation specific.
-          example: '2'
-        totalElements:
-          type: integer
-          description: Total number of elements
-          example: 3
-    FiAttribute:
-      title: FiAttribute Entity
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of attribute
-        value:
-          type: string
-          description: Value of attribute. All date fields will be of the string format YYYY-MM-DD.
-      description: Financial platform provider-specific attribute
-    SecurityType:
-      title: SecurityType
+    UnitType:
+      title: UnitType
       type: string
       enum:
-      - BOND
-      - DEBT
-      - MUTUALFUND
-      - OPTION
-      - OTHER
-      - STOCK
-      - SWEEP
-    Currency:
-      title: Currency Entity
-      type: object
-      properties:
-        currencyRate:
-          type: number
-          description: Currency rate between original and converted currency
-        currencyCode:
-          $ref: '#/components/schemas/Iso4217Code'
-        originalCurrencyCode:
-          $ref: '#/components/schemas/Iso4217Code'
-      description: Currency information if it is different from Account entity
-    PaymentDetails:
-      title: PaymentDetails Entity
-      type: object
-      properties:
-        principalAmount:
-          type: number
-          description: The amount of payment applied to principal
-        interestAmount:
-          type: number
-          description: The amount of payment applied to interest
-        insuranceAmount:
-          type: number
-          description: The amount of payment applied to life/health/accident insurance on the loan
-        escrowAmount:
-          type: number
-          description: The amount of payment applied to escrow
-        pmiAmount:
-          type: number
-          description: The amount of payment applied to PMI
-        feesAmount:
-          type: number
-          description: The amount of payment applied to fees
-      description: Breakdown of payment details
+      - CURRENCY
+      - SHARES
     Iso4217Code:
       title: Iso4217Code
       type: string
@@ -1022,6 +833,195 @@ components:
       - ZAR
       - ZMW
       - ZWL
+    TransactionStatus:
+      title: TransactionStatus
+      type: string
+      enum:
+      - AUTHORIZATION
+      - MEMO
+      - PENDING
+      - POSTED
+    PaymentDetails:
+      title: PaymentDetails Entity
+      type: object
+      properties:
+        principalAmount:
+          type: number
+          description: The amount of payment applied to principal
+        interestAmount:
+          type: number
+          description: The amount of payment applied to interest
+        insuranceAmount:
+          type: number
+          description: The amount of payment applied to life/health/accident insurance on the loan
+        escrowAmount:
+          type: number
+          description: The amount of payment applied to escrow
+        pmiAmount:
+          type: number
+          description: The amount of payment applied to PMI
+        feesAmount:
+          type: number
+          description: The amount of payment applied to fees
+      description: Breakdown of payment details
+    LocTransactionType:
+      title: LocTransactionType
+      type: string
+      description: CHECK, WITHDRAWAL, PAYMENT, FEE, ADJUSTMENT, INTEREST
+      enum:
+      - ADJUSTMENT
+      - CHECK
+      - FEE
+      - INTEREST
+      - PAYMENT
+      - WITHDRAWAL
+    Inv401kSourceType:
+      title: Inv401kSourceType
+      type: string
+      description: Source of money. PRETAX, AFTERTAX, MATCH, PROFITSHARING, ROLLOVER OTHERVEST, OTHERNONVEST
+      enum:
+      - AFTERTAX
+      - MATCH
+      - OTHERNONVEST
+      - OTHERVEST
+      - PRETAX
+      - PROFITSHARING
+      - ROLLOVER
+    InvestmentTransaction:
+      title: InvestmentTransaction Entity
+      description: Investment Transaction will have following fields in FiAttributes - Posted, IssueDate, MaturityDate, InterestRate, OriginalAmount, CurrentValue, Disposition
+      allOf:
+      - $ref: '#/components/schemas/Transaction'
+      - type: object
+        properties:
+          transactionType:
+            $ref: '#/components/schemas/InvestmentTransactionType'
+          shares:
+            type: number
+            description: Required for stock, mutual funds. Number of shares (with decimals). Negative numbers indicate securities are being removed from the account.
+          faceValue:
+            type: number
+            description: Cash value for bonds
+          price:
+            type: number
+            description: Unit purchase price
+          securityId:
+            type: string
+            description: Unique identifier of security
+          securityIdType:
+            $ref: '#/components/schemas/SecurityIdType'
+          securityType:
+            $ref: '#/components/schemas/SecurityType'
+          symbol:
+            type: string
+            description: Ticker symbol
+          markup:
+            type: number
+            description: Portion of unit price that is attributed to the dealer markup
+          commission:
+            type: number
+            description: Transaction commission
+          taxes:
+            type: number
+            description: Taxes on the trade
+          fees:
+            type: number
+            description: Fees applied to the trade
+          load:
+            type: number
+            description: Load on the transaction
+          inv401kSource:
+            $ref: '#/components/schemas/Inv401kSourceType'
+          confirmationNumber:
+            type: string
+            description: Confirmation number of the transaction
+          fractionalCash:
+            type: number
+            description: Cash for fractional units (used for stock splits)
+          incomeType:
+            $ref: '#/components/schemas/IncomeType'
+          oldUnits:
+            type: number
+            description: Number of shares before split
+          splitRatioNumerator:
+            type: number
+            description: Split ratio numerator
+          splitRatioDenominator:
+            type: number
+            description: Split ratio denominator
+          newUnits:
+            type: number
+            description: Number of shares after split
+          subAccountSec:
+            type: string
+            description: Sub-account security Type - CASH, MARGIN, SHORT and OTHERS
+            enum:
+            - CASH
+            - MARGIN
+            - SHORT
+            - OTHER
+          subAccountFund:
+            type: string
+            description: From which account money came in - CASH, MARGIN, SHORT and OTHERS
+            enum:
+            - CASH
+            - MARGIN
+            - SHORT
+            - OTHER
+          loanId:
+            type: string
+            description: For 401k accounts only. This indicates the transaction was due to a loan or a loan repayment.
+          loanPrincipal:
+            type: number
+            description: How much loan pre‐payment is principal
+          loanInterest:
+            type: number
+            description: How much loan pre‐payment is interest
+          payrollDate:
+            type: string
+            description: The date for the 401k transaction was obtained in payroll. YYYY-MM-DD.
+          priorYearContrib:
+            type: boolean
+            description: Indicates this buy was made using prior year's contribution.
+          withholding:
+            type: number
+            description: Federal tax withholding
+          taxExempt:
+            type: boolean
+            description: Tax‐exempt transaction
+          gain:
+            type: number
+            description: For sales
+          stateWithholding:
+            type: number
+            description: State tax withholding
+          penalty:
+            type: number
+            description: Indicates amount withheld due to a penalty
+          runningBalance:
+            type: number
+            description: Running balance of the position
+          unitPrice:
+            type: number
+            description: Price per commonly-quoted unit. Does not include markup/markdown, unitprice. Share price for stocks, mutual funds, and others. Percentage of par for bonds. Per share (not contract) for options.
+          units:
+            type: number
+            description: For security‐based actions other than stock splits, quantity. Shares for stocks, mutual funds, and others. Face value for bonds. Contracts for options.
+          unitType:
+            $ref: '#/components/schemas/UnitType'
+          transactionReason:
+            $ref: '#/components/schemas/TransactionReason'
+          accruedInterest:
+            type: number
+            description: Accrued Interest
+          transferAction:
+            type: string
+            description: Transfer direction [IN or OUT]
+            enum:
+            - IN
+            - OUT
+          positionType:
+            $ref: '#/components/schemas/PositionType'
     Accounts:
       description: An instance of the getAccounts types with limited details.
       allOf:
