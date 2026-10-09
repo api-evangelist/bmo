@@ -2,7 +2,7 @@
 name: Retrieve business account balances and transactions
 description: List accessible business accounts, fetch balances/details for one account, and page through its transactions.
 api: openapi/bmo-account-information-openapi.json
-operations: ["Search for Accounts", "Get an Account", "Search for Account Transactions"]
+operations: ["SearchForAccounts", "GetAnAccount", "SearchForAccountTransactions"]
 ---
 
 # Retrieve business account balances and transactions
