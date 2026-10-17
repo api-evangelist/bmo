@@ -560,24 +560,18 @@ components:
           type: string
         detailMessage:
           type: string
-    Result:
+    AdditionalDetail:
       type: object
-      required:
-      - code
-      - status
+      description: An object containing detailed Additional information.
       properties:
-        code:
+        detailCode:
           type: string
-        status:
+          description: Detailed backend response codes.eg. CUSTOMER-ERROR-DOB-MISSING
+        detailMessage:
           type: string
-        messages:
-          type: array
-          items:
-            type: string
-        resultDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResultDetails'
+          description: Detailed backend messages. e.g. Date of Birth is missing.
+        sourceAppCatId:
+          type: string
     ResponsePayload:
       required:
       - result
@@ -586,10 +580,6 @@ components:
       properties:
         result:
           $ref: '#/components/schemas/Result'
-        SECURE:
-          $ref: '#/components/schemas/SECURE'
-    RequestPayload:
-      properties:
         SECURE:
           $ref: '#/components/schemas/SECURE'
     SECURE:
@@ -606,18 +596,10 @@ components:
           type: string
           default: encrypted PAIN001 or PAIN00 or CAMT005 payload for request and pain002 for response
           description: 'base64url<cipher-text>. #/definitions/SecuredDataObject should be sent as encrypted string in this field'
-    AdditionalDetail:
-      type: object
-      description: An object containing detailed Additional information.
+    RequestPayload:
       properties:
-        detailCode:
-          type: string
-          description: Detailed backend response codes.eg. CUSTOMER-ERROR-DOB-MISSING
-        detailMessage:
-          type: string
-          description: Detailed backend messages. e.g. Date of Birth is missing.
-        sourceAppCatId:
-          type: string
+        SECURE:
+          $ref: '#/components/schemas/SECURE'
     Problem:
       required:
       - detail
@@ -665,6 +647,24 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AdditionalDetail'
+    Result:
+      type: object
+      required:
+      - code
+      - status
+      properties:
+        code:
+          type: string
+        status:
+          type: string
+        messages:
+          type: array
+          items:
+            type: string
+        resultDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResultDetails'
   securitySchemes:
     api-key-1:
       type: apiKey

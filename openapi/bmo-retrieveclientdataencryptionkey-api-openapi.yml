@@ -200,13 +200,6 @@ paths:
       x-summary-source: derived
 components:
   parameters:
-    x-fapi-customer-user-agent:
-      name: x-fapi-customer-user-agent
-      in: header
-      description: Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm
-      required: false
-      schema:
-        type: string
     x-api-key:
       name: x-api-key
       in: header
@@ -214,10 +207,38 @@ components:
       required: false
       schema:
         type: string
+    x-fapi-interaction-id:
+      name: x-fapi-interaction-id
+      in: header
+      description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
+      required: false
+      schema:
+        type: string
     x-fapi-customer-last-logged-time:
       name: x-fapi-customer-last-logged-time
       in: header
       description: The time when the Payment Services User last logged in with the Third Party Provider
+      required: false
+      schema:
+        type: string
+    x-client-id:
+      name: x-client-id
+      in: header
+      description: Client Id generated during Third Party Provider application registration
+      required: false
+      schema:
+        type: string
+    Authorization:
+      name: Authorization
+      in: header
+      description: An Authorization Token as per https://tools.ietf.org/html/rfc6750
+      required: false
+      schema:
+        type: string
+    x-fapi-customer-ip-address:
+      name: x-fapi-customer-ip-address
+      in: header
+      description: The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.
       required: false
       schema:
         type: string
@@ -235,34 +256,6 @@ components:
       required: true
       schema:
         type: string
-    Authorization:
-      name: Authorization
-      in: header
-      description: An Authorization Token as per https://tools.ietf.org/html/rfc6750
-      required: false
-      schema:
-        type: string
-    x-client-id:
-      name: x-client-id
-      in: header
-      description: Client Id generated during Third Party Provider application registration
-      required: false
-      schema:
-        type: string
-    x-fapi-interaction-id:
-      name: x-fapi-interaction-id
-      in: header
-      description: An RFC 4122 UID used  to consolidate multiple requests for ex. in a particular session of the customer/employee. Multiple requests  with unique  x-request-id’s might have common  x-fapi-interaction-id.If there is no need to link multiple API calls then the x-fapi-interaction-id values is the same as x-request-id.
-      required: false
-      schema:
-        type: string
-    x-fapi-customer-ip-address:
-      name: x-fapi-customer-ip-address
-      in: header
-      description: The Payment Services User’s IP address if the Payment Services User is currently logged in with the Third Party Provider.
-      required: false
-      schema:
-        type: string
     x-fapi-financial-id:
       name: x-fapi-financial-id
       in: header
@@ -270,7 +263,48 @@ components:
       required: true
       schema:
         type: string
+    x-fapi-customer-user-agent:
+      name: x-fapi-customer-user-agent
+      in: header
+      description: Indicates the user-agent that the Payment Services User is using https://www.computerhope.com/jargon/u/useragen.htm
+      required: false
+      schema:
+        type: string
   schemas:
+    ResultDetails:
+      type: object
+      properties:
+        detailCode:
+          type: string
+        detailMessage:
+          type: string
+    key:
+      type: object
+      required:
+      - keyid
+      properties:
+        keyid:
+          type: string
+        pemContent:
+          type: string
+        keyType:
+          type: string
+        encryptionAlgorithm:
+          type: string
+        timeToLive:
+          type: string
+    RetrieveClientKeyRequest:
+      type: object
+      required:
+      - keyAlias
+      - originatorData
+      properties:
+        originatorData:
+          $ref: '#/components/schemas/OriginatorData'
+        keyAlias:
+          type: string
+        resourceName:
+          type: string
     RetrieveClientKeyResponse:
       type: object
       properties:
@@ -278,6 +312,13 @@ components:
           $ref: '#/components/schemas/Result'
         key:
           $ref: '#/components/schemas/key'
+    exceptionResult:
+      type: object
+      required:
+      - result
+      properties:
+        result:
+          $ref: '#/components/schemas/Result'
     OriginatorData:
       type: object
       required:
@@ -296,20 +337,6 @@ components:
           type: string
         employeeUserId:
           type: string
-    exceptionResult:
-      type: object
-      required:
-      - result
-      properties:
-        result:
-          $ref: '#/components/schemas/Result'
-    ResultDetails:
-      type: object
-      properties:
-        detailCode:
-          type: string
-        detailMessage:
-          type: string
     Result:
       type: object
       properties:
@@ -325,33 +352,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ResultDetails'
-    RetrieveClientKeyRequest:
-      type: object
-      required:
-      - keyAlias
-      - originatorData
-      properties:
-        originatorData:
-          $ref: '#/components/schemas/OriginatorData'
-        keyAlias:
-          type: string
-        resourceName:
-          type: string
-    key:
-      type: object
-      required:
-      - keyid
-      properties:
-        keyid:
-          type: string
-        pemContent:
-          type: string
-        keyType:
-          type: string
-        encryptionAlgorithm:
-          type: string
-        timeToLive:
-          type: string
   securitySchemes:
     api-key-1:
       type: apiKey
