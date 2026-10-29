@@ -1,4 +1,4 @@
-# BMO (bmo)
+# BMO
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,127 +64,164 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-BMO Bank N.A. is the U.S. banking subsidiary of Canada's Bank of Montreal (BMO Financial Group), a nationally chartered commercial bank (OCC-supervised) headquartered in Chicago, Illinois. With roughly 1,000 branches across 22 states following its 2023 acquisition of Bank of the West, BMO is a super-regional bank serving personal, commercial, and capital-markets customers. It runs a genuine first-party commercial developer portal for its Online Banking for Business / Treasury and Payment Solutions customers, publishing downloadable OpenAPI 3.0 and Swagger 2.0 specifications on an IBM API Connect platform.
+BMO Bank N.A. is the U.S. banking subsidiary of Canada's Bank of Montreal (BMO Financial Group), a nationally chartered commercial bank supervised by the Office of the Comptroller of the Currency and headquartered in Chicago, Illinois. Operating roughly 1,000 branches across 22 states following its 2023 acquisition of Bank of the West, BMO is a super-regional bank serving personal, commercial, and capital-markets customers. Unlike UK or Australian banks, BMO is under no U.S. open-banking mandate, but it runs a genuine first-party commercial developer portal (developer.bmo.com) for its Online Banking for Business / Treasury and Payment Solutions customers, publishing downloadable OpenAPI 3.0 and Swagger 2.0 specifications for account validation, payments (ACH, wire, EFT, Interac), account information, image retrieval, and OAuth authorization on an IBM API Connect platform with FAPI-aligned headers.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/bmo/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/bmo/refs/heads/main/apis.yml)
+**Areas:** Financial Services · Banking · United States · Open Finance · Payments · Commercial Banking · Treasury Management · Account Validation
 
-## Open-Finance Posture
+## BMO on APIs.io
 
-The United States has no single mandated open-banking contract. BMO's public API surface is a **commercial (business-to-bank) developer program**, not a consumer open-banking API:
+Everything profiled for BMO is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/bmo/](https://apis.io/providers/bmo/)** — or go straight to one of the APIs or properties below.
 
-- **First-party developer portal:** [developer.bmo.com/api/commercial](https://developer.bmo.com/api/commercial/) (confirmed live), with an API catalogue, registration, sandbox credentials, and terms.
-- **Downloadable specs:** Eleven documented API products, each with a publicly downloadable OpenAPI 3.0 / Swagger 2.0 definition, harvested verbatim into `openapi/`.
-- **Auth:** OAuth 2.0 authorization-code flow plus a client API key (`x-api-key`), FAPI-aligned headers, and client-side payload encryption.
-- **FDX / CFPB 1033:** No documented Financial Data Exchange membership or Section 1033 posture was found for the U.S. entity. Consumer-permissioned data sharing is generally intermediated by aggregators. `fdx_or_1033 = false`.
-- **No official GitHub org:** `github.com/bmo` belongs to an unrelated individual and is excluded.
+### APIs (23)
 
-## Tags
+- [BMO Account Information API](https://apis.io/apis/bmo/bmo-account-information-api/) — Query all information for a set of accounts provided in the payload
+- [BMO Account Transactions API](https://apis.io/apis/bmo/bmo-account-transactions-api/) — Search for account transactions
+- [BMO Account Transaction Images API](https://apis.io/apis/bmo/bmo-accounttransactionimages-api/) — The AccountTransactionImages API from BMO — 3 operation(s) for accounttransactionimages.
+- [BMO Get Payment Status API](https://apis.io/apis/bmo/bmo-getpaymentstatus-api/) — Receive payment inquiry request in CAMT.005 ISO from BMO Canada Partners/Customers and send payment status as response in PAIN.002 ISO.
+- [BMO Obtain Payment Status API](https://apis.io/apis/bmo/bmo-obtain-payment-status-api/) — Payment List which receives CAMT.005 ISO request as input and return PAIN.002 ISO as response.
+- [BMO Obtain Service Agreement List API](https://apis.io/apis/bmo/bmo-obtain-service-agreement-list-api/) — Service agreement search which receives CustomerEntityId (proprietary) as input and return CustomerAgreementInfoReport (proprietary) as response
+- [BMO Payment Status Update API](https://apis.io/apis/bmo/bmo-paymentstatusupdate-api/) — The PaymentStatusUpdate API from BMO — 1 operation(s) for paymentstatusupdate.
+- [BMO Retrieve Client Data Encryption Key API](https://apis.io/apis/bmo/bmo-retrieveclientdataencryptionkey-api/) — The retrieveClientDataEncryptionKey API from BMO — 1 operation(s) for retrieveclientdataencryptionkey.
+- [BMO Send Payment Credit API](https://apis.io/apis/bmo/bmo-send-payment-credit-api/) — Payment credit initiation which receives PAIN.001 ISO request as input and return PAIN.002 ISO as response
+- [BMO Send Payment Debit API](https://apis.io/apis/bmo/bmo-send-payment-debit-api/) — Payment credit initiation which receives PAIN.008 ISO request as input and return PAIN.002 ISO as response
+- [BMO Send Fedwire Drawdown Payment API](https://apis.io/apis/bmo/bmo-sendfedwiredrawdownpayment-api/) — Receive Fedwire Drawdown request in PAIN.013 ISO from BMO Bank NA Partners/Customers to initiate payment request and send acknowledgement as response in…
+- [BMO Send Payment API](https://apis.io/apis/bmo/bmo-sendpayment-api/) — Receive wire payment request in PAIN.001 ISO from BMO Canada partners/customers to initiate wire payment and send acknowledgement as response in PAIN.002 ISO.
+- [BMO TPP EMT Creditor Payment Activation Request API](https://apis.io/apis/bmo/bmo-tpp-emtcreditorpaymentactivationrequest-api/) — Request for Payment initiation
+- [BMO TPP EMT Customer Cancel Transfer Initiation API](https://apis.io/apis/bmo/bmo-tpp-emtcustomercanceltransferinitiation-api/) — Cancel Payment
+- [BMO TPP EMT Customer Credit Transfer Initiation API](https://apis.io/apis/bmo/bmo-tpp-emtcustomercredittransferinitiation-api/) — Send Payment
+- [BMO TPP EMT Get Request For Payment Transaction API](https://apis.io/apis/bmo/bmo-tpp-emtgetrequestforpaymenttransaction-api/) — Request for Payment Status Enquiry
+- [BMO TPP EMT Get Transaction API](https://apis.io/apis/bmo/bmo-tpp-emtgettransaction-api/) — Payment Status Enquiry
+- [BMO TPP EMT Recipient Payment Options API](https://apis.io/apis/bmo/bmo-tpp-emtrecipientpaymentoptions-api/) — Retrieve payment options
+- [BMO Tpp ACH Arrangement Company API](https://apis.io/apis/bmo/bmo-tppacharrangementcompany-api/) — The TppACHArrangementCompany API from BMO — 1 operation(s) for tppacharrangementcompany.
+- [BMO Account Validation API](https://apis.io/apis/bmo/bmo-account-validation-api/) — The Account Validation API from BMO — 1 operation(s) for account validation.
+- [BMO OAuth 2.0 API](https://apis.io/apis/bmo/bmo-oauth-2-0-api/) — The OAuth 2.0 API from BMO — 2 operation(s) for oauth 2.0.
+- [BMO Payment Initiation API](https://apis.io/apis/bmo/bmo-payment-initiation-api/) — This is a tag for Payment Initiation - send Payments. receive PAIN001/PAIN008 (Debit/Credit) ISO request as input and return PAIN002 ISO as response after…
+- [BMO Payment Status API](https://apis.io/apis/bmo/bmo-payment-status-api/) — This is a tag for PaymentStatus which enquiry sends CAMT005 ISO JSON Request standard messages and enquires and responds back with PAIN002 message structure…
 
-- Financial Services
-- Banking
-- United States
-- Open Finance
-- Payments
-- Commercial Banking
-- Treasury Management
-- Account Validation
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-23
-- **Modified:** 2026-07-23
+#### AsyncAPI (1)
 
-## APIs
+Event-driven and webhook contracts.
 
-### BMO Account Validation API
+- [Bmo Push Notification Webhooks](https://apis.io/asyncapis/bmo/bmo-push-notification-webhooks/)
 
-Verifies U.S. account ownership and returns a risk-level score before a transfer is set up, checking owner details against Early Warning Services' national identity database.
+#### Agentic access (1)
 
-- **Human URL:** [Account Validation](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-validation)
-- **Base URL:** `https://sandbox-open-api.bmo.com/open-banking/commercial-sb`
-- **OpenAPI:** [openapi/bmo-account-validation-openapi.json](openapi/bmo-account-validation-openapi.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-### BMO Account Information API
+- [Bmo Agentic Access](https://apis.io/agentic-access/bmo/bmo-agentic-access/)
 
-Retrieves account details, balances, and transaction information for Online Banking for Business accounts.
+#### Collections (11)
 
-- **Human URL:** [Account Information](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/account-information)
-- **OpenAPI:** [openapi/bmo-account-information-openapi.json](openapi/bmo-account-information-openapi.json)
+Postman and Open Collection request collections.
 
-### BMO ACH Payments API
+- [Account Information](https://apis.io/collections/bmo/open-bmo-account-information/)
+- [Account Validation (US Only)](https://apis.io/collections/bmo/open-bmo-account-validation/)
+- [ACH Payments](https://apis.io/collections/bmo/open-bmo-ach-payments/)
+- [Authorize & Token](https://apis.io/collections/bmo/open-bmo-authorize-token-swagger/)
+- [Client Data Encryption Key Get Open Banking](https://apis.io/collections/bmo/open-bmo-client-data-encryption-key-swagger/)
+- [Electronic Funds Transfer (EFT)](https://apis.io/collections/bmo/open-bmo-eft-payments/)
+- [Image Retrieval](https://apis.io/collections/bmo/open-bmo-image-retrieval-swagger/)
+- [Instant Payments](https://apis.io/collections/bmo/open-bmo-interac-instant-payments/)
+- [Push Notifications](https://apis.io/collections/bmo/open-bmo-push-notification/)
+- [Wire Payments (Canada)](https://apis.io/collections/bmo/open-bmo-wire-payments-ca/)
+- [Wire Payments (U.S.)](https://apis.io/collections/bmo/open-bmo-wire-payments-us/)
 
-Initiates and manages U.S. ACH credit and debit payments with live status updates.
+#### Overlays (11)
 
-- **Human URL:** [ACH Payments](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/achpaymentapi)
-- **OpenAPI:** [openapi/bmo-ach-payments-openapi.json](openapi/bmo-ach-payments-openapi.json)
+OpenAPI overlays, including conversational phrasing for each operation.
 
-### BMO Wire Payments (U.S.) API
+- [Bmo Account Information Overlay](https://apis.io/overlays/bmo/bmo-account-information-overlay/)
+- [Bmo Account Validation Overlay](https://apis.io/overlays/bmo/bmo-account-validation-overlay/)
+- [Bmo Ach Payments Overlay](https://apis.io/overlays/bmo/bmo-ach-payments-overlay/)
+- [Bmo Authorize Token Overlay](https://apis.io/overlays/bmo/bmo-authorize-token-overlay/)
+- [Bmo Client Data Encryption Key Overlay](https://apis.io/overlays/bmo/bmo-client-data-encryption-key-overlay/)
+- [Bmo Eft Payments Overlay](https://apis.io/overlays/bmo/bmo-eft-payments-overlay/)
+- [Bmo Image Retrieval Overlay](https://apis.io/overlays/bmo/bmo-image-retrieval-overlay/)
+- [Bmo Interac Instant Payments Overlay](https://apis.io/overlays/bmo/bmo-interac-instant-payments-overlay/)
+- [Bmo Push Notification Overlay](https://apis.io/overlays/bmo/bmo-push-notification-overlay/)
+- [Bmo Wire Payments Ca Overlay](https://apis.io/overlays/bmo/bmo-wire-payments-ca-overlay/)
+- [Bmo Wire Payments Us Overlay](https://apis.io/overlays/bmo/bmo-wire-payments-us-overlay/)
 
-Submits and tracks U.S. domestic and international wire payments.
+#### Security (2)
 
-- **Human URL:** [Wire Payments (US)](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepaymentapius)
-- **OpenAPI:** [openapi/bmo-wire-payments-us-openapi.json](openapi/bmo-wire-payments-us-openapi.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### BMO Wire Payments (Canada) API
+- [Bmo Authentication](https://apis.io/security/bmo/bmo-authentication/)
+- [Bmo Domain Security](https://apis.io/security/bmo/bmo-domain-security/)
 
-Submits and tracks Canadian domestic and international wire payments.
+#### OAuth scopes (1)
 
-- **Human URL:** [Wire Payments (CA)](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/wirepayment)
-- **OpenAPI:** [openapi/bmo-wire-payments-ca-openapi.json](openapi/bmo-wire-payments-ca-openapi.json)
+The permissions the API asks for.
 
-### BMO EFT Payments API
+- [Bmo Scopes](https://apis.io/scopes/bmo/bmo-scopes/)
 
-Initiates Canadian Electronic Funds Transfer credit and debit payments with live status and batch support.
+## Where to find this API
 
-- **Human URL:** [EFT Payments](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/eft-payments-ca)
-- **OpenAPI:** [openapi/bmo-eft-payments-openapi.json](openapi/bmo-eft-payments-openapi.json)
-
-### BMO Instant Payments (Interac) API
-
-Sends and receives real-time Interac e-Transfer payments in Canada.
-
-- **Human URL:** [Instant Payments (Interac)](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/interacpaymentapi)
-- **OpenAPI:** [openapi/bmo-interac-instant-payments-openapi.json](openapi/bmo-interac-instant-payments-openapi.json)
-
-### BMO Image Retrieval API
-
-Searches for and downloads images of deposited cheques and other items. Published as Swagger 2.0.
-
-- **Human URL:** [Image Retrieval](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/image-retrieval)
-- **OpenAPI:** [openapi/bmo-image-retrieval-swagger.json](openapi/bmo-image-retrieval-swagger.json)
-
-### BMO Authorize & Token API
-
-OAuth 2.0 authorization-code and token endpoints protecting all BMO commercial API connections. Published as Swagger 2.0.
-
-- **Human URL:** [Authorize (OAuth 2.0)](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/authorize)
-- **OpenAPI:** [openapi/bmo-authorize-token-swagger.json](openapi/bmo-authorize-token-swagger.json)
-
-### BMO Client Data Encryption Key API
-
-Issues a client data encryption key used to encrypt sensitive fields in requests to other BMO APIs. Published as Swagger 2.0.
-
-- **Human URL:** [Client Data Encryption Key](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/client-data-encryption-key-get-open-banking)
-- **OpenAPI:** [openapi/bmo-client-data-encryption-key-swagger.json](openapi/bmo-client-data-encryption-key-swagger.json)
-
-### BMO Push Notification API
-
-Delivers asynchronous payment-status push notifications to a registered client endpoint.
-
-- **Human URL:** [Push Notification](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/documentation/payment-service-push-notification-api)
-- **OpenAPI:** [openapi/bmo-push-notification-openapi.json](openapi/bmo-push-notification-openapi.json)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.bmo.com/)
-- [Developer Portal](https://developer.bmo.com/api/commercial/)
-- [Documentation / API Catalogue](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/catalogue)
-- [Registration](https://developer.bmo.com/api/commercial/registration)
-- [Support / FAQ](https://developer.bmo.com/api/commercial/faq)
-- [Terms of Service](https://developer.bmo.com/api/commercial/terms-and-conditions)
-- [Newsroom](https://newsroom.bmo.com/)
+- [Documentation](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/catalogue)
+- [API reference](https://www21.bmo.com/uiv2/openapi/dev-portal/dev-portal/#/catalogue)
+- [Sign up](https://developer.bmo.com/api/commercial/registration)
+- [Support](https://developer.bmo.com/api/commercial/faq)
+- [Blog](https://newsroom.bmo.com/)
+- [Terms of service](https://developer.bmo.com/api/commercial/terms-and-conditions)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 42.2** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 57.2 |
+| Contract governance | 4.5 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 54.2 |
+| Access clarity | 23.7 |
+
+**Agent readiness 30.7** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 44.1** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/bmo/](https://apis.io/providers/bmo/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for BMO: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/bmo/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
